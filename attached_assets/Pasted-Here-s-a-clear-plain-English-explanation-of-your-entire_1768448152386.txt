@@ -1,0 +1,184 @@
+Here’s a **clear, plain-English explanation of your entire site**, written the way **a client or non-technical person** would understand it. You can use this for presentations, emails, or your portfolio.
+
+---
+
+## What This Website Is
+
+This website is a **professional service site** that shows how much it costs to build different types of websites and web applications. It lets a client **see options, choose features, and instantly get an estimated price** without needing technical knowledge.
+
+The goal of the site is to:
+
+* Explain what kind of website or app a client needs
+* Show transparent pricing
+* Help clients understand the difference between basic websites and full applications
+* Start a conversation before a custom quote is finalized
+
+---
+
+## What the Site Does (In Simple Terms)
+
+When someone visits the site, they can:
+
+* Choose how many pages they want
+* Choose the type of website or app they need
+* Select features and add-ons
+* Instantly see an estimated total price
+
+Everything updates live as they make selections.
+
+---
+
+## Pages Explained (Plain Text)
+
+### 1. Home Page
+
+The home page introduces your services and explains that you build:
+
+* Basic websites
+* Modern frontend applications
+* Full-logic web applications
+
+It sets expectations and directs users to the pricing/quote section.
+
+---
+
+### 2. Pricing / Quote Builder Page
+
+This is the **main feature of the site**.
+
+The client selects:
+
+* **Number of pages** (1 page to 5 pages, or custom)
+* **Website type / complexity**
+* **Core features**
+* **Advanced add-ons**
+
+As they click options, the site **calculates the total price automatically**.
+
+This helps clients understand:
+
+* Why certain websites cost more
+* What features add value
+* What is included vs optional
+
+---
+
+### 3. Website Type / Complexity Explained
+
+Clients choose between three levels:
+
+**Basic Website**
+
+* Built with HTML, CSS, and JavaScript
+* Good for simple business sites
+* No backend or advanced logic
+
+**React Frontend Website**
+
+* Modern, interactive design
+* Built with React
+* Frontend only (no login, no payments, no database)
+
+**Full Logic Web Application**
+
+* React with TypeScript
+* Backend using Node or Next.js
+* Includes real application logic and scalability
+
+Each level clearly increases in capability and price.
+
+---
+
+### 4. Features Section
+
+This section lets clients add common website features such as:
+
+* Contact or booking forms
+* Maps and location integration
+* Galleries or showcases
+* Blogs or news sections
+* Social media integration
+* Email newsletter signup
+
+Some features are included by default, while others add cost depending on complexity.
+
+---
+
+### 5. Advanced Add-Ons Section
+
+This section is for **larger, more complex needs**, such as:
+
+* SEO optimization
+* Branding and custom UI design
+* E-commerce functionality
+* Maintenance and support
+* Hosting and domain setup
+* Multi-language support
+* API integrations
+* AI or chatbot assistants
+
+These options are clearly marked as **advanced logic** and priced separately.
+
+---
+
+### 6. Live Price Calculation
+
+As users select options:
+
+* The total price updates instantly
+* No hidden fees
+* No confusing technical terms
+
+This builds trust and avoids awkward pricing conversations later.
+
+---
+
+## What This Site Is NOT
+
+The site:
+
+* Does not collect payments
+* Does not build the website automatically
+* Does not lock clients into a final price
+
+Instead, it provides a **clear estimate** that can later be finalized in a proposal or invoice.
+
+---
+
+## Who This Site Is For
+
+This site is ideal for:
+
+* Small business owners
+* Local shops
+* Startups
+* Clients who don’t understand web development pricing
+
+It helps them **visualize cost before committing**.
+
+---
+
+## Why This Site Is Valuable
+
+* Saves time explaining prices
+* Filters serious clients
+* Prevents underpricing
+* Makes you look professional and organized
+* Turns pricing into a guided experience
+
+---
+
+## One-Sentence Summary (Very Important)
+
+> “This website helps clients understand what kind of website they need, what features they want, and how pricing changes based on complexity — all in a clear and transparent way.”
+
+---
+
+If you want, I can:
+
+* Rewrite this as **portfolio copy**
+* Turn it into **client proposal text**
+* Make a **short elevator pitch**
+* Simplify it even more for non-technical clients
+
+Just tell me where you plan to use it.

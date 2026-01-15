@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global CSS Reset for consistent layout on Vercel */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: #111;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: #fff;
+  z-index: 10;
+}
+header img {
+  height: 50px;
+  width: auto;
+  margin-right: 1rem;
+}
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+header nav a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+header nav a:hover {
+  color: #ec4899;
+}
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    /* Reset and box-sizing */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body default font */
+    body {
+      font-family: 'Inter', sans-serif; /* Matches Stripe/Framer typography */
+      line-height: 1.5;
+      color: #111;
+      background-color: #fff;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #f8f9fa;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    header nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+    }
+
+    /* Main content spacing */
+    main {
+      padding: 2rem;
+    }
+
+    /* Mockup section keeps current styling */
+    /* Example: ensures demo phones and interactions stay correct */
+    .mockup-section {
+      margin-top: 3rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+    }
+  perspective: 600px;
+  width: 128px;
+  height: 128px;
+}
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cube-spin 4s infinite linear;
+}
+.cube-face {
+  position: absolute;
+  width: 128px;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: white;
+  border: 2px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.cube-front  { transform: rotateY(0deg) translateZ(64px); }
+.cube-back   { transform: rotateY(180deg) translateZ(64px); }
+.cube-right  { transform: rotateY(90deg) translateZ(64px); }
+.cube-left   { transform: rotateY(-90deg) translateZ(64px); }
+.cube-top    { transform: rotateX(90deg) translateZ(64px); }
+.cube-bottom { transform: rotateX(-90deg) translateZ(64px); }
