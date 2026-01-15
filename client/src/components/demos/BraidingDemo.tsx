@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import braidingBg from "@assets/braidinghair1.jpg";
 import { Star, Calendar, Clock, MapPin } from "lucide-react";
 
 export function BraidingDemo() {
@@ -25,13 +24,7 @@ export function BraidingDemo() {
 
       {/* Hero */}
       <div className="relative h-48 bg-gray-200 overflow-hidden">
-        {braidingBg ? (
-          <img src={braidingBg} alt="Styles" className="w-full h-full object-cover" />
-        ) : (
-          <div className="w-full h-full bg-purple-100 flex items-center justify-center text-purple-300">
-            <Star size={48} />
-          </div>
-        )}
+        <img src="/braidinghair1.svg" alt="Styles" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-purple-900/80 to-transparent flex items-end p-6">
           <div className="text-white">
             <div className="flex items-center gap-1 text-yellow-400 mb-1">

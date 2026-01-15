@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import mechanicBg from "@assets/autoservicing.jpg";
 import { Wrench, Gauge, ShieldCheck, Phone } from "lucide-react";
 
 export function MechanicDemo() {
@@ -19,13 +18,7 @@ export function MechanicDemo() {
 
       {/* Hero */}
       <div className="relative h-40 overflow-hidden">
-        {mechanicBg ? (
-          <img src={mechanicBg} alt="Mechanic" className="w-full h-full object-cover opacity-60" />
-        ) : (
-          <div className="w-full h-full bg-slate-800 flex items-center justify-center">
-            <Gauge size={48} className="text-slate-700" />
-          </div>
-        )}
+        <img src="/autoservicing.svg" alt="Mechanic" className="w-full h-full object-cover opacity-60" />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent flex items-center p-6">
           <div>
             <h2 className="text-2xl font-black italic mb-2">FULL SERVICE<br /><span className="text-red-600">REPAIR SHOP</span></h2>

@@ -2,7 +2,6 @@ import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import sonoaacLogo from "@assets/sonoaaclogo.PNG";
 import { QuoteBooklet } from "@/components/features/QuoteBooklet";
 
 export function Navbar() {
@@ -25,11 +24,7 @@ export function Navbar() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 cursor-pointer">
-              {sonoaacLogo ? (
-                <img src={sonoaacLogo} alt="Sonoaac" className="h-10 w-auto" />
-              ) : (
-                <span className="text-2xl font-bold text-gradient">SONOAAC</span>
-              )}
+              <img src="/sonoaac-logo.svg" alt="Sonoaac" className="h-10 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}

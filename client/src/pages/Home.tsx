@@ -3,8 +3,6 @@ import { ArrowRight, Monitor, Code, Palette } from "lucide-react";
 import { Link } from "wouter";
 import { BraidingDemo } from "@/components/demos/BraidingDemo";
 import { MechanicDemo } from "@/components/demos/MechanicDemo";
-import gempages from "@assets/gempages.webp";
-import gempages1 from "@assets/gempages1.webp";
 
 export default function Home() {
   return (
@@ -63,14 +61,14 @@ export default function Home() {
                 whileHover={{ y: -10 }}
               >
                 {/* Landing page hero scenic mountain landscape */}
-                <img src={gempages || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800"} alt="Website Demo" className="w-full h-full object-cover" />
+                <img src="/gempages.svg" alt="Website Demo" className="w-full h-full object-cover" />
               </motion.div>
               <motion.div 
                 className="absolute bottom-0 left-0 w-3/4 rounded-3xl shadow-xl overflow-hidden border-4 border-white z-10 grayscale hover:grayscale-0 transition-all duration-500"
                 whileHover={{ y: -10 }}
               >
                 {/* Modern gaming setup with neon lights */}
-                <img src={gempages1 || "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=800"} alt="PC Build" className="w-full h-full object-cover" />
+                <img src="/gempages1.svg" alt="PC Build" className="w-full h-full object-cover" />
               </motion.div>
               
               {/* Decorative elements */}
