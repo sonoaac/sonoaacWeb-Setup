@@ -31,6 +31,11 @@ export function MechanicDemo() {
         <div className="absolute inset-0 bg-slate-800 rounded-[40px] shadow-2xl" style={{ padding: "16px" }}>
           {/* Tablet Screen */}
           <div className="w-full h-full bg-gradient-to-br from-slate-950 to-slate-900 rounded-[32px] overflow-hidden flex flex-col border border-gray-700">
+            {/* Logo Bar */}
+            <div className="bg-slate-950/80 px-7 py-3 flex items-center justify-center border-b border-slate-700">
+              <img src="/sonoaac-logo.svg" alt="Sonoaac" className="h-7 w-auto" />
+            </div>
+            
             {/* Navigation */}
             <div className="flex items-center justify-between px-7 py-5 border-b border-slate-700 flex-shrink-0 bg-slate-950/50">
               <div className="flex items-center gap-3">

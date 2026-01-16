@@ -45,6 +45,11 @@ export function BraidingDemo() {
             
             {/* Phone Content */}
             <div className="flex-1 overflow-hidden flex flex-col bg-white">
+              {/* Logo Bar */}
+              <div className="bg-white px-4 py-2 flex items-center justify-center border-b border-gray-100">
+                <img src="/sonoaac-logo.svg" alt="Sonoaac" className="h-6 w-auto" />
+              </div>
+              
               {/* Header */}
               <div className="bg-gradient-to-r from-purple-900 via-purple-800 to-pink-600 text-white px-5 py-4 flex justify-between items-center flex-shrink-0">
                 <div>
