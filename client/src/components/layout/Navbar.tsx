@@ -19,59 +19,68 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16">
             {/* Logo - Left Side */}
-            <Link href="/" className="flex-shrink-0 cursor-pointer mr-8">
-              <div className="flex items-center gap-2">
-                <img src="/sonoaac-logo.svg" alt="Sonoaac" className="h-12 w-auto" />
-                <span className="hidden sm:inline text-lg font-bold text-gray-900">Sonoaac</span>
-              </div>
+            <Link href="/" className="flex-shrink-0 cursor-pointer">
+              <motion.div
+                className="flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <img src="/sonoaac-logo.svg" alt="Sonoaac" className="h-10 w-auto" />
+                <span className="hidden sm:inline text-xl font-bold bg-gradient-to-r from-pink-600 to-green-500 bg-clip-text text-transparent">Sonoaac</span>
+              </motion.div>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-1">
               {navLinks.map((link) => (
                 <Link key={link.name} href={link.path}>
-                  <div className={`cursor-pointer px-3 py-2 text-sm font-medium transition-colors hover:text-pink-600 ${
-                    isActive(link.path) ? "text-pink-600" : "text-gray-600"
-                  }`}>
+                  <motion.div
+                    className={`cursor-pointer px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+                      isActive(link.path) 
+                        ? "text-pink-600 bg-pink-50" 
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                    whileHover={{ y: -2 }}
+                  >
                     {link.name}
-                    {isActive(link.path) && (
-                      <motion.div
-                        layoutId="nav-underline"
-                        className="h-0.5 bg-pink-500 w-full mt-1"
-                      />
-                    )}
-                  </div>
+                  </motion.div>
                 </Link>
               ))}
             </div>
 
             {/* Desktop Actions */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-3">
               <Link href="/contact">
-                <div className="text-gray-600 hover:text-pink-600 font-medium text-sm cursor-pointer transition-colors">
+                <motion.div
+                  className="text-gray-700 hover:text-pink-600 font-medium text-sm cursor-pointer transition-colors px-4 py-2"
+                  whileHover={{ y: -2 }}
+                >
                   Contact
-                </div>
+                </motion.div>
               </Link>
-              <button
+              <motion.button
                 onClick={() => setIsQuoteOpen(true)}
-                className="px-6 py-2.5 rounded-full text-white font-semibold text-sm bg-gradient-to-r from-pink-500 to-green-500 hover:opacity-90 transition-opacity shadow-lg shadow-pink-500/20"
+                className="px-5 py-2 rounded-lg text-white font-semibold text-sm bg-gradient-to-r from-pink-500 to-green-500 hover:shadow-lg transition-shadow"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Get Quote
-              </button>
+              </motion.button>
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden">
-              <button
+              <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-gray-600 hover:text-pink-500 p-2"
+                className="text-gray-700 hover:text-pink-600 p-2"
+                whileTap={{ scale: 0.95 }}
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
@@ -83,32 +92,43 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             className="md:hidden bg-white border-t border-gray-100"
           >
-            <div className="px-4 pt-2 pb-6 space-y-1">
+            <div className="px-4 pt-2 pb-4 space-y-1">
               {navLinks.map((link) => (
                 <Link key={link.name} href={link.path}>
-                  <div
-                    className="block px-3 py-4 text-base font-medium text-gray-700 hover:text-pink-600 hover:bg-gray-50 rounded-md cursor-pointer"
+                  <motion.div
+                    className={`block px-4 py-3 text-base font-medium rounded-lg cursor-pointer transition-all ${
+                      isActive(link.path)
+                        ? "text-pink-600 bg-pink-50"
+                        : "text-gray-700 hover:bg-gray-50"
+                    }`}
                     onClick={() => setIsOpen(false)}
+                    whileHover={{ x: 4 }}
                   >
                     {link.name}
-                  </div>
+                  </motion.div>
                 </Link>
               ))}
-              <div className="pt-4 space-y-3">
+              <div className="pt-3 space-y-2">
                 <Link href="/contact">
-                  <div className="block w-full text-center px-4 py-3 text-gray-600 font-medium border border-gray-200 rounded-xl cursor-pointer">
-                    Contact Us
-                  </div>
+                  <motion.div
+                    className="block w-full text-center px-4 py-2.5 text-gray-700 font-medium border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                    whileHover={{ y: -2 }}
+                  >
+                    Contact
+                  </motion.div>
                 </Link>
-                <button
+                <motion.button
                   onClick={() => {
                     setIsOpen(false);
                     setIsQuoteOpen(true);
                   }}
-                  className="w-full px-4 py-3 text-white font-medium bg-gradient-to-r from-pink-500 to-green-500 rounded-xl"
+                  className="w-full px-4 py-2.5 text-white font-medium bg-gradient-to-r from-pink-500 to-green-500 rounded-lg"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Get Quote
-                </button>
+                </motion.button>
               </div>
             </div>
           </motion.div>
