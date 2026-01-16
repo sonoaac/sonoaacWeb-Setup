@@ -20,20 +20,24 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async getPcParts(): Promise<PcPart[]> {
+    if (!db) return [];
     return await db.select().from(pcParts);
   }
 
   async createPcPart(part: InsertPcPart): Promise<PcPart> {
+    if (!db) return { ...part, id: 1 } as PcPart;
     const [newPart] = await db.insert(pcParts).values(part).returning();
     return newPart;
   }
 
   async createQuote(quote: InsertQuote): Promise<Quote> {
+    if (!db) return { ...quote, id: 1, createdAt: new Date() } as Quote;
     const [newQuote] = await db.insert(quotes).values(quote).returning();
     return newQuote;
   }
 
   async createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission> {
+    if (!db) return { ...submission, id: 1, createdAt: new Date() } as ContactSubmission;
     const [newSubmission] = await db.insert(contactSubmissions).values(submission).returning();
     return newSubmission;
   }

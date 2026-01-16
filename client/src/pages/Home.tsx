@@ -118,6 +118,94 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Gaming PC Setup Section */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">Gaming PC Setup</h2>
+              <p className="text-lg text-gray-600 mb-6">
+                Looking for the perfect gaming rig? We build custom gaming PCs tailored to your specific needs and budget. Whether you're into competitive esports, AAA gaming, or content creation, we'll help you get the best performance.
+              </p>
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-green-500 flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white text-sm font-bold">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Custom Configuration</h4>
+                    <p className="text-sm text-gray-500">Choose exactly what components you need</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-green-500 flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white text-sm font-bold">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Expert Assembly</h4>
+                    <p className="text-sm text-gray-500">Professional builders with years of experience</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-pink-500 to-green-500 flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white text-sm font-bold">✓</span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">Competitive Pricing</h4>
+                    <p className="text-sm text-gray-500">Best value for performance on the market</p>
+                  </div>
+                </div>
+              </div>
+              <Link href="/build-pc">
+                <button className="px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-pink-500 to-green-500 hover:shadow-lg hover:shadow-green-500/30 transition-all flex items-center justify-center gap-2 group">
+                  Configure Your PC
+                  <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative w-full aspect-square max-w-lg mx-auto">
+                <motion.div 
+                  className="absolute top-0 right-0 w-3/4 rounded-3xl shadow-2xl overflow-hidden border-4 border-white z-20"
+                  whileHover={{ y: -10 }}
+                >
+                  <img 
+                    src="/gamingpc.jpg" 
+                    alt="Gaming PC Setup 1" 
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+                <motion.div 
+                  className="absolute bottom-0 left-0 w-3/4 rounded-3xl shadow-xl overflow-hidden border-4 border-white z-10"
+                  whileHover={{ y: -10 }}
+                >
+                  <img 
+                    src="/gamingpc.jpg" 
+                    alt="Gaming PC Setup 2" 
+                    className="w-full h-full object-cover opacity-80"
+                  />
+                </motion.div>
+                
+                {/* Decorative elements */}
+                <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full border-2 border-dashed border-gray-300 rounded-full animate-spin-slow" style={{ animationDuration: '20s' }} />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Grid */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
