@@ -26,94 +26,116 @@ export function BraidingDemo() {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="flex items-center justify-center"
+    >
       {/* iPhone Frame */}
-      <div className="relative" style={{ width: "280px", height: "580px" }}>
+      <div className="relative drop-shadow-2xl" style={{ width: "320px", height: "620px" }}>
         {/* Phone Bezel */}
-        <div className="absolute inset-0 bg-black rounded-[40px] shadow-2xl" style={{ padding: "12px" }}>
+        <div className="absolute inset-0 bg-black rounded-[50px] shadow-2xl" style={{ padding: "14px" }}>
           {/* Phone Screen */}
-          <div className="w-full h-full bg-white rounded-[32px] overflow-hidden flex flex-col">
-            {/* Notch */}
-            <div className="h-6 bg-black rounded-b-2xl mx-auto w-1/2" />
+          <div className="w-full h-full bg-white rounded-[40px] overflow-hidden flex flex-col border border-gray-200">
+            {/* Dynamic Island Notch */}
+            <div className="h-8 bg-black rounded-b-3xl mx-auto w-48 flex items-center justify-center">
+              <div className="w-12 h-6 bg-gray-800 rounded-full"></div>
+            </div>
             
-            {/* Phone Content - scrollable area */}
+            {/* Phone Content */}
             <div className="flex-1 overflow-hidden flex flex-col bg-white">
               {/* Header */}
-              <div className="bg-purple-900 text-white px-4 py-3 flex justify-between items-center flex-shrink-0">
+              <div className="bg-gradient-to-r from-purple-900 via-purple-800 to-pink-600 text-white px-5 py-4 flex justify-between items-center flex-shrink-0">
                 <div>
-                  <h3 className="text-lg font-serif italic">Luxe Braids</h3>
-                  <p className="text-purple-200 text-xs uppercase tracking-widest mt-0.5">Premium Studio</p>
+                  <h3 className="text-xl font-serif font-bold italic">Luxe Braids</h3>
+                  <p className="text-purple-100 text-xs uppercase tracking-widest mt-0.5">Premium Studio</p>
                 </div>
-                <button className="bg-white text-purple-900 px-2 py-1 rounded-full text-xs font-bold hover:bg-purple-100 transition-colors">
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white text-purple-900 px-3 py-1.5 rounded-full text-xs font-bold hover:bg-purple-100 transition-all shadow-md"
+                >
                   Book
-                </button>
+                </motion.button>
               </div>
 
               {/* Hero Image Carousel */}
-              <div className="relative h-32 bg-gray-200 overflow-hidden flex-shrink-0">
+              <div className="relative h-40 bg-gradient-to-br from-purple-100 to-pink-50 overflow-hidden flex-shrink-0">
                 <motion.img 
                   key={currentImageIndex}
                   src={braiddingImages[currentImageIndex].src} 
                   alt={braiddingImages[currentImageIndex].alt}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.5 }}
                   className="w-full h-full object-cover" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/80 to-transparent flex items-end justify-between p-2">
-                  <button
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 via-purple-900/40 to-transparent flex items-end justify-between p-3">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
                     onClick={prevImage}
-                    className="bg-white/80 hover:bg-white text-purple-900 p-1 rounded-full transition-colors"
+                    className="bg-white/90 hover:bg-white text-purple-900 p-2 rounded-full transition-all shadow-lg backdrop-blur-sm"
                   >
-                    <ChevronLeft size={14} />
-                  </button>
+                    <ChevronLeft size={16} />
+                  </motion.button>
                   <div className="text-white flex flex-col items-center">
-                    <div className="flex items-center gap-0.5 text-yellow-400 mb-0.5">
-                      <Star size={12} fill="currentColor" />
-                      <Star size={12} fill="currentColor" />
-                      <Star size={12} fill="currentColor" />
-                      <Star size={12} fill="currentColor" />
-                      <Star size={12} fill="currentColor" />
+                    <div className="flex items-center gap-1 text-yellow-300 mb-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={12} fill="currentColor" />
+                      ))}
                     </div>
-                    <p className="font-medium text-xs">"Best braider!"</p>
+                    <p className="font-semibold text-xs">"Best in town!"</p>
                   </div>
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
                     onClick={nextImage}
-                    className="bg-white/80 hover:bg-white text-purple-900 p-1 rounded-full transition-colors"
+                    className="bg-white/90 hover:bg-white text-purple-900 p-2 rounded-full transition-all shadow-lg backdrop-blur-sm"
                   >
-                    <ChevronRight size={14} />
-                  </button>
+                    <ChevronRight size={16} />
+                  </motion.button>
                 </div>
               </div>
 
               {/* Services List */}
               <div className="p-4 overflow-y-auto flex-1">
-                <div className="flex items-center gap-2 text-purple-900 mb-3 font-bold text-sm">
-                  <Calendar size={16} />
-                  <span>Select Service</span>
+                <div className="flex items-center gap-2 text-purple-900 mb-4 font-bold text-sm">
+                  <div className="w-5 h-5 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <Calendar size={14} className="text-purple-700" />
+                  </div>
+                  <span>Services</span>
                 </div>
                 
                 <div className="space-y-2">
                   {services.map((s) => (
-                    <div key={s.name} className="flex items-center justify-between p-2 rounded-lg border border-purple-50 hover:border-purple-200 hover:bg-purple-50 transition-colors cursor-pointer text-xs">
+                    <motion.div 
+                      key={s.name}
+                      whileHover={{ x: 4 }}
+                      className="flex items-center justify-between p-3 rounded-xl border border-purple-100 hover:border-purple-300 hover:bg-purple-50/50 transition-all cursor-pointer text-xs shadow-sm"
+                    >
                       <div>
-                        <div className="font-medium text-gray-800">{s.name}</div>
-                        <div className="flex items-center gap-1 text-xs text-gray-500 mt-0.5">
+                        <div className="font-semibold text-gray-900">{s.name}</div>
+                        <div className="flex items-center gap-1 text-gray-500 mt-1">
                           <Clock size={10} /> {s.time}
                         </div>
                       </div>
-                      <div className="text-purple-700 font-bold">
+                      <div className="text-purple-700 font-bold text-sm">
                         {s.price}
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
+              </div>
+
+              {/* Footer */}
+              <div className="px-4 py-3 border-t border-gray-100 flex items-center gap-2 text-xs text-gray-600">
+                <MapPin size={12} className="flex-shrink-0" />
+                <span>Downtown Studio</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
