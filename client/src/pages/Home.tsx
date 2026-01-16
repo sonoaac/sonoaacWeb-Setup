@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-slate-50 min-h-[85vh] flex items-start pt-8">
+      <section className="relative overflow-hidden bg-slate-50 min-h-[85vh] flex items-start pt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-1 gap-12">
             {/* Left Side - Content */}
@@ -21,6 +21,20 @@ export default function Home() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="max-w-2xl"
             >
+              {/* Logo */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="mb-8"
+              >
+                <img
+                  src="/sonoaac-mascot.png"
+                  alt="Sonoaac"
+                  className="h-24 w-24 object-contain"
+                />
+              </motion.div>
+
               {/* SWS Heading with gradient colors */}
               <div className="flex items-center gap-1 mb-4">
                 <span className="text-6xl font-bold text-pink-600">S</span>
