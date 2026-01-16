@@ -117,13 +117,3 @@ export function BraidingDemo() {
     </div>
   );
 }
-        </div>
-
-        <div className="mt-6 flex items-center gap-2 text-xs text-gray-500 border-t pt-4 border-gray-100">
-          <MapPin size={14} />
-          123 Beauty Lane, Downtown District
-        </div>
-      </div>
-    </div>
-  );
-}
