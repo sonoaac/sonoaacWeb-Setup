@@ -48,6 +48,12 @@ Thumbs.db
 # Vercel
 .vercel
 
+# Replit
+.replit
+.local/
+*.replit
+replit.nix
+
 # Local Env files
 .env*.local
 
