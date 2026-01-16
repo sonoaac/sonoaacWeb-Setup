@@ -60,44 +60,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Right Side - Images */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative w-full max-w-md mx-auto h-96">
-                {/* Top Image */}
-                <motion.div
-                  className="absolute top-0 right-0 w-full rounded-2xl shadow-2xl overflow-hidden border-4 border-white z-20 h-48"
-                  whileHover={{ y: -10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <img
-                    src="/gempages1.svg"
-                    alt="Web Services Showcase"
-                    className="w-full h-full object-cover"
-                  />
-                </motion.div>
 
-                {/* Bottom Image */}
-                <motion.div
-                  className="absolute bottom-0 left-0 w-full rounded-2xl shadow-xl overflow-hidden border-4 border-white z-10 h-48"
-                  whileHover={{ y: -10 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <img
-                    src="/gempages.svg"
-                    alt="Website Design"
-                    className="w-full h-full object-cover opacity-90"
-                  />
-                </motion.div>
-
-                {/* Decorative Ring */}
-                <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full border-2 border-dashed border-gray-200 rounded-full" style={{ animationDuration: '20s' }} />
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
