@@ -22,9 +22,12 @@ export function Navbar() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/" className="flex-shrink-0 cursor-pointer">
-              <img src="/sonoaac-logo.svg" alt="Sonoaac" className="h-10 w-auto" />
+            {/* Logo - Left Side */}
+            <Link href="/" className="flex-shrink-0 cursor-pointer mr-8">
+              <div className="flex items-center gap-2">
+                <img src="/sonoaac-logo.svg" alt="Sonoaac" className="h-12 w-auto" />
+                <span className="hidden sm:inline text-lg font-bold text-gray-900">Sonoaac</span>
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
