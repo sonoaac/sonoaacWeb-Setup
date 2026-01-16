@@ -25,9 +25,9 @@ export function Navbar() {
             {/* Logo - Left Side */}
             <Link href="/" className="flex-shrink-0 cursor-pointer">
               <motion.img
-                src="/sonoaac-logo.svg"
+                src="/sonoaac-mascot.png"
                 alt="Sonoaac"
-                className="h-10 w-auto"
+                className="h-12 w-auto"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
               />

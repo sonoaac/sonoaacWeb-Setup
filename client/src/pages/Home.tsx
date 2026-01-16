@@ -11,29 +11,30 @@ export default function Home() {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-pink-50 min-h-[85vh] flex items-center">
+      <section className="relative overflow-hidden bg-slate-50 min-h-[85vh] flex items-start pt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-1 gap-12">
             {/* Left Side - Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
+              className="max-w-2xl"
             >
               {/* SWS Heading with gradient colors */}
-              <div className="flex items-center gap-1 mb-6">
+              <div className="flex items-center gap-1 mb-4">
                 <span className="text-6xl font-bold text-pink-600">S</span>
                 <span className="text-6xl font-bold text-green-500">W</span>
                 <span className="text-6xl font-bold text-pink-600">S</span>
               </div>
 
               {/* Subheader */}
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
                 Sonoaac Web Services
               </h2>
 
               {/* Main Description */}
-              <p className="text-base text-gray-700 mb-8 leading-relaxed max-w-lg">
+              <p className="text-base text-gray-700 mb-6 leading-relaxed max-w-lg">
                 Build your dream digital presence. Small business owners, customize your website with us for a fraction of the agency cost. Or build a custom PC that fits your specific needs.
               </p>
 
@@ -59,7 +60,6 @@ export default function Home() {
                 </Link>
               </div>
             </motion.div>
-
 
           </div>
         </div>
