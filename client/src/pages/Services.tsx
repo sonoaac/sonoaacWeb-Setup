@@ -4,32 +4,8 @@ import { MechanicDemo } from "@/components/demos/MechanicDemo";
 import { Code, Server, Smartphone, Globe } from "lucide-react";
 
 export default function Services() {
-  const serviceCards = [
-    {
-      icon: Globe,
-      title: "Website Development",
-      description: "Custom websites tailored to your brand. From simple landing pages to complex e-commerce stores.",
-      color: "bg-blue-50 text-blue-600"
-    },
-    {
-      icon: Server,
-      title: "Hosting & Maintenance",
-      description: "We handle the technical stuff so you don't have to. Secure hosting, daily backups, and updates.",
-      color: "bg-green-50 text-green-600"
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile Optimization",
-      description: "Ensure your site looks stunning on every device. Mobile-first design approach.",
-      color: "bg-purple-50 text-purple-600"
-    },
-    {
-      icon: Code,
-      title: "Custom Applications",
-      description: "Need specialized internal tools? We build custom web apps to streamline your business.",
-      color: "bg-pink-50 text-pink-600"
-    }
-  ];
+  // serviceCards intentionally left empty per design request
+  const serviceCards: Array<any> = [];
 
   return (
     <div className="min-h-screen pt-24 pb-24">
@@ -42,9 +18,6 @@ export default function Services() {
         >
           Our Services
         </motion.h1>
-        <p className="text-xl text-gray-500 max-w-2xl mx-auto">
-          We bring enterprise-level quality to small businesses at prices that make sense.
-        </p>
       </div>
 
       {/* Service Cards */}
