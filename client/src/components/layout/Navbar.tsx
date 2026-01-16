@@ -22,8 +22,16 @@ export function Navbar() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Empty space for alignment */}
-            <div className="flex-shrink-0"></div>
+            {/* Logo - Left Side */}
+            <Link href="/" className="flex-shrink-0 cursor-pointer">
+              <motion.img
+                src="/sonoaac-logo.svg"
+                alt="Sonoaac"
+                className="h-10 w-auto"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              />
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">

@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white min-h-[85vh] flex items-center">
+      <section className="relative overflow-hidden bg-pink-50 min-h-[85vh] flex items-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Content */}
