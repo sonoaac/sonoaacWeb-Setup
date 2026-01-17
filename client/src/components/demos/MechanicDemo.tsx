@@ -6,8 +6,8 @@ export function MechanicDemo() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const autoImages = [
-    { src: "/autoservicing.jpg", alt: "Auto Service Center" },
-    { src: "/autoservicing.jpg", alt: "Professional Mechanics" },
+    { src: "/images/autoservicing.jpg", alt: "Auto Service Center" },
+    { src: "/images/autoservicing.jpg", alt: "Professional Mechanics" },
   ];
 
   const nextImage = () => {

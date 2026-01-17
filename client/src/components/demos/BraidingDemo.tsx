@@ -13,8 +13,8 @@ export function BraidingDemo() {
   ];
 
   const braiddingImages = [
-    { src: "/braidinghair1.jpg", alt: "Beautiful Braiding Work" },
-    { src: "/braidinghair1.jpg", alt: "Professional Styling" },
+    { src: "/images/braidinghair1.jpg", alt: "Beautiful Braiding Work" },
+    { src: "/images/braidinghair1.jpg", alt: "Professional Styling" },
   ];
 
   const nextImage = () => {

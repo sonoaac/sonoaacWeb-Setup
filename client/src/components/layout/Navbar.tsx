@@ -25,7 +25,7 @@ export function Navbar() {
             {/* Logo - Left Side */}
             <Link href="/" className="flex-shrink-0 cursor-pointer">
               <motion.img
-                src="/sonoaac-mascot.png"
+                src="/images/sonoaac-mascot.png"
                 alt="Sonoaac"
                 className="h-12 w-auto"
                 whileHover={{ scale: 1.05 }}
