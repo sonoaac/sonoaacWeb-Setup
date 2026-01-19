@@ -29,7 +29,7 @@ export default function Home() {
                 className="mb-8"
               >
                 <img
-                  src="/images/sonoaac-mascot.png"
+                  src="/images/sonoaaclogos.PNG"
                   alt="Sonoaac"
                   className="h-24 w-24 object-contain"
                 />

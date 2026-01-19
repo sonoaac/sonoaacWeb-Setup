@@ -6,8 +6,8 @@ export function MechanicDemo() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const autoImages = [
-    { src: "/images/autoservicing.jpg", alt: "Auto Service Center" },
-    { src: "/images/autoservicing.jpg", alt: "Professional Mechanics" },
+    { src: "/images/Autoservicingmock.jpg", alt: "Auto Service Center" },
+    { src: "/images/Autoservicingmock1.jpg", alt: "Professional Mechanics" },
   ];
 
   const nextImage = () => {
@@ -33,7 +33,7 @@ export function MechanicDemo() {
           <div className="w-full h-full bg-gradient-to-br from-slate-950 to-slate-900 rounded-[32px] overflow-hidden flex flex-col border border-gray-700">
             {/* Logo Bar */}
             <div className="bg-slate-950/80 px-7 py-3 flex items-center justify-center border-b border-slate-700">
-              <img src="/sonoaac-logo.svg" alt="Sonoaac" className="h-7 w-auto" />
+              <img src="/images/Autoservicingmocklogo.png" alt="Sonoaac" className="h-7 w-auto" />
             </div>
             
             {/* Navigation */}

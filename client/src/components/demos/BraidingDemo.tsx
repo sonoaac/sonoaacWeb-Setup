@@ -13,8 +13,8 @@ export function BraidingDemo() {
   ];
 
   const braiddingImages = [
-    { src: "/images/braidinghair1.jpg", alt: "Beautiful Braiding Work" },
-    { src: "/images/braidinghair1.jpg", alt: "Professional Styling" },
+    { src: "/images/braidinghairmock.jpg", alt: "Beautiful Braiding Work" },
+    { src: "/images/braidinghairmock1.jpg", alt: "Professional Styling" },
   ];
 
   const nextImage = () => {
@@ -47,7 +47,7 @@ export function BraidingDemo() {
             <div className="flex-1 overflow-hidden flex flex-col bg-white">
               {/* Logo Bar */}
               <div className="bg-white px-4 py-2 flex items-center justify-center border-b border-gray-100">
-                <img src="/sonoaac-logo.svg" alt="Sonoaac" className="h-6 w-auto" />
+                <img src="/images/braidinghairmocklogo.png" alt="Sonoaac" className="h-6 w-auto" />
               </div>
               
               {/* Header */}
