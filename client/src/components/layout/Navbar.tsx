@@ -75,7 +75,7 @@ export function Navbar() {
             >
               <div className="flex items-center gap-3">
                 <motion.img
-                  src="/images/sonoaaclogos.PNG"
+                  src="/images/sonoaaclogos.png"
                   alt="Sonoaac"
                   className="h-12 w-auto"
                   whileHover={{ scale: 1.05, rotate: 5 }}
