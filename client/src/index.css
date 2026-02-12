@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,65 +6,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    --background: 0 0% 0%; /* Pure black */
+    --foreground: 0 0% 100%;
     
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
     
-    --primary: 336 80% 60%; /* Pink-500ish base */
-    --primary-foreground: 210 40% 98%;
+    --primary: 336 80% 60%; /* Pink */
+    --primary-foreground: 0 0% 100%;
     
-    --secondary: 142 71% 45%; /* Green-500ish base */
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 142 71% 55%; /* Green */
+    --secondary-foreground: 0 0% 100%;
     
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
     
-    --accent: 336 80% 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 0 0% 15%;
+    --input: 0 0% 10%;
     --ring: 336 80% 60%;
     
     --radius: 0.75rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    
-    --primary: 336 80% 60%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    
-    --secondary: 142 71% 45%;
-    --secondary-foreground: 210 40% 98%;
-    
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 336 80% 60%;
   }
 }
 
@@ -72,22 +42,111 @@
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground antialiased font-sans selection:bg-pink-100 selection:text-pink-900;
+  
+  html {
+    scroll-behavior: smooth;
   }
+  
+  body {
+    @apply bg-black text-white antialiased font-sans selection:bg-pink-500 selection:text-white;
+    font-family: 'Inter', sans-serif;
+  }
+  
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold tracking-tight;
+    text-shadow: 
+      2px 2px 0px rgba(0, 0, 0, 0.8),
+      3px 3px 0px rgba(0, 0, 0, 0.6),
+      4px 4px 0px rgba(0, 0, 0, 0.4),
+      5px 5px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-3d {
+    text-shadow: 
+      2px 2px 0px rgba(0, 0, 0, 0.8),
+      3px 3px 0px rgba(0, 0, 0, 0.6),
+      4px 4px 0px rgba(0, 0, 0, 0.4),
+      5px 5px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-3d-pink {
+    color: #ec4899;
+    text-shadow: 
+      2px 2px 0px rgba(0, 0, 0, 0.8),
+      3px 3px 0px rgba(0, 0, 0, 0.6),
+      4px 4px 0px rgba(0, 0, 0, 0.4),
+      5px 5px 15px rgba(236, 72, 153, 0.5);
+  }
+  
+  .text-3d-green {
+    color: #22c55e;
+    text-shadow: 
+      2px 2px 0px rgba(0, 0, 0, 0.8),
+      3px 3px 0px rgba(0, 0, 0, 0.6),
+      4px 4px 0px rgba(0, 0, 0, 0.4),
+      5px 5px 15px rgba(34, 197, 94, 0.5);
+  }
+  
+  .font-code {
+    font-family: 'Fira Code', monospace;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-green-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-pink-400 to-green-500;
+    text-shadow: none;
   }
+  
+  .text-gradient-reverse {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-green-400 to-pink-500;
+    text-shadow: none;
+  }
+  
   .bg-gradient-primary {
     @apply bg-gradient-to-r from-pink-500 to-green-500;
   }
+  
+  .bg-gradient-reverse {
+    @apply bg-gradient-to-r from-green-500 to-pink-500;
+  }
+  
   .bg-gradient-subtle {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(244, 114, 182, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+  }
+  
+  .glow-pink {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3),
+                0 0 40px rgba(236, 72, 153, 0.2);
+  }
+  
+  .glow-green {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3),
+                0 0 40px rgba(34, 197, 94, 0.2);
+  }
+  
+  .hover-glow-pink {
+    transition: all 0.3s ease;
+  }
+  
+  .hover-glow-pink:hover {
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.5),
+                0 0 60px rgba(236, 72, 153, 0.3);
+  }
+  
+  .hover-glow-green:hover {
+    box-shadow: 0 0 30px rgba(34, 197, 94, 0.5),
+                0 0 60px rgba(34, 197, 94, 0.3);
+  }
+  
+  .code-grid-bg {
+    background-image: 
+      linear-gradient(rgba(236, 72, 153, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34, 197, 94, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  .section-scroll {
+    scroll-margin-top: 80px;
   }
 }

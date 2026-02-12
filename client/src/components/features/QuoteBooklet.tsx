@@ -136,38 +136,38 @@ export function QuoteBooklet({ open, onOpenChange }: QuoteBookletProps) {
     if (currentStep.isForm) {
       return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="p-4 bg-gray-50 rounded-xl mb-6 border border-gray-100">
-            <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Estimated Range</h4>
-            <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-green-500">
+          <div className="p-6 bg-gray-900 rounded-xl mb-6 border border-gray-800">
+            <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2 font-code">Estimated Range</h4>
+            <div className="text-3xl sm:text-4xl font-bold text-gradient font-code">
               ${calculateEstimate()} - ${Math.round(calculateEstimate() * 1.2)}
             </div>
-            <p className="text-xs text-gray-400 mt-1">*Final price may vary based on specific requirements.</p>
+            <p className="text-xs text-gray-500 mt-2">*Final price may vary based on specific requirements.</p>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+              <label className="block text-sm font-bold text-white mb-2 font-code">Name</label>
               <input
                 {...register("contactName")}
-                className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl border-2 border-gray-800 bg-gray-900 text-white focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none transition-all placeholder:text-gray-600"
                 placeholder="John Doe"
               />
-              {errors.contactName && <p className="text-red-500 text-xs mt-1">{errors.contactName.message}</p>}
+              {errors.contactName && <p className="text-pink-500 text-xs mt-1">{errors.contactName.message}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label className="block text-sm font-bold text-white mb-2 font-code">Email</label>
               <input
                 {...register("contactEmail")}
-                className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl border-2 border-gray-800 bg-gray-900 text-white focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none transition-all placeholder:text-gray-600"
                 placeholder="john@example.com"
               />
-              {errors.contactEmail && <p className="text-red-500 text-xs mt-1">{errors.contactEmail.message}</p>}
+              {errors.contactEmail && <p className="text-pink-500 text-xs mt-1">{errors.contactEmail.message}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Project Details (Optional)</label>
+              <label className="block text-sm font-bold text-white mb-2 font-code">Project Details (Optional)</label>
               <textarea
                 {...register("message")}
-                className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none transition-all min-h-[80px]"
+                className="w-full px-4 py-3 rounded-xl border-2 border-gray-800 bg-gray-900 text-white focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none transition-all min-h-[100px] placeholder:text-gray-600"
                 placeholder="Any specific design references or deadlines?"
               />
             </div>
@@ -176,7 +176,7 @@ export function QuoteBooklet({ open, onOpenChange }: QuoteBookletProps) {
           <button
             type="submit"
             disabled={createQuote.isPending}
-            className="w-full py-3 mt-4 rounded-xl font-bold text-white bg-gradient-to-r from-pink-500 to-green-500 hover:shadow-lg hover:shadow-pink-500/25 transition-all flex items-center justify-center gap-2"
+            className="w-full py-4 mt-6 rounded-xl font-bold text-white bg-gradient-primary hover-glow-pink transition-all flex items-center justify-center gap-2 text-lg"
           >
             {createQuote.isPending ? <Loader2 className="animate-spin" /> : "Submit Request"}
           </button>
@@ -201,14 +201,14 @@ export function QuoteBooklet({ open, onOpenChange }: QuoteBookletProps) {
               whileTap={{ scale: 0.98 }}
               onClick={() => handleOptionClick(option, currentStep.key as any, currentStep.multi)}
               className={`
-                p-4 rounded-xl cursor-pointer border-2 transition-all flex items-center justify-between
+                p-4 rounded-xl cursor-pointer border-2 transition-all flex items-center justify-between font-bold
                 ${isSelected 
-                  ? "border-pink-500 bg-pink-50 text-pink-900" 
-                  : "border-gray-100 hover:border-pink-200 bg-white text-gray-700"}
+                  ? "border-pink-500 bg-pink-500/10 text-pink-500 hover-glow-pink" 
+                  : "border-gray-800 hover:border-green-500 bg-gray-900 text-gray-300 hover:text-white hover-glow-green"}
               `}
             >
-              <span className="font-medium">{option}</span>
-              {isSelected && <Check size={18} className="text-pink-500" />}
+              <span className="font-bold">{option}</span>
+              {isSelected && <Check size={20} className="text-pink-500" />}
             </motion.div>
           );
         })}
@@ -216,9 +216,9 @@ export function QuoteBooklet({ open, onOpenChange }: QuoteBookletProps) {
         {currentStep.multi && (
           <button
             onClick={() => setStep(step + 1)}
-            className="w-full py-3 mt-4 flex items-center justify-center gap-2 text-gray-600 hover:text-pink-600 font-medium transition-colors"
+            className="w-full py-3 mt-6 flex items-center justify-center gap-2 text-gray-300 hover:text-green-500 font-bold transition-all font-code text-lg"
           >
-            Next Step <ChevronRight size={16} />
+            Next Step <ChevronRight size={20} />
           </button>
         )}
       </div>
@@ -227,21 +227,21 @@ export function QuoteBooklet({ open, onOpenChange }: QuoteBookletProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md overflow-hidden bg-white/95 backdrop-blur-xl border-none shadow-2xl rounded-2xl">
+      <DialogContent className="sm:max-w-md overflow-hidden bg-black/95 backdrop-blur-xl border-2 border-gray-900 shadow-2xl shadow-pink-500/20 rounded-2xl">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-2xl font-bold">
-            <Calculator className="text-pink-500" />
-            Project Estimate
+          <DialogTitle className="flex items-center gap-3 text-2xl sm:text-3xl font-bold text-white text-3d">
+            <Calculator className="text-pink-500" size={32} />
+            <span className="text-gradient">Project Estimate</span>
           </DialogTitle>
-          <DialogDescription>
-            Step {step} of 5: {steps[step - 1].title}
+          <DialogDescription className="text-gray-400 font-code text-sm mt-2">
+            Step {step} of 5: <span className="text-green-500">{steps[step - 1].title}</span>
           </DialogDescription>
         </DialogHeader>
 
-        <div className="mt-4">
-          <div className="h-1 w-full bg-gray-100 rounded-full mb-6 overflow-hidden">
+        <div className="mt-6">
+          <div className="h-2 w-full bg-gray-900 rounded-full mb-8 overflow-hidden border border-gray-800">
             <motion.div 
-              className="h-full bg-gradient-to-r from-pink-500 to-green-500"
+              className="h-full bg-gradient-primary glow-pink"
               initial={{ width: 0 }}
               animate={{ width: `${(step / 5) * 100}%` }}
             />
