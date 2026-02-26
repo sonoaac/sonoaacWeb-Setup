@@ -19,6 +19,7 @@ import SoftwareFixes from "@/pages/SoftwareFixes";
 import BusinessIT from "@/pages/BusinessIT";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import HelpBot from "@/components/features/HelpBot";
 
 function Router() {
   return (
@@ -54,6 +55,7 @@ function App() {
           </main>
           <Footer />
           <Toaster />
+          <HelpBot />
         </div>
       </TooltipProvider>
     </QueryClientProvider>

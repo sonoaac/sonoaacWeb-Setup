@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
 import { StickyNav } from "@/components/layout/StickyNav";
-import ServiceCard from "@/components/ui/ServiceCard";
+import ScrollWindow from "@/components/layout/ScrollWindow";
 
 export default function Home() {
   // Homepage navigation tabs for sticky nav
@@ -26,6 +26,7 @@ export default function Home() {
           src: "/images/sonoaactexts.png",
           alt: "Sonoaac"
         }}
+        showTabs={false}
       >
         {/* 1. Hero Section */}
           <section className="et-slide" id="hero">
@@ -61,162 +62,55 @@ export default function Home() {
             </motion.div>
           </section>
 
-          {/* 2. What We Help With */}
-          <section className="et-slide" id="help" style={{ background: "#f3f4f6" }}>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
-            >
-              <div className="mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold mb-2">How We Can Help</h2>
-                <p className="text-lg text-gray-700 mb-4">Choose the service that fits your needs. All work is clear, secure, and tailored to you.</p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Consistent ServiceCard grid */}
-                <ServiceCard title="Consultation" link="/book-consultation">
-                  <span>Expert advice for your tech, business, or home. <b>Starting at $49</b>.</span>
-                </ServiceCard>
-                <ServiceCard title="Remote IT Support" link="/it-support">
-                  <span>Get help anywhere. <b>Support sessions starting at $79</b>.</span>
-                </ServiceCard>
-                <ServiceCard title="On-Site Service" link="/on-site-services">
-                  <span>We come to you. <b>Request a quote</b> for home or office visits.</span>
-                </ServiceCard>
-                <ServiceCard title="Device Setup" link="/device-setup">
-                  <span>New or existing device, fully configured and ready to use.</span>
-                </ServiceCard>
-                <ServiceCard title="Business IT" link="/business-it">
-                  <span>Setup, security, and support for small businesses.</span>
-                </ServiceCard>
-                <ServiceCard title="Software Fixes" link="/software-fixes">
-                  <span>App errors, Microsoft 365, and more—fixed fast.</span>
-                </ServiceCard>
-              </div>
-            </motion.div>
-          </section>
-
-          {/* 3. On-Site Services */}
-          <section className="et-slide" id="onsite">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
-            >
-              <div className="max-w-[55%]">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                  On-Site Services
-                </h2>
-                <ul className="list-disc ml-6 text-xl text-gray-600 mb-8">
-                  <li>Home visits</li>
-                  <li>Office visits</li>
-                  <li>Workstation & network setup</li>
-                  <li>Device installations</li>
-                </ul>
-                <p className="text-lg text-gray-700 mb-6">
-                  On-site services are scheduled after booking and availability confirmation.
-                </p>
-                <Link href="/services">
-                  <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-                    Request On-Site Service
-                    <ArrowRight size={20} />
-                  </button>
-                </Link>
-              </div>
-            </motion.div>
-          </section>
-
-          {/* 4. Remote Support */}
-          <section className="et-slide" id="remote" style={{ background: "#f3f4f6" }}>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
-            >
-              <div className="max-w-[55%]">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                  Remote Support
-                </h2>
-                <ul className="list-disc ml-6 text-xl text-gray-600 mb-8">
-                  <li>Microsoft 365 issues</li>
-                  <li>Email setup</li>
-                  <li>App errors</li>
-                  <li>OS troubleshooting</li>
-                </ul>
-                <Link href="/services">
-                  <button className="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-                    Start Remote Support
-                    <ArrowRight size={20} />
-                  </button>
-                </Link>
-              </div>
-            </motion.div>
-          </section>
-
-          {/* 5. Device Setup & Sales */}
-          <section className="et-slide" id="devices">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
-            >
-              <div className="max-w-[55%]">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                  Device Setup & Sales
-                </h2>
-                <ul className="list-disc ml-6 text-xl text-gray-600 mb-8">
-                  <li>New or existing device setup</li>
-                  <li>Business-ready configuration</li>
-                  <li>Fully configured device delivery</li>
-                </ul>
-                <div className="flex flex-col xs:flex-row gap-4 w-full max-w-xs sm:max-w-none mx-auto sm:mx-0">
-                  <Link href="/my-tech">
-                    <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-                      Setup My Device
-                      <ArrowRight size={20} />
-                    </button>
-                  </Link>
-                  <Link href="/device-sales">
-                    <button className="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-                      Buy a Ready-to-Use Computer
-                      <ArrowRight size={20} />
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          </section>
-
-          {/* 6. Why Choose Us */}
-          <section className="et-slide" id="trust" style={{ background: "#f3f4f6" }}>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
-            >
-              <div className="max-w-[55%]">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                  Why Choose Us
-                </h2>
-                <ul className="list-disc ml-6 text-xl text-gray-600 mb-8">
-                  <li>Professionally registered U.S. business</li>
-                  <li>Clear, non-technical communication</li>
-                  <li>Secure & productivity-focused setups</li>
-                  <li>One-on-one personalized support</li>
-                </ul>
-              </div>
-            </motion.div>
-          </section>
+          <ScrollWindow
+            sections={[
+              {
+                title: "Get the Right PC for Your Work",
+                description:
+                  "We help you choose or build the perfect PC for creators, office, or small business. Get expert advice on specs, performance, and value.",
+                imageSrc: "/images/gamingpc.jpg",
+                imageAlt: "Custom PC for creators and business",
+                ctaLabel: "Book Consultation",
+                ctaHref: "/book-consultation",
+              },
+              {
+                title: "On-Site Services",
+                description:
+                  "Home or office visits for setup, troubleshooting, and upgrades. We come to you for networks, devices, and more.",
+                imageSrc: "/images/onsite-support.webp",
+                imageAlt: "On-site IT support",
+                ctaLabel: "Request On-Site Service",
+                ctaHref: "/services",
+              },
+              {
+                title: "Remote Support",
+                description:
+                  "Fast help for Microsoft 365, email, app errors, and OS issues. Secure remote sessions for homes and businesses.",
+                imageSrc: "/images/remote-support.webp",
+                imageAlt: "Remote IT support",
+                ctaLabel: "Get IT Support",
+                ctaHref: "/it-support",
+              },
+              {
+                title: "Device Setup & Sales",
+                description:
+                  "Ready-to-go laptops, desktops, iPads, and Macs. We set up new and existing devices for productivity and security.",
+                imageSrc: "/images/gaming-pc-builder.webp",
+                imageAlt: "Device setup and sales",
+                ctaLabel: "Request Device Quote",
+                ctaHref: "/device-sales",
+              },
+              {
+                title: "Why Choose Us",
+                description:
+                  "Sonoaac is a registered U.S. business. We focus on clear communication, secure setups, and one-on-one support.",
+                imageSrc: "/images/sonoaactexts.png",
+                imageAlt: "Why choose Sonoaac",
+                ctaLabel: "Book Consultation",
+                ctaHref: "/book-consultation",
+              },
+            ]}
+          />
 
           {/* 7. Final CTA Section */}
           <section className="bg-gray-900 text-white flex justify-end py-20 px-8 sm:px-12 lg:px-16" id="cta">

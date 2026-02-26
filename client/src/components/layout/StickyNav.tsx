@@ -16,9 +16,10 @@ interface StickyNavProps {
   tabs: Tab[];
   children: React.ReactNode;
   heroImage?: HeroImage;
+  showTabs?: boolean;
 }
 
-export function StickyNav({ tabs, children, heroImage }: StickyNavProps) {
+export function StickyNav({ tabs, children, heroImage, showTabs = true }: StickyNavProps) {
   const [currentId, setCurrentId] = useState<string | null>(null);
   const [sliderWidth, setSliderWidth] = useState(0);
   const [sliderLeft, setSliderLeft] = useState(0);
@@ -119,64 +120,66 @@ export function StickyNav({ tabs, children, heroImage }: StickyNavProps) {
       {/* Sticky Nav Section - always at the top of the page flow */}
       <section style={{ position: 'relative', zIndex: 100 }}>
         {/* This spacer ONLY appears when sticky, so content gets pushed down */}
-        {isSticky && <div aria-hidden="true" style={{ height: tabContainerHeight }} />}
+        {showTabs && isSticky && <div aria-hidden="true" style={{ height: tabContainerHeight }} />}
 
-        <nav
-          className={`et-hero-tabs-container ${isSticky ? "et-hero-tabs-container--top" : ""}`}
-          style={isSticky ? { position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999 } : { position: 'static' }}
-        >
-          {/* Logo and SNC */}
-          <Link href="/">
-            <button className="flex-shrink-0 cursor-pointer group flex items-center gap-3 mr-8 mt-2">
-              <motion.img
-                src="/images/sonoaaclogos.png"
-                alt="Sonoaac"
-                className="h-12 w-auto"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              />
-              <span className="font-bold text-3xl text-gray-900">SNC</span>
-            </button>
-          </Link>
-          {/* Main nav links (no CTA) */}
-          <div className="hidden lg:flex items-center space-x-1 mr-8">
-            {navLinks.map((link) => (
-              <Link key={link.name} href={link.path}>
-                <button
-                  className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
-                    isActive(link.path)
-                      ? "text-green-600 bg-green-50"
-                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
-                  }`}
+        {showTabs && (
+          <nav
+            className={`et-hero-tabs-container ${isSticky ? "et-hero-tabs-container--top" : ""}`}
+            style={isSticky ? { position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999 } : { position: 'static' }}
+          >
+            {/* Logo and SNC */}
+            <Link href="/">
+              <button className="flex-shrink-0 cursor-pointer group flex items-center gap-3 mr-8 mt-2">
+                <motion.img
+                  src="/images/sonoaaclogos.png"
+                  alt="Sonoaac"
+                  className="h-12 w-auto"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                />
+                <span className="font-bold text-3xl text-gray-900">SNC</span>
+              </button>
+            </Link>
+            {/* Main nav links (no CTA) */}
+            <div className="hidden lg:flex items-center space-x-1 mr-8">
+              {navLinks.map((link) => (
+                <Link key={link.name} href={link.path}>
+                  <button
+                    className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
+                      isActive(link.path)
+                        ? "text-green-600 bg-green-50"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                    }`}
+                  >
+                    {link.name}
+                  </button>
+                </Link>
+              ))}
+            </div>
+            {/* Section tabs (always visible) */}
+            <div className="flex-1 items-center justify-end hidden md:flex">
+              {tabs.map((tab) => (
+                <motion.a
+                  key={tab.id}
+                  ref={(el) => {
+                    tabRefs.current[tab.id] = el;
+                  }}
+                  href={`#${tab.id}`}
+                  className={`et-hero-tab ${currentId === tab.id ? "active" : ""}`}
+                  onClick={(e) => handleTabClick(e, tab.id)}
+                  whileHover={{ color: "white" }}
                 >
-                  {link.name}
-                </button>
-              </Link>
-            ))}
-          </div>
-          {/* Section tabs (always visible) */}
-          <div className="flex-1 items-center justify-end hidden md:flex">
-            {tabs.map((tab) => (
-              <motion.a
-                key={tab.id}
-                ref={(el) => {
-                  tabRefs.current[tab.id] = el;
-                }}
-                href={`#${tab.id}`}
-                className={`et-hero-tab ${currentId === tab.id ? "active" : ""}`}
-                onClick={(e) => handleTabClick(e, tab.id)}
-                whileHover={{ color: "white" }}
-              >
-                {tab.label}
-              </motion.a>
-            ))}
-            <motion.span
-              className="et-hero-tab-slider"
-              animate={{ width: `${sliderWidth}px`, left: `${sliderLeft}px` }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            />
-          </div>
-        </nav>
+                  {tab.label}
+                </motion.a>
+              ))}
+              <motion.span
+                className="et-hero-tab-slider"
+                animate={{ width: `${sliderWidth}px`, left: `${sliderLeft}px` }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            </div>
+          </nav>
+        )}
       </section>
 
       {/* Hero Section (logo/image) only on Home page if heroImage is provided */}
