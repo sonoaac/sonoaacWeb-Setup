@@ -4,11 +4,15 @@ import { Link } from "wouter";
 import { StickyNav } from "@/components/layout/StickyNav";
 
 export default function Home() {
+  // Homepage navigation tabs for sticky nav
   const tabs = [
-    { id: "services", label: "Services" },
-    { id: "my-tech", label: "My Tech" },
-    { id: "partnerships", label: "Partnerships" },
-    { id: "products", label: "Products" },
+    { id: "hero", label: "Home" },
+    { id: "help", label: "What We Help With" },
+    { id: "onsite", label: "On-Site Services" },
+    { id: "remote", label: "Remote Support" },
+    { id: "devices", label: "Device Setup & Sales" },
+    { id: "trust", label: "Why Choose Us" },
+    { id: "cta", label: "Get Started" },
   ];
 
   return (
@@ -20,183 +24,232 @@ export default function Home() {
           src: "/images/sonoaactexts.png",
           alt: "Sonoaac"
         }}
-      >
-        {/* Services Section */}
-        <section className="et-slide" id="services">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-6xl px-8 sm:px-12 lg:px-16 flex justify-end"
-          >
-            <div className="max-w-[55%] text-right">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Client builds
-              </h2>
-              <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                If you need a website or a full web app, I can build it clean and professional, mobile ready, and easy to manage.
-              </p>
-              <Link href="/services">
-                <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-                  See services
-                  <ArrowRight size={20} />
-                </button>
-              </Link>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* My Tech Section */}
-        <section className="et-slide" id="my-tech" style={{ background: "#f3f4f6" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
-          >
-            <div className="max-w-[55%]">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                The Right Setup for You
-              </h2>
-              <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                Get the right tech for your business or personal use. Sonoaac helps you pick the right devices based on what you actually need.
-              </p>
-              <Link href="/my-tech">
-                <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-                  Explore products
-                  <ArrowRight size={20} />
-                </button>
-              </Link>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* Partnerships Section */}
-        <section className="et-slide" id="partnerships">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-6xl px-8 sm:px-12 lg:px-16 flex justify-end"
-          >
-            <div className="max-w-[55%] text-right">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Partnerships
-              </h2>
-              <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                If you have a strong idea and you want to build it the right way, we can team up and move serious.
-              </p>
-              <Link href="/contact">
-                <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-                  Talk to me
-                  <ArrowRight size={20} />
-                </button>
-              </Link>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* Featured Products Section */}
-        <section className="et-slide" id="products" style={{ background: "#f3f4f6" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
-          >
-            <div className="max-w-[55%]">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Products under Sonoaac
-              </h2>
-              <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed">
-                I do not just build for people. I ship my own platforms too.
-              </p>
-
-              <div className="space-y-8">
-                <div>
-                  <span className="inline-block px-3 py-1 bg-green-500 text-white text-sm font-medium rounded mb-3">
-                    Live
-                  </span>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    Sonoaac Web Services
-                  </h3>
-                  <p className="text-lg text-gray-600 mb-4">
-                    Full service web development for small businesses and startups
-                  </p>
-                </div>
-
-                <div>
-                  <span className="inline-block px-3 py-1 bg-green-500 text-white text-sm font-medium rounded mb-3">
-                    Live
-                  </span>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    My Tech
-                  </h3>
-                  <p className="text-lg text-gray-600 mb-4">
-                    Find the perfect device for your business or personal needs. Get professional recommendations based on your use case.
-                  </p>
-                  <Link href="/my-tech">
-                    <button className="text-green-600 hover:text-green-700 font-semibold inline-flex items-center gap-2">
-                      Explore now
-                      <ArrowRight size={16} />
+      <div className="min-h-screen bg-white">
+        {/* Sticky Navigation with Content */}
+        <StickyNav 
+          tabs={tabs}
+          heroImage={{
+            src: "/images/sonoaactexts.png",
+            alt: "Sonoaac"
+          }}
+        >
+          {/* 1. Hero Section */}
+          <section className="et-slide" id="hero">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16 flex justify-end"
+            >
+              <div className="max-w-[55%] text-right">
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                  On-Site & Remote Tech Setup for Homes and Small Businesses
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
+                  Consultations, fixes, and full device setups — done right
+                </p>
+                <div className="flex gap-4 justify-end">
+                  <Link href="/contact">
+                    <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
+                      Book a Consultation
+                      <ArrowRight size={20} />
+                    </button>
+                  </Link>
+                  <Link href="/services">
+                    <button className="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
+                      Request IT Support
+                      <ArrowRight size={20} />
                     </button>
                   </Link>
                 </div>
+              </div>
+            </motion.div>
+          </section>
 
-                <div>
-                  <span className="inline-block px-3 py-1 bg-gray-400 text-white text-sm font-medium rounded mb-3">
-                    Planning
-                  </span>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    More coming soon
-                  </h3>
-                  <p className="text-lg text-gray-600 mb-4">
-                    Building tools and platforms that solve real problems
-                  </p>
+          {/* 2. What We Help With */}
+          <section className="et-slide" id="help" style={{ background: "#f3f4f6" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {/* Service Cards */}
+                <ServiceCard title="Computer & Device Setup" link="/my-tech" />
+                <ServiceCard title="Small Business IT Support" link="/services" />
+                <ServiceCard title="Software & App Fixes" link="/software-fixes" />
+                <ServiceCard title="On-Site Visits" link="/services" />
+                <ServiceCard title="Remote Support" link="/services" />
+              </div>
+            </motion.div>
+          </section>
+
+          {/* 3. On-Site Services */}
+          <section className="et-slide" id="onsite">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
+            >
+              <div className="max-w-[55%]">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                  On-Site Services
+                </h2>
+                <ul className="list-disc ml-6 text-xl text-gray-600 mb-8">
+                  <li>Home visits</li>
+                  <li>Office visits</li>
+                  <li>Workstation & network setup</li>
+                  <li>Device installations</li>
+                </ul>
+                <p className="text-lg text-gray-700 mb-6">
+                  On-site services are scheduled after booking and availability confirmation.
+                </p>
+                <Link href="/services">
+                  <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
+                    Request On-Site Service
+                    <ArrowRight size={20} />
+                  </button>
+                </Link>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* 4. Remote Support */}
+          <section className="et-slide" id="remote" style={{ background: "#f3f4f6" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
+            >
+              <div className="max-w-[55%]">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                  Remote Support
+                </h2>
+                <ul className="list-disc ml-6 text-xl text-gray-600 mb-8">
+                  <li>Microsoft 365 issues</li>
+                  <li>Email setup</li>
+                  <li>App errors</li>
+                  <li>OS troubleshooting</li>
+                </ul>
+                <Link href="/services">
+                  <button className="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
+                    Start Remote Support
+                    <ArrowRight size={20} />
+                  </button>
+                </Link>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* 5. Device Setup & Sales */}
+          <section className="et-slide" id="devices">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
+            >
+              <div className="max-w-[55%]">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                  Device Setup & Sales
+                </h2>
+                <ul className="list-disc ml-6 text-xl text-gray-600 mb-8">
+                  <li>New or existing device setup</li>
+                  <li>Business-ready configuration</li>
+                  <li>Fully configured device delivery</li>
+                </ul>
+                <div className="flex gap-4">
+                  <Link href="/my-tech">
+                    <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
+                      Setup My Device
+                      <ArrowRight size={20} />
+                    </button>
+                  </Link>
+                  <Link href="/device-sales">
+                    <button className="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
+                      Buy a Ready-to-Use Computer
+                      <ArrowRight size={20} />
+                    </button>
+                  </Link>
                 </div>
               </div>
+            </motion.div>
+          </section>
+
+          {/* 6. Why Choose Us */}
+          <section className="et-slide" id="trust" style={{ background: "#f3f4f6" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
+            >
+              <div className="max-w-[55%]">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                  Why Choose Us
+                </h2>
+                <ul className="list-disc ml-6 text-xl text-gray-600 mb-8">
+                  <li>Professionally registered U.S. business</li>
+                  <li>Clear, non-technical communication</li>
+                  <li>Secure & productivity-focused setups</li>
+                  <li>One-on-one personalized support</li>
+                </ul>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* 7. Final CTA Section */}
+          <section className="bg-gray-900 text-white flex justify-end py-20 px-8 sm:px-12 lg:px-16" id="cta">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="pr-8 sm:pr-12 lg:pr-16 max-w-[55%] text-right"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Ready to get started?
+              </h2>
+              <div className="flex gap-4 justify-end mb-8">
+                <Link href="/contact">
+                  <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
+                    Book Consultation
+                    <ArrowRight size={20} />
+                  </button>
+                </Link>
+                <Link href="/services">
+                  <button className="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
+                    Get IT Support
+                    <ArrowRight size={20} />
+                  </button>
+                </Link>
+                <Link href="/device-sales">
+                  <button className="px-8 py-4 bg-gray-700 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
+                    Request Device Quote
+                    <ArrowRight size={20} />
+                  </button>
+                </Link>
+              </div>
+            </motion.div>
+          </section>
+        </StickyNav>
+
+        {/* Footer */}
+        <footer className="py-12 border-t border-gray-200 bg-white">
+          <div className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16">
+            <div className="text-center text-gray-600">
+              <p className="mb-2">© 2025 Sonoaac. All rights reserved.</p>
+              <p className="text-sm">Building products and services that matter.</p>
             </div>
-          </motion.div>
-        </section>
-      </StickyNav>
-
-      {/* CTA Section */}
-      <section className="bg-gray-900 text-white flex justify-end py-20 px-8 sm:px-12 lg:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="pr-8 sm:pr-12 lg:pr-16 max-w-[55%] text-right"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to build something?
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-            Whether you need a website for your business or want to partner on a new product, let's talk.
-          </p>
-          <Link href="/contact">
-            <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-              Get in touch
-              <ArrowRight size={20} />
-            </button>
-          </Link>
-        </motion.div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-12 border-t border-gray-200 bg-white">
-        <div className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16">
-          <div className="text-center text-gray-600">
-            <p className="mb-2">© 2025 Sonoaac. All rights reserved.</p>
-            <p className="text-sm">Building products and services that matter.</p>
           </div>
-        </div>
-      </footer>
-    </div>
-  );
-}
+        </footer>
+      </div>
