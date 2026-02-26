@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,35 +6,37 @@
 
 @layer base {
   :root {
-    --background: 0 0% 0%; /* Pure black */
-    --foreground: 0 0% 100%;
+    --header-height: 96px;
     
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 100%;
+    --background: 0 0% 100%; /* Pure white */
+    --foreground: 0 0% 10%; /* Near black */
     
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
     
-    --primary: 336 80% 60%; /* Pink */
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    
+    --primary: 142 71% 55%; /* Light green */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 142 71% 55%; /* Green */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
     
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
     
-    --accent: 0 0% 10%;
+    --accent: 142 71% 55%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 10%;
-    --ring: 336 80% 60%;
+    --border: 0 0% 90%;
+    --input: 0 0% 96%;
+    --ring: 142 71% 55%;
     
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 }
 
@@ -45,108 +47,65 @@
   
   html {
     scroll-behavior: smooth;
+    height: 100%;
+    overflow: hidden;
   }
   
   body {
-    @apply bg-black text-white antialiased font-sans selection:bg-pink-500 selection:text-white;
-    font-family: 'Inter', sans-serif;
+    @apply bg-white text-gray-900 antialiased font-sans selection:bg-green-100 selection:text-green-900;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    margin: 0;
+    padding: 0;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold tracking-tight;
-    text-shadow: 
-      2px 2px 0px rgba(0, 0, 0, 0.8),
-      3px 3px 0px rgba(0, 0, 0, 0.6),
-      4px 4px 0px rgba(0, 0, 0, 0.4),
-      5px 5px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.02em;
   }
   
-  .text-3d {
-    text-shadow: 
-      2px 2px 0px rgba(0, 0, 0, 0.8),
-      3px 3px 0px rgba(0, 0, 0, 0.6),
-      4px 4px 0px rgba(0, 0, 0, 0.4),
-      5px 5px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .text-3d-pink {
-    color: #ec4899;
-    text-shadow: 
-      2px 2px 0px rgba(0, 0, 0, 0.8),
-      3px 3px 0px rgba(0, 0, 0, 0.6),
-      4px 4px 0px rgba(0, 0, 0, 0.4),
-      5px 5px 15px rgba(236, 72, 153, 0.5);
-  }
-  
-  .text-3d-green {
-    color: #22c55e;
-    text-shadow: 
-      2px 2px 0px rgba(0, 0, 0, 0.8),
-      3px 3px 0px rgba(0, 0, 0, 0.6),
-      4px 4px 0px rgba(0, 0, 0, 0.4),
-      5px 5px 15px rgba(34, 197, 94, 0.5);
-  }
-  
-  .font-code {
-    font-family: 'Fira Code', monospace;
+  p {
+    letter-spacing: 0.015em;
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-pink-400 to-green-500;
-    text-shadow: none;
+  .section-padding {
+    @apply py-24 md:py-36;
   }
   
-  .text-gradient-reverse {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-green-500 via-green-400 to-pink-500;
-    text-shadow: none;
+  .content-max-width {
+    @apply max-w-6xl mx-auto px-8 sm:px-12 lg:px-16;
   }
   
-  .bg-gradient-primary {
-    @apply bg-gradient-to-r from-pink-500 to-green-500;
+  .parallax-slide {
+    position: relative;
+    padding: 15vh 10%;
+    min-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    transform-style: inherit;
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+    scroll-margin-top: var(--header-height);
   }
   
-  .bg-gradient-reverse {
-    @apply bg-gradient-to-r from-green-500 to-pink-500;
+  .parallax-slide:first-of-type {
+    padding-top: calc(var(--header-height) + 15vh);
   }
   
-  .bg-gradient-subtle {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
-  }
-  
-  .glow-pink {
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3),
-                0 0 40px rgba(236, 72, 153, 0.2);
-  }
-  
-  .glow-green {
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3),
-                0 0 40px rgba(34, 197, 94, 0.2);
-  }
-  
-  .hover-glow-pink {
-    transition: all 0.3s ease;
-  }
-  
-  .hover-glow-pink:hover {
-    box-shadow: 0 0 30px rgba(236, 72, 153, 0.5),
-                0 0 60px rgba(236, 72, 153, 0.3);
-  }
-  
-  .hover-glow-green:hover {
-    box-shadow: 0 0 30px rgba(34, 197, 94, 0.5),
-                0 0 60px rgba(34, 197, 94, 0.3);
-  }
-  
-  .code-grid-bg {
-    background-image: 
-      linear-gradient(rgba(236, 72, 153, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(34, 197, 94, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-  
-  .section-scroll {
-    scroll-margin-top: 80px;
+  .parallax-slide:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.05);
   }
 }

@@ -1,3 +1,4 @@
+// This file is being removed as it is not referenced in the current setup.
 import { motion } from "framer-motion";
 import { Wrench, Gauge, ShieldCheck, Phone, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
