@@ -89,7 +89,7 @@ const SectionScroll: React.FC = () => {
   return (
     <div className="app-container single-scroll">
       <header className="header">
-        <nav>
+        <nav className="hidden md:flex">
           {sectionsData.map((section) => (
             <a key={section.id} href={`#${section.id}`}>{section.title}</a>
           ))}

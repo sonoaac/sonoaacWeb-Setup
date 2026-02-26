@@ -45,8 +45,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans antialiased selection:bg-green-100 selection:text-green-900">
+        <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans antialiased selection:bg-green-100 selection:text-green-900 overflow-x-hidden">
           <Header />
+          {/* Spacer for sticky header height (h-24 = 96px, adjust if header height changes) */}
+          <div className="h-24 md:h-24" aria-hidden="true" />
           <main id="main-content" className="flex-1 w-full focus:outline-none" tabIndex={-1} aria-label="Main content">
             <Router />
           </main>

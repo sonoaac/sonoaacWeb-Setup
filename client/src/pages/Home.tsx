@@ -43,7 +43,7 @@ export default function Home() {
                 <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
                   Book a consultation, get remote support, or schedule on-site service. We make IT easy for homes and small businesses.
                 </p>
-                <div className="flex gap-4 justify-end">
+                <div className="flex flex-col xs:flex-row gap-4 justify-end w-full max-w-xs sm:max-w-none mx-auto sm:mx-0">
                   <Link href="/book-consultation">
                     <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
                       Book Consultation
@@ -74,7 +74,7 @@ export default function Home() {
                 <h2 className="text-2xl md:text-3xl font-bold mb-2">How We Can Help</h2>
                 <p className="text-lg text-gray-700 mb-4">Choose the service that fits your needs. All work is clear, secure, and tailored to you.</p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Consistent ServiceCard grid */}
                 <ServiceCard title="Consultation" link="/book-consultation">
                   <span>Expert advice for your tech, business, or home. <b>Starting at $49</b>.</span>
@@ -177,7 +177,7 @@ export default function Home() {
                   <li>Business-ready configuration</li>
                   <li>Fully configured device delivery</li>
                 </ul>
-                <div className="flex gap-4">
+                <div className="flex flex-col xs:flex-row gap-4 w-full max-w-xs sm:max-w-none mx-auto sm:mx-0">
                   <Link href="/my-tech">
                     <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
                       Setup My Device
@@ -230,7 +230,7 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Ready to get started?
               </h2>
-              <div className="flex gap-4 justify-end mb-8">
+              <div className="flex flex-col xs:flex-row gap-4 justify-end mb-8 w-full max-w-xs sm:max-w-none mx-auto sm:mx-0">
                 <Link href="/contact">
                   <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
                     Book Consultation
@@ -252,15 +252,7 @@ export default function Home() {
               </div>
             </motion.div>
           </section>
-        {/* Footer */}
-        <footer className="py-12 border-t border-gray-200 bg-white">
-          <div className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16">
-            <div className="text-center text-gray-600">
-              <p className="mb-2">© 2025 Sonoaac. All rights reserved.</p>
-              <p className="text-sm">Building products and services that matter.</p>
-            </div>
-          </div>
-        </footer>
+        {/* Footer removed: now rendered globally in App layout */}
       </StickyNav>
     </div>
   );

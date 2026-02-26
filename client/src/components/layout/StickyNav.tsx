@@ -155,7 +155,7 @@ export function StickyNav({ tabs, children, heroImage }: StickyNavProps) {
             ))}
           </div>
           {/* Section tabs (always visible) */}
-          <div className="flex-1 flex items-center justify-end">
+          <div className="flex-1 items-center justify-end hidden md:flex">
             {tabs.map((tab) => (
               <motion.a
                 key={tab.id}
