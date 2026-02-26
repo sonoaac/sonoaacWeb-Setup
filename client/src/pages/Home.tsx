@@ -24,16 +24,8 @@ export default function Home() {
           src: "/images/sonoaactexts.png",
           alt: "Sonoaac"
         }}
-      <div className="min-h-screen bg-white">
-        {/* Sticky Navigation with Content */}
-        <StickyNav 
-          tabs={tabs}
-          heroImage={{
-            src: "/images/sonoaactexts.png",
-            alt: "Sonoaac"
-          }}
-        >
-          {/* 1. Hero Section */}
+      >
+        {/* 1. Hero Section */}
           <section className="et-slide" id="hero">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
