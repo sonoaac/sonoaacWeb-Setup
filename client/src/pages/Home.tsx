@@ -1,7 +1,9 @@
 ﻿import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+
 import { StickyNav } from "@/components/layout/StickyNav";
+import ServiceCard from "@/components/ui/ServiceCard";
 
 export default function Home() {
   // Homepage navigation tabs for sticky nav
