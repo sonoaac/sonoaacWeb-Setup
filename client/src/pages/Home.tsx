@@ -250,8 +250,6 @@ export default function Home() {
               </div>
             </motion.div>
           </section>
-        </StickyNav>
-
         {/* Footer */}
         <footer className="py-12 border-t border-gray-200 bg-white">
           <div className="max-w-6xl mx-auto px-8 sm:px-12 lg:px-16">
