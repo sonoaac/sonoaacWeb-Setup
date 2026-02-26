@@ -44,21 +44,21 @@ export default function Home() {
             >
               <div className="max-w-[55%] text-right">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                  On-Site & Remote Tech Setup for Homes and Small Businesses
+                  Fast, Friendly Tech Help—Anywhere
                 </h1>
                 <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                  Consultations, fixes, and full device setups — done right
+                  Book a consultation, get remote support, or schedule on-site service. We make IT easy for homes and small businesses.
                 </p>
                 <div className="flex gap-4 justify-end">
-                  <Link href="/contact">
+                  <Link href="/book-consultation">
                     <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-                      Book a Consultation
+                      Book Consultation
                       <ArrowRight size={20} />
                     </button>
                   </Link>
-                  <Link href="/services">
+                  <Link href="/it-support">
                     <button className="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors inline-flex items-center gap-2">
-                      Request IT Support
+                      Get IT Support
                       <ArrowRight size={20} />
                     </button>
                   </Link>
@@ -76,13 +76,30 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="w-full max-w-6xl px-8 sm:px-12 lg:px-16"
             >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Service Cards */}
-                <ServiceCard title="Computer & Device Setup" link="/my-tech" />
-                <ServiceCard title="Small Business IT Support" link="/services" />
-                <ServiceCard title="Software & App Fixes" link="/software-fixes" />
-                <ServiceCard title="On-Site Visits" link="/services" />
-                <ServiceCard title="Remote Support" link="/services" />
+              <div className="mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold mb-2">How We Can Help</h2>
+                <p className="text-lg text-gray-700 mb-4">Choose the service that fits your needs. All work is clear, secure, and tailored to you.</p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Consistent ServiceCard grid */}
+                <ServiceCard title="Consultation" link="/book-consultation">
+                  <span>Expert advice for your tech, business, or home. <b>Starting at $49</b>.</span>
+                </ServiceCard>
+                <ServiceCard title="Remote IT Support" link="/it-support">
+                  <span>Get help anywhere. <b>Support sessions starting at $79</b>.</span>
+                </ServiceCard>
+                <ServiceCard title="On-Site Service" link="/on-site-services">
+                  <span>We come to you. <b>Request a quote</b> for home or office visits.</span>
+                </ServiceCard>
+                <ServiceCard title="Device Setup" link="/device-setup">
+                  <span>New or existing device, fully configured and ready to use.</span>
+                </ServiceCard>
+                <ServiceCard title="Business IT" link="/business-it">
+                  <span>Setup, security, and support for small businesses.</span>
+                </ServiceCard>
+                <ServiceCard title="Software Fixes" link="/software-fixes">
+                  <span>App errors, Microsoft 365, and more—fixed fast.</span>
+                </ServiceCard>
               </div>
             </motion.div>
           </section>

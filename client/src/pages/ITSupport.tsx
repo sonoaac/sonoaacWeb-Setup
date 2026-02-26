@@ -7,9 +7,26 @@ export default function ITSupport() {
     <div className="max-w-2xl mx-auto py-8 px-4 sm:py-16">
       <h1 className="text-3xl font-bold mb-4">IT Support & On-Site Services</h1>
       <p className="mb-6 text-lg text-gray-700">Remote support is available globally. On-site visits are scheduled after booking and availability confirmation. Get help with device setup, troubleshooting, and network configuration.</p>
-      {/* Booking integration point */}
+      {/* Acuity Scheduling booking link for Remote IT Support */}
       <div className="mb-8">
-        <button className="px-6 py-3 bg-green-500 text-white rounded-lg font-semibold w-full sm:w-auto">Request IT Support</button>
+        {/*
+          Booking flow: User is sent to Acuity external booking page for Remote IT Support.
+          Acuity form should collect:
+            - Name
+            - Email
+            - Location (State/Country)
+            - Service interest (Remote IT Support)
+            - Notes/Issue description
+          If embed is desired, replace <a> with iframe.
+        */}
+        <a
+          href="https://your-acuity-link.com/schedule.php?appointmentType=RemoteITSupport"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block px-6 py-3 bg-green-500 text-white rounded-lg font-semibold text-center w-full sm:w-auto hover:bg-green-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+        >
+          Request IT Support
+        </a>
       </div>
       <Link href="/book-consultation">
         <button className="px-6 py-3 bg-gray-900 text-white rounded-lg font-semibold w-full sm:w-auto">Book Consultation</button>
