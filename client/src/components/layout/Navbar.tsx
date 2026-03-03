@@ -30,7 +30,6 @@ export function Navbar() {
   return (
     <nav
       className={`transition-all duration-300 ${scrolled ? "bg-black/95 backdrop-blur-sm" : "bg-black"}`}
-      style={{ willChange: "transform", transform: "translateZ(0)" }}
     >
       <div className="w-full px-6 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-16 md:h-20">

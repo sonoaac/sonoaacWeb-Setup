@@ -49,12 +49,14 @@
     scroll-behavior: smooth;
     height: 100%;
     overflow: hidden;
+    font-size: 112.5%; /* 18px base — scales all rem/Tailwind sizes up */
   }
 
   body {
     background-color: #000;
     color: #ffffff;
     font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
     line-height: 1.8;
     letter-spacing: 0.01em;
     margin: 0;
@@ -72,7 +74,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.02em;
     color: #ffffff;
   }
