@@ -8,16 +8,16 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-  theme: "dark",
+  theme: "light",
   toggleTheme: () => {},
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     try {
-      return (localStorage.getItem("sonoaac-theme") as Theme) || "dark";
+      return (localStorage.getItem("sonoaac-theme") as Theme) || "light";
     } catch {
-      return "dark";
+      return "light";
     }
   });
 
