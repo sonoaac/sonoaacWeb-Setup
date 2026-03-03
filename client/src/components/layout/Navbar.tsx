@@ -1,6 +1,7 @@
 import { useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { ProfileDropdown } from "@/components/layout/ProfileDropdown";
 
 export function Navbar() {
   const [location] = useLocation();
@@ -70,16 +71,20 @@ export function Navbar() {
                 Book Now
               </motion.button>
             </Link>
+            <ProfileDropdown />
           </div>
 
-          {/* Mobile toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-green-600 hover:text-green-400 text-xs uppercase tracking-[0.25em] font-bold transition-colors py-2"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-          >
-            {isOpen ? "[ close ]" : "[ menu ]"}
-          </button>
+          {/* Mobile: profile + menu toggle */}
+          <div className="md:hidden flex items-center gap-3">
+            <ProfileDropdown />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-green-600 hover:text-green-400 text-xs uppercase tracking-[0.25em] font-bold transition-colors py-2"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+            >
+              {isOpen ? "[ close ]" : "[ menu ]"}
+            </button>
+          </div>
         </div>
       </div>
 

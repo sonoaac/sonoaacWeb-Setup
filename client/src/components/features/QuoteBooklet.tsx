@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronRight, Calculator, Loader2 } from "lucide-react";
 import { useCreateQuote } from "@/hooks/use-quotes";
-import { type InsertQuote } from "@shared/routes";
+import { type InsertQuote } from "@shared/schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";

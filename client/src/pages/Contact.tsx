@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import { useSubmitContact } from "@/hooks/use-contact";
-import { type InsertContactSubmission } from "@shared/routes";
+import { type InsertContactSubmission } from "@shared/schema";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),

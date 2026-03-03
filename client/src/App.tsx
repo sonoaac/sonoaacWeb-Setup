@@ -9,6 +9,9 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import HelpBot from "@/components/features/HelpBot";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { DesktopSidebar } from "@/components/layout/DesktopSidebar";
+import { DesktopRightPanel } from "@/components/layout/DesktopRightPanel";
 
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Home = lazy(() => import("@/pages/Home"));
@@ -51,27 +54,34 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="min-h-screen flex flex-col bg-black text-green-200 antialiased overflow-x-hidden">
-          <ScrollProgress />
-          <Header />
-          {/* Spacer for sticky header */}
-          <div className="h-16 md:h-20" aria-hidden="true" />
-          <main
-            id="main-content"
-            className="flex-1 w-full focus:outline-none"
-            tabIndex={-1}
-            aria-label="Main content"
-          >
-            <Router />
-          </main>
-          <Footer />
-          <Toaster />
-          <HelpBot />
-        </div>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <div className="min-h-screen flex flex-col bg-black text-green-200 antialiased overflow-x-hidden">
+            <ScrollProgress />
+            <Header />
+            {/* Spacer for sticky header */}
+            <div className="h-16 md:h-20" aria-hidden="true" />
+            {/* 3-column layout on xl screens */}
+            <div className="flex flex-1 w-full">
+              <DesktopSidebar />
+              <main
+                id="main-content"
+                className="flex-1 min-w-0 focus:outline-none"
+                tabIndex={-1}
+                aria-label="Main content"
+              >
+                <Router />
+              </main>
+              <DesktopRightPanel />
+            </div>
+            <Footer />
+            <Toaster />
+            <HelpBot />
+          </div>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 

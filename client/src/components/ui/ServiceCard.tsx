@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 
 // Shared Service Card component
-export default function ServiceCard({ title, link, children }) {
+export default function ServiceCard({ title, link, children }: { title: string; link: string; children: React.ReactNode }) {
   return (
     <div className="bg-white rounded-lg shadow p-6 flex flex-col justify-between h-full">
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
