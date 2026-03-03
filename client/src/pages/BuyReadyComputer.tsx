@@ -22,10 +22,10 @@ export default function BuyReadyComputer() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Device Recommendations
             </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-green-100 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               Get the Right Device<br />for Your Needs.
             </h1>
-            <p className="text-green-600 text-base leading-relaxed max-w-xl mb-4">
+            <p className="text-gray-300 text-base leading-relaxed max-w-xl mb-4">
               Not sure what to buy? We'll recommend the right laptop, desktop, or iPad
               for your workflow — then configure it for you before delivery.
             </p>
@@ -48,6 +48,24 @@ export default function BuyReadyComputer() {
         </div>
       </section>
 
+      {/* PC showcase images */}
+      <section className="px-6 py-12 border-b border-green-900/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img
+              src="/images/gaming-pc-builder.webp"
+              alt="PC components and hardware"
+              className="w-full h-56 object-cover opacity-80 hover:opacity-100 transition-opacity"
+            />
+            <img
+              src="/images/gamingpc.jpg"
+              alt="Custom gaming PC build"
+              className="w-full h-56 object-cover opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </motion.div>
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
         <div className="max-w-4xl mx-auto">
@@ -55,7 +73,7 @@ export default function BuyReadyComputer() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               01 / How It Works
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               Our Recommendation Process
             </h2>
             <div className="space-y-8">
@@ -86,10 +104,10 @@ export default function BuyReadyComputer() {
                     {item.step}
                   </span>
                   <div>
-                    <h3 className="text-sm font-bold text-green-300 uppercase tracking-[0.15em] mb-2">
+                    <h3 className="text-sm font-bold text-white uppercase tracking-[0.15em] mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-green-600 text-sm leading-relaxed">{item.detail}</p>
+                    <p className="text-gray-300 text-sm leading-relaxed">{item.detail}</p>
                   </div>
                 </div>
               ))}
@@ -105,7 +123,7 @@ export default function BuyReadyComputer() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               02 / Device Types
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               What We Recommend
             </h2>
             <ul className="space-y-3">
@@ -116,8 +134,8 @@ export default function BuyReadyComputer() {
                 "Custom PC builds — spec'd to your exact needs and budget",
                 "Budget picks — solid, reliable devices that won't break the bank",
               ].map((item) => (
-                <li key={item} className="flex gap-4 text-green-600 text-sm">
-                  <span className="text-green-700 font-bold shrink-0">//</span>
+                <li key={item} className="flex gap-4 text-gray-300 text-sm">
+                  <span className="text-green-400 font-bold shrink-0">//</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -133,7 +151,7 @@ export default function BuyReadyComputer() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Get a Recommendation
             </span>
-            <h2 className="text-2xl md:text-4xl font-bold text-green-100 mb-8">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-8">
               Not sure what to buy?
             </h2>
             <div className="flex flex-col sm:flex-row gap-4">

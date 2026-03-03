@@ -22,22 +22,19 @@ export default function OnSiteServices() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — On-Site Services
             </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-green-100 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               We Come to You.
             </h1>
-            <p className="text-green-600 text-base leading-relaxed max-w-xl mb-8">
+            <p className="text-gray-300 text-base leading-relaxed max-w-xl mb-8">
               Home and office visits for hardware setup, network configuration, device
               installations, and hands-on troubleshooting. All scheduled by appointment.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
-              <a
-                href="https://your-acuity-link.com/schedule.php?appointmentType=OnSiteService"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors text-center"
-              >
-                Request On-Site Service
-              </a>
+              <Link href="/book-consultation">
+                <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors w-full sm:w-auto">
+                  Request On-Site Service
+                </button>
+              </Link>
               <Link href="/book-consultation">
                 <button className="px-8 py-4 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors w-full sm:w-auto">
                   Book Consultation
@@ -58,7 +55,7 @@ export default function OnSiteServices() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               01 / What We Do
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               On-Site Services
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-green-900/20">
@@ -96,10 +93,10 @@ export default function OnSiteServices() {
                   transition={{ delay: i * 0.07 }}
                   className="bg-black p-6 hover:bg-green-950/20 transition-colors"
                 >
-                  <h3 className="text-xs font-bold text-green-300 uppercase tracking-[0.15em] mb-3">
+                  <h3 className="text-xs font-bold text-white uppercase tracking-[0.15em] mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-green-700 text-xs leading-relaxed">{item.detail}</p>
+                  <p className="text-gray-400 text-xs leading-relaxed">{item.detail}</p>
                 </motion.div>
               ))}
             </div>
@@ -114,7 +111,7 @@ export default function OnSiteServices() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               02 / Scheduling
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
               How It Works
             </h2>
             <ul className="space-y-4">
@@ -125,8 +122,8 @@ export default function OnSiteServices() {
                 "Service area and travel fees discussed at booking",
                 "Please have devices accessible and accounts ready before the visit",
               ].map((item) => (
-                <li key={item} className="flex gap-4 text-green-600 text-sm">
-                  <span className="text-green-700 font-bold shrink-0">//</span>
+                <li key={item} className="flex gap-4 text-gray-300 text-sm">
+                  <span className="text-green-400 font-bold shrink-0">//</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -142,18 +139,15 @@ export default function OnSiteServices() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Schedule a Visit
             </span>
-            <h2 className="text-2xl md:text-4xl font-bold text-green-100 mb-8">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-8">
               Need hands-on help?
             </h2>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="https://your-acuity-link.com/schedule.php?appointmentType=OnSiteService"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors text-center"
-              >
-                Request On-Site Service
-              </a>
+              <Link href="/book-consultation">
+                <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors w-full sm:w-auto">
+                  Request On-Site Service
+                </button>
+              </Link>
               <Link href="/contact">
                 <button className="px-8 py-4 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors w-full sm:w-auto">
                   Contact Us

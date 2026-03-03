@@ -21,7 +21,7 @@ const fadeUp = {
 };
 
 const inputClass =
-  "w-full px-4 py-3 bg-black border border-green-900 text-green-200 text-sm focus:border-green-500 focus:outline-none transition-colors placeholder:text-green-900";
+  "w-full px-4 py-3 bg-black border border-green-900 text-white text-sm focus:border-green-500 focus:outline-none transition-colors placeholder:text-green-900";
 
 export default function Contact() {
   const {
@@ -52,10 +52,10 @@ export default function Contact() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Contact
             </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-green-100 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               Let's talk about<br />your tech needs.
             </h1>
-            <p className="text-green-600 text-base leading-relaxed max-w-xl">
+            <p className="text-gray-300 text-base leading-relaxed max-w-xl">
               Whether you need remote support, an on-site visit, or a new website —
               reach out and we'll get you sorted.
             </p>
@@ -147,32 +147,40 @@ export default function Contact() {
                   <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
                     Email
                   </h3>
-                  <p className="text-green-300 text-sm mb-1">contact@sonoaac.com</p>
-                  <p className="text-green-700 text-xs">Response within 24 hours</p>
+                  <p className="text-white text-sm mb-1">sonoaac@gmail.com</p>
+                  <p className="text-gray-400 text-xs">Response within 24 hours</p>
+                </div>
+
+                <div className="border-l-2 border-green-800 pl-5">
+                  <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
+                    Phone
+                  </h3>
+                  <p className="text-white text-sm mb-1">(862) 755-9845</p>
+                  <p className="text-gray-400 text-xs">By appointment — call or text</p>
                 </div>
 
                 <div className="border-l-2 border-green-800 pl-5">
                   <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
                     Location
                   </h3>
-                  <p className="text-green-300 text-sm mb-1">New York, NY</p>
-                  <p className="text-green-700 text-xs">Remote support available worldwide</p>
+                  <p className="text-white text-sm mb-1">New York, NY</p>
+                  <p className="text-gray-400 text-xs">Remote support available worldwide</p>
                 </div>
 
                 <div className="border-l-2 border-green-800 pl-5">
                   <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
                     Hours
                   </h3>
-                  <p className="text-green-300 text-sm mb-1">By appointment</p>
-                  <p className="text-green-700 text-xs">Walk-ins available at additional charge</p>
+                  <p className="text-white text-sm mb-1">By appointment</p>
+                  <p className="text-gray-400 text-xs">Walk-ins available at additional charge</p>
                 </div>
 
                 <div className="border-l-2 border-green-800 pl-5">
                   <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
                     Remote Sessions
                   </h3>
-                  <p className="text-green-300 text-sm mb-1">Zoom · AnyDesk · TeamViewer</p>
-                  <p className="text-green-700 text-xs">Available globally</p>
+                  <p className="text-white text-sm mb-1">Zoom · AnyDesk · TeamViewer</p>
+                  <p className="text-gray-400 text-xs">Available globally</p>
                 </div>
               </div>
             </motion.div>

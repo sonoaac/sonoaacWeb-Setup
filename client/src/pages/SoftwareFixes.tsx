@@ -22,10 +22,10 @@ export default function SoftwareFixes() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Software Fixes
             </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-green-100 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               Software &amp; App<br />Troubleshooting
             </h1>
-            <p className="text-green-600 text-base leading-relaxed max-w-xl mb-8">
+            <p className="text-gray-300 text-base leading-relaxed max-w-xl mb-8">
               Resolve app crashes, OS errors, login issues, and slow performance.
               Fast, professional troubleshooting for Windows and Mac — remote or in-person.
             </p>
@@ -52,7 +52,7 @@ export default function SoftwareFixes() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               01 / What We Fix
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               Common Issues Resolved
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-green-900/20">
@@ -98,10 +98,10 @@ export default function SoftwareFixes() {
                   transition={{ delay: i * 0.06 }}
                   className="bg-black p-6 hover:bg-green-950/20 transition-colors"
                 >
-                  <h3 className="text-xs font-bold text-green-300 uppercase tracking-[0.15em] mb-3">
+                  <h3 className="text-xs font-bold text-white uppercase tracking-[0.15em] mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-green-700 text-xs leading-relaxed">{item.detail}</p>
+                  <p className="text-gray-400 text-xs leading-relaxed">{item.detail}</p>
                 </motion.div>
               ))}
             </div>
@@ -116,20 +116,20 @@ export default function SoftwareFixes() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               02 / Software Policy
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
               Software Purchases
             </h2>
             <div className="border-l-2 border-green-800 pl-6">
-              <p className="text-green-600 text-sm leading-relaxed mb-4">
+              <p className="text-gray-300 text-sm leading-relaxed mb-4">
                 Sonoaac recommends software solutions — we do not sell software directly.
                 All software is purchased by the client through official channels.
               </p>
-              <p className="text-green-600 text-sm leading-relaxed mb-4">
+              <p className="text-gray-300 text-sm leading-relaxed mb-4">
                 Software purchases are non-refundable once acquired. We recommend only
                 what is needed and appropriate for your situation.
               </p>
               <Link href="/service-agreement">
-                <button className="text-xs text-green-700 uppercase tracking-[0.2em] hover:text-green-400 transition-colors">
+                <button className="text-xs text-green-800 uppercase tracking-[0.2em] hover:text-green-400 transition-colors">
                   Read Full Service Agreement —
                 </button>
               </Link>
@@ -145,7 +145,7 @@ export default function SoftwareFixes() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Get Help
             </span>
-            <h2 className="text-2xl md:text-4xl font-bold text-green-100 mb-8">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-8">
               Software giving you trouble?
             </h2>
             <div className="flex flex-col sm:flex-row gap-4">

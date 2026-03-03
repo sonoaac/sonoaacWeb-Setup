@@ -10,10 +10,10 @@ const fadeUp = {
 };
 
 const inputClass =
-  "w-full px-4 py-3 bg-black border border-green-900 text-green-200 text-sm focus:border-green-500 focus:outline-none transition-colors placeholder:text-green-900";
+  "w-full px-4 py-3 bg-black border border-green-900 text-white text-sm focus:border-green-500 focus:outline-none transition-colors placeholder:text-green-900";
 
 const selectClass =
-  "w-full px-4 py-3 bg-black border border-green-900 text-green-200 text-sm focus:border-green-500 focus:outline-none transition-colors appearance-none";
+  "w-full px-4 py-3 bg-black border border-green-900 text-white text-sm focus:border-green-500 focus:outline-none transition-colors appearance-none";
 
 export default function MyTech() {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -46,32 +46,46 @@ export default function MyTech() {
       {/* Hero */}
       <section className="px-6 py-20 md:py-32 border-b border-green-900/30">
         <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-              — My Tech
-            </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-green-100 mb-6">
-              Get Matched to<br />the Right Tech.
-            </h1>
-            <p className="text-green-600 text-base leading-relaxed max-w-xl mb-8">
-              Not sure what to buy? Tell us your needs and we'll recommend the right
-              laptop, desktop, iPad, or setup — and configure it for you.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#recommendation" className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors text-center">
-                Get Matched
-              </a>
-              <Link href="/book-consultation">
-                <button className="px-8 py-4 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors w-full sm:w-auto">
-                  Book Consultation
-                </button>
-              </Link>
-            </div>
-          </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
+                — My Tech
+              </span>
+              <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                Get Matched to<br />the Right Tech.
+              </h1>
+              <p className="text-gray-300 text-base leading-relaxed max-w-xl mb-8">
+                Not sure what to buy? Tell us your needs and we'll recommend the right
+                laptop, desktop, iPad, or setup — and configure it for you.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="#recommendation" className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors text-center">
+                  Get Matched
+                </a>
+                <Link href="/book-consultation">
+                  <button className="px-8 py-4 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors w-full sm:w-auto">
+                    Book Consultation
+                  </button>
+                </Link>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="hidden lg:block"
+            >
+              <img
+                src="/images/gamingpc.jpg"
+                alt="Custom PC build"
+                className="w-full h-64 object-cover opacity-80"
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -82,7 +96,7 @@ export default function MyTech() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               01 / Who It's For
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               Perfect for Any Use Case
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-green-900/20">
@@ -102,10 +116,10 @@ export default function MyTech() {
                   transition={{ delay: i * 0.07 }}
                   className="bg-black p-6 hover:bg-green-950/20 transition-colors"
                 >
-                  <h3 className="text-xs font-bold text-green-300 uppercase tracking-[0.15em] mb-3">
+                  <h3 className="text-xs font-bold text-white uppercase tracking-[0.15em] mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-green-700 text-xs leading-relaxed">{item.detail}</p>
+                  <p className="text-gray-400 text-xs leading-relaxed">{item.detail}</p>
                 </motion.div>
               ))}
             </div>
@@ -120,7 +134,7 @@ export default function MyTech() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               02 / Example Setups
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               Common Recommendations
             </h2>
             <div className="space-y-6">
@@ -142,10 +156,10 @@ export default function MyTech() {
                   key={item.title}
                   className="flex flex-col sm:flex-row sm:gap-8 py-5 border-b border-green-900/20"
                 >
-                  <h3 className="text-xs font-bold text-green-300 uppercase tracking-[0.15em] sm:w-56 shrink-0 mb-2 sm:mb-0">
+                  <h3 className="text-xs font-bold text-white uppercase tracking-[0.15em] sm:w-56 shrink-0 mb-2 sm:mb-0">
                     {item.title}
                   </h3>
-                  <p className="text-green-600 text-sm leading-relaxed">{item.detail}</p>
+                  <p className="text-gray-300 text-sm leading-relaxed">{item.detail}</p>
                 </div>
               ))}
             </div>
@@ -160,10 +174,10 @@ export default function MyTech() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               03 / Get Matched
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Tell Us What You Need
             </h2>
-            <p className="text-green-600 text-sm mb-10 leading-relaxed">
+            <p className="text-gray-300 text-sm mb-10 leading-relaxed">
               Answer a few quick questions and we'll match you with the right setup.
             </p>
 
@@ -173,10 +187,10 @@ export default function MyTech() {
                 animate={{ opacity: 1 }}
                 className="border border-green-700 p-8"
               >
-                <h3 className="text-sm font-bold text-green-300 uppercase tracking-[0.2em] mb-3">
+                <h3 className="text-sm font-bold text-white uppercase tracking-[0.2em] mb-3">
                   Request Received
                 </h3>
-                <p className="text-green-500 text-sm leading-relaxed">
+                <p className="text-gray-300 text-sm leading-relaxed">
                   We'll reach out to confirm your needs. After a quick consult,
                   we'll send a custom recommendation with exact specs and pricing.
                 </p>

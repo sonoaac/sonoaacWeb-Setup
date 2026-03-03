@@ -43,10 +43,10 @@ export default function Services() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Services
             </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-green-100 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               IT Support &amp;<br />Digital Solutions
             </h1>
-            <p className="text-green-600 text-base md:text-lg leading-relaxed max-w-xl mb-8">
+            <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-xl mb-8">
               From remote troubleshooting to full web development — Sonoaac covers
               the full range of tech needs for individuals and small businesses.
             </p>
@@ -66,7 +66,7 @@ export default function Services() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               01 / IT Services
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               Tech Support &amp; Troubleshooting
             </h2>
             <div className="space-y-6">
@@ -110,11 +110,11 @@ export default function Services() {
                   transition={{ delay: i * 0.06 }}
                   className="flex flex-col sm:flex-row sm:gap-8 py-5 border-b border-green-900/20 group"
                 >
-                  <h3 className="text-sm font-bold text-green-300 uppercase tracking-[0.15em] sm:w-56 shrink-0 mb-2 sm:mb-0 group-hover:text-green-400 transition-colors">
+                  <h3 className="text-sm font-bold text-white uppercase tracking-[0.15em] sm:w-56 shrink-0 mb-2 sm:mb-0 group-hover:text-green-400 transition-colors">
                     {item.title}
                   </h3>
                   <div className="flex flex-col gap-2">
-                    <p className="text-green-600 text-sm leading-relaxed">{item.detail}</p>
+                    <p className="text-gray-300 text-sm leading-relaxed">{item.detail}</p>
                     <Link href={item.path}>
                       <button className="text-xs text-green-800 uppercase tracking-[0.15em] hover:text-green-400 transition-colors w-fit">
                         Details —
@@ -135,10 +135,10 @@ export default function Services() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               02 / Web Development
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
               Websites for Small Businesses
             </h2>
-            <p className="text-green-600 text-sm leading-relaxed max-w-xl mb-10">
+            <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-10">
               Clean, professional web presence built around your business needs.
               No templates — every site is custom-designed and built for performance.
             </p>
@@ -152,10 +152,10 @@ export default function Services() {
                   transition={{ delay: i * 0.08 }}
                   className="bg-black p-6 hover:bg-green-950/20 transition-colors"
                 >
-                  <h3 className="text-sm font-bold text-green-300 uppercase tracking-[0.15em] mb-3">
+                  <h3 className="text-sm font-bold text-white uppercase tracking-[0.15em] mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-green-700 text-xs leading-relaxed">{item.description}</p>
+                  <p className="text-gray-400 text-xs leading-relaxed">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -170,10 +170,10 @@ export default function Services() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               03 / Live Demos
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               See It In Action
             </h2>
-            <p className="text-green-600 text-sm leading-relaxed max-w-xl mb-12">
+            <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-12">
               These are live UI components built for real clients. Fully functional examples
               of what Sonoaac can build for your business.
             </p>
@@ -202,7 +202,7 @@ export default function Services() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Get Started
             </span>
-            <h2 className="text-2xl md:text-4xl font-bold text-green-100 mb-6">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-6">
               Ready to work together?
             </h2>
             <div className="flex flex-col sm:flex-row gap-4">

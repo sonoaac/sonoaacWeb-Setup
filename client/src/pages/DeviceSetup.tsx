@@ -22,10 +22,10 @@ export default function DeviceSetup() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Device Setup
             </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-green-100 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               Device Setup &amp;<br />Configuration
             </h1>
-            <p className="text-green-600 text-base leading-relaxed max-w-xl mb-8">
+            <p className="text-gray-300 text-base leading-relaxed max-w-xl mb-8">
               Get your new or existing device fully configured, optimized, and secured.
               Business and personal setups — done right the first time.
             </p>
@@ -52,7 +52,7 @@ export default function DeviceSetup() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               01 / What We Do
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               Setup Services
             </h2>
             <div className="space-y-6">
@@ -90,10 +90,10 @@ export default function DeviceSetup() {
                   transition={{ delay: i * 0.06 }}
                   className="flex flex-col sm:flex-row sm:gap-8 py-5 border-b border-green-900/20"
                 >
-                  <h3 className="text-xs font-bold text-green-300 uppercase tracking-[0.15em] sm:w-48 shrink-0 mb-2 sm:mb-0">
+                  <h3 className="text-xs font-bold text-white uppercase tracking-[0.15em] sm:w-48 shrink-0 mb-2 sm:mb-0">
                     {item.title}
                   </h3>
-                  <p className="text-green-600 text-sm leading-relaxed">{item.detail}</p>
+                  <p className="text-gray-300 text-sm leading-relaxed">{item.detail}</p>
                 </motion.div>
               ))}
             </div>
@@ -108,7 +108,7 @@ export default function DeviceSetup() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Get Set Up
             </span>
-            <h2 className="text-2xl md:text-4xl font-bold text-green-100 mb-8">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-8">
               Ready to set up your device?
             </h2>
             <div className="flex flex-col sm:flex-row gap-4">

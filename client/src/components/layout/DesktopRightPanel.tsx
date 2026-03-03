@@ -19,7 +19,7 @@ export function DesktopRightPanel() {
             ].map((item) => (
               <li key={item.path}>
                 <Link href={item.path}>
-                  <button className="w-full text-left text-[11px] uppercase tracking-[0.15em] font-bold py-1.5 text-green-700 hover:text-green-400 transition-colors">
+                  <button className="w-full text-left text-[11px] uppercase tracking-[0.15em] font-bold py-1.5 text-gray-400 hover:text-green-400 transition-colors">
                     {item.label}
                   </button>
                 </Link>

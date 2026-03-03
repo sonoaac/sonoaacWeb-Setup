@@ -58,7 +58,7 @@ export function DesktopSidebar() {
                       className={`w-full text-left text-[11px] uppercase tracking-[0.15em] font-bold py-1.5 transition-colors ${
                         location === link.path
                           ? "text-green-400"
-                          : "text-green-700 hover:text-green-400"
+                          : "text-gray-400 hover:text-green-400"
                       }`}
                     >
                       {location === link.path ? "→ " : ""}

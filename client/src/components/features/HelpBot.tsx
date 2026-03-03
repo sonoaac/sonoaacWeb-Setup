@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "wouter";
+import { MessageCircle, X } from "lucide-react";
 
 const TOPICS = [
   {
@@ -79,11 +80,11 @@ export default function HelpBot() {
     <>
       {/* Float button */}
       <button
-        aria-label="Open help"
+        aria-label="Open help chat"
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 bg-green-400 text-black text-xs font-bold uppercase tracking-[0.2em] px-4 py-3 hover:bg-green-300 transition-colors shadow-lg shadow-green-900/30"
+        className="fixed bottom-6 right-6 z-[200] w-14 h-14 bg-green-400 text-black flex items-center justify-center hover:bg-green-300 transition-colors shadow-lg shadow-green-900/30 rounded-full"
       >
-        [ help ]
+        <MessageCircle size={24} strokeWidth={2} />
       </button>
 
       {/* Panel */}
@@ -98,19 +99,19 @@ export default function HelpBot() {
             tabIndex={-1}
             aria-modal="true"
             role="dialog"
-            className="fixed bottom-20 right-6 z-50 w-80 max-w-[calc(100vw-3rem)] bg-black border border-green-800 p-5 flex flex-col gap-4 focus:outline-none shadow-xl shadow-black/50"
+            className="fixed bottom-24 right-6 z-[200] w-80 max-w-[calc(100vw-3rem)] bg-black border border-green-800 p-5 flex flex-col gap-4 focus:outline-none shadow-xl shadow-black/50"
           >
             {/* Header */}
             <div className="flex items-center justify-between">
-              <span className="text-xs uppercase tracking-[0.3em] text-green-500 font-bold">
+              <span className="text-xs uppercase tracking-[0.3em] text-green-400 font-bold">
                 Sonoaac Help
               </span>
               <button
                 aria-label="Close help"
                 onClick={handleClose}
-                className="text-green-800 hover:text-green-400 text-xs uppercase tracking-[0.2em] transition-colors"
+                className="text-gray-500 hover:text-green-400 transition-colors"
               >
-                [ close ]
+                <X size={16} />
               </button>
             </div>
 
@@ -124,7 +125,7 @@ export default function HelpBot() {
                   className={`px-3 py-1.5 text-xs uppercase tracking-[0.15em] font-bold border transition-colors ${
                     selected === topic.id
                       ? "bg-green-400 text-black border-green-400"
-                      : "border-green-900 text-green-600 hover:border-green-600 hover:text-green-400"
+                      : "border-green-900 text-gray-400 hover:border-green-600 hover:text-green-400"
                   }`}
                 >
                   {topic.label}
@@ -135,7 +136,7 @@ export default function HelpBot() {
             {/* Response */}
             {selectedTopic ? (
               <div className="flex flex-col gap-3">
-                <p className="text-green-300 text-xs leading-relaxed">
+                <p className="text-gray-300 text-xs leading-relaxed">
                   {selectedTopic.response}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -152,7 +153,7 @@ export default function HelpBot() {
                 </div>
               </div>
             ) : (
-              <p className="text-green-800 text-xs">Select a topic above.</p>
+              <p className="text-gray-500 text-xs">Select a topic above.</p>
             )}
           </motion.div>
         )}

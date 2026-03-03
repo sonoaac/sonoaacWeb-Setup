@@ -22,22 +22,19 @@ export default function BookConsultation() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Book a Consultation
             </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-green-100 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               Let's Talk<br />About Your Tech.
             </h1>
-            <p className="text-green-600 text-base leading-relaxed max-w-xl mb-8">
+            <p className="text-gray-300 text-base leading-relaxed max-w-xl mb-8">
               Get expert advice for your tech needs. Available for individuals and
               businesses worldwide. Remote and in-person options available.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="https://your-acuity-link.com/schedule.php?appointmentType=Consultation"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors text-center"
-              >
-                Book Consultation
-              </a>
+              <Link href="/contact">
+                <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors w-full sm:w-auto">
+                  Book Consultation
+                </button>
+              </Link>
               <Link href="/contact">
                 <button className="px-8 py-4 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors w-full sm:w-auto">
                   Send a Message
@@ -55,7 +52,7 @@ export default function BookConsultation() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               01 / What to Expect
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               What We Cover
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -84,7 +81,7 @@ export default function BookConsultation() {
                   <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.15em] mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-green-600 text-sm leading-relaxed">{item.detail}</p>
+                  <p className="text-gray-300 text-sm leading-relaxed">{item.detail}</p>
                 </div>
               ))}
             </div>
@@ -99,7 +96,7 @@ export default function BookConsultation() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               02 / Appointments
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
               Scheduling Policy
             </h2>
             <ul className="space-y-4">
@@ -110,18 +107,42 @@ export default function BookConsultation() {
                 "On-site consultations are confirmed after booking and availability check",
                 "Please review the Service Agreement before your first appointment",
               ].map((item) => (
-                <li key={item} className="flex gap-4 text-green-600 text-sm">
-                  <span className="text-green-700 font-bold shrink-0">//</span>
+                <li key={item} className="flex gap-4 text-gray-300 text-sm">
+                  <span className="text-green-400 font-bold shrink-0">//</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
             <div className="mt-8">
               <Link href="/service-agreement">
-                <button className="text-xs text-green-700 uppercase tracking-[0.2em] hover:text-green-400 transition-colors">
+                <button className="text-xs text-green-800 uppercase tracking-[0.2em] hover:text-green-400 transition-colors">
                   Read Service Agreement —
                 </button>
               </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact info */}
+      <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp}>
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
+              03 / Contact
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+              Reach Out Directly
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="border-l-2 border-green-800 pl-5">
+                <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">Email</h3>
+                <p className="text-white text-sm">sonoaac@gmail.com</p>
+              </div>
+              <div className="border-l-2 border-green-800 pl-5">
+                <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">Phone</h3>
+                <p className="text-white text-sm">(862) 755-9845</p>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -134,18 +155,15 @@ export default function BookConsultation() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Ready?
             </span>
-            <h2 className="text-2xl md:text-4xl font-bold text-green-100 mb-8">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-8">
               Book your consultation today.
             </h2>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="https://your-acuity-link.com/schedule.php?appointmentType=Consultation"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors text-center"
-              >
-                Book Now
-              </a>
+              <Link href="/contact">
+                <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors w-full sm:w-auto">
+                  Book Now
+                </button>
+              </Link>
               <Link href="/it-support">
                 <button className="px-8 py-4 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors w-full sm:w-auto">
                   IT Support

@@ -56,7 +56,7 @@ export function Navbar() {
                   className={`text-xs uppercase tracking-[0.25em] font-bold transition-colors ${
                     isActive(link.path)
                       ? "text-green-400"
-                      : "text-green-700 hover:text-green-400"
+                      : "text-gray-400 hover:text-green-400"
                   }`}
                 >
                   {link.name}
@@ -79,7 +79,7 @@ export function Navbar() {
             <ProfileDropdown />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-green-600 hover:text-green-400 text-xs uppercase tracking-[0.25em] font-bold transition-colors py-2"
+              className="text-gray-400 hover:text-green-400 text-xs uppercase tracking-[0.25em] font-bold transition-colors py-2"
               aria-label={isOpen ? "Close menu" : "Open menu"}
             >
               {isOpen ? "[ close ]" : "[ menu ]"}
@@ -112,7 +112,7 @@ export function Navbar() {
                 <Link key={link.name} href={link.path}>
                   <button
                     className={`block w-full text-left py-3 text-xs uppercase tracking-[0.25em] font-bold border-b border-green-900/30 transition-colors ${
-                      isActive(link.path) ? "text-green-400" : "text-green-700 hover:text-green-400"
+                      isActive(link.path) ? "text-green-400" : "text-gray-400 hover:text-green-400"
                     }`}
                   >
                     {link.name}

@@ -23,10 +23,10 @@ const Section = ({
         {num}
       </span>
       <div className="flex-1">
-        <h2 className="text-sm font-bold text-green-300 uppercase tracking-[0.2em] mb-4">
+        <h2 className="text-sm font-bold text-white uppercase tracking-[0.2em] mb-4">
           {title}
         </h2>
-        <div className="text-green-600 text-sm leading-relaxed space-y-3">{children}</div>
+        <div className="text-gray-300 text-sm leading-relaxed space-y-3">{children}</div>
       </div>
     </div>
   </motion.div>
@@ -46,10 +46,10 @@ export default function ServiceAgreement() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Legal
             </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-green-100 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               Service Agreement
             </h1>
-            <p className="text-green-600 text-sm leading-relaxed max-w-xl mb-4">
+            <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-4">
               By booking or using any Sonoaac service, you agree to the terms outlined
               below. Please read carefully before your first appointment.
             </p>
@@ -215,7 +215,7 @@ export default function ServiceAgreement() {
           <Section num="10" title="Contact & Disputes">
             <p>
               For questions about this agreement or any service, contact Sonoaac directly
-              at <span className="text-green-400">contact@sonoaac.com</span>.
+              at <span className="text-green-400">sonoaac@gmail.com</span>.
             </p>
             <p>
               Disputes shall first be addressed through direct communication. Sonoaac is
@@ -236,11 +236,11 @@ export default function ServiceAgreement() {
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
               — Questions?
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
               Questions about this agreement?
             </h2>
-            <p className="text-green-600 text-sm mb-8">
-              Contact us directly at contact@sonoaac.com or reach out before your
+            <p className="text-gray-300 text-sm mb-8">
+              Contact us directly at sonoaac@gmail.com or reach out before your
               first appointment.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">

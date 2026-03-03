@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
+import { User } from "lucide-react";
 
 export function ProfileDropdown() {
   const [open, setOpen] = useState(false);
@@ -31,13 +32,13 @@ export function ProfileDropdown() {
 
   return (
     <div ref={ref} className="relative">
-      {/* Profile avatar button */}
+      {/* Profile icon button */}
       <button
         onClick={() => { setOpen(!open); setView("main"); }}
         aria-label="Open profile"
-        className="w-8 h-8 border border-green-800 text-green-500 text-[10px] font-bold uppercase tracking-wider hover:border-green-400 hover:text-green-400 transition-colors flex items-center justify-center shrink-0"
+        className="w-8 h-8 border border-green-800 text-green-500 hover:border-green-400 hover:text-green-400 transition-colors flex items-center justify-center shrink-0"
       >
-        SNC
+        <User size={16} strokeWidth={1.5} />
       </button>
 
       <AnimatePresence>
@@ -53,10 +54,10 @@ export function ProfileDropdown() {
               <>
                 {/* Profile header */}
                 <div className="px-4 py-3 border-b border-green-900/30">
-                  <p className="text-xs font-bold text-green-300 uppercase tracking-[0.2em]">
+                  <p className="text-xs font-bold text-white uppercase tracking-[0.2em]">
                     Sonoaac
                   </p>
-                  <p className="text-[10px] text-green-700 mt-0.5 uppercase tracking-[0.15em]">
+                  <p className="text-[10px] text-gray-400 mt-0.5 uppercase tracking-[0.15em]">
                     IT Support &amp; Digital Solutions
                   </p>
                 </div>
@@ -65,7 +66,7 @@ export function ProfileDropdown() {
                 <div className="p-2">
                   <button
                     onClick={() => setView("settings")}
-                    className="w-full text-left px-3 py-2.5 text-xs text-green-600 hover:text-green-400 hover:bg-green-950/20 transition-colors uppercase tracking-[0.2em] font-bold flex items-center justify-between"
+                    className="w-full text-left px-3 py-2.5 text-xs text-gray-400 hover:text-green-400 hover:bg-green-950/20 transition-colors uppercase tracking-[0.2em] font-bold flex items-center justify-between"
                   >
                     <span>[ Settings ]</span>
                     <span className="text-green-800">→</span>
@@ -80,7 +81,7 @@ export function ProfileDropdown() {
                 <div className="px-4 py-3 border-b border-green-900/30 flex items-center gap-3">
                   <button
                     onClick={() => setView("main")}
-                    className="text-green-800 hover:text-green-400 text-xs transition-colors"
+                    className="text-gray-500 hover:text-green-400 text-xs transition-colors"
                     aria-label="Back"
                   >
                     ←
@@ -96,7 +97,7 @@ export function ProfileDropdown() {
                     Appearance
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-green-500 uppercase tracking-[0.15em]">
+                    <span className="text-xs text-gray-300 uppercase tracking-[0.15em]">
                       Theme
                     </span>
                     {/* Toggle switch */}
@@ -110,7 +111,7 @@ export function ProfileDropdown() {
                         className={`flex-1 h-full flex items-center justify-center text-[9px] font-bold uppercase tracking-wider transition-colors ${
                           theme === "dark"
                             ? "bg-green-400 text-black"
-                            : "text-green-800"
+                            : "text-gray-500"
                         }`}
                       >
                         Dark
@@ -120,7 +121,7 @@ export function ProfileDropdown() {
                         className={`flex-1 h-full flex items-center justify-center text-[9px] font-bold uppercase tracking-wider transition-colors ${
                           theme === "light"
                             ? "bg-green-400 text-black"
-                            : "text-green-800"
+                            : "text-gray-500"
                         }`}
                       >
                         Light
