@@ -1,6 +1,5 @@
 import { useLocation, Link } from "wouter";
-import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
 export function Navbar() {
@@ -9,131 +8,123 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
   const navLinks = [
-    { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
-    { name: "My Tech", path: "/my-tech" },
+    { name: "IT Support", path: "/it-support" },
     { name: "Contact", path: "/contact" },
+    { name: "Agreement", path: "/service-agreement" },
   ];
 
   const isActive = (path: string) => location === path;
 
   return (
-    <nav className={`sticky top-0 left-0 right-0 z-[100] transition-all duration-300 border-b border-black ${
-      scrolled 
-        ? "bg-white shadow-md" 
-        : "bg-white"
-    }`} style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
-      <div className="w-full px-8 sm:px-12 lg:px-16">
-        <div className="flex items-center justify-between h-24">
-          {/* Left side: Logo + SNC + Nav Links */}
-          <div className="flex items-center gap-8">
-            {/* Logo with SNC */}
-            <Link href="/">
-              <button className="flex-shrink-0 cursor-pointer group">
-                <div className="flex items-center gap-3">
-                  <motion.img
-                    src="/images/sonoaaclogos.png"
-                    alt="Sonoaac"
-                    className="h-12 w-auto"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                  />
-                  <span className="font-bold text-3xl text-gray-900">SNC</span>
-                </div>
-              </button>
-            </Link>
+    <nav
+      className={`transition-all duration-300 ${scrolled ? "bg-black/95 backdrop-blur-sm" : "bg-black"}`}
+      style={{ willChange: "transform", transform: "translateZ(0)" }}
+    >
+      <div className="w-full px-6 sm:px-8 lg:px-12">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
+          <Link href="/">
+            <button className="cursor-pointer flex items-center gap-3 group">
+              <img
+                src="/images/sonoaaclogos.png"
+                alt="Sonoaac"
+                className="h-8 md:h-10 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
+              />
+              <span className="font-bold text-sm md:text-base text-green-300 tracking-[0.3em] uppercase">
+                Sonoaac
+              </span>
+            </button>
+          </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-1">
-              {navLinks.map((link) => (
-                <Link key={link.name} href={link.path}>
-                  <button
-                    className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
-                      isActive(link.path) 
-                        ? "text-green-600 bg-green-50" 
-                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
-                    }`}
-                  >
-                    {link.name}
-                  </button>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center">
-            <Link href="/contact">
-              <motion.button
-                className="px-6 py-2.5 rounded-lg text-white font-semibold text-sm bg-green-500 hover:bg-green-600 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Get started
-              </motion.button>
-            </Link>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <motion.button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-gray-900 p-2"
-              whileTap={{ scale: 0.95 }}
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </motion.button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-white border-t border-gray-200"
-        >
-          <div className="px-4 pt-2 pb-4 space-y-1">
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link key={link.name} href={link.path}>
                 <button
-                  onClick={() => setIsOpen(false)}
-                  className={`block w-full text-left px-4 py-3 text-base font-semibold rounded-lg transition-all ${
+                  className={`text-xs uppercase tracking-[0.25em] font-bold transition-colors ${
                     isActive(link.path)
-                      ? "text-green-600 bg-green-50"
-                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                      ? "text-green-400"
+                      : "text-green-700 hover:text-green-400"
                   }`}
                 >
                   {link.name}
                 </button>
               </Link>
             ))}
-            <div className="pt-3">
-              <Link href="/contact">
-                <motion.button
-                  onClick={() => setIsOpen(false)}
-                  className="w-full px-4 py-3 text-white font-semibold bg-green-500 rounded-lg hover:bg-green-600"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Get started
-                </motion.button>
-              </Link>
-            </div>
+            <Link href="/book-consultation">
+              <motion.button
+                className="px-5 py-2 bg-green-400 text-black text-xs uppercase tracking-[0.2em] font-bold hover:bg-green-300 transition-colors"
+                whileTap={{ scale: 0.97 }}
+              >
+                Book Now
+              </motion.button>
+            </Link>
           </div>
-        </motion.div>
-      )}
+
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-green-600 hover:text-green-400 text-xs uppercase tracking-[0.25em] font-bold transition-colors py-2"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+          >
+            {isOpen ? "[ close ]" : "[ menu ]"}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden border-t border-green-900/50 bg-black overflow-hidden"
+          >
+            <div className="px-6 py-4 flex flex-col">
+              <Link href="/">
+                <button
+                  className={`block w-full text-left py-3 text-xs uppercase tracking-[0.25em] font-bold border-b border-green-900/30 transition-colors ${
+                    isActive("/") ? "text-green-400" : "text-green-700 hover:text-green-400"
+                  }`}
+                >
+                  Home
+                </button>
+              </Link>
+              {navLinks.map((link) => (
+                <Link key={link.name} href={link.path}>
+                  <button
+                    className={`block w-full text-left py-3 text-xs uppercase tracking-[0.25em] font-bold border-b border-green-900/30 transition-colors ${
+                      isActive(link.path) ? "text-green-400" : "text-green-700 hover:text-green-400"
+                    }`}
+                  >
+                    {link.name}
+                  </button>
+                </Link>
+              ))}
+              <div className="pt-4">
+                <Link href="/book-consultation">
+                  <button className="w-full py-3 bg-green-400 text-black text-xs uppercase tracking-[0.2em] font-bold hover:bg-green-300 transition-colors">
+                    Book Now
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

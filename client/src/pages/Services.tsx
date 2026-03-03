@@ -1,128 +1,225 @@
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import { BraidingDemo } from "@/components/demos/BraidingDemo";
 import { MechanicDemo } from "@/components/demos/MechanicDemo";
-import { StickyNav } from "@/components/layout/StickyNav";
-import { Code, Server, Smartphone, Globe } from "lucide-react";
+
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 } as any,
+  viewport: { once: true },
+  transition: { duration: 0.5 },
+};
+
+const webServices = [
+  {
+    title: "Custom Website Design",
+    description: "Tailored design built to reflect your brand. Clean, professional layouts for any industry.",
+  },
+  {
+    title: "Mobile-Responsive Builds",
+    description: "Every site is built mobile-first and tested across all screen sizes.",
+  },
+  {
+    title: "SEO Optimization",
+    description: "On-page SEO, fast load times, and structured markup to help clients find you.",
+  },
+  {
+    title: "Admin & CMS Integration",
+    description: "Easy-to-manage dashboards so you can update content without developer help.",
+  },
+];
 
 export default function Services() {
-  const tabs = [
-    { id: "overview", label: "Overview" },
-    { id: "demos", label: "Live Demos" },
-  ];
-
-  // serviceCards intentionally left empty per design request
-  const serviceCards: Array<any> = [];
-
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header Section */}
-      <section className="et-hero-tabs bg-white">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full"
-        >
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6">Our Services</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Building clean, professional web solutions tailored to your business needs.
-          </p>
-        </motion.div>
+    <div className="min-h-screen bg-black">
+      {/* Hero */}
+      <section className="px-6 py-20 md:py-32 border-b border-green-900/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
+              — Services
+            </span>
+            <h1 className="text-3xl md:text-5xl font-bold text-green-100 mb-6">
+              IT Support &amp;<br />Digital Solutions
+            </h1>
+            <p className="text-green-600 text-base md:text-lg leading-relaxed max-w-xl mb-8">
+              From remote troubleshooting to full web development — Sonoaac covers
+              the full range of tech needs for individuals and small businesses.
+            </p>
+            <Link href="/book-consultation">
+              <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors">
+                Book Consultation
+              </button>
+            </Link>
+          </motion.div>
+        </div>
       </section>
 
-      {/* Sticky Navigation with Content */}
-      <StickyNav tabs={tabs}>
-        {/* Overview Section */}
-        <section className="et-slide" id="overview">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-4xl font-bold mb-12 text-center">Service Overview</h2>
-              
-              {/* Service Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-                {serviceCards.map((service, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all border border-gray-100"
-                  >
-                    <div className={`w-14 h-14 ${service.color} rounded-2xl flex items-center justify-center mb-6`}>
-                      <service.icon size={28} />
-                    </div>
-                    <h3 className="text-lg font-bold mb-3">{service.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{service.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="bg-green-50 p-12 rounded-2xl">
-                <h3 className="text-2xl font-bold mb-4">What We Include</h3>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start gap-3">
-                    <span className="text-green-600 font-bold">✓</span>
-                    <span>Custom website design and development</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-green-600 font-bold">✓</span>
-                    <span>Mobile-responsive layouts</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-green-600 font-bold">✓</span>
-                    <span>Fast, secure, and SEO-optimized</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-green-600 font-bold">✓</span>
-                    <span>Easy-to-manage admin dashboard</span>
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Live Demos Section */}
-        <section className="et-slide" id="demos" style={{ background: "#f3f4f6" }}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-4xl font-bold mb-6 text-center">See It In Action</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto text-center mb-16">
-                Explore our live component demos. These are fully functional UI elements we've built for clients in various industries.
-              </p>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                <div>
-                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <span className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-sm font-bold">1</span>
-                    Beauty & Salon Booking
+      {/* IT Services */}
+      <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp}>
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
+              01 / IT Services
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-10">
+              Tech Support &amp; Troubleshooting
+            </h2>
+            <div className="space-y-6">
+              {[
+                {
+                  title: "Remote IT Support",
+                  detail: "Via Zoom, AnyDesk, or TeamViewer. Software errors, OS issues, login problems, virus removal — resolved without a site visit.",
+                  path: "/it-support",
+                },
+                {
+                  title: "On-Site Services",
+                  detail: "Home and office visits. Hardware setup, network configuration, device installations, and workstation builds.",
+                  path: "/on-site-services",
+                },
+                {
+                  title: "Software & App Fixes",
+                  detail: "Microsoft 365, app crashes, browser issues, driver errors, and full system troubleshooting for PC and Mac.",
+                  path: "/software-fixes",
+                },
+                {
+                  title: "Device Setup & Configuration",
+                  detail: "New device setup, PC/laptop resets, software installation, virus protection, and optimization for business or personal use.",
+                  path: "/device-setup",
+                },
+                {
+                  title: "Business IT Solutions",
+                  detail: "Startup IT setup, business email, workstation rollout, network security, and ongoing IT planning for small businesses.",
+                  path: "/business-it",
+                },
+                {
+                  title: "PC/Laptop Reset",
+                  detail: "Full system reset and clean reinstall. Removes malware, resolves persistent issues, and restores performance.",
+                  path: "/software-fixes",
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                  className="flex flex-col sm:flex-row sm:gap-8 py-5 border-b border-green-900/20 group"
+                >
+                  <h3 className="text-sm font-bold text-green-300 uppercase tracking-[0.15em] sm:w-56 shrink-0 mb-2 sm:mb-0 group-hover:text-green-400 transition-colors">
+                    {item.title}
                   </h3>
-                  <BraidingDemo />
-                </div>
-                
-                <div>
-                  <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <span className="w-10 h-10 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-sm font-bold">2</span>
-                    Automotive Service Menu
+                  <div className="flex flex-col gap-2">
+                    <p className="text-green-600 text-sm leading-relaxed">{item.detail}</p>
+                    <Link href={item.path}>
+                      <button className="text-xs text-green-800 uppercase tracking-[0.15em] hover:text-green-400 transition-colors w-fit">
+                        Details —
+                      </button>
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Web Development */}
+      <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp}>
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
+              02 / Web Development
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-6">
+              Websites for Small Businesses
+            </h2>
+            <p className="text-green-600 text-sm leading-relaxed max-w-xl mb-10">
+              Clean, professional web presence built around your business needs.
+              No templates — every site is custom-designed and built for performance.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-green-900/20">
+              {webServices.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="bg-black p-6 hover:bg-green-950/20 transition-colors"
+                >
+                  <h3 className="text-sm font-bold text-green-300 uppercase tracking-[0.15em] mb-3">
+                    {item.title}
                   </h3>
-                  <MechanicDemo />
-                </div>
+                  <p className="text-green-700 text-xs leading-relaxed">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Live Demos */}
+      <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp}>
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
+              03 / Live Demos
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-green-100 mb-4">
+              See It In Action
+            </h2>
+            <p className="text-green-600 text-sm leading-relaxed max-w-xl mb-12">
+              These are live UI components built for real clients. Fully functional examples
+              of what Sonoaac can build for your business.
+            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              <div>
+                <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-6">
+                  Beauty &amp; Salon Booking
+                </h3>
+                <BraidingDemo />
               </div>
-            </motion.div>
-          </div>
-        </section>
-      </StickyNav>
+              <div>
+                <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-6">
+                  Automotive Service Menu
+                </h3>
+                <MechanicDemo />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="px-6 py-20 md:py-28">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp}>
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
+              — Get Started
+            </span>
+            <h2 className="text-2xl md:text-4xl font-bold text-green-100 mb-6">
+              Ready to work together?
+            </h2>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/book-consultation">
+                <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors w-full sm:w-auto">
+                  Book Consultation
+                </button>
+              </Link>
+              <Link href="/contact">
+                <button className="px-8 py-4 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors w-full sm:w-auto">
+                  Contact Us
+                </button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }

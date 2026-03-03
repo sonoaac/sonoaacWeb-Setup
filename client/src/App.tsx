@@ -1,4 +1,4 @@
-import { Switch, Route, useLocation } from "wouter";
+import { Switch, Route } from "wouter";
 import { lazy, Suspense } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import HelpBot from "@/components/features/HelpBot";
 
 const NotFound = lazy(() => import("@/pages/not-found"));
@@ -22,6 +23,7 @@ const DeviceSetup = lazy(() => import("@/pages/DeviceSetup"));
 const BuyReadyComputer = lazy(() => import("@/pages/BuyReadyComputer"));
 const SoftwareFixes = lazy(() => import("@/pages/SoftwareFixes"));
 const BusinessIT = lazy(() => import("@/pages/BusinessIT"));
+const ServiceAgreement = lazy(() => import("@/pages/ServiceAgreement"));
 
 function Router() {
   return (
@@ -40,6 +42,7 @@ function Router() {
         <Route path="/build-pc" component={BuildPC} />
         <Route path="/services" component={Services} />
         <Route path="/contact" component={Contact} />
+        <Route path="/service-agreement" component={ServiceAgreement} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
@@ -50,11 +53,17 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="min-h-screen flex flex-col bg-white text-gray-900 font-sans antialiased selection:bg-green-100 selection:text-green-900 overflow-x-hidden">
+        <div className="min-h-screen flex flex-col bg-black text-green-200 antialiased overflow-x-hidden">
+          <ScrollProgress />
           <Header />
-          {/* Spacer for sticky header height (h-24 = 96px, adjust if header height changes) */}
-          <div className="h-24 md:h-24" aria-hidden="true" />
-          <main id="main-content" className="flex-1 w-full focus:outline-none" tabIndex={-1} aria-label="Main content">
+          {/* Spacer for sticky header */}
+          <div className="h-16 md:h-20" aria-hidden="true" />
+          <main
+            id="main-content"
+            className="flex-1 w-full focus:outline-none"
+            tabIndex={-1}
+            aria-label="Main content"
+          >
             <Router />
           </main>
           <Footer />

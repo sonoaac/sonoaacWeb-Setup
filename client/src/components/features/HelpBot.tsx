@@ -1,52 +1,51 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { X, MessageCircle } from "lucide-react";
 import { Link } from "wouter";
 
 const TOPICS = [
   {
     id: "help",
-    label: "What We Help With",
-    response: "We help with tech support, device setup, business IT, and more. How can we assist you today?",
+    label: "What We Do",
+    response: "Remote and in-person IT support, web development, software troubleshooting, device setup, and business IT solutions.",
     ctas: [
       { label: "Book Consultation", href: "/book-consultation" },
-      { label: "Get IT Support", href: "/it-support" },
-    ],
-  },
-  {
-    id: "onsite",
-    label: "On-Site Services",
-    response: "We offer on-site visits for homes and offices. Schedule a visit or request a quote!",
-    ctas: [
-      { label: "Book Consultation", href: "/book-consultation" },
-      { label: "Request On-Site Service", href: "/services" },
+      { label: "View Services", href: "/services" },
     ],
   },
   {
     id: "remote",
     label: "Remote Support",
-    response: "Get fast remote help for software, email, and troubleshooting. Start a remote session or contact us!",
+    response: "Secure remote sessions via Zoom, AnyDesk, or TeamViewer. Available globally for software, email, OS, and troubleshooting issues.",
     ctas: [
       { label: "Get IT Support", href: "/it-support" },
+      { label: "Book Consultation", href: "/book-consultation" },
+    ],
+  },
+  {
+    id: "onsite",
+    label: "On-Site Services",
+    response: "Home and office visits for hardware setup, network config, and device installations. Scheduled by appointment — walk-ins at additional charge.",
+    ctas: [
+      { label: "On-Site Services", href: "/on-site-services" },
       { label: "Book Consultation", href: "/book-consultation" },
     ],
   },
   {
     id: "devices",
-    label: "Device Setup & Sales",
-    response: "We set up new and existing devices, and offer ready-to-use computers. Need a quote or setup?",
+    label: "Device Setup",
+    response: "New device configuration, PC and laptop resets, software installation, and device recommendations for business or personal use.",
     ctas: [
-      { label: "Setup My Device", href: "/my-tech" },
-      { label: "Request Device Quote", href: "/device-sales" },
+      { label: "Device Setup", href: "/device-setup" },
+      { label: "My Tech", href: "/my-tech" },
     ],
   },
   {
-    id: "trust",
-    label: "Why Choose Us",
-    response: "Sonoaac is a registered U.S. business focused on clear, secure, and personal tech help.",
+    id: "booking",
+    label: "Appointments",
+    response: "All services are by appointment. Walk-ins are available at an additional charge. Book online or contact us to schedule.",
     ctas: [
-      { label: "Book Consultation", href: "/book-consultation" },
-      { label: "Get IT Support", href: "/it-support" },
+      { label: "Book Now", href: "/book-consultation" },
+      { label: "Contact Us", href: "/contact" },
     ],
   },
 ];
@@ -56,14 +55,10 @@ export default function HelpBot() {
   const [selected, setSelected] = useState<null | string>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Focus trap for accessibility
   useEffect(() => {
-    if (open && panelRef.current) {
-      panelRef.current.focus();
-    }
+    if (open && panelRef.current) panelRef.current.focus();
   }, [open]);
 
-  // Close on Escape
   useEffect(() => {
     if (!open) return;
     const handler = (e: KeyboardEvent) => {
@@ -72,10 +67,6 @@ export default function HelpBot() {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [open]);
-
-  const handleChip = (id: string) => {
-    setSelected(id);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -86,76 +77,82 @@ export default function HelpBot() {
 
   return (
     <>
-      {/* Floating HelpBot Button */}
+      {/* Float button */}
       <button
-        aria-label="Open help chat"
-        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg p-4 flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
+        aria-label="Open help"
         onClick={() => setOpen(true)}
-        style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.18)" }}
+        className="fixed bottom-6 right-6 z-50 bg-green-400 text-black text-xs font-bold uppercase tracking-[0.2em] px-4 py-3 hover:bg-green-300 transition-colors shadow-lg shadow-green-900/30"
       >
-        <MessageCircle size={28} className="mr-2" />
-        <span className="font-semibold text-base hidden sm:inline">Need help?</span>
+        [ help ]
       </button>
 
-      {/* Chat Panel */}
+      {/* Panel */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 40 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.18 }}
             ref={panelRef}
             tabIndex={-1}
             aria-modal="true"
             role="dialog"
-            className="fixed bottom-24 right-6 z-50 w-80 max-w-[95vw] bg-white rounded-xl shadow-2xl border border-gray-200 p-4 flex flex-col gap-3 focus:outline-none"
+            className="fixed bottom-20 right-6 z-50 w-80 max-w-[calc(100vw-3rem)] bg-black border border-green-800 p-5 flex flex-col gap-4 focus:outline-none shadow-xl shadow-black/50"
           >
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-bold text-lg text-gray-900">HelpBot</span>
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <span className="text-xs uppercase tracking-[0.3em] text-green-500 font-bold">
+                Sonoaac Help
+              </span>
               <button
-                aria-label="Close help chat"
-                className="text-gray-400 hover:text-gray-700 p-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
+                aria-label="Close help"
                 onClick={handleClose}
+                className="text-green-800 hover:text-green-400 text-xs uppercase tracking-[0.2em] transition-colors"
               >
-                <X size={22} />
+                [ close ]
               </button>
             </div>
-            <div className="flex flex-wrap gap-2 mb-2">
+
+            {/* Topics */}
+            <div className="flex flex-wrap gap-2">
               {TOPICS.map((topic) => (
                 <button
                   key={topic.id}
-                  className={`px-3 py-1 rounded-full text-sm font-medium border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 ${
-                    selected === topic.id
-                      ? "bg-green-500 text-white border-green-500"
-                      : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-green-50"
-                  }`}
-                  onClick={() => handleChip(topic.id)}
+                  onClick={() => setSelected(topic.id)}
                   aria-pressed={selected === topic.id}
+                  className={`px-3 py-1.5 text-xs uppercase tracking-[0.15em] font-bold border transition-colors ${
+                    selected === topic.id
+                      ? "bg-green-400 text-black border-green-400"
+                      : "border-green-900 text-green-600 hover:border-green-600 hover:text-green-400"
+                  }`}
                 >
                   {topic.label}
                 </button>
               ))}
             </div>
+
+            {/* Response */}
             {selectedTopic ? (
-              <div className="flex flex-col gap-2">
-                <div className="text-gray-800 text-base mb-1">{selectedTopic.response}</div>
+              <div className="flex flex-col gap-3">
+                <p className="text-green-300 text-xs leading-relaxed">
+                  {selectedTopic.response}
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {selectedTopic.ctas.map((cta) => (
                     <Link key={cta.href} href={cta.href}>
-                      <a
-                        className="px-4 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
-                        tabIndex={0}
-                        aria-label={cta.label}
+                      <button
+                        onClick={handleClose}
+                        className="px-4 py-2 bg-green-400 text-black text-xs uppercase tracking-[0.15em] font-bold hover:bg-green-300 transition-colors"
                       >
                         {cta.label}
-                      </a>
+                      </button>
                     </Link>
                   ))}
                 </div>
               </div>
             ) : (
-              <div className="text-gray-600 text-sm">Select a topic to get started.</div>
+              <p className="text-green-800 text-xs">Select a topic above.</p>
             )}
           </motion.div>
         )}
