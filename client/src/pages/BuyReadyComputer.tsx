@@ -126,7 +126,7 @@ export default function BuyReadyComputer() {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               What We Recommend
             </h2>
-            <ul className="space-y-3">
+            <ul className="space-y-3 list-disc pl-5 marker:text-green-400">
               {[
                 "Laptops — Windows and Mac, for work, school, and business",
                 "Desktops — high-performance systems for invoicing, editing, or multitasking",
@@ -134,9 +134,8 @@ export default function BuyReadyComputer() {
                 "Custom PC builds — spec'd to your exact needs and budget",
                 "Budget picks — solid, reliable devices that won't break the bank",
               ].map((item) => (
-                <li key={item} className="flex gap-4 text-gray-300 text-sm">
-                  <span className="text-green-400 font-bold shrink-0">//</span>
-                  <span>{item}</span>
+                <li key={item} className="text-gray-300 text-sm">
+                  {item}
                 </li>
               ))}
             </ul>

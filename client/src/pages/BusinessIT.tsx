@@ -111,7 +111,7 @@ export default function BusinessIT() {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
               Built for Small Businesses
             </h2>
-            <ul className="space-y-3">
+            <ul className="space-y-3 list-disc pl-5 marker:text-green-400">
               {[
                 "Startups getting their first IT setup",
                 "Service businesses — salons, shops, mechanic shops, restaurants",
@@ -119,9 +119,8 @@ export default function BusinessIT() {
                 "Freelancers and solo operators who need a professional setup",
                 "Growing teams adding workstations and user accounts",
               ].map((item) => (
-                <li key={item} className="flex gap-4 text-gray-300 text-sm">
-                  <span className="text-green-400 font-bold shrink-0">//</span>
-                  <span>{item}</span>
+                <li key={item} className="text-gray-300 text-sm">
+                  {item}
                 </li>
               ))}
             </ul>

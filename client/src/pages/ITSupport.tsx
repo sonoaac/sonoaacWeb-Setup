@@ -73,7 +73,7 @@ export default function ITSupport() {
               Connect with a specialist via Zoom, AnyDesk, or TeamViewer. No travel required.
               Fast response for issues that need immediate attention.
             </p>
-            <ul className="space-y-3">
+            <ul className="space-y-3 list-disc pl-5 marker:text-green-400">
               {[
                 "Virus and malware removal",
                 "Microsoft 365 setup and troubleshooting",
@@ -83,9 +83,8 @@ export default function ITSupport() {
                 "Driver issues and system updates",
                 "Security audits and basic hardening",
               ].map((item) => (
-                <li key={item} className="flex gap-4 text-gray-300 text-sm">
-                  <span className="text-green-400 font-bold shrink-0">//</span>
-                  <span>{item}</span>
+                <li key={item} className="text-gray-300 text-sm">
+                  {item}
                 </li>
               ))}
             </ul>

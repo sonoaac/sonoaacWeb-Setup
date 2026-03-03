@@ -114,7 +114,7 @@ export default function OnSiteServices() {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
               How It Works
             </h2>
-            <ul className="space-y-4">
+            <ul className="space-y-4 list-disc pl-5 marker:text-green-400">
               {[
                 "Book online or contact us to request an on-site visit",
                 "Availability confirmed after booking — we'll confirm date and time",
@@ -122,9 +122,8 @@ export default function OnSiteServices() {
                 "Service area and travel fees discussed at booking",
                 "Please have devices accessible and accounts ready before the visit",
               ].map((item) => (
-                <li key={item} className="flex gap-4 text-gray-300 text-sm">
-                  <span className="text-green-400 font-bold shrink-0">//</span>
-                  <span>{item}</span>
+                <li key={item} className="text-gray-300 text-sm">
+                  {item}
                 </li>
               ))}
             </ul>

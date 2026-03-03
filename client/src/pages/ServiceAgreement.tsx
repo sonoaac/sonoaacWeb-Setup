@@ -77,7 +77,7 @@ export default function ServiceAgreement() {
 
           <Section num="02" title="Services Provided">
             <p>Services include but are not limited to:</p>
-            <ul className="space-y-2">
+            <ul className="space-y-2 list-disc pl-5 marker:text-green-400">
               {[
                 "Remote IT support via Zoom, AnyDesk, or TeamViewer",
                 "On-site IT support — home and office visits",
@@ -90,10 +90,7 @@ export default function ServiceAgreement() {
                 "Business IT consulting",
                 "Tech recommendations for devices and software",
               ].map((item) => (
-                <li key={item} className="flex gap-4">
-                  <span className="text-green-700 font-bold shrink-0">//</span>
-                  <span>{item}</span>
-                </li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </Section>
