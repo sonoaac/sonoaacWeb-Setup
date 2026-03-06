@@ -27,6 +27,7 @@ const BuyReadyComputer = lazy(() => import("@/pages/BuyReadyComputer"));
 const SoftwareFixes = lazy(() => import("@/pages/SoftwareFixes"));
 const BusinessIT = lazy(() => import("@/pages/BusinessIT"));
 const ServiceAgreement = lazy(() => import("@/pages/ServiceAgreement"));
+const KnowledgeBase = lazy(() => import("@/pages/KnowledgeBase"));
 
 function Router() {
   return (
@@ -46,6 +47,7 @@ function Router() {
         <Route path="/services" component={Services} />
         <Route path="/contact" component={Contact} />
         <Route path="/service-agreement" component={ServiceAgreement} />
+        <Route path="/knowledge-base" component={KnowledgeBase} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
