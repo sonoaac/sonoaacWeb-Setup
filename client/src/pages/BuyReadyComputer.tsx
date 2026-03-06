@@ -1,5 +1,7 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import TechMatcher from "@/components/features/TechMatcher";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -9,6 +11,8 @@ const fadeUp = {
 };
 
 export default function BuyReadyComputer() {
+  const [matcherOpen, setMatcherOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-black">
       {/* Hero */}
@@ -154,11 +158,12 @@ export default function BuyReadyComputer() {
               Not sure what to buy?
             </h2>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/my-tech">
-                <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors w-full sm:w-auto">
-                  Get Tech Matched
-                </button>
-              </Link>
+              <button
+                onClick={() => setMatcherOpen(true)}
+                className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors w-full sm:w-auto"
+              >
+                Get Tech Matched
+              </button>
               <Link href="/book-consultation">
                 <button className="px-8 py-4 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors w-full sm:w-auto">
                   Book Consultation
@@ -168,6 +173,10 @@ export default function BuyReadyComputer() {
           </motion.div>
         </div>
       </section>
+      {/* TechMatcher modal */}
+      <AnimatePresence>
+        {matcherOpen && <TechMatcher onClose={() => setMatcherOpen(false)} />}
+      </AnimatePresence>
     </div>
   );
 }
