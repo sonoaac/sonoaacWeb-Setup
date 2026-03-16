@@ -20,12 +20,12 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Services", path: "/services" },
-    { name: "IT Support", path: "/it-support" },
-    { name: "Contact", path: "/contact" },
+    { name: "My Tech", path: "/my-tech" },
+    { name: "Knowledge Base", path: "/knowledge-base" },
     { name: "Agreement", path: "/service-agreement" },
   ];
 
-  const isActive = (path: string) => location === path;
+  const isActive = (path: string) => location === path || location.startsWith(path + "/");
 
   return (
     <nav
@@ -62,12 +62,12 @@ export function Navbar() {
                 </button>
               </Link>
             ))}
-            <Link href="/book-consultation">
+            <Link href="/contact">
               <motion.button
                 className="px-5 py-2 bg-green-400 text-black text-xs uppercase tracking-[0.2em] font-bold hover:bg-green-300 transition-colors"
                 whileTap={{ scale: 0.97 }}
               >
-                Book Now
+                Contact
               </motion.button>
             </Link>
             <ProfileDropdown />
@@ -101,7 +101,7 @@ export function Navbar() {
               <Link href="/">
                 <button
                   className={`block w-full text-left py-3 text-xs uppercase tracking-[0.25em] font-bold border-b border-green-900/30 transition-colors ${
-                    isActive("/") ? "text-green-400" : "text-green-700 hover:text-green-400"
+                    location === "/" ? "text-green-400" : "text-green-700 hover:text-green-400"
                   }`}
                 >
                   Home
@@ -119,9 +119,9 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="pt-4">
-                <Link href="/book-consultation">
+                <Link href="/contact">
                   <button className="w-full py-3 bg-green-400 text-black text-xs uppercase tracking-[0.2em] font-bold hover:bg-green-300 transition-colors">
-                    Book Now
+                    Contact
                   </button>
                 </Link>
               </div>

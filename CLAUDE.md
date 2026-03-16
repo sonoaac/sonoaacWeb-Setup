@@ -30,11 +30,17 @@ script/        → Build orchestration (script/build.ts)
 ### Frontend
 
 - **Router:** Wouter — all routes defined in `client/src/App.tsx`
-- **Server state:** React Query with `queryClient.ts`; all fetches use `apiRequest()`
+- **Server state:** React Query with `queryClient.ts`; all fetches use `apiRequest()` from `client/src/lib/queryClient.ts`
 - **Forms:** React Hook Form + Zod (schemas from `shared/schema.ts`)
 - **UI:** Shadcn/ui (Radix UI + Tailwind CSS) in `client/src/components/ui/`
 - **Animations:** Framer Motion for standard animations, GSAP for advanced effects
-- **Theme:** `ThemeContext` in `client/src/context/ThemeContext.tsx` — light/dark toggle, persisted to `localStorage` under key `sonoaac-theme`
+- **Theme:** `ThemeContext` in `client/src/context/ThemeContext.tsx` — light/dark toggle, default is **light**, persisted to `localStorage` under key `sonoaac-theme`. Sets `data-theme` attribute on `<html>`.
+
+### Design System
+
+The app uses a **terminal/monospace aesthetic**: `Courier New` body font, green (`hsl(142, 69%, 58%)`) as the primary/accent color, and a white-on-black base layer. The `App.tsx` root div uses `bg-black text-green-200`, but `index.css` overrides these in **light mode** (default) — `bg-black → #fff`, `text-green-200 → #14532d`, etc. In **dark mode** (`data-theme="dark"`), the raw Tailwind colors are used unmodified (true dark terminal look). When writing component styles, write them in dark-terminal terms (e.g., `bg-black`, `text-green-300`) and rely on the CSS overrides in `index.css` to invert them for light mode.
+
+Base font size is set to `112.5%` (18px) on `<html>`, so all Tailwind `rem`-based sizes are scaled up proportionally.
 
 **App shell layout** (`App.tsx`): sticky `Header`, then a 3-column flex row on `xl` screens — `DesktopSidebar` | `main` (Router) | `DesktopRightPanel` — then `Footer`. `HelpBot` and `Toaster` are rendered globally.
 
@@ -44,10 +50,13 @@ script/        → Build orchestration (script/build.ts)
 - `Header` / `Navbar` — global top bar with nav links and `ProfileDropdown`.
 - `ScrollProgress` — thin progress bar at top of viewport.
 - `CTASection` — reusable call-to-action banner used across pages.
+- `SectionScroll` — scroll-snap section wrapper used within pages for full-height slide transitions.
+- `ErrorBoundary` — wraps routes to catch and display render errors gracefully.
 
 **Feature components** (`client/src/components/features/`):
 - `HelpBot` — global chat/help widget.
 - `QuoteBooklet` — multi-step quote flow used on service pages.
+- `TechMatcher` — multi-step device recommendation quiz modal; collects device type, use cases, budget, and portability preference, then returns a matched recommendation.
 
 **Pages** (all lazy-loaded via `React.lazy`):
 
@@ -66,6 +75,7 @@ script/        → Build orchestration (script/build.ts)
 | `/my-tech/build-pc` or `/build-pc` | `BuildPC` |
 | `/contact` | `Contact` |
 | `/service-agreement` | `ServiceAgreement` |
+| `/knowledge-base` | `KnowledgeBase` |
 
 ### Backend
 

@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import { useSubmitContact } from "@/hooks/use-contact";
-import { type InsertContactSubmission } from "@shared/schema";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -41,6 +41,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-black">
+
       {/* Hero */}
       <section className="px-6 py-20 md:py-32 border-b border-green-900/30">
         <div className="max-w-4xl mx-auto">
@@ -50,27 +51,104 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
           >
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-              — Contact
+              — Contact & Booking
             </span>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Let's talk about<br />your tech needs.
+              Let's Talk About<br />Your Tech.
             </h1>
             <p className="text-gray-300 text-base leading-relaxed max-w-xl">
-              Whether you need remote support, an on-site visit, or a new website —
-              reach out and we'll get you sorted.
+              Book a consultation, request support, or ask a question.
+              Remote and in-person options available for individuals and businesses worldwide.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Form + Info */}
+      {/* Consultation types */}
+      <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp}>
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
+              01 / What We Cover
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
+              Consultation Types
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {[
+                {
+                  title: "IT Consultations",
+                  detail: "Review your current setup, identify issues, and get clear recommendations — no jargon.",
+                },
+                {
+                  title: "Device Planning",
+                  detail: "Not sure what to buy? We'll match you with the right laptop, desktop, iPad, or setup for your workflow.",
+                },
+                {
+                  title: "Business Tech Strategy",
+                  detail: "Plan your IT infrastructure for a new or growing business — email, workstations, security, and more.",
+                },
+                {
+                  title: "Web Project Scoping",
+                  detail: "Discuss your website needs and get a clear scope, timeline, and quote for your project.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="border-l-2 border-green-900 pl-5 py-1 hover:border-green-600 transition-colors"
+                >
+                  <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.15em] mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm leading-relaxed">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Scheduling policy */}
+      <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp}>
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
+              02 / Scheduling
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+              Appointment Policy
+            </h2>
+            <ul className="space-y-4 list-disc pl-5 marker:text-green-400 mb-8">
+              {[
+                "All consultations are by appointment — book online or contact us directly",
+                "Walk-in consultations are available at an additional charge",
+                "Remote consultations are available worldwide via Zoom",
+                "On-site appointments are confirmed after booking and availability check",
+                "Please review the Service Agreement before your first appointment",
+              ].map((item) => (
+                <li key={item} className="text-gray-300 text-sm">
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <Link href="/service-agreement">
+              <button className="text-xs text-green-800 uppercase tracking-[0.2em] hover:text-green-400 transition-colors">
+                Read Service Agreement —
+              </button>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Form + Contact info */}
       <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+
             {/* Form */}
             <motion.div {...fadeUp}>
               <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-                01 / Send a Message
+                03 / Send a Message
               </span>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div>
@@ -109,7 +187,7 @@ export default function Contact() {
                     {...register("message")}
                     rows={5}
                     className={inputClass + " resize-none"}
-                    placeholder="Describe your issue or project..."
+                    placeholder="Describe your issue, project, or question..."
                   />
                   {errors.message && (
                     <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>
@@ -140,48 +218,44 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-                02 / Direct Contact
+                04 / Direct Contact
               </span>
               <div className="space-y-8">
-                <div className="border-l-2 border-green-800 pl-5">
-                  <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
-                    Email
-                  </h3>
-                  <p className="text-white text-sm mb-1">sonoaac@gmail.com</p>
-                  <p className="text-gray-400 text-xs">Response within 24 hours</p>
-                </div>
-
-                <div className="border-l-2 border-green-800 pl-5">
-                  <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
-                    Phone
-                  </h3>
-                  <p className="text-white text-sm mb-1">(862) 755-9845</p>
-                  <p className="text-gray-400 text-xs">By appointment — call or text</p>
-                </div>
-
-                <div className="border-l-2 border-green-800 pl-5">
-                  <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
-                    Location
-                  </h3>
-                  <p className="text-white text-sm mb-1">New York, NY</p>
-                  <p className="text-gray-400 text-xs">Remote support available worldwide</p>
-                </div>
-
-                <div className="border-l-2 border-green-800 pl-5">
-                  <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
-                    Hours
-                  </h3>
-                  <p className="text-white text-sm mb-1">By appointment</p>
-                  <p className="text-gray-400 text-xs">Walk-ins available at additional charge</p>
-                </div>
-
-                <div className="border-l-2 border-green-800 pl-5">
-                  <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
-                    Remote Sessions
-                  </h3>
-                  <p className="text-white text-sm mb-1">Zoom · AnyDesk · TeamViewer</p>
-                  <p className="text-gray-400 text-xs">Available globally</p>
-                </div>
+                {[
+                  {
+                    label: "Email",
+                    value: "sonoaac@gmail.com",
+                    sub: "Response within 24 hours",
+                  },
+                  {
+                    label: "Phone",
+                    value: "(862) 755-9845",
+                    sub: "By appointment — call or text",
+                  },
+                  {
+                    label: "Location",
+                    value: "New York, NY",
+                    sub: "Remote support available worldwide",
+                  },
+                  {
+                    label: "Hours",
+                    value: "By appointment",
+                    sub: "Walk-ins available at additional charge",
+                  },
+                  {
+                    label: "Remote Sessions",
+                    value: "Zoom · AnyDesk · TeamViewer",
+                    sub: "Available globally",
+                  },
+                ].map((item) => (
+                  <div key={item.label} className="border-l-2 border-green-800 pl-5">
+                    <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">
+                      {item.label}
+                    </h3>
+                    <p className="text-white text-sm mb-1">{item.value}</p>
+                    <p className="text-gray-400 text-xs">{item.sub}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>

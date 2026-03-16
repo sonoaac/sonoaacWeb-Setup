@@ -1,5 +1,5 @@
-import { Switch, Route } from "wouter";
-import { lazy, Suspense } from "react";
+import { Switch, Route, useLocation } from "wouter";
+import { lazy, Suspense, useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -19,35 +19,39 @@ const MyTech = lazy(() => import("@/pages/MyTech"));
 const BuildPC = lazy(() => import("@/pages/BuildPC"));
 const Services = lazy(() => import("@/pages/Services"));
 const Contact = lazy(() => import("@/pages/Contact"));
-const BookConsultation = lazy(() => import("@/pages/BookConsultation"));
-const ITSupport = lazy(() => import("@/pages/ITSupport"));
-const OnSiteServices = lazy(() => import("@/pages/OnSiteServices"));
-const DeviceSetup = lazy(() => import("@/pages/DeviceSetup"));
-const BuyReadyComputer = lazy(() => import("@/pages/BuyReadyComputer"));
-const SoftwareFixes = lazy(() => import("@/pages/SoftwareFixes"));
-const BusinessIT = lazy(() => import("@/pages/BusinessIT"));
 const ServiceAgreement = lazy(() => import("@/pages/ServiceAgreement"));
 const KnowledgeBase = lazy(() => import("@/pages/KnowledgeBase"));
+
+// Redirect old routes to consolidated pages
+function RedirectTo({ to }: { to: string }) {
+  const [, setLocation] = useLocation();
+  useEffect(() => { setLocation(to); }, [to]);
+  return null;
+}
 
 function Router() {
   return (
     <Suspense fallback={null}>
       <Switch>
+        {/* Primary routes */}
         <Route path="/" component={Home} />
-        <Route path="/book-consultation" component={BookConsultation} />
-        <Route path="/it-support" component={ITSupport} />
-        <Route path="/on-site-services" component={OnSiteServices} />
-        <Route path="/device-setup" component={DeviceSetup} />
-        <Route path="/buy-ready-computer" component={BuyReadyComputer} />
-        <Route path="/software-fixes" component={SoftwareFixes} />
-        <Route path="/business-it" component={BusinessIT} />
+        <Route path="/services" component={Services} />
         <Route path="/my-tech" component={MyTech} />
         <Route path="/my-tech/build-pc" component={BuildPC} />
-        <Route path="/build-pc" component={BuildPC} />
-        <Route path="/services" component={Services} />
         <Route path="/contact" component={Contact} />
-        <Route path="/service-agreement" component={ServiceAgreement} />
         <Route path="/knowledge-base" component={KnowledgeBase} />
+        <Route path="/service-agreement" component={ServiceAgreement} />
+
+        {/* Legacy redirects */}
+        <Route path="/it-support"><RedirectTo to="/services" /></Route>
+        <Route path="/on-site-services"><RedirectTo to="/services" /></Route>
+        <Route path="/device-setup"><RedirectTo to="/services" /></Route>
+        <Route path="/software-fixes"><RedirectTo to="/services" /></Route>
+        <Route path="/business-it"><RedirectTo to="/services" /></Route>
+        <Route path="/book-consultation"><RedirectTo to="/contact" /></Route>
+        <Route path="/buy-ready-computer"><RedirectTo to="/my-tech" /></Route>
+        <Route path="/build-pc"><RedirectTo to="/my-tech/build-pc" /></Route>
+
         <Route component={NotFound} />
       </Switch>
     </Suspense>
