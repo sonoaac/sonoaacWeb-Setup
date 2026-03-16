@@ -12,8 +12,8 @@ export function DesktopRightPanel() {
           </span>
           <ul className="space-y-1">
             {[
-              { label: "Book Consultation", path: "/book-consultation" },
-              { label: "IT Support", path: "/it-support" },
+              { label: "Book Consultation", path: "/contact" },
+              { label: "IT Support", path: "/services" },
               { label: "Contact Us", path: "/contact" },
               { label: "Service Agreement", path: "/service-agreement" },
             ].map((item) => (
@@ -37,7 +37,7 @@ export function DesktopRightPanel() {
             {["Zoom", "AnyDesk", "TeamViewer"].map((tool) => (
               <li key={tool}>
                 <span className="text-[10px] text-green-800 uppercase tracking-[0.2em]">
-                  // {tool}
+                  {tool}
                 </span>
               </li>
             ))}

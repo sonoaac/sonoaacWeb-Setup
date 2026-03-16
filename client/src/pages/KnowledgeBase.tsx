@@ -37,6 +37,7 @@ interface CompareCategory {
 interface FAQItem {
   q: string;
   a: ReactNode;
+  keywords?: string;
 }
 
 interface FAQSection {
@@ -531,6 +532,7 @@ const FAQ_SECTIONS: FAQSection[] = [
     items: [
       {
         q: "Why is my computer running slow?",
+        keywords: "slow computer fix speed up sluggish freezing startup slow boot performance",
         a: (
           <div className="space-y-3 text-sm text-gray-600">
             <p>A slow computer is almost always fixable without replacing the machine. The cause is usually one of these:</p>
@@ -796,6 +798,115 @@ const FAQ_SECTIONS: FAQSection[] = [
           </div>
         ),
       },
+      {
+        q: "How much RAM do I actually need in 2025?",
+        keywords: "ram memory how much 8gb 16gb 32gb enough too much need",
+        a: (
+          <div className="space-y-3 text-gray-600">
+            <p>RAM (memory) determines how many things your computer can handle at once. More RAM prevents slowdowns when multitasking. Here's the real-world breakdown:</p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">RAM Amount</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Who it's for</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">What it handles</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["4GB", "Basic Chromebook use only", "Web browsing and Google Docs — anything more will stutter"],
+                    ["8GB", "Light users only in 2025", "Email, browsing, Office — will feel sluggish with Teams open too"],
+                    ["16GB", "The recommended standard in 2025", "All everyday work including Teams, Office, and 15+ browser tabs simultaneously"],
+                    ["32GB", "Power users, creative, dev work", "Video editing, multiple VMs, coding with Docker, heavy Photoshop work"],
+                    ["64GB+", "Professional workstations", "3D rendering, machine learning, data science with large datasets"],
+                  ].map(([ram, who, handles], i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                      <td className="py-2 px-3 border border-gray-200 font-bold text-green-700">{ram}</td>
+                      <td className="py-2 px-3 border border-gray-200 font-medium text-gray-700">{who}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-gray-500">{handles}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-3 text-sm space-y-2">
+              <p className="font-semibold text-gray-800">What apps actually use:</p>
+              <ul className="space-y-1 text-gray-600">
+                {[
+                  "Google Chrome: 150–500MB per tab — 20 tabs = 3–10GB RAM just in your browser",
+                  "Microsoft Teams: 500MB–1.5GB on its own — more during screen sharing and video calls",
+                  "Microsoft Outlook: 200–600MB depending on mailbox size",
+                  "Microsoft Word/Excel: 200–500MB each",
+                  "Zoom (during a call with background blur): 600MB–1.2GB",
+                  "OneDrive sync running in background: 100–300MB",
+                ].map((x, i) => <li key={i} className="flex gap-2"><span className="text-gray-400">•</span>{x}</li>)}
+              </ul>
+              <p className="font-semibold text-gray-700 mt-2">Total for a typical work session: 6–14GB RAM — which is why 8GB is tight and 16GB is the right minimum in 2025.</p>
+            </div>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">RAM is one of the cheapest upgrades if your laptop supports it. Adding 8GB to a machine with slow 8GB often costs $30–$50 and makes a dramatic difference in daily responsiveness.</p>
+          </div>
+        ),
+      },
+      {
+        q: "What are the minimum specs for a work or office computer in 2025?",
+        keywords: "minimum specs work office computer typing email teams zoom word excel what do i need requirements work laptop",
+        a: (
+          <div className="space-y-3 text-gray-600">
+            <p>The right specs depend on what you actually run. Here are the minimum requirements by workload:</p>
+            <div className="space-y-3">
+              {[
+                {
+                  label: "Light Use — Typing, Email, Web Browsing",
+                  color: "bg-green-50 border-green-100",
+                  specs: [
+                    ["CPU", "Intel Core i3/i5 (any 2019+) or AMD Ryzen 3/5", "A 4-core CPU is more than enough for typing and web browsing"],
+                    ["RAM", "8GB minimum, 16GB preferred", "8GB handles light use — 16GB adds buffer for more tabs and apps"],
+                    ["Storage", "256GB SSD", "SSD is mandatory — HDD makes even typing feel slow due to system delays"],
+                    ["Battery", "10+ hours real-world", "Prioritize battery if you work without an outlet nearby"],
+                  ],
+                },
+                {
+                  label: "Office Work — Teams, Outlook, Word, Excel",
+                  color: "bg-blue-50 border-blue-100",
+                  specs: [
+                    ["CPU", "Intel Core i5/i7 (Gen 11+) or AMD Ryzen 5/7", "Needed for Teams video calls and Excel with large datasets"],
+                    ["RAM", "16GB — non-negotiable", "Teams + Outlook + Chrome + OneDrive together use 8–14GB RAM"],
+                    ["Storage", "512GB SSD", "Outlook cache, Office installs, and OneDrive local sync use 50–100GB"],
+                    ["OS", "Windows 11 Pro for business", "Allows domain join, BitLocker encryption, and Remote Desktop"],
+                  ],
+                },
+                {
+                  label: "Heavy Work — Multiple Apps, Large Files, Presentations",
+                  color: "bg-orange-50 border-orange-100",
+                  specs: [
+                    ["CPU", "Intel Core i7/i9 or AMD Ryzen 7/9", "More cores handle parallel app loading and heavy file operations"],
+                    ["RAM", "32GB", "Heavy multitasking with large files and multiple demanding apps"],
+                    ["Storage", "1TB NVMe SSD", "Large project files, recordings, and installs fill storage fast"],
+                    ["GPU", "Dedicated GPU if doing any visual design or video", "Otherwise integrated GPU is fine for Office work"],
+                  ],
+                },
+              ].map((tier, ti) => (
+                <div key={ti} className={`border rounded-lg p-3 ${tier.color}`}>
+                  <p className="font-bold text-gray-800 text-sm mb-2">{tier.label}</p>
+                  <div className="space-y-1.5">
+                    {tier.specs.map(([spec, value, note], si) => (
+                      <div key={si}>
+                        <div className="flex gap-2 text-sm">
+                          <span className="font-semibold text-gray-700 w-20 shrink-0">{spec}:</span>
+                          <span className="text-gray-700">{value}</span>
+                        </div>
+                        {note && <p className="text-xs text-gray-500 ml-[5.5rem]">{note}</p>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">If your current computer is slow for work, the most common fix is adding RAM (if upgradeable) or replacing the hard drive with an SSD — not buying a new machine. Sonoaac can diagnose what's bottlenecking your system.</p>
+          </div>
+        ),
+      },
     ],
   },
   {
@@ -912,6 +1023,7 @@ const FAQ_SECTIONS: FAQSection[] = [
     items: [
       {
         q: "My Wi-Fi is slow — is it my router or my device?",
+        keywords: "wifi slow router device speed test ethernet speed problem fix",
         a: (
           <div className="space-y-2 text-sm text-gray-600">
             <p>Run a quick test to isolate the problem:</p>
@@ -937,6 +1049,7 @@ const FAQ_SECTIONS: FAQSection[] = [
       },
       {
         q: "What is the difference between Wi-Fi 5, Wi-Fi 6, and Wi-Fi 6E?",
+        keywords: "wifi 5 wifi 6 wifi 6e wifi 7 difference upgrade 802.11ac 802.11ax speed standard",
         a: (
           <div className="space-y-2 text-sm text-gray-600">
             <div className="overflow-x-auto">
@@ -967,6 +1080,159 @@ const FAQ_SECTIONS: FAQSection[] = [
               </table>
             </div>
             <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">The real-world benefit of upgrading from Wi-Fi 5 to Wi-Fi 6 is mostly felt in homes with 10+ connected devices. For most households, Wi-Fi 5 is still fine.</p>
+          </div>
+        ),
+      },
+      {
+        q: "What is a WiFi extender and when do I actually need one?",
+        keywords: "wifi extender repeater booster range dead zone weak signal coverage whole home mesh powerline",
+        a: (
+          <div className="space-y-3 text-gray-600">
+            <p>A WiFi extender (also called a repeater or range extender) picks up your existing WiFi signal and rebroadcasts it, extending coverage into areas your router can't reach.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                <p className="font-bold text-gray-800 text-xs mb-2">WiFi Extender / Repeater</p>
+                <ul className="text-xs space-y-1 text-gray-600">
+                  {["Cheapest option ($20–$60)", "Plugs into wall outlet", "Extends signal into dead zones", "Usually creates a second network name", "Speed drops 30–50% (it's relaying, not routing)"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-gray-400">•</span>{x}</li>)}
+                </ul>
+              </div>
+              <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
+                <p className="font-bold text-blue-800 text-xs mb-2">Mesh System (Recommended)</p>
+                <ul className="text-xs space-y-1 text-gray-600">
+                  {["Multiple nodes work as one network", "Seamless roaming — same network name throughout", "No speed penalty between nodes", "Best for homes over 1,500 sq ft", "Examples: Eero, Google Nest, TP-Link Deco ($100–$250)"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-blue-500">✔</span>{x}</li>)}
+                </ul>
+              </div>
+              <div className="bg-green-50 border border-green-100 rounded-lg p-3">
+                <p className="font-bold text-green-800 text-xs mb-2">Powerline Adapter</p>
+                <ul className="text-xs space-y-1 text-gray-600">
+                  {["Sends internet through your electrical wiring", "No WiFi signal issues — wired connection", "Great for distant rooms or basements", "Requires two adapters (one near router, one at device)", "Speed depends on wiring quality (~100–500 Mbps)"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-green-600">•</span>{x}</li>)}
+                </ul>
+              </div>
+            </div>
+            <p className="font-semibold text-gray-700">Signs you need a WiFi extender or mesh:</p>
+            <ul className="space-y-1 text-sm pl-1">
+              {["Signal drops to 1–2 bars in certain rooms", "Video calls keep cutting out in specific areas", "Devices disconnect when you walk to another floor or room", "You have a home over 1,500 sq ft and a single router"].map((x, i) => <li key={i} className="flex gap-2"><span className="text-gray-400">•</span>{x}</li>)}
+            </ul>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">Recommendation: Skip cheap extenders and go straight to a 2-node mesh system. The seamless roaming and zero speed penalty are worth the extra $50–$80.</p>
+          </div>
+        ),
+      },
+      {
+        q: "What is the difference between a router, a modem, and a gateway?",
+        keywords: "router modem gateway difference what does a router do isp cable box internet box combo",
+        a: (
+          <div className="space-y-3 text-gray-600">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Device</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">What it does</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Who provides it</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Modem", "Converts your ISP's signal (cable, fiber, DSL) into a network signal your home can use", "Usually rented from your ISP (Xfinity, Verizon, Spectrum)"],
+                    ["Router", "Distributes the internet from your modem to all devices via WiFi or Ethernet", "You buy this yourself — or use what your ISP provides"],
+                    ["Gateway (Combo)", "Modem and router combined into one box — most ISPs provide these by default", "Your ISP provides this — you pay a monthly rental fee"],
+                  ].map(([dev, does, who], i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                      <td className="py-2 px-3 border border-gray-200 font-bold text-gray-800">{dev}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-gray-600">{does}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-gray-500">{who}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm space-y-2">
+              <p className="font-semibold text-gray-800">Should you buy your own router?</p>
+              <p className="text-gray-600">Most ISP-provided gateways are mediocre. Buying your own router ($80–$150) typically gives you better WiFi range, faster speeds, and better security features — and eliminates the $10–$15/month rental fee your ISP charges.</p>
+              <p className="font-semibold text-gray-800 mt-2">Good standalone routers in 2025:</p>
+              <ul className="space-y-0.5 text-sm text-gray-600">
+                {["TP-Link Archer AX55 (~$80) — best budget WiFi 6 router", "ASUS RT-AX88U (~$200) — excellent for larger homes", "Eero 6+ (~$130 for 3-node mesh) — best for whole-home coverage"].map((x, i) => <li key={i} className="flex gap-2"><span className="text-green-500">✔</span>{x}</li>)}
+              </ul>
+            </div>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">If your ISP provides a combo gateway and you want to use your own router, you'll need to put the gateway in "bridge mode" to avoid double-NAT issues. Sonoaac can help with this setup.</p>
+          </div>
+        ),
+      },
+      {
+        q: "2.4 GHz vs 5 GHz WiFi — which band should I connect to?",
+        keywords: "2.4 ghz 5 ghz band frequency which is better range speed wifi band select choose",
+        a: (
+          <div className="space-y-3 text-gray-600">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Band</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Range</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Speed</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Best for</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["2.4 GHz", "Long range, penetrates walls better", "Slower (up to 600 Mbps)", "Smart home devices, devices far from router"],
+                    ["5 GHz", "Shorter range, blocked more by walls", "Much faster (up to 3.5 Gbps)", "Laptops, phones, streaming — when close to router"],
+                    ["6 GHz (Wi-Fi 6E)", "Shortest range, barely penetrates walls", "Fastest (up to 9.6 Gbps)", "High-speed devices in the same room as router"],
+                  ].map(([band, range, speed, use], i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                      <td className="py-2 px-3 border border-gray-200 font-bold text-gray-800">{band}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-gray-600">{range}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-gray-600">{speed}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-green-700">{use}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="font-semibold text-gray-800">Simple rule:</p>
+            <ul className="space-y-1 text-sm pl-1">
+              {["In the same room as your router: use 5 GHz", "In a far room or through multiple walls: use 2.4 GHz", "Smart plugs, cameras, and IoT devices: always 2.4 GHz (they don't support 5 GHz)", "Most modern routers merge both bands under one name and auto-select — you don't have to choose manually"].map((x, i) => <li key={i} className="flex gap-2"><span className="text-green-500">✔</span>{x}</li>)}
+            </ul>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">If your router shows separate network names like "HomeNetwork" and "HomeNetwork_5G", connect your phone and laptop to the 5GHz version whenever you're nearby for significantly faster speeds.</p>
+          </div>
+        ),
+      },
+      {
+        q: "How do I add WiFi to a desktop PC that doesn't have it?",
+        keywords: "desktop pc wifi wireless no wifi how to add usb wifi adapter pcie card dongle ethernet",
+        a: (
+          <div className="space-y-3 text-gray-600">
+            <p>Most desktops don't have built-in WiFi. You have three options:</p>
+            <div className="space-y-3">
+              {[
+                {
+                  title: "USB WiFi Adapter (~$15–$40)",
+                  pros: "Plug-and-play, no opening the case, works on any desktop",
+                  cons: "Slower than PCIe cards, can be blocked by other USB devices or desk positioning",
+                  rec: "Best for renters or those who move computers frequently",
+                },
+                {
+                  title: "PCIe WiFi Card (~$30–$80)",
+                  pros: "Fastest WiFi option for desktops, includes external antennas for better signal, supports WiFi 6/6E",
+                  cons: "Requires opening the desktop case and an available PCIe slot",
+                  rec: "Best for permanent setups — perform closest to a laptop's built-in WiFi",
+                },
+                {
+                  title: "Ethernet Cable (Best Option)",
+                  pros: "No WiFi interference, fastest possible speeds, most reliable — zero drops",
+                  cons: "Requires running a cable from your router to the desktop",
+                  rec: "Always the best choice for a stationary desktop if cable routing is possible",
+                },
+              ].map((opt, i) => (
+                <div key={i} className="border border-gray-200 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 text-sm mb-1">{opt.title}</p>
+                  <p className="text-xs text-green-700 mb-0.5"><span className="font-semibold">Pro:</span> {opt.pros}</p>
+                  <p className="text-xs text-red-600 mb-0.5"><span className="font-semibold">Con:</span> {opt.cons}</p>
+                  <p className="text-xs text-gray-500 italic">{opt.rec}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">Sonoaac can install a PCIe WiFi card or USB adapter, install drivers, and configure your network connection on-site or remotely.</p>
           </div>
         ),
       },
@@ -1048,12 +1314,152 @@ const FAQ_SECTIONS: FAQSection[] = [
     ],
   },
   {
+    id: "microsoft365",
+    label: "Microsoft 365",
+    icon: "📧",
+    items: [
+      {
+        q: "What is Microsoft 365 and do I actually need it?",
+        keywords: "microsoft 365 office subscription word excel outlook teams onedrive is it worth it what is office",
+        a: (
+          <div className="space-y-3 text-gray-600">
+            <p>Microsoft 365 (formerly called Office 365) is a subscription that gives you the full Microsoft Office suite plus cloud services — all continuously updated. Here's exactly what you get:</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
+                <p className="font-bold text-blue-800 text-sm mb-2">Apps Included</p>
+                <ul className="space-y-1 text-sm text-gray-700">
+                  {[
+                    "Word — documents, reports, resumes",
+                    "Excel — spreadsheets, budgets, data",
+                    "PowerPoint — presentations",
+                    "Outlook — email and calendar",
+                    "Teams — video calls and chat",
+                    "OneDrive — 1TB cloud storage",
+                    "OneNote — notes and organization",
+                    "Publisher / Access (PC only)",
+                  ].map((x, i) => <li key={i} className="flex gap-2"><span className="text-blue-500">✔</span>{x}</li>)}
+                </ul>
+              </div>
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                <p className="font-bold text-gray-800 text-sm mb-2">Plans & Pricing (2025)</p>
+                <ul className="space-y-1.5 text-sm text-gray-700">
+                  {[
+                    ["Personal", "$6.99/mo", "1 person, up to 5 devices"],
+                    ["Family", "$9.99/mo", "Up to 6 people"],
+                    ["Business Basic", "$6/user/mo", "Web versions only, Teams, OneDrive"],
+                    ["Business Standard", "$12.50/user/mo", "Full desktop apps + Teams + SharePoint"],
+                    ["Business Premium", "$22/user/mo", "Adds advanced security and device management"],
+                  ].map(([plan, price, desc], i) => (
+                    <li key={i} className="border-b border-gray-100 pb-1 last:border-0">
+                      <span className="font-semibold text-gray-800">{plan}</span>{" "}
+                      <span className="text-green-700 font-bold">{price}</span>{" — "}
+                      <span className="text-gray-500 text-xs">{desc}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-3 text-sm">
+              <p className="font-bold text-yellow-800 mb-1">Subscription vs. buying Office once — which is better?</p>
+              <ul className="space-y-1 text-gray-700">
+                {[
+                  "One-time Office purchase ($150) gives you permanent licenses but no updates — you're stuck on that version forever",
+                  "Microsoft 365 at $6.99/month = $83.88/year — you always have the newest version, cloud sync, and mobile apps",
+                  "After 2 years, the subscription has cost the same as buying — but you're always current and have OneDrive 1TB included",
+                  "For businesses: Microsoft 365 Business Basic/Standard is the standard — it includes Teams, SharePoint, and compliance tools you can't get with one-time Office",
+                ].map((x, i) => <li key={i} className="flex gap-2"><span className="text-yellow-600">•</span>{x}</li>)}
+              </ul>
+            </div>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">Sonoaac can set up your Microsoft 365 account, migrate your email, configure Outlook, and set up OneDrive sync on all your devices.</p>
+          </div>
+        ),
+      },
+      {
+        q: "Microsoft 365 vs Google Workspace — which should my business use?",
+        keywords: "microsoft 365 google workspace gsuite comparison business email office google docs sheets which is better",
+        a: (
+          <div className="space-y-3 text-gray-600">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Factor</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Microsoft 365</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Google Workspace</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Email", "Outlook (full-featured client)", "Gmail (web-first, simple)"],
+                    ["Documents", "Word — richest formatting, industry standard", "Google Docs — simpler, real-time collab"],
+                    ["Spreadsheets", "Excel — most powerful, complex formulas", "Google Sheets — good for shared budgets"],
+                    ["Video calls", "Teams — deep integration with Office", "Google Meet — simple, browser-based"],
+                    ["Storage", "OneDrive 1TB per user", "Google Drive 30GB (pooled)"],
+                    ["Offline access", "Full desktop apps work offline", "Limited offline — needs internet mostly"],
+                    ["Price", "From $6/user/month", "From $6/user/month"],
+                    ["Best for", "Businesses using Windows, Excel-heavy work, VPN, compliance needs", "Startups, remote teams, companies living in the browser"],
+                  ].map(([factor, ms, google], i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                      <td className="py-2 px-3 border border-gray-200 font-semibold text-gray-700">{factor}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-gray-600">{ms}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-gray-600">{google}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">If your clients send you Word or Excel files, Microsoft 365 preserves formatting perfectly. Google Docs sometimes shifts formatting on import. For heavy Excel users, there is no substitute for desktop Excel.</p>
+          </div>
+        ),
+      },
+      {
+        q: "What are the minimum specs to run Microsoft 365 and Teams smoothly?",
+        keywords: "microsoft 365 teams minimum specs requirements computer specs ram cpu outlook word excel zoom teams",
+        a: (
+          <div className="space-y-3 text-gray-600">
+            <p>Microsoft 365 apps are more resource-hungry than most people expect — especially when Teams, Outlook, OneDrive, and Chrome all run simultaneously.</p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Component</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Minimum</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Recommended</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Why it matters</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["RAM", "8GB", "16GB", "Teams + Outlook + Chrome + OneDrive typically uses 8–14GB combined"],
+                    ["Processor", "Intel Core i3 / Ryzen 3", "Intel Core i5/i7 or Ryzen 5/7", "Teams video calls and background blur require real CPU headroom"],
+                    ["Storage", "128GB SSD", "512GB SSD", "Office installs, Outlook cache, and OneDrive sync use 50–100GB"],
+                    ["Display", "Any 1080p", "1080p or 1440p, 13–15 inch", "Larger screens let you see Excel sheets and Teams without constant scrolling"],
+                    ["Internet", "5 Mbps up/down", "20+ Mbps symmetric", "Teams HD video calls need 4–5 Mbps upload per participant"],
+                  ].map(([comp, min, rec, why], i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                      <td className="py-2 px-3 border border-gray-200 font-bold text-gray-700">{comp}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-gray-500">{min}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-green-700 font-semibold">{rec}</td>
+                      <td className="py-2 px-3 border border-gray-200 text-gray-500 text-xs">{why}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">Sonoaac installs and configures Microsoft 365 on your devices, migrates email, sets up shared mailboxes, and configures Teams — remote or on-site.</p>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
     id: "cpu-gpu",
     label: "CPU & GPU",
     icon: "🔧",
     items: [
       {
         q: "What is the best CPU and GPU combination for gaming in 2025?",
+        keywords: "cpu gpu combo combination gaming best budget 1080p 1440p 4k rtx amd nvidia ryzen intel",
         a: (
           <div className="space-y-3 text-sm text-gray-600">
             <p>Pairing the right CPU and GPU prevents bottlenecks. Here are the best combos by budget:</p>
@@ -1091,6 +1497,7 @@ const FAQ_SECTIONS: FAQSection[] = [
       },
       {
         q: "Best CPU × GPU combo for video editing and creative work?",
+        keywords: "cpu gpu video editing creative premiere davinci resolve final cut pro best combo rendering",
         a: (
           <div className="space-y-3 text-sm text-gray-600">
             <p>Video editing uses both the CPU (timeline scrubbing, exports) and GPU (effects, acceleration). Best combos depend on your software:</p>
@@ -1127,6 +1534,7 @@ const FAQ_SECTIONS: FAQSection[] = [
       },
       {
         q: "What is an NPU and do I need one?",
+        keywords: "npu neural processing unit ai chip qualcomm snapdragon apple intel amd copilot copilot plus",
         a: (
           <div className="space-y-3 text-sm text-gray-600">
             <p><strong className="text-gray-800">NPU</strong> = <strong className="text-gray-800">Neural Processing Unit</strong> — a dedicated chip built for AI and machine learning tasks. Unlike the CPU (general-purpose) or GPU (parallel graphics), the NPU handles AI inference at high speed with very low power draw.</p>
@@ -1164,6 +1572,7 @@ const FAQ_SECTIONS: FAQSection[] = [
       },
       {
         q: "AMD vs Intel: which CPU should I choose for a desktop build?",
+        keywords: "amd intel cpu which better ryzen vs core processor comparison desktop build gaming work",
         a: (
           <div className="space-y-3 text-sm text-gray-600">
             <div className="overflow-x-auto">
@@ -1442,9 +1851,9 @@ function FAQAccordion({ section }: { section: FAQSection }) {
         <div key={i} className="border border-gray-200 rounded-xl overflow-hidden">
           <button
             onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            className="w-full flex items-center justify-between px-4 py-3.5 text-left bg-white hover:bg-gray-50 transition-colors"
+            className="w-full flex items-center justify-between px-4 py-4 text-left bg-white hover:bg-gray-50 transition-colors"
           >
-            <span className="text-sm font-semibold text-gray-800 pr-4">{item.q}</span>
+            <span className="text-base font-bold text-gray-900 pr-4">{item.q}</span>
             <ChevronDown
               size={16}
               className={`text-gray-400 shrink-0 transition-transform duration-200 ${
@@ -1492,7 +1901,7 @@ function SearchResultItem({
             <span>{item.sectionIcon}</span>
             {item.sectionLabel}
           </span>
-          <span className="text-sm font-semibold text-gray-800 block">{item.q}</span>
+          <span className="text-base font-bold text-gray-900 block">{item.q}</span>
         </div>
         <ChevronDown
           size={16}
@@ -1559,13 +1968,20 @@ export default function KnowledgeBase() {
 
   const activeFAQSection = FAQ_SECTIONS.find((s) => s.id === activeFAQId)!;
 
+  const normalize = (s: string) =>
+    s.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+
   const searchResults =
     searchQuery.trim().length > 0
       ? FAQ_SECTIONS.flatMap((s) =>
           s.items
-            .filter((item) =>
-              item.q.toLowerCase().includes(searchQuery.toLowerCase())
-            )
+            .filter((item) => {
+              const term = normalize(searchQuery);
+              return (
+                normalize(item.q).includes(term) ||
+                normalize(item.keywords ?? "").includes(term)
+              );
+            })
             .map((item) => ({ ...item, sectionLabel: s.label, sectionIcon: s.icon }))
         )
       : [];;
