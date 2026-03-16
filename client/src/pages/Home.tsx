@@ -41,7 +41,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-              — Sonoaac · IT Services
+              Sonoaac · IT Services
             </span>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
               Fast, Friendly IT Help.<br />
@@ -89,7 +89,7 @@ export default function Home() {
 
           <motion.div {...fadeUp} className="mb-10">
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              01 / What We Do
+              What We Do
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white">Our Services</h2>
           </motion.div>
@@ -147,7 +147,7 @@ export default function Home() {
                 <p className="text-gray-400 text-xs leading-relaxed mb-4">{item.detail}</p>
                 <Link href={item.link}>
                   <button className="text-xs text-green-800 uppercase tracking-[0.15em] hover:text-green-400 transition-colors">
-                    Details —
+                    Details
                   </button>
                 </Link>
               </motion.div>
@@ -157,7 +157,7 @@ export default function Home() {
           {/* Why Sonoaac */}
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              02 / Why Sonoaac
+              Why Sonoaac
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">Built on Trust</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -199,7 +199,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-              — Get Started
+              Get Started
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
               Ready to get started?
@@ -232,7 +232,7 @@ export default function Home() {
                   ].map(([label, href]) => (
                     <Link key={label} href={href}>
                       <button className="block text-xs text-green-700 uppercase tracking-[0.2em] hover:text-green-400 transition-colors">
-                        {label} —
+                        {label}
                       </button>
                     </Link>
                   ))}

@@ -51,7 +51,7 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
           >
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-              — Contact & Booking
+              Contact & Booking
             </span>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               Let's Talk About<br />Your Tech.
@@ -69,7 +69,7 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              01 / What We Cover
+              What We Cover
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               Consultation Types
@@ -113,7 +113,7 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              02 / Scheduling
+              Scheduling
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
               Appointment Policy
@@ -133,7 +133,7 @@ export default function Contact() {
             </ul>
             <Link href="/service-agreement">
               <button className="text-xs text-green-800 uppercase tracking-[0.2em] hover:text-green-400 transition-colors">
-                Read Service Agreement —
+                Read Service Agreement
               </button>
             </Link>
           </motion.div>
@@ -148,7 +148,7 @@ export default function Contact() {
             {/* Form */}
             <motion.div {...fadeUp}>
               <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-                03 / Send a Message
+                Send a Message
               </span>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div>
@@ -218,7 +218,7 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-                04 / Direct Contact
+                Direct Contact
               </span>
               <div className="space-y-8">
                 {[

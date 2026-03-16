@@ -23,7 +23,7 @@ export default function Services() {
             transition={{ duration: 0.5 }}
           >
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-              — Services
+              Services
             </span>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               IT Support &amp;<br />Digital Solutions
@@ -55,7 +55,7 @@ export default function Services() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              01 / Remote IT Support
+              Remote IT Support
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Help Without a Site Visit
@@ -123,7 +123,7 @@ export default function Services() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              02 / On-Site Services
+              On-Site Services
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               We Come to You
@@ -187,7 +187,7 @@ export default function Services() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              03 / Software &amp; App Fixes
+              Software &amp; App Fixes
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Common Issues We Resolve
@@ -262,7 +262,7 @@ export default function Services() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              04 / Device Setup &amp; Configuration
+              Device Setup &amp; Configuration
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Ready to Use, Right Away
@@ -325,7 +325,7 @@ export default function Services() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              05 / Business IT Solutions
+              Business IT Solutions
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               IT Built for Small Business
@@ -391,7 +391,7 @@ export default function Services() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              06 / Web Development
+              Web Development
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Websites for Small Businesses
@@ -464,7 +464,7 @@ export default function Services() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-              — Get Started
+              Get Started
             </span>
             <h2 className="text-2xl md:text-4xl font-bold text-white mb-6">
               Ready to work together?

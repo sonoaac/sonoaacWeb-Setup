@@ -55,7 +55,7 @@ export default function MyTech() {
             transition={{ duration: 0.5 }}
           >
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">
-              — My Tech
+              My Tech
             </span>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
               Get Matched to<br />the Right Device.
@@ -87,7 +87,7 @@ export default function MyTech() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              01 / How It Works
+              How It Works
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               Our Recommendation Process
@@ -137,7 +137,7 @@ export default function MyTech() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              02 / Device Types
+              Device Types
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               What We Recommend
@@ -164,7 +164,7 @@ export default function MyTech() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              03 / Who It's For
+              Who It's For
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               Perfect for Any Use Case
@@ -202,7 +202,7 @@ export default function MyTech() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              04 / Example Setups
+              Example Setups
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-10">
               Common Recommendations
@@ -242,7 +242,7 @@ export default function MyTech() {
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              05 / Custom PC Builds
+              Custom PC Builds
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Build Your Own PC
@@ -266,7 +266,7 @@ export default function MyTech() {
         <div className="max-w-2xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              06 / Get Matched
+              Get Matched
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Tell Us What You Need
