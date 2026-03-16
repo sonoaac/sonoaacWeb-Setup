@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Monitor, Tablet, Printer, ArrowRight, CheckCircle, XCircle, Minus } from "lucide-react";
+import { ChevronDown, Monitor, Tablet, Printer, ArrowRight, CheckCircle, XCircle, Minus, Search, X } from "lucide-react";
 import { Link } from "wouter";
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -1047,6 +1047,192 @@ const FAQ_SECTIONS: FAQSection[] = [
       },
     ],
   },
+  {
+    id: "cpu-gpu",
+    label: "CPU & GPU",
+    icon: "🔧",
+    items: [
+      {
+        q: "What is the best CPU and GPU combination for gaming in 2025?",
+        a: (
+          <div className="space-y-3 text-sm text-gray-600">
+            <p>Pairing the right CPU and GPU prevents bottlenecks. Here are the best combos by budget:</p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Budget</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">CPU</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">GPU</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Target</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["~$500", "AMD Ryzen 5 7600", "NVIDIA RTX 4060", "1080p 144Hz gaming"],
+                    ["~$800", "Intel Core i5-14600K", "NVIDIA RTX 4070", "1440p 144Hz gaming"],
+                    ["~$1,200", "AMD Ryzen 7 7800X3D", "NVIDIA RTX 4070 Ti Super", "1440p–4K high fps"],
+                    ["~$2,400+", "Intel Core i9-14900K", "NVIDIA RTX 4090", "4K 144Hz, max settings"],
+                    ["AMD Build ~$1,100", "AMD Ryzen 7 7700X", "AMD RX 7900 GRE", "Strong 1440p–4K alternative"],
+                  ].map(([budget, cpu, gpu, target], i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                      <td className="py-1.5 px-3 border border-gray-200 font-semibold text-green-700">{budget}</td>
+                      <td className="py-1.5 px-3 border border-gray-200 text-gray-700">{cpu}</td>
+                      <td className="py-1.5 px-3 border border-gray-200 text-gray-700">{gpu}</td>
+                      <td className="py-1.5 px-3 border border-gray-200 text-gray-500">{target}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">The Ryzen 7 7800X3D's 3D V-Cache makes it the best gaming CPU pound-for-pound — it outperforms the i9-14900K in most games at a lower cost.</p>
+          </div>
+        ),
+      },
+      {
+        q: "Best CPU × GPU combo for video editing and creative work?",
+        a: (
+          <div className="space-y-3 text-sm text-gray-600">
+            <p>Video editing uses both the CPU (timeline scrubbing, exports) and GPU (effects, acceleration). Best combos depend on your software:</p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Software</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Best CPU</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Best GPU</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Why</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Adobe Premiere Pro", "Intel Core i9-14900K", "NVIDIA RTX 4080", "CUDA acceleration + AI features"],
+                    ["DaVinci Resolve", "AMD Ryzen 9 7950X", "AMD RX 7900 XTX", "OpenCL + fast CPU for noise reduction"],
+                    ["Final Cut Pro", "Apple M3 Max / M4 Max", "Built-in Apple GPU", "Natively optimized — fastest exports"],
+                    ["Budget edit setup", "Intel Core i7-13700K", "NVIDIA RTX 4060 Ti", "Solid 1080p–4K editing under $1,100"],
+                  ].map(([sw, cpu, gpu, why], i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                      <td className="py-1.5 px-3 border border-gray-200 font-medium text-gray-700">{sw}</td>
+                      <td className="py-1.5 px-3 border border-gray-200 text-gray-600">{cpu}</td>
+                      <td className="py-1.5 px-3 border border-gray-200 text-gray-600">{gpu}</td>
+                      <td className="py-1.5 px-3 border border-gray-200 text-gray-500 text-xs">{why}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">For Final Cut Pro users: always go Apple Silicon. An M3 Pro MacBook Pro exports 4K video faster than most $3,000 Windows PCs for that specific workflow.</p>
+          </div>
+        ),
+      },
+      {
+        q: "What is an NPU and do I need one?",
+        a: (
+          <div className="space-y-3 text-sm text-gray-600">
+            <p><strong className="text-gray-800">NPU</strong> = <strong className="text-gray-800">Neural Processing Unit</strong> — a dedicated chip built for AI and machine learning tasks. Unlike the CPU (general-purpose) or GPU (parallel graphics), the NPU handles AI inference at high speed with very low power draw.</p>
+            <div className="space-y-2">
+              <p className="font-semibold text-gray-700 text-xs uppercase tracking-wider">Where you'll find NPUs in 2025:</p>
+              <ul className="space-y-2 text-xs">
+                {[
+                  ["Apple Silicon (M1–M4)", "16–38 TOPS Neural Engine. Powers Face ID, photo cleanup, Siri, on-device AI in Photos and other apps."],
+                  ["Qualcomm Snapdragon X Elite", "Hexagon NPU — 45 TOPS. Used in Windows Copilot+ PCs: Dell XPS 13, Surface Pro 11, Lenovo X1."],
+                  ["Intel Lunar Lake (Core Ultra 200V)", "Intel NPU 4 — ~48 TOPS. Powers Windows Studio Effects, live captions, and AI features in apps."],
+                  ["AMD Ryzen AI (Strix Point)", "XDNA2 NPU — up to 50 TOPS. Featured in Asus ROG, Lenovo Yoga Pro, HP EliteBook."],
+                ].map(([chip, desc], i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-green-500 font-bold shrink-0 mt-0.5">→</span>
+                    <span><span className="font-medium text-gray-700">{chip}:</span> {desc}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-3 space-y-1 text-xs">
+              <p className="font-semibold text-gray-700 mb-1.5">What NPUs actually do today:</p>
+              {[
+                "Real-time background blur and noise cancellation in video calls (no cloud required)",
+                "AI-powered photo editing — object removal, enhance detail, denoise — processed locally",
+                "Windows Studio Effects: auto eye contact correction, auto-framing, voice focus",
+                "On-device voice transcription and live captions without sending audio to the cloud",
+                "Faster AI in apps like Photoshop, Lightroom, and DaVinci Resolve",
+              ].map((x, i) => (
+                <p key={i} className="flex gap-1.5"><span className="text-green-500">✓</span>{x}</p>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500 italic border-l-2 border-gray-200 pl-2">Do you need one? If buying in 2025, most new chips already include an NPU — you get the benefits automatically. It won't affect gaming or general day-to-day performance either way.</p>
+          </div>
+        ),
+      },
+      {
+        q: "AMD vs Intel: which CPU should I choose for a desktop build?",
+        a: (
+          <div className="space-y-3 text-sm text-gray-600">
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Factor</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">AMD Ryzen</th>
+                    <th className="text-left py-2 px-3 border border-gray-200 font-semibold">Intel Core</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Gaming (2025)", "Best — Ryzen 7 7800X3D dominates with 3D V-Cache", "Very close — i9-14900K competes at 1080p"],
+                    ["Multitasking / workloads", "Ryzen 9 7950X has more cores for rendering and encoding", "i9-14900K hybrid architecture handles mixed loads well"],
+                    ["Power efficiency", "Better — Ryzen 7600 / 7700X run cooler and use less power", "Higher power draw on K-series CPUs at stock speeds"],
+                    ["Platform cost", "AM5 socket — pricier motherboards, long upgrade path", "LGA1700 — wide range of boards, cheaper entry point"],
+                    ["Price per performance", "Usually better at mid-range ($200–$350 CPUs)", "Competitive at high end; older gen i5/i7 still capable"],
+                    ["AI / NPU", "Ryzen AI (Strix) — NPU in newer laptops, not desktop yet", "Intel Core Ultra (Meteor Lake, Lunar Lake) include NPU"],
+                  ].map(([factor, amd, intel], i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                      <td className="py-1.5 px-3 border border-gray-200 font-medium text-gray-700">{factor}</td>
+                      <td className="py-1.5 px-3 border border-gray-200 text-gray-600">{amd}</td>
+                      <td className="py-1.5 px-3 border border-gray-200 text-gray-600">{intel}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-gray-400 italic border-l-2 border-gray-200 pl-2">Verdict: Pure gaming → Ryzen 7 7800X3D. Content creation mixed workloads → either i9-14900K or Ryzen 9 7950X. Budget builds → Ryzen 5 7600 gives better value than similarly-priced Intel options.</p>
+          </div>
+        ),
+      },
+      {
+        q: "Integrated vs dedicated GPU: what's the difference and which do I need?",
+        a: (
+          <div className="space-y-3 text-sm text-gray-600">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-gray-50 rounded-lg p-3">
+                <p className="font-bold text-gray-800 text-xs uppercase tracking-wider mb-2">Integrated GPU</p>
+                <ul className="space-y-1 text-xs">
+                  {[
+                    "Built into the CPU — shares system RAM",
+                    "Low power — great for battery life",
+                    "Handles: web browsing, Office, video streaming, light photo editing",
+                    "Cannot run demanding games or 3D rendering",
+                    "Examples: Intel Iris Xe, Apple M4 GPU, AMD Radeon 780M",
+                  ].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-gray-400">•</span>{x}</li>)}
+                </ul>
+              </div>
+              <div className="bg-green-50 rounded-lg p-3 border border-green-100">
+                <p className="font-bold text-gray-800 text-xs uppercase tracking-wider mb-2">Dedicated GPU</p>
+                <ul className="space-y-1 text-xs">
+                  {[
+                    "Separate chip with its own VRAM (4GB–24GB)",
+                    "Higher power draw — reduces battery life",
+                    "Handles: gaming, 3D modeling, video editing, AI rendering",
+                    "Significantly more performance for visual workloads",
+                    "Examples: NVIDIA RTX 4060–4090, AMD RX 7600–7900 XTX",
+                  ].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-green-600">•</span>{x}</li>)}
+                </ul>
+              </div>
+            </div>
+            <p className="text-xs text-gray-500 italic border-l-2 border-gray-200 pl-2">If you browse, stream, use Office, and do video calls — integrated is fine and you get much better battery life. If you game, edit video, do 3D work, or run local AI tools — you need a dedicated GPU.</p>
+          </div>
+        ),
+      },
+    ],
+  },
 ];
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -1287,13 +1473,57 @@ function FAQAccordion({ section }: { section: FAQSection }) {
   );
 }
 
+// ── Search Result Item ────────────────────────────────────────────────────────
+
+function SearchResultItem({
+  item,
+}: {
+  item: FAQItem & { sectionLabel: string; sectionIcon: string };
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-gray-200 rounded-xl overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-start justify-between px-4 py-3.5 text-left bg-white hover:bg-gray-50 transition-colors gap-3"
+      >
+        <div className="min-w-0">
+          <span className="text-xs text-gray-400 mb-1 flex items-center gap-1">
+            <span>{item.sectionIcon}</span>
+            {item.sectionLabel}
+          </span>
+          <span className="text-sm font-semibold text-gray-800 block">{item.q}</span>
+        </div>
+        <ChevronDown
+          size={16}
+          className={`text-gray-400 shrink-0 mt-1 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-4 pt-1 bg-white border-t border-gray-100">{item.a}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 // ── Main Page ─────────────────────────────────────────────────────────────────
 
 export default function KnowledgeBase() {
   const [activeCategoryId, setActiveCategoryId] = useState("laptops");
   const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
   const [selectedRight, setSelectedRight] = useState<string | null>(null);
-  const [activeFAQId, setActiveFAQId] = useState("slow-pc");
+  const [activeFAQId, setActiveFAQId] = useState("cpu-gpu");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const activeCategory = COMPARE_CATEGORIES.find((c) => c.id === activeCategoryId)!;
   const specsOrder =
@@ -1329,6 +1559,17 @@ export default function KnowledgeBase() {
 
   const activeFAQSection = FAQ_SECTIONS.find((s) => s.id === activeFAQId)!;
 
+  const searchResults =
+    searchQuery.trim().length > 0
+      ? FAQ_SECTIONS.flatMap((s) =>
+          s.items
+            .filter((item) =>
+              item.q.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+            .map((item) => ({ ...item, sectionLabel: s.label, sectionIcon: s.icon }))
+        )
+      : [];;
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero */}
@@ -1349,19 +1590,47 @@ export default function KnowledgeBase() {
               Compare real products side by side and get answers to the most common tech questions — laptops, tablets, printers, Wi-Fi, and more.
             </p>
             <div className="flex flex-wrap gap-3 mt-6">
-              <Link href="/book-consultation">
+              <Link href="/contact">
                 <button className="px-5 py-2.5 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors text-sm inline-flex items-center gap-2">
                   Book a Consultation
                   <ArrowRight size={15} />
                 </button>
               </Link>
-              <Link href="/it-support">
+              <Link href="/services">
                 <button className="px-5 py-2.5 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors text-sm">
-                  Get IT Support
+                  Our Services
                 </button>
               </Link>
             </div>
           </motion.div>
+        </div>
+      </div>
+
+      {/* ── Sticky search bar ── */}
+      <div className="sticky top-[64px] md:top-[80px] z-40 bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-5xl mx-auto px-4 sm:px-8 py-3">
+          <div className="relative">
+            <Search
+              size={15}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+            />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search — CPU combos, NPU, Wi-Fi, repairs, displays..."
+              className="w-full pl-9 pr-9 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-green-500 bg-white transition-colors"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition-colors"
+                aria-label="Clear search"
+              >
+                <X size={14} />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -1454,7 +1723,7 @@ export default function KnowledgeBase() {
                   specsOrder={specsOrder}
                 />
                 <div className="mt-4 pt-4 border-t border-gray-100 flex gap-3">
-                  <Link href="/book-consultation">
+                  <Link href="/contact">
                     <button className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg text-xs transition-colors inline-flex items-center gap-1.5">
                       Get Advice on Which to Buy
                       <ArrowRight size={13} />
@@ -1475,34 +1744,58 @@ export default function KnowledgeBase() {
             </p>
           </div>
 
-          <div className="flex gap-2 flex-wrap mb-6">
-            {FAQ_SECTIONS.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => setActiveFAQId(section.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                  activeFAQId === section.id
-                    ? "bg-gray-900 text-white"
-                    : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
-                }`}
-              >
-                <span>{section.icon}</span>
-                {section.label}
-              </button>
-            ))}
-          </div>
+          {searchQuery.trim() ? (
+            <div>
+              {searchResults.length === 0 ? (
+                <div className="py-12 text-center">
+                  <p className="text-gray-400 text-sm">
+                    No results for &ldquo;<span className="text-gray-600 font-medium">{searchQuery}</span>&rdquo;
+                  </p>
+                  <p className="text-gray-400 text-xs mt-1">Try a different term or browse by category below.</p>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <p className="text-xs text-gray-400 mb-4">
+                    {searchResults.length} result{searchResults.length !== 1 ? "s" : ""} for &ldquo;{searchQuery}&rdquo;
+                  </p>
+                  {searchResults.map((item, i) => (
+                    <SearchResultItem key={i} item={item} />
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <div className="flex gap-2 flex-wrap mb-6">
+                {FAQ_SECTIONS.map((section) => (
+                  <button
+                    key={section.id}
+                    onClick={() => setActiveFAQId(section.id)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                      activeFAQId === section.id
+                        ? "bg-gray-900 text-white"
+                        : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+                    }`}
+                  >
+                    <span>{section.icon}</span>
+                    {section.label}
+                  </button>
+                ))}
+              </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeFAQId}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <FAQAccordion section={activeFAQSection} />
-            </motion.div>
-          </AnimatePresence>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeFAQId}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <FAQAccordion section={activeFAQSection} />
+                </motion.div>
+              </AnimatePresence>
+            </>
+          )}
 
           {/* CTA */}
           <div className="mt-8 bg-gray-900 rounded-2xl p-6 text-white">
@@ -1511,7 +1804,7 @@ export default function KnowledgeBase() {
               Our team can help you choose the right device, fix your current setup, or advise on upgrades — in person or remotely.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/book-consultation">
+              <Link href="/contact">
                 <button className="px-5 py-2.5 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg text-sm transition-colors inline-flex items-center gap-2">
                   Book Consultation
                   <ArrowRight size={15} />

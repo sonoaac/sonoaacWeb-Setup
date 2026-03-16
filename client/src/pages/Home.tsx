@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import MonitorIntro from "@/components/features/MonitorIntro";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -10,8 +12,25 @@ const fadeUp = {
 };
 
 export default function Home() {
+  const [showIntro, setShowIntro] = useState(() => {
+    try {
+      return !sessionStorage.getItem("sonoaac-intro");
+    } catch {
+      return true;
+    }
+  });
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+    try {
+      sessionStorage.setItem("sonoaac-intro", "1");
+    } catch {}
+  };
+
   return (
-    <div className="min-h-screen bg-black">
+    <>
+      {showIntro && <MonitorIntro onComplete={handleIntroComplete} />}
+      <div className="min-h-screen bg-black">
 
       {/* ── Section 1: Hero ──────────────────────────────────────────── */}
       <section className="px-6 py-20 md:py-32 border-b border-green-900/30 min-h-[88vh] flex items-center">
@@ -257,5 +276,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   );
 }
