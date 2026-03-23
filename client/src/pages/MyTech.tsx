@@ -1,7 +1,48 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import TechMatcher from "@/components/features/TechMatcher";
+
+// ── Find Your Match — Pre-built PC Data ─────────────────────────────────────
+
+type PrebuiltPC = {
+  id: number;
+  name: string;
+  cpu: string;
+  gpu: string;
+  ram: string;
+  storage: string;
+  price: number;
+  useCases: string[];   // gaming | work | editing | light
+  brand: string;        // windows | mac
+  badge?: string;
+};
+
+const PREBUILTS: PrebuiltPC[] = [
+  { id: 1,  name: "Lenovo Legion Tower 7i",    cpu: "Core Ultra 7 265K", gpu: "RTX 4080 Super", ram: "32GB", storage: "1TB SSD",  price: 1999, useCases: ["gaming"],           brand: "windows", badge: "Best Seller" },
+  { id: 2,  name: "Acer Predator Orion 7000",  cpu: "i9-14900K",         gpu: "RTX 4080",       ram: "32GB", storage: "2TB SSD",  price: 1799, useCases: ["gaming"],           brand: "windows"                        },
+  { id: 3,  name: "ASUS ROG Strix G16 Laptop", cpu: "Intel Ultra 9 275HX",gpu:"RTX 5090",       ram: "32GB", storage: "2TB SSD",  price: 3499, useCases: ["gaming", "editing"],brand: "windows", badge: "Flagship"   },
+  { id: 4,  name: "MSI MEG Infinite X2",       cpu: "Core Ultra 9 285K", gpu: "RTX 4090",       ram: "64GB", storage: "2TB SSD",  price: 3999, useCases: ["gaming", "editing"],brand: "windows"                        },
+  { id: 5,  name: "Dell XPS Desktop",          cpu: "Core Ultra 7",      gpu: "RTX 4070 Ti",    ram: "32GB", storage: "1TB SSD",  price: 1499, useCases: ["work", "editing"],  brand: "windows", badge: "Professional"},
+  { id: 6,  name: "HP OMEN 45L",               cpu: "Ryzen 9 7950X",     gpu: "RTX 4090",       ram: "64GB", storage: "2TB SSD",  price: 2999, useCases: ["editing", "gaming"],brand: "windows"                        },
+  { id: 7,  name: "Apple Mac Studio (M4 Max)", cpu: "M4 Max",            gpu: "40-core GPU",    ram: "64GB", storage: "1TB SSD",  price: 2199, useCases: ["editing", "work"],  brand: "mac",     badge: "Mac Pick"   },
+  { id: 8,  name: "Apple Mac Mini (M4)",       cpu: "M4",                gpu: "10-core GPU",    ram: "16GB", storage: "256GB SSD",price: 599,  useCases: ["work", "light"],    brand: "mac",     badge: "Popular"    },
+  { id: 9,  name: "HP Pavilion Desktop",       cpu: "Ryzen 5 7600",      gpu: "RX 7600",        ram: "16GB", storage: "512GB SSD",price: 649,  useCases: ["work", "light"],    brand: "windows", badge: "Budget Pick" },
+  { id: 10, name: "Microsoft Surface Pro 11",  cpu: "Snapdragon X Elite",gpu: "Integrated",     ram: "16GB", storage: "512GB SSD",price: 999,  useCases: ["work", "light"],    brand: "windows", badge: "Portable"   },
+];
+
+const BUDGETS   = ["Any", "Under $1,000", "$1,000–$2,000", "$2,000+"] as const;
+const USE_CASES = ["Any", "Gaming", "Work & School", "Video Editing", "Light Use"] as const;
+const BRANDS    = ["Any", "Windows", "Mac"] as const;
+
+type Budget   = typeof BUDGETS[number];
+type UseCase  = typeof USE_CASES[number];
+type Brand    = typeof BRANDS[number];
+
+const USE_CASE_KEY: Record<UseCase, string> = {
+  "Any": "",  "Gaming": "gaming",  "Work & School": "work",
+  "Video Editing": "editing",  "Light Use": "light",
+};
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -19,6 +60,24 @@ const selectClass =
 export default function MyTech() {
   const [matcherOpen, setMatcherOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  // Find Your Match filters
+  const [budget, setBudget]     = useState<Budget>("Any");
+  const [useCase, setUseCase]   = useState<UseCase>("Any");
+  const [brand, setBrand]       = useState<Brand>("Any");
+
+  const matchedPCs = useMemo(() => {
+    return PREBUILTS.filter((pc) => {
+      if (budget === "Under $1,000"   && pc.price >= 1000) return false;
+      if (budget === "$1,000–$2,000"  && (pc.price < 1000 || pc.price > 2000)) return false;
+      if (budget === "$2,000+"        && pc.price <= 2000) return false;
+      if (useCase !== "Any" && !pc.useCases.includes(USE_CASE_KEY[useCase])) return false;
+      if (brand === "Windows" && pc.brand !== "windows") return false;
+      if (brand === "Mac"     && pc.brand !== "mac")     return false;
+      return true;
+    });
+  }, [budget, useCase, brand]);
+
   const [formData, setFormData] = useState({
     businessOrPersonal: "",
     deviceType: "",
@@ -78,6 +137,144 @@ export default function MyTech() {
                 Get Matched
               </a>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Find Your Match ──────────────────────────────────────────── */}
+      <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp}>
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">Find Your Match</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+              Filter by Your Needs
+            </h2>
+            <p className="text-gray-400 text-sm mb-8">
+              Set your filters and we'll show matching pre-built options. We recommend where to buy — you purchase directly.
+            </p>
+
+            {/* Filter controls */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+              {/* Budget */}
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-green-800 mb-2">Budget</p>
+                <div className="flex flex-col gap-1.5">
+                  {BUDGETS.map((b) => (
+                    <button
+                      key={b}
+                      onClick={() => setBudget(b)}
+                      className={`px-3 py-2 text-xs text-left uppercase tracking-[0.12em] font-bold border transition-colors ${
+                        budget === b
+                          ? "bg-green-400 text-black border-green-400"
+                          : "border-green-900/40 text-green-800 hover:border-green-700 hover:text-green-500"
+                      }`}
+                    >
+                      {b}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Use Case */}
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-green-800 mb-2">Main Use</p>
+                <div className="flex flex-col gap-1.5">
+                  {USE_CASES.map((u) => (
+                    <button
+                      key={u}
+                      onClick={() => setUseCase(u)}
+                      className={`px-3 py-2 text-xs text-left uppercase tracking-[0.12em] font-bold border transition-colors ${
+                        useCase === u
+                          ? "bg-green-400 text-black border-green-400"
+                          : "border-green-900/40 text-green-800 hover:border-green-700 hover:text-green-500"
+                      }`}
+                    >
+                      {u}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Brand */}
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-green-800 mb-2">Platform</p>
+                <div className="flex flex-col gap-1.5">
+                  {BRANDS.map((br) => (
+                    <button
+                      key={br}
+                      onClick={() => setBrand(br)}
+                      className={`px-3 py-2 text-xs text-left uppercase tracking-[0.12em] font-bold border transition-colors ${
+                        brand === br
+                          ? "bg-green-400 text-black border-green-400"
+                          : "border-green-900/40 text-green-800 hover:border-green-700 hover:text-green-500"
+                      }`}
+                    >
+                      {br}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Results */}
+            <div className="mb-3">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-green-700">
+                {matchedPCs.length} match{matchedPCs.length !== 1 ? "es" : ""} found
+              </p>
+            </div>
+
+            {matchedPCs.length === 0 ? (
+              <div className="border border-green-900/30 p-8 text-center">
+                <p className="text-green-800 text-xs uppercase tracking-[0.2em] mb-2">No exact matches</p>
+                <p className="text-gray-500 text-sm">Try adjusting your filters, or
+                  {" "}<Link href="/contact"><button className="text-green-500 hover:text-green-300 transition-colors underline underline-offset-2">book a consultation</button></Link>
+                  {" "}for a custom recommendation.
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <AnimatePresence mode="popLayout">
+                  {matchedPCs.map((pc) => (
+                    <motion.div
+                      key={pc.id}
+                      layout
+                      initial={{ opacity: 0, scale: 0.97 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.97 }}
+                      transition={{ duration: 0.2 }}
+                      className="border border-green-900/40 p-5 hover:border-green-700 transition-colors group"
+                    >
+                      <div className="flex justify-between items-start mb-3">
+                        <h3 className="text-sm font-bold text-white uppercase tracking-[0.1em] leading-tight group-hover:text-green-400 transition-colors">
+                          {pc.name}
+                        </h3>
+                        {pc.badge && (
+                          <span className="ml-2 shrink-0 px-2 py-0.5 border border-green-700 text-green-600 text-[9px] font-bold uppercase tracking-[0.08em]">
+                            {pc.badge}
+                          </span>
+                        )}
+                      </div>
+                      <div className="space-y-1 mb-4">
+                        {[["CPU", pc.cpu], ["GPU", pc.gpu], ["RAM", pc.ram], ["Storage", pc.storage]].map(([label, val]) => (
+                          <div key={label} className="flex gap-3 text-[11px]">
+                            <span className="text-green-900 uppercase tracking-[0.1em] w-14 shrink-0">{label}</span>
+                            <span className="text-gray-400">{val}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-green-400 font-bold text-sm">~${pc.price.toLocaleString()}</span>
+                        <Link href="/contact">
+                          <button className="text-[10px] text-green-800 uppercase tracking-[0.15em] hover:text-green-400 transition-colors">
+                            Book Consult →
+                          </button>
+                        </Link>
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>

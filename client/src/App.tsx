@@ -10,8 +10,6 @@ import Footer from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import HelpBot from "@/components/features/HelpBot";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { DesktopSidebar } from "@/components/layout/DesktopSidebar";
-import { DesktopRightPanel } from "@/components/layout/DesktopRightPanel";
 
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Home = lazy(() => import("@/pages/Home"));
@@ -22,7 +20,6 @@ const Contact = lazy(() => import("@/pages/Contact"));
 const ServiceAgreement = lazy(() => import("@/pages/ServiceAgreement"));
 const KnowledgeBase = lazy(() => import("@/pages/KnowledgeBase"));
 
-// Redirect old routes to consolidated pages
 function RedirectTo({ to }: { to: string }) {
   const [, setLocation] = useLocation();
   useEffect(() => { setLocation(to); }, [to]);
@@ -33,7 +30,6 @@ function Router() {
   return (
     <Suspense fallback={null}>
       <Switch>
-        {/* Primary routes */}
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
         <Route path="/my-tech" component={MyTech} />
@@ -42,7 +38,6 @@ function Router() {
         <Route path="/knowledge-base" component={KnowledgeBase} />
         <Route path="/service-agreement" component={ServiceAgreement} />
 
-        {/* Legacy redirects */}
         <Route path="/it-support"><RedirectTo to="/services" /></Route>
         <Route path="/on-site-services"><RedirectTo to="/services" /></Route>
         <Route path="/device-setup"><RedirectTo to="/services" /></Route>
@@ -66,21 +61,16 @@ function App() {
           <div className="min-h-screen flex flex-col bg-black text-green-200 antialiased overflow-x-hidden">
             <ScrollProgress />
             <Header />
-            {/* Spacer for sticky header */}
-            <div className="h-16 md:h-20" aria-hidden="true" />
-            {/* 3-column layout on xl screens */}
-            <div className="flex flex-1 w-full">
-              <DesktopSidebar />
-              <main
-                id="main-content"
-                className="flex-1 min-w-0 focus:outline-none"
-                tabIndex={-1}
-                aria-label="Main content"
-              >
-                <Router />
-              </main>
-              <DesktopRightPanel />
-            </div>
+            {/* Spacer: utility bar (40px) + main nav on md+ (48px) = 88px */}
+            <div className="h-10 md:h-[88px]" aria-hidden="true" />
+            <main
+              id="main-content"
+              className="flex-1 min-w-0 focus:outline-none"
+              tabIndex={-1}
+              aria-label="Main content"
+            >
+              <Router />
+            </main>
             <Footer />
             <Toaster />
             <HelpBot />
