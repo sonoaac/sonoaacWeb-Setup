@@ -21,45 +21,45 @@ type Part = {
 
 const PARTS: Part[] = [
   // CPUs
-  { id:  1, category: "CPU",         name: "AMD Ryzen 9 9950X",             price: 649,  specs: "16-Core / 5.7GHz / 170W",           badge: "Flagship"   },
-  { id:  2, category: "CPU",         name: "AMD Ryzen 9 9900X",             price: 449,  specs: "12-Core / 5.6GHz / 120W",           topPick: true       },
-  { id:  3, category: "CPU",         name: "Intel Core Ultra 9 285K",       price: 589,  specs: "24-Core Hybrid / 5.7GHz / 125W"                         },
-  { id:  4, category: "CPU",         name: "Intel Core Ultra 7 265K",       price: 394,  specs: "20-Core Hybrid / 5.5GHz / 125W",    badge: "Sweet Spot" },
-  { id:  5, category: "CPU",         name: "AMD Ryzen 7 9700X",             price: 299,  specs: "8-Core / 5.5GHz / 65W",             badge: "Best Value" },
+  { id:  1, category: "CPU",         name: "AMD Ryzen 9 9950X",             price: 649,  specs: "16 Core  5.7GHz  170W",            badge: "Flagship"   },
+  { id:  2, category: "CPU",         name: "AMD Ryzen 9 9900X",             price: 449,  specs: "12 Core  5.6GHz  120W",            topPick: true       },
+  { id:  3, category: "CPU",         name: "Intel Core Ultra 9 285K",       price: 589,  specs: "24 Core Hybrid  5.7GHz  125W"                          },
+  { id:  4, category: "CPU",         name: "Intel Core Ultra 7 265K",       price: 394,  specs: "20 Core Hybrid  5.5GHz  125W",     badge: "Sweet Spot" },
+  { id:  5, category: "CPU",         name: "AMD Ryzen 7 9700X",             price: 299,  specs: "8 Core  5.5GHz  65W",              badge: "Best Value" },
 
   // GPUs
-  { id:  6, category: "GPU",         name: "NVIDIA GeForce RTX 5090",       price: 1999, specs: "32GB GDDR7 / Blackwell",            badge: "Flagship"   },
-  { id:  7, category: "GPU",         name: "NVIDIA GeForce RTX 5080",       price: 999,  specs: "16GB GDDR7 / Blackwell",            topPick: true       },
-  { id:  8, category: "GPU",         name: "NVIDIA GeForce RTX 5070 Ti",    price: 749,  specs: "16GB GDDR7 / Blackwell",            badge: "Best Value" },
-  { id:  9, category: "GPU",         name: "NVIDIA GeForce RTX 5070",       price: 549,  specs: "12GB GDDR7 / Blackwell"                                 },
-  { id: 10, category: "GPU",         name: "AMD Radeon RX 9070 XT",         price: 699,  specs: "16GB GDDR6 / RDNA 4",              badge: "AMD Pick"   },
-  { id: 11, category: "GPU",         name: "AMD Radeon RX 9070",            price: 549,  specs: "16GB GDDR6 / RDNA 4"                                    },
-  { id: 12, category: "GPU",         name: "NVIDIA GeForce RTX 4070 Super", price: 499,  specs: "12GB GDDR6X / Ada Lovelace",       badge: "Budget"     },
+  { id:  6, category: "GPU",         name: "NVIDIA GeForce RTX 5090",       price: 1999, specs: "32GB GDDR7  Blackwell",            badge: "Flagship"   },
+  { id:  7, category: "GPU",         name: "NVIDIA GeForce RTX 5080",       price: 999,  specs: "16GB GDDR7  Blackwell",            topPick: true       },
+  { id:  8, category: "GPU",         name: "NVIDIA GeForce RTX 5070 Ti",    price: 749,  specs: "16GB GDDR7  Blackwell",            badge: "Best Value" },
+  { id:  9, category: "GPU",         name: "NVIDIA GeForce RTX 5070",       price: 549,  specs: "12GB GDDR7  Blackwell"                                 },
+  { id: 10, category: "GPU",         name: "AMD Radeon RX 9070 XT",         price: 699,  specs: "16GB GDDR6  RDNA 4",              badge: "AMD Pick"   },
+  { id: 11, category: "GPU",         name: "AMD Radeon RX 9070",            price: 549,  specs: "16GB GDDR6  RDNA 4"                                    },
+  { id: 12, category: "GPU",         name: "NVIDIA GeForce RTX 4070 Super", price: 499,  specs: "12GB GDDR6X  Ada Lovelace",       badge: "Budget"     },
 
   // Motherboards
-  { id: 13, category: "Motherboard", name: "ASUS ROG Strix Z890-E Gaming",  price: 449,  specs: "ATX / DDR5 / Wi-Fi 7 / PCIe 5.0"                       },
-  { id: 14, category: "Motherboard", name: "MSI MEG Z890 ACE",              price: 349,  specs: "ATX / DDR5 / Wi-Fi 7 / PCIe 5.0", topPick: true       },
-  { id: 15, category: "Motherboard", name: "ASUS TUF Gaming B650M-Plus",    price: 179,  specs: "mATX / DDR5 / Wi-Fi 6",            badge: "Best Value" },
+  { id: 13, category: "Motherboard", name: "ASUS ROG Strix Z890-E Gaming",  price: 449,  specs: "ATX  DDR5  Wi-Fi 7  PCIe 5.0"                         },
+  { id: 14, category: "Motherboard", name: "MSI MEG Z890 ACE",              price: 349,  specs: "ATX  DDR5  Wi-Fi 7  PCIe 5.0",   topPick: true       },
+  { id: 15, category: "Motherboard", name: "ASUS TUF Gaming B650M-Plus",    price: 179,  specs: "mATX  DDR5  Wi-Fi 6",             badge: "Best Value" },
 
   // RAM
-  { id: 16, category: "RAM",         name: "Corsair Dominator Titanium 32GB", price: 149, specs: "DDR5 6400MHz / 2×16GB"                                },
-  { id: 17, category: "RAM",         name: "G.Skill Trident Z5 64GB",       price: 219,  specs: "DDR5 6000MHz / 2×32GB",            topPick: true       },
-  { id: 18, category: "RAM",         name: "Kingston Fury Beast 16GB",      price: 65,   specs: "DDR5 5200MHz / 2×8GB",             badge: "Budget"     },
+  { id: 16, category: "RAM",         name: "Corsair Dominator Titanium 32GB", price: 149, specs: "DDR5 6400MHz  2x16GB"                                 },
+  { id: 17, category: "RAM",         name: "G.Skill Trident Z5 64GB",       price: 219,  specs: "DDR5 6000MHz  2x32GB",            topPick: true       },
+  { id: 18, category: "RAM",         name: "Kingston Fury Beast 16GB",      price: 65,   specs: "DDR5 5200MHz  2x8GB",             badge: "Budget"     },
 
   // Storage
-  { id: 19, category: "Storage",     name: "Samsung 990 Pro 2TB",           price: 149,  specs: "NVMe PCIe 4.0 / 7,450 MB/s"                            },
-  { id: 20, category: "Storage",     name: "WD Black SN850X 2TB",           price: 139,  specs: "NVMe PCIe 4.0 / 7,300 MB/s",      topPick: true       },
-  { id: 21, category: "Storage",     name: "Seagate FireCuda 530 1TB",      price: 89,   specs: "NVMe PCIe 4.0 / 7,300 MB/s",      badge: "Budget"     },
+  { id: 19, category: "Storage",     name: "Samsung 990 Pro 2TB",           price: 149,  specs: "NVMe PCIe 4.0  7450 MB/s"                             },
+  { id: 20, category: "Storage",     name: "WD Black SN850X 2TB",           price: 139,  specs: "NVMe PCIe 4.0  7300 MB/s",       topPick: true       },
+  { id: 21, category: "Storage",     name: "Seagate FireCuda 530 1TB",      price: 89,   specs: "NVMe PCIe 4.0  7300 MB/s",       badge: "Budget"     },
 
   // Cases
-  { id: 22, category: "Case",        name: "Lian Li O11 Dynamic EVO XL",    price: 179,  specs: "Full Tower / Dual-Chamber"                              },
-  { id: 23, category: "Case",        name: "Fractal Design Torrent RGB",     price: 149,  specs: "Mid Tower / Airflow-Optimized",    topPick: true       },
-  { id: 24, category: "Case",        name: "NZXT H7 Flow",                  price: 129,  specs: "Mid Tower / Tempered Glass",       badge: "Popular"    },
+  { id: 22, category: "Case",        name: "Lian Li O11 Dynamic EVO XL",    price: 179,  specs: "Full Tower  Dual Chamber"                              },
+  { id: 23, category: "Case",        name: "Fractal Design Torrent RGB",     price: 149,  specs: "Mid Tower  Airflow Optimized",   topPick: true       },
+  { id: 24, category: "Case",        name: "NZXT H7 Flow",                  price: 129,  specs: "Mid Tower  Tempered Glass",      badge: "Popular"    },
 
   // PSU
-  { id: 25, category: "PSU",         name: "Corsair RM1000x 80+ Gold",      price: 189,  specs: "1000W / Fully Modular",            topPick: true       },
-  { id: 26, category: "PSU",         name: "Seasonic Prime TX-850",         price: 199,  specs: "850W / 80+ Titanium / Modular"                         },
-  { id: 27, category: "PSU",         name: "be quiet! Straight Power 12",   price: 129,  specs: "750W / 80+ Platinum / Modular",    badge: "Budget"     },
+  { id: 25, category: "PSU",         name: "Corsair RM1000x 80+ Gold",      price: 189,  specs: "1000W  Fully Modular",           topPick: true       },
+  { id: 26, category: "PSU",         name: "Seasonic Prime TX-850",         price: 199,  specs: "850W  80+ Titanium  Modular"                          },
+  { id: 27, category: "PSU",         name: "be quiet! Straight Power 12",   price: 129,  specs: "750W  80+ Platinum  Modular",    badge: "Budget"     },
 ];
 
 const CATEGORIES = [
@@ -130,40 +130,34 @@ export default function BuildPC() {
       </div>
 
       {/* ── Hero Banner ───────────────────────────────────────────────── */}
-      <div className="relative overflow-hidden border-b border-green-900/30 bg-gradient-to-br from-green-950/50 via-black to-black">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12 py-14 md:py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="text-[10px] uppercase tracking-[0.4em] text-green-700 block mb-3">
+      <div style={{ borderBottom: "2px solid #000", backgroundColor: "#000", padding: "56px 0" }}>
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <p style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.35em", color: "#888", marginBottom: "12px" }}>
               Custom PC Builder
-            </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+            </p>
+            <h1 style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "clamp(2.4rem, 5vw, 4.5rem)", lineHeight: 1.05, letterSpacing: "-0.02em", color: "#fff", marginBottom: "16px" }}>
               Configure Your<br />
-              <span className="text-green-400">Dream Build.</span>
+              <em style={{ fontStyle: "italic" }}>Dream Build.</em>
             </h1>
-            <p className="text-gray-400 text-sm md:text-base max-w-xl mb-8 leading-relaxed">
-              Select your components below. Sonoaac assembles, bench-tests, and delivers.
+            <p style={{ fontFamily: "'Times New Roman', serif", fontSize: "1rem", color: "#aaa", maxWidth: "520px", lineHeight: 1.75, marginBottom: "32px" }}>
+              Select your components below. Sonoaac assembles, bench tests, and delivers.
               Assembly and testing fee (15%) is included in your final quote.
             </p>
             <div className="flex flex-wrap gap-4">
               <a href="#builder">
-                <button className="px-6 py-3 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors inline-flex items-center gap-2">
+                <button style={{ padding: "14px 28px", backgroundColor: "#fff", color: "#000", fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: "0.18em", border: "none", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: "8px" }}>
                   Start Selecting <ArrowRight size={14} />
                 </button>
               </a>
               <Link href="/contact">
-                <button className="px-6 py-3 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors">
+                <button style={{ padding: "14px 28px", backgroundColor: "transparent", color: "#fff", fontFamily: "'Times New Roman', serif", fontWeight: 800, fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: "0.18em", border: "2px solid #555", cursor: "pointer" }}>
                   Request Custom Quote
                 </button>
               </Link>
             </div>
           </motion.div>
         </div>
-        {/* Decorative accent */}
-        <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-green-400/3 to-transparent pointer-events-none" />
       </div>
 
       {/* ── Builder Area ──────────────────────────────────────────────── */}
@@ -324,7 +318,7 @@ export default function BuildPC() {
                           </div>
                         </div>
                       ) : (
-                        <span className="text-green-900 text-[11px] italic">— not selected</span>
+                        <span className="text-green-900 text-[11px] italic">not selected</span>
                       )}
                     </div>
                   );
@@ -428,7 +422,7 @@ export default function BuildPC() {
                           </div>
                         </div>
                       ) : (
-                        <span className="text-green-900 text-[11px] italic">— not selected</span>
+                        <span className="text-green-900 text-[11px] italic">not selected</span>
                       )}
                     </div>
                   );

@@ -22,12 +22,12 @@ export default function Footer() {
               Sonoaac
             </span>
             <p className="text-green-700 text-xs leading-relaxed mb-3">
-              IT Support &amp; Digital Solutions Specialist.
-              Registered U.S. business.
+              IT Support and Digital Solutions Specialist.
+              Registered US business.
             </p>
             <p className="text-green-800 text-xs leading-relaxed">
               Services by appointment only.<br />
-              Walk-ins available at additional charge.
+              Walk ins available at additional charge.
             </p>
           </div>
 
@@ -90,7 +90,7 @@ export default function Footer() {
             &copy; {year} Sonoaac. All rights reserved.
           </p>
           <p className="text-green-900 text-xs text-right">
-            Software purchases are non-refundable. Sonoaac recommends — does not sell software.
+            Software purchases are nonrefundable. Sonoaac recommends and does not sell software directly.
           </p>
         </div>
       </div>

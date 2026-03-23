@@ -6,7 +6,7 @@ import { ProfileDropdown } from "@/components/layout/ProfileDropdown";
 
 const servicesMenu = [
   { name: "Remote IT Support",  path: "/services#remote",   sub: "Starting at $49"  },
-  { name: "On-Site Services",   path: "/services#onsite",   sub: "Starting at $99"  },
+  { name: "On Site Services",   path: "/services#onsite",   sub: "Starting at $99"  },
   { name: "Software Fixes",     path: "/services#software", sub: "Starting at $49"  },
   { name: "Business IT",        path: "/services#business", sub: "Starting at $129" },
   { name: "Web Development",    path: "/services#web",      sub: "Starting at $499" },
@@ -50,12 +50,14 @@ export function Navbar() {
     location === path || location.startsWith(path.split("#")[0] + "/");
 
   return (
-    <div className={`transition-shadow duration-300 ${scrolled ? "shadow-xl shadow-black/60" : ""}`}>
-
+    <div
+      className="w-full bg-white"
+      style={{ boxShadow: scrolled ? "0 1px 0 0 #000" : "none", transition: "box-shadow 0.2s" }}
+    >
       {/* ── Tier 1: Utility Bar ───────────────────────────────────────── */}
-      <div className="bg-[#060606] border-b border-green-900/25">
+      <div style={{ borderBottom: "1px solid #e5e5e5" }}>
         <div className="w-full px-5 sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between h-10">
+          <div className="flex items-center justify-between h-11">
 
             {/* Logo */}
             <Link href="/">
@@ -63,45 +65,57 @@ export function Navbar() {
                 <img
                   src="/images/sonoaaclogos.png"
                   alt="Sonoaac"
-                  className="h-6 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
+                  className="h-7 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
                 />
-                <span className="font-bold text-xs text-green-300 tracking-[0.3em] uppercase">
+                <span
+                  style={{ fontFamily: "'Times New Roman', Times, serif", fontWeight: 900, fontSize: "1rem", letterSpacing: "0.2em", color: "#000", textTransform: "uppercase" }}
+                >
                   Sonoaac
                 </span>
               </button>
             </Link>
 
-            {/* Right side */}
+            {/* Right: contact info + CTA */}
             <div className="flex items-center gap-5">
               <a
                 href="tel:+18627559845"
-                className="hidden sm:flex items-center gap-1.5 text-[10px] text-green-800 hover:text-green-400 transition-colors tracking-[0.1em] font-mono"
+                className="hidden sm:flex items-center gap-1.5 transition-colors"
+                style={{ fontFamily: "'Times New Roman', Times, serif", fontSize: "0.72rem", color: "#777", letterSpacing: "0.08em" }}
               >
-                <Phone size={10} />
+                <Phone size={11} />
                 (862) 755-9845
               </a>
               <a
                 href="mailto:sonoaac@gmail.com"
-                className="hidden lg:flex items-center gap-1.5 text-[10px] text-green-800 hover:text-green-400 transition-colors tracking-[0.1em]"
+                className="hidden lg:flex items-center gap-1.5 transition-colors"
+                style={{ fontFamily: "'Times New Roman', Times, serif", fontSize: "0.72rem", color: "#777", letterSpacing: "0.08em" }}
               >
-                <Mail size={10} />
+                <Mail size={11} />
                 sonoaac@gmail.com
               </a>
               <Link href="/contact">
                 <motion.button
-                  className="px-4 py-1.5 bg-green-400 text-black text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-green-300 transition-colors"
                   whileTap={{ scale: 0.97 }}
+                  style={{
+                    backgroundColor: "#000", color: "#fff",
+                    fontFamily: "'Times New Roman', Times, serif",
+                    fontWeight: 900, fontSize: "0.7rem",
+                    textTransform: "uppercase", letterSpacing: "0.18em",
+                    padding: "7px 18px", border: "none", cursor: "pointer",
+                  }}
                 >
                   Book Now
                 </motion.button>
               </Link>
+
               {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden text-gray-500 hover:text-green-400 transition-colors p-1"
+                className="md:hidden transition-colors p-1"
+                style={{ color: "#555" }}
                 aria-label={mobileOpen ? "Close menu" : "Open menu"}
               >
-                {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
@@ -109,7 +123,10 @@ export function Navbar() {
       </div>
 
       {/* ── Tier 2: Main Nav (desktop only) ──────────────────────────── */}
-      <div className="hidden md:block bg-black border-b border-green-900/40">
+      <div
+        className="hidden md:block"
+        style={{ borderBottom: "2px solid #000" }}
+      >
         <div className="w-full px-5 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-12">
             <div className="flex items-center">
@@ -121,40 +138,67 @@ export function Navbar() {
                 onMouseLeave={scheduleClose}
               >
                 <button
-                  className={`flex items-center gap-1.5 px-4 h-12 text-xs uppercase tracking-[0.2em] font-bold transition-colors ${
-                    isActive("/services") ? "text-green-400" : "text-gray-400 hover:text-green-300"
-                  }`}
+                  style={{
+                    fontFamily: "'Times New Roman', Times, serif",
+                    fontWeight: isActive("/services") ? 900 : 700,
+                    fontSize: "0.78rem", textTransform: "uppercase",
+                    letterSpacing: "0.18em", color: isActive("/services") ? "#000" : "#555",
+                    display: "flex", alignItems: "center", gap: "4px",
+                    padding: "0 16px", height: "48px", background: "none", border: "none",
+                    cursor: "pointer", transition: "color 0.15s",
+                  }}
                 >
                   Services
-                  <ChevronDown
-                    size={12}
-                    className={`transition-transform duration-200 ${openDropdown === "services" ? "rotate-180" : ""}`}
-                  />
+                  <ChevronDown size={12} className={`transition-transform duration-200 ${openDropdown === "services" ? "rotate-180" : ""}`} />
                 </button>
                 <AnimatePresence>
                   {openDropdown === "services" && (
                     <motion.div
-                      initial={{ opacity: 0, y: -6 }}
+                      initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
+                      exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.15 }}
                       onMouseEnter={cancelClose}
                       onMouseLeave={scheduleClose}
-                      className="absolute top-full left-0 w-64 bg-black border border-green-900/50 shadow-2xl shadow-black z-50"
+                      style={{
+                        position: "absolute", top: "100%", left: 0,
+                        width: "260px", backgroundColor: "#fff",
+                        border: "2px solid #000",
+                        boxShadow: "4px 4px 0 #000", zIndex: 50,
+                      }}
                     >
                       {servicesMenu.map((item) => (
                         <Link key={item.path} href={item.path}>
-                          <button className="w-full text-left px-5 py-3.5 hover:bg-green-950/30 transition-colors group border-b border-green-900/20 last:border-0">
-                            <div className="text-xs font-bold text-gray-300 uppercase tracking-[0.1em] group-hover:text-green-400 transition-colors">
+                          <button
+                            style={{
+                              display: "block", width: "100%", textAlign: "left",
+                              padding: "12px 20px", background: "none", border: "none",
+                              borderBottom: "1px solid #e5e5e5", cursor: "pointer",
+                              transition: "background 0.15s",
+                            }}
+                            onMouseEnter={e => (e.currentTarget.style.background = "#f5f5f5")}
+                            onMouseLeave={e => (e.currentTarget.style.background = "none")}
+                          >
+                            <div style={{ fontFamily: "'Times New Roman', Times, serif", fontWeight: 800, fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.12em", color: "#000" }}>
                               {item.name}
                             </div>
-                            <div className="text-[10px] text-green-800 mt-0.5">{item.sub}</div>
+                            <div style={{ fontFamily: "'Times New Roman', Times, serif", fontSize: "0.65rem", color: "#888", marginTop: "2px" }}>
+                              {item.sub}
+                            </div>
                           </button>
                         </Link>
                       ))}
                       <Link href="/services">
-                        <button className="w-full text-left px-5 py-3 bg-green-950/10 hover:bg-green-950/30 transition-colors">
-                          <div className="text-[10px] text-green-600 uppercase tracking-[0.15em] font-bold">
+                        <button
+                          style={{
+                            display: "block", width: "100%", textAlign: "left",
+                            padding: "10px 20px", background: "#f9f9f9",
+                            border: "none", cursor: "pointer", transition: "background 0.15s",
+                          }}
+                          onMouseEnter={e => (e.currentTarget.style.background = "#eee")}
+                          onMouseLeave={e => (e.currentTarget.style.background = "#f9f9f9")}
+                        >
+                          <div style={{ fontFamily: "'Times New Roman', Times, serif", fontWeight: 900, fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.15em", color: "#000" }}>
                             View All Services →
                           </div>
                         </button>
@@ -171,34 +215,53 @@ export function Navbar() {
                 onMouseLeave={scheduleClose}
               >
                 <button
-                  className={`flex items-center gap-1.5 px-4 h-12 text-xs uppercase tracking-[0.2em] font-bold transition-colors ${
-                    isActive("/my-tech") ? "text-green-400" : "text-gray-400 hover:text-green-300"
-                  }`}
+                  style={{
+                    fontFamily: "'Times New Roman', Times, serif",
+                    fontWeight: isActive("/my-tech") ? 900 : 700,
+                    fontSize: "0.78rem", textTransform: "uppercase",
+                    letterSpacing: "0.18em", color: isActive("/my-tech") ? "#000" : "#555",
+                    display: "flex", alignItems: "center", gap: "4px",
+                    padding: "0 16px", height: "48px", background: "none", border: "none",
+                    cursor: "pointer", transition: "color 0.15s",
+                  }}
                 >
                   My Tech
-                  <ChevronDown
-                    size={12}
-                    className={`transition-transform duration-200 ${openDropdown === "mytech" ? "rotate-180" : ""}`}
-                  />
+                  <ChevronDown size={12} className={`transition-transform duration-200 ${openDropdown === "mytech" ? "rotate-180" : ""}`} />
                 </button>
                 <AnimatePresence>
                   {openDropdown === "mytech" && (
                     <motion.div
-                      initial={{ opacity: 0, y: -6 }}
+                      initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
+                      exit={{ opacity: 0, y: -4 }}
                       transition={{ duration: 0.15 }}
                       onMouseEnter={cancelClose}
                       onMouseLeave={scheduleClose}
-                      className="absolute top-full left-0 w-64 bg-black border border-green-900/50 shadow-2xl shadow-black z-50"
+                      style={{
+                        position: "absolute", top: "100%", left: 0,
+                        width: "260px", backgroundColor: "#fff",
+                        border: "2px solid #000",
+                        boxShadow: "4px 4px 0 #000", zIndex: 50,
+                      }}
                     >
                       {myTechMenu.map((item) => (
                         <Link key={item.path} href={item.path}>
-                          <button className="w-full text-left px-5 py-3.5 hover:bg-green-950/30 transition-colors group border-b border-green-900/20 last:border-0">
-                            <div className="text-xs font-bold text-gray-300 uppercase tracking-[0.1em] group-hover:text-green-400 transition-colors">
+                          <button
+                            style={{
+                              display: "block", width: "100%", textAlign: "left",
+                              padding: "12px 20px", background: "none", border: "none",
+                              borderBottom: "1px solid #e5e5e5", cursor: "pointer",
+                              transition: "background 0.15s",
+                            }}
+                            onMouseEnter={e => (e.currentTarget.style.background = "#f5f5f5")}
+                            onMouseLeave={e => (e.currentTarget.style.background = "none")}
+                          >
+                            <div style={{ fontFamily: "'Times New Roman', Times, serif", fontWeight: 800, fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.12em", color: "#000" }}>
                               {item.name}
                             </div>
-                            <div className="text-[10px] text-green-800 mt-0.5">{item.sub}</div>
+                            <div style={{ fontFamily: "'Times New Roman', Times, serif", fontSize: "0.65rem", color: "#888", marginTop: "2px" }}>
+                              {item.sub}
+                            </div>
                           </button>
                         </Link>
                       ))}
@@ -214,9 +277,16 @@ export function Navbar() {
               ].map((link) => (
                 <Link key={link.name} href={link.path}>
                   <button
-                    className={`px-4 h-12 text-xs uppercase tracking-[0.2em] font-bold transition-colors ${
-                      isActive(link.path) ? "text-green-400" : "text-gray-400 hover:text-green-300"
-                    }`}
+                    style={{
+                      fontFamily: "'Times New Roman', Times, serif",
+                      fontWeight: isActive(link.path) ? 900 : 700,
+                      fontSize: "0.78rem", textTransform: "uppercase",
+                      letterSpacing: "0.18em",
+                      color: isActive(link.path) ? "#000" : "#555",
+                      padding: "0 16px", height: "48px",
+                      background: "none", border: "none",
+                      cursor: "pointer", transition: "color 0.15s",
+                    }}
                   >
                     {link.name}
                   </button>
@@ -229,7 +299,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* ── Mobile Menu Drawer ────────────────────────────────────────── */}
+      {/* ── Mobile Menu ───────────────────────────────────────────────── */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -237,52 +307,82 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-black border-b border-green-900/50 overflow-hidden"
+            className="md:hidden overflow-hidden"
+            style={{ borderBottom: "2px solid #000", backgroundColor: "#fff" }}
           >
-            <div className="px-5 py-4 space-y-1">
-              <div className="pb-3 mb-2 border-b border-green-900/30">
-                <p className="text-[9px] text-green-900 uppercase tracking-[0.35em] mb-2 pt-1">
+            <div className="px-5 py-5 space-y-0">
+              <div style={{ borderBottom: "1px solid #e5e5e5", paddingBottom: "12px", marginBottom: "12px" }}>
+                <p style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.3em", color: "#aaa", marginBottom: "8px" }}>
                   Services
                 </p>
                 {servicesMenu.map((item) => (
                   <Link key={item.path} href={item.path}>
-                    <button className="block w-full text-left py-2.5 text-xs text-gray-400 hover:text-green-400 uppercase tracking-[0.15em] font-bold transition-colors">
+                    <button
+                      style={{
+                        display: "block", width: "100%", textAlign: "left",
+                        padding: "9px 0", background: "none", border: "none",
+                        fontFamily: "'Times New Roman', serif", fontWeight: 800,
+                        fontSize: "0.82rem", textTransform: "uppercase",
+                        letterSpacing: "0.14em", color: "#222", cursor: "pointer",
+                      }}
+                    >
                       {item.name}
-                      <span className="ml-2 text-[9px] text-green-800 normal-case tracking-normal font-normal">
+                      <span style={{ fontWeight: 500, fontSize: "0.65rem", color: "#999", marginLeft: "8px", textTransform: "none", letterSpacing: "0" }}>
                         {item.sub}
                       </span>
                     </button>
                   </Link>
                 ))}
               </div>
-              <div className="pb-3 mb-2 border-b border-green-900/30">
-                <p className="text-[9px] text-green-900 uppercase tracking-[0.35em] mb-2">
+
+              <div style={{ borderBottom: "1px solid #e5e5e5", paddingBottom: "12px", marginBottom: "12px" }}>
+                <p style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.3em", color: "#aaa", marginBottom: "8px" }}>
                   My Tech
                 </p>
                 {myTechMenu.map((item) => (
                   <Link key={item.path} href={item.path}>
-                    <button className="block w-full text-left py-2.5 text-xs text-gray-400 hover:text-green-400 uppercase tracking-[0.15em] font-bold transition-colors">
+                    <button
+                      style={{
+                        display: "block", width: "100%", textAlign: "left",
+                        padding: "9px 0", background: "none", border: "none",
+                        fontFamily: "'Times New Roman', serif", fontWeight: 800,
+                        fontSize: "0.82rem", textTransform: "uppercase",
+                        letterSpacing: "0.14em", color: "#222", cursor: "pointer",
+                      }}
+                    >
                       {item.name}
                     </button>
                   </Link>
                 ))}
               </div>
-              <Link href="/knowledge-base">
-                <button className="block w-full text-left py-2.5 text-xs text-gray-400 hover:text-green-400 uppercase tracking-[0.15em] font-bold transition-colors border-b border-green-900/30">
-                  Knowledge Base
-                </button>
-              </Link>
-              <Link href="/service-agreement">
-                <button className="block w-full text-left py-2.5 text-xs text-gray-400 hover:text-green-400 uppercase tracking-[0.15em] font-bold transition-colors border-b border-green-900/30">
-                  Agreement
-                </button>
-              </Link>
-              <div className="pt-3 space-y-2">
-                <a href="tel:+18627559845" className="flex items-center gap-2 text-xs text-green-700 hover:text-green-400 transition-colors font-mono py-1">
-                  <Phone size={12} /> (862) 755-9845
+
+              {[
+                { name: "Knowledge Base", path: "/knowledge-base" },
+                { name: "Agreement",      path: "/service-agreement" },
+              ].map((link) => (
+                <Link key={link.name} href={link.path}>
+                  <button
+                    style={{
+                      display: "block", width: "100%", textAlign: "left",
+                      padding: "9px 0", background: "none",
+                      borderBottom: "1px solid #e5e5e5", borderTop: "none",
+                      borderLeft: "none", borderRight: "none",
+                      fontFamily: "'Times New Roman', serif", fontWeight: 800,
+                      fontSize: "0.82rem", textTransform: "uppercase",
+                      letterSpacing: "0.14em", color: "#222", cursor: "pointer",
+                    }}
+                  >
+                    {link.name}
+                  </button>
+                </Link>
+              ))}
+
+              <div style={{ paddingTop: "12px", display: "flex", flexDirection: "column", gap: "6px" }}>
+                <a href="tel:+18627559845" style={{ fontFamily: "monospace", fontSize: "0.82rem", color: "#555", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <Phone size={13} /> (862) 755-9845
                 </a>
-                <a href="mailto:sonoaac@gmail.com" className="flex items-center gap-2 text-xs text-green-700 hover:text-green-400 transition-colors py-1">
-                  <Mail size={12} /> sonoaac@gmail.com
+                <a href="mailto:sonoaac@gmail.com" style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.8rem", color: "#555", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <Mail size={13} /> sonoaac@gmail.com
                 </a>
               </div>
             </div>
