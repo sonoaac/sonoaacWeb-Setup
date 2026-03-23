@@ -14,6 +14,7 @@ const servicesMenu = [
 const myTechMenu = [
   { name: "Build a Custom PC", path: "/my-tech/build-pc", sub: "Configure your dream build" },
   { name: "Device Matching",   path: "/my-tech",          sub: "Find the right device"      },
+  { name: "Trade In",          path: "/trade-in",         sub: "Get 30% above market rate"  },
 ];
 
 export function Navbar() {

@@ -19,6 +19,7 @@ const Services = lazy(() => import("@/pages/Services"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const ServiceAgreement = lazy(() => import("@/pages/ServiceAgreement"));
 const KnowledgeBase = lazy(() => import("@/pages/KnowledgeBase"));
+const TradeIn = lazy(() => import("@/pages/TradeIn"));
 
 function RedirectTo({ to }: { to: string }) {
   const [, setLocation] = useLocation();
@@ -36,6 +37,7 @@ function Router() {
         <Route path="/my-tech/build-pc" component={BuildPC} />
         <Route path="/contact" component={Contact} />
         <Route path="/knowledge-base" component={KnowledgeBase} />
+        <Route path="/trade-in" component={TradeIn} />
         <Route path="/service-agreement" component={ServiceAgreement} />
 
         <Route path="/it-support"><RedirectTo to="/services" /></Route>
