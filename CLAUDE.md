@@ -64,18 +64,13 @@ Base font size is set to `112.5%` (18px) on `<html>`, so all Tailwind `rem`-base
 |---|---|
 | `/` | `Home` |
 | `/services` | `Services` |
-| `/book-consultation` | `BookConsultation` |
-| `/it-support` | `ITSupport` |
-| `/on-site-services` | `OnSiteServices` |
-| `/device-setup` | `DeviceSetup` |
-| `/buy-ready-computer` | `BuyReadyComputer` |
-| `/software-fixes` | `SoftwareFixes` |
-| `/business-it` | `BusinessIT` |
 | `/my-tech` | `MyTech` |
-| `/my-tech/build-pc` or `/build-pc` | `BuildPC` |
+| `/my-tech/build-pc` | `BuildPC` |
 | `/contact` | `Contact` |
-| `/service-agreement` | `ServiceAgreement` |
 | `/knowledge-base` | `KnowledgeBase` |
+| `/service-agreement` | `ServiceAgreement` |
+
+Legacy routes (`/it-support`, `/on-site-services`, `/device-setup`, `/software-fixes`, `/business-it`, `/book-consultation`, `/buy-ready-computer`, `/build-pc`) all redirect to consolidated pages via `<RedirectTo>` in `App.tsx`. Several legacy page files (`ITSupport.tsx`, `OnSiteServices.tsx`, etc.) still exist in `client/src/pages/` but are no longer imported.
 
 ### Backend
 

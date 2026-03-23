@@ -62,12 +62,18 @@ export function Navbar() {
                 </button>
               </Link>
             ))}
+            <a
+              href="tel:+18627559845"
+              className="text-xs text-green-800 hover:text-green-400 tracking-[0.15em] transition-colors font-mono"
+            >
+              (862) 755-9845
+            </a>
             <Link href="/contact">
               <motion.button
                 className="px-5 py-2 bg-green-400 text-black text-xs uppercase tracking-[0.2em] font-bold hover:bg-green-300 transition-colors"
                 whileTap={{ scale: 0.97 }}
               >
-                Contact
+                Book Now
               </motion.button>
             </Link>
             <ProfileDropdown />

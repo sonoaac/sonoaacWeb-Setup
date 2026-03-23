@@ -1,6 +1,8 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 export function DesktopRightPanel() {
+  const [location] = useLocation();
+  if (location === "/") return null;
   return (
     <aside className="hidden xl:flex xl:flex-col xl:w-52 xl:shrink-0 border-l border-green-900/30 sticky top-20 self-start h-[calc(100vh-80px)] overflow-y-auto">
       <div className="px-5 py-8 flex flex-col gap-8">
