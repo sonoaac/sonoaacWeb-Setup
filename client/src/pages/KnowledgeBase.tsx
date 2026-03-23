@@ -1246,7 +1246,138 @@ const FAQ_SECTIONS: FAQSection[] = [
       {
         q: "What monitor specs actually matter?",
         a: (
-          <div className="space-y-3 text-sm text-gray-600">
+          <div className="space-y-4 text-sm text-gray-600">
+            {/* Resolution visual */}
+            <div style={{ background: "#f8f8f8", border: "1px solid #e5e5e5", padding: "16px" }}>
+              <p style={{ fontSize: "0.62rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.28em", color: "#aaa", marginBottom: "14px" }}>
+                Resolution — same screen size, more pixels = sharper
+              </p>
+              <div style={{ display: "flex", gap: "20px", alignItems: "flex-end", justifyContent: "center", flexWrap: "wrap" }}>
+                {([
+                  { label: "1080p", sub: "1920×1080", cols: 5, rows: 3, note: "Standard" },
+                  { label: "1440p", sub: "2560×1440", cols: 8, rows: 5, note: "Recommended" },
+                  { label: "4K", sub: "3840×2160", cols: 12, rows: 7, note: "Ultra sharp" },
+                ] as { label: string; sub: string; cols: number; rows: number; note: string }[]).map(({ label, sub, cols, rows, note }) => (
+                  <div key={label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}>
+                    <svg width="88" height="56" viewBox="0 0 88 56" style={{ display: "block" }}>
+                      {/* monitor bezel */}
+                      <rect x="1" y="1" width="86" height="50" rx="2" fill="#fff" stroke="#333" strokeWidth="2"/>
+                      {/* screen area */}
+                      <rect x="4" y="4" width="80" height="44" fill="#f0f4ff"/>
+                      {/* pixel grid */}
+                      {Array.from({ length: cols - 1 }).map((_, i) => (
+                        <line key={`v${i}`} x1={4 + (80 / cols) * (i + 1)} y1="4" x2={4 + (80 / cols) * (i + 1)} y2="48" stroke="#c8d0e8" strokeWidth="0.6"/>
+                      ))}
+                      {Array.from({ length: rows - 1 }).map((_, i) => (
+                        <line key={`h${i}`} x1="4" y1={4 + (44 / rows) * (i + 1)} x2="84" y2={4 + (44 / rows) * (i + 1)} stroke="#c8d0e8" strokeWidth="0.6"/>
+                      ))}
+                      {/* stand */}
+                      <rect x="39" y="51" width="10" height="4" fill="#999"/>
+                      <rect x="32" y="55" width="24" height="1.5" fill="#888"/>
+                    </svg>
+                    <p style={{ fontSize: "0.72rem", fontWeight: 900, color: "#222", letterSpacing: "0.05em" }}>{label}</p>
+                    <p style={{ fontSize: "0.58rem", color: "#999" }}>{sub}</p>
+                    <p style={{ fontSize: "0.58rem", fontWeight: 700, color: label === "1440p" ? "#1976d2" : "#aaa", textTransform: "uppercase", letterSpacing: "0.1em" }}>{note}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Panel type visual */}
+            <div style={{ background: "#f8f8f8", border: "1px solid #e5e5e5", padding: "16px" }}>
+              <p style={{ fontSize: "0.62rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.28em", color: "#aaa", marginBottom: "12px" }}>
+                Panel types — pick the right trade-off
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" }}>
+                {([
+                  {
+                    name: "IPS",
+                    tag: "Color & Angles",
+                    best: "Designers, everyday use",
+                    bg: "#e8f4fd",
+                    border: "#90caf9",
+                    accent: "#1565c0",
+                    arc: 160,
+                    arcColor: "#42a5f5",
+                  },
+                  {
+                    name: "VA",
+                    tag: "Deep Contrast",
+                    best: "Movies, dark rooms",
+                    bg: "#f3e5f5",
+                    border: "#ce93d8",
+                    accent: "#6a1b9a",
+                    arc: 100,
+                    arcColor: "#ab47bc",
+                  },
+                  {
+                    name: "TN",
+                    tag: "Speed",
+                    best: "Competitive gaming",
+                    bg: "#e8f5e9",
+                    border: "#a5d6a7",
+                    accent: "#1b5e20",
+                    arc: 60,
+                    arcColor: "#66bb6a",
+                  },
+                ] as { name: string; tag: string; best: string; bg: string; border: string; accent: string; arc: number; arcColor: string }[]).map(({ name, tag, best, bg, border, accent, arc, arcColor }) => (
+                  <div key={name} style={{ background: bg, border: `1px solid ${border}`, padding: "10px 8px", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    {/* Viewing angle arc diagram */}
+                    <svg width="60" height="36" viewBox="0 0 60 36">
+                      {/* Monitor outline */}
+                      <rect x="22" y="2" width="16" height="10" rx="1" fill="#fff" stroke={accent} strokeWidth="1.5"/>
+                      <rect x="28" y="12" width="4" height="3" fill={accent} opacity="0.5"/>
+                      {/* Viewing angle arc */}
+                      {(() => {
+                        const rad = (arc / 2) * (Math.PI / 180);
+                        const cx = 30, cy = 14, r = 18;
+                        const x1 = cx - Math.sin(rad) * r;
+                        const y1 = cy + Math.cos(rad) * r;
+                        const x2 = cx + Math.sin(rad) * r;
+                        const y2 = cy + Math.cos(rad) * r;
+                        const large = arc > 180 ? 1 : 0;
+                        return (
+                          <path
+                            d={`M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`}
+                            fill={arcColor}
+                            opacity="0.25"
+                          />
+                        );
+                      })()}
+                      {/* Center line */}
+                      <line x1="30" y1="14" x2="30" y2="34" stroke={arcColor} strokeWidth="1" strokeDasharray="2,2" opacity="0.6"/>
+                    </svg>
+                    <p style={{ fontSize: "0.72rem", fontWeight: 900, color: accent, letterSpacing: "0.08em" }}>{name}</p>
+                    <p style={{ fontSize: "0.6rem", fontWeight: 700, color: accent, textTransform: "uppercase", letterSpacing: "0.12em" }}>{tag}</p>
+                    <p style={{ fontSize: "0.58rem", color: "#555", textAlign: "center", lineHeight: 1.35 }}>{best}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Refresh rate visual */}
+            <div style={{ background: "#f8f8f8", border: "1px solid #e5e5e5", padding: "16px" }}>
+              <p style={{ fontSize: "0.62rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.28em", color: "#aaa", marginBottom: "12px" }}>
+                Refresh rate — frames per second
+              </p>
+              <div style={{ position: "relative", paddingBottom: "28px" }}>
+                <div style={{ height: "10px", background: "linear-gradient(to right, #d0d0d0 0%, #888 40%, #333 70%, #000 100%)", borderRadius: "5px" }} />
+                {([
+                  { hz: "60Hz", pct: "0%", label: "Everyday", offset: "-4px" },
+                  { hz: "144Hz", pct: "43%", label: "Gaming", offset: "-22px" },
+                  { hz: "240Hz", pct: "73%", label: "Competitive", offset: "-28px" },
+                  { hz: "360Hz+", pct: "97%", label: "Pro", offset: "-26px" },
+                ] as { hz: string; pct: string; label: string; offset: string }[]).map(({ hz, pct, label, offset }) => (
+                  <div key={hz} style={{ position: "absolute", top: "14px", left: pct, transform: `translateX(${offset})`, display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
+                    <div style={{ width: "1px", height: "6px", background: "#999" }} />
+                    <p style={{ fontSize: "0.6rem", fontWeight: 700, color: "#333", whiteSpace: "nowrap" }}>{hz}</p>
+                    <p style={{ fontSize: "0.55rem", color: "#999", whiteSpace: "nowrap" }}>{label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Spec table */}
             <div className="overflow-x-auto">
               <table className="w-full text-xs border-collapse">
                 <thead>
@@ -1280,8 +1411,39 @@ const FAQ_SECTIONS: FAQSection[] = [
       {
         q: "How many monitors can my computer support?",
         a: (
-          <div className="space-y-2 text-sm text-gray-600">
+          <div className="space-y-4 text-sm text-gray-600">
             <p>The number of monitors depends on your GPU's output ports and your connection method.</p>
+
+            {/* Multi-monitor layout diagram */}
+            <div style={{ background: "#f8f8f8", border: "1px solid #e5e5e5", padding: "16px" }}>
+              <p style={{ fontSize: "0.62rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.28em", color: "#aaa", marginBottom: "14px" }}>
+                Example setups
+              </p>
+              <div style={{ display: "flex", gap: "24px", alignItems: "flex-end", justifyContent: "center", flexWrap: "wrap" }}>
+                {([
+                  { count: 1, label: "Laptop", sublabel: "1 external", color: "#e3f2fd", border: "#90caf9" },
+                  { count: 2, label: "Laptop + Dock", sublabel: "2–4 displays", color: "#e8f5e9", border: "#a5d6a7" },
+                  { count: 4, label: "Desktop GPU", sublabel: "3–6 displays", color: "#fff3e0", border: "#ffcc80" },
+                ] as { count: number; label: string; sublabel: string; color: string; border: string }[]).map(({ count, label, sublabel, color, border }) => (
+                  <div key={label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                    {/* Monitor icons in a row */}
+                    <div style={{ display: "flex", gap: "4px", alignItems: "flex-end" }}>
+                      {Array.from({ length: count }).map((_, i) => (
+                        <svg key={i} width={count > 2 ? 28 : 40} height={count > 2 ? 22 : 30} viewBox="0 0 40 30" style={{ display: "block" }}>
+                          <rect x="1" y="1" width="38" height="24" rx="2" fill={color} stroke={border} strokeWidth="2"/>
+                          <rect x="4" y="4" width="32" height="18" fill="#fff" opacity="0.7"/>
+                          <rect x="17" y="25" width="6" height="3" fill={border}/>
+                          <rect x="12" y="28" width="16" height="1.5" fill={border} opacity="0.7"/>
+                        </svg>
+                      ))}
+                    </div>
+                    <p style={{ fontSize: "0.68rem", fontWeight: 900, color: "#333" }}>{label}</p>
+                    <p style={{ fontSize: "0.58rem", color: "#888" }}>{sublabel}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="overflow-x-auto">
               <table className="w-full text-xs border-collapse">
                 <thead>

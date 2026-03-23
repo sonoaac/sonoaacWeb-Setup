@@ -1,9 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
-
-type Theme = "dark" | "light";
+import { createContext, useContext, useEffect } from "react";
 
 interface ThemeContextValue {
-  theme: Theme;
+  theme: "light";
   toggleTheme: () => void;
 }
 
@@ -13,26 +11,14 @@ const ThemeContext = createContext<ThemeContextValue>({
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    try {
-      return (localStorage.getItem("sonoaac-theme") as Theme) || "light";
-    } catch {
-      return "light";
-    }
-  });
-
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    try {
-      localStorage.setItem("sonoaac-theme", theme);
-    } catch {}
-  }, [theme]);
-
-  const toggleTheme = () =>
-    setTheme((t) => (t === "dark" ? "light" : "dark"));
+    // Always light — remove any previously stored dark preference
+    document.documentElement.removeAttribute("data-theme");
+    try { localStorage.removeItem("sonoaac-theme"); } catch {}
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: "light", toggleTheme: () => {} }}>
       {children}
     </ThemeContext.Provider>
   );

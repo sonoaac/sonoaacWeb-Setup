@@ -103,26 +103,18 @@ export function ProfileDropdown() {
                     {/* Toggle switch */}
                     <button
                       onClick={toggleTheme}
-                      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                      aria-label="Theme toggle"
                       className="relative flex items-center w-[88px] h-8 border border-green-900 hover:border-green-700 transition-colors overflow-hidden"
                     >
                       {/* Dark option */}
                       <span
-                        className={`flex-1 h-full flex items-center justify-center text-[9px] font-bold uppercase tracking-wider transition-colors ${
-                          theme === "dark"
-                            ? "bg-green-400 text-black"
-                            : "text-gray-500"
-                        }`}
+                        className="flex-1 h-full flex items-center justify-center text-[9px] font-bold uppercase tracking-wider transition-colors text-gray-500"
                       >
                         Dark
                       </span>
                       {/* Light option */}
                       <span
-                        className={`flex-1 h-full flex items-center justify-center text-[9px] font-bold uppercase tracking-wider transition-colors ${
-                          theme === "light"
-                            ? "bg-green-400 text-black"
-                            : "text-gray-500"
-                        }`}
+                        className="flex-1 h-full flex items-center justify-center text-[9px] font-bold uppercase tracking-wider transition-colors bg-green-400 text-black"
                       >
                         Light
                       </span>

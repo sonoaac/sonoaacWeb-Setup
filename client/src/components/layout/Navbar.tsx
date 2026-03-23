@@ -2,7 +2,6 @@ import { useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { ChevronDown, Phone, Mail, Menu, X } from "lucide-react";
-import { ProfileDropdown } from "@/components/layout/ProfileDropdown";
 
 const servicesMenu = [
   { name: "Remote IT Support",  path: "/services#remote",   sub: "Starting at $49"  },
@@ -294,7 +293,6 @@ export function Navbar() {
               ))}
             </div>
 
-            <ProfileDropdown />
           </div>
         </div>
       </div>
