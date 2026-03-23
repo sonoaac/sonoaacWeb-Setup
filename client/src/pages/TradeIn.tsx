@@ -5,7 +5,7 @@ import { ChevronDown, ChevronRight, Info, CheckCircle, XCircle, Clock, AlertTria
 
 // ─── Pricing data ──────────────────────────────────────────────────────────
 // competitorAvg = typical trade-in value across Gazelle / SellCell / BestBuy / Apple
-// Sonoaac offers 30% above competitorAvg
+// Sonoaac cash offer = 50% of competitorAvg (competitors offer store credit; we pay cash)
 
 const IPHONE_MODELS: { id: string; name: string; released: number; storage: { gb: string; competitorAvg: number }[] }[] = [
   {
@@ -311,14 +311,10 @@ const CONDITION_MULTIPLIER: Record<Condition, number> = {
   ineligible: 0,
 };
 
-const SONOAAC_MULTIPLIER = 1.3; // 30% above competitor
+const SONOAAC_MULTIPLIER = 0.5; // cash offer — 50% of typical market rate
 
 function calcOffer(competitorAvg: number, condition: Condition): number {
   return Math.round(competitorAvg * SONOAAC_MULTIPLIER * CONDITION_MULTIPLIER[condition]);
-}
-
-function calcCompetitor(competitorAvg: number, condition: Condition): number {
-  return Math.round(competitorAvg * CONDITION_MULTIPLIER[condition]);
 }
 
 // ─── Sub-components ────────────────────────────────────────────────────────
@@ -520,9 +516,6 @@ export default function TradeIn() {
     ? calcOffer(selectedStorageObj.competitorAvg, condition)
     : null;
 
-  const competitorAmount = selectedStorageObj && condition && condition !== "ineligible"
-    ? calcCompetitor(selectedStorageObj.competitorAvg, condition)
-    : null;
 
   return (
     <div style={{ backgroundColor: "#fff", minHeight: "100vh" }}>
@@ -534,10 +527,10 @@ export default function TradeIn() {
             Sonoaac Trade-In Program
           </p>
           <h1 style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "clamp(2rem, 5vw, 3.4rem)", color: "#fff", lineHeight: 1.05, letterSpacing: "-0.02em", marginBottom: "16px" }}>
-            Get 30% More.<br />Guaranteed.
+            Trade In.<br />Get Paid Cash.
           </h1>
           <p style={{ fontFamily: "'Times New Roman', serif", fontSize: "1rem", color: "#aaa", lineHeight: 1.7, maxWidth: "520px", marginBottom: "24px" }}>
-            We beat every major trade-in buyer — Gazelle, SellCell, Apple, and Best Buy — by at least 30%. Unlocked iPhones, Samsung Galaxy, and iPads accepted. Get your offer in under 2 minutes.
+            Bring in your unlocked iPhone, Samsung Galaxy, or iPad and walk out with cash. No store credit, no waiting — real money on the spot after inspection. Get your estimate in under 2 minutes.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
             {[
@@ -761,32 +754,6 @@ export default function TradeIn() {
                       <p style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.72rem", color: "#888", marginTop: "6px" }}>
                         {selectedModel?.name} · {storageGb} · {condition?.charAt(0).toUpperCase()}{condition?.slice(1)} condition
                       </p>
-                    </div>
-
-                    {/* Comparison */}
-                    <div style={{ padding: "20px 28px", borderBottom: "1px solid #e5e5e5", display: "flex", gap: "0", flexWrap: "wrap" }}>
-                      <div style={{ flex: "1 1 160px", padding: "0 16px 0 0", borderRight: "1px solid #e5e5e5" }}>
-                        <p style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.2em", color: "#aaa", marginBottom: "4px" }}>
-                          Typical competitors
-                        </p>
-                        <p style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "1.4rem", color: "#999", letterSpacing: "-0.01em" }}>
-                          ${competitorAmount}
-                        </p>
-                        <p style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.6rem", color: "#bbb" }}>
-                          Gazelle · SellCell · Apple · Best Buy
-                        </p>
-                      </div>
-                      <div style={{ flex: "1 1 160px", padding: "0 0 0 20px" }}>
-                        <p style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.2em", color: "#aaa", marginBottom: "4px" }}>
-                          You save
-                        </p>
-                        <p style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "1.4rem", color: "#000", letterSpacing: "-0.01em" }}>
-                          +${(offerAmount ?? 0) - (competitorAmount ?? 0)}
-                        </p>
-                        <p style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.6rem", color: "#777" }}>
-                          30% above market average
-                        </p>
-                      </div>
                     </div>
 
                     {/* Validity + CTA */}
