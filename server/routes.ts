@@ -4,6 +4,27 @@ import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
 
+const BUSINESS_EMAIL = "sonoaac@gmail.com";
+
+async function sendContactEmail(name: string, email: string, message: string) {
+  const key = process.env.SENDGRID_API_KEY;
+  if (!key) return;
+  try {
+    const sgMail = (await import("@sendgrid/mail")).default;
+    sgMail.setApiKey(key);
+    await sgMail.send({
+      to: BUSINESS_EMAIL,
+      from: BUSINESS_EMAIL,
+      replyTo: email,
+      subject: `New message from ${name} — Sonoaac Contact Form`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p><p><strong>Message:</strong></p><p style="white-space:pre-wrap">${message}</p>`,
+    });
+  } catch (err) {
+    console.error("SendGrid error:", err);
+  }
+}
+
 export async function registerRoutes(
   httpServer: Server,
   app: Express
@@ -37,6 +58,7 @@ export async function registerRoutes(
     try {
       const input = api.contact.create.input.parse(req.body);
       const submission = await storage.createContactSubmission(input);
+      await sendContactEmail(input.name, input.email, input.message);
       res.status(201).json(submission);
     } catch (err) {
       if (err instanceof z.ZodError) {
@@ -45,7 +67,8 @@ export async function registerRoutes(
           field: err.errors[0].path.join('.'),
         });
       }
-      throw err;
+      console.error("Contact route error:", err);
+      res.status(500).json({ message: "Something went wrong. Please try again." });
     }
   });
 

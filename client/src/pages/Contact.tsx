@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -24,6 +25,16 @@ const inputClass =
   "w-full px-4 py-3 bg-black border border-green-900 text-white text-sm focus:border-green-500 focus:outline-none transition-colors placeholder:text-green-900";
 
 export default function Contact() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -136,6 +147,28 @@ export default function Contact() {
                 Read Service Agreement
               </button>
             </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Calendly Booking */}
+      <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp}>
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
+              Book Online
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+              Schedule an Appointment
+            </h2>
+            <p className="text-gray-400 text-sm mb-8">
+              Pick a time that works for you — slots update in real time. You'll receive a confirmation email automatically.
+            </p>
+            <div
+              className="calendly-inline-widget w-full overflow-hidden"
+              data-url="https://calendly.com/sonoaac?hide_gdpr_banner=1&background_color=0a0a0a&text_color=e5e7eb&primary_color=4ade80"
+              style={{ minWidth: "320px", height: "700px" }}
+            />
           </motion.div>
         </div>
       </section>

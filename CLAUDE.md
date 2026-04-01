@@ -34,20 +34,24 @@ script/        → Build orchestration (script/build.ts)
 - **Forms:** React Hook Form + Zod (schemas from `shared/schema.ts`)
 - **UI:** Shadcn/ui (Radix UI + Tailwind CSS) in `client/src/components/ui/`
 - **Animations:** Framer Motion for standard animations, GSAP for advanced effects
-- **Theme:** `ThemeContext` in `client/src/context/ThemeContext.tsx` — light/dark toggle, default is **light**, persisted to `localStorage` under key `sonoaac-theme`. Sets `data-theme` attribute on `<html>`.
+- **Theme:** `ThemeContext` in `client/src/context/ThemeContext.tsx` — **locked to light mode only**. The context exists but actively removes any stored theme preference and the `data-theme` attribute. There is no dark/light toggle.
 
 ### Design System
 
-The app uses a **terminal/monospace aesthetic**: `Courier New` body font, green (`hsl(142, 69%, 58%)`) as the primary/accent color, and a white-on-black base layer. The `App.tsx` root div uses `bg-black text-green-200`, but `index.css` overrides these in **light mode** (default) — `bg-black → #fff`, `text-green-200 → #14532d`, etc. In **dark mode** (`data-theme="dark"`), the raw Tailwind colors are used unmodified (true dark terminal look). When writing component styles, write them in dark-terminal terms (e.g., `bg-black`, `text-green-300`) and rely on the CSS overrides in `index.css` to invert them for light mode.
+The app uses a **terminal/monospace aesthetic**: `Times New Roman` body font, green (`hsl(142, 69%, 58%)`) as the primary/accent color, and a white-on-black base layer. The `App.tsx` root div uses `bg-black text-green-200`, but `index.css` permanently overrides these for light mode — `bg-black → #fff`, `text-green-200 → #14532d`, etc. **Write component styles in dark-terminal Tailwind terms** (e.g., `bg-black`, `text-green-300`) and rely on the CSS overrides in `index.css` to invert them to the B&W light theme. Dark mode is not active.
 
-Base font size is set to `112.5%` (18px) on `<html>`, so all Tailwind `rem`-based sizes are scaled up proportionally.
+Base font size is `clamp(17px, 1.1vw + 14px, 20px)` on `<html>`, so all Tailwind `rem`-based sizes scale responsively.
 
-**App shell layout** (`App.tsx`): sticky `Header`, then a 3-column flex row on `xl` screens — `DesktopSidebar` | `main` (Router) | `DesktopRightPanel` — then `Footer`. `HelpBot` and `Toaster` are rendered globally.
+**App shell layout** (`App.tsx`): sticky `Header` (2-tier navbar, see below), a `h-10 md:h-[88px]` spacer div to offset the fixed header height, then a 3-column flex row on `xl` screens — `DesktopSidebar` | `main` (Router) | `DesktopRightPanel` — then `Footer`. `HelpBot` and `Toaster` are rendered globally.
+
+**Navbar structure** (`Header` / `Navbar`): Two-tier layout:
+- **Tier 1** (utility bar, ~40px): logo, contact info, primary CTA button
+- **Tier 2** (main nav, ~48px): navigation links with dropdown menus for Services and MyTech (dropdowns include service names and starting prices)
 
 **Key layout components** (`client/src/components/layout/`):
 - `StickyNav` — used on the Home page; renders a tab bar that sticks to the top on scroll, with an animated slider underline. Wraps page sections as children using `et-slide` / `et-hero-tabs` CSS classes defined inline.
 - `ScrollWindow` — drives the sticky horizontal-scroll card sections on the Home page (each card has title, description, image, and a CTA link).
-- `Header` / `Navbar` — global top bar with nav links and `ProfileDropdown`.
+- `DesktopSidebar` / `DesktopRightPanel` — flanking panels in the `xl` 3-column layout.
 - `ScrollProgress` — thin progress bar at top of viewport.
 - `CTASection` — reusable call-to-action banner used across pages.
 - `SectionScroll` — scroll-snap section wrapper used within pages for full-height slide transitions.
@@ -57,6 +61,7 @@ Base font size is set to `112.5%` (18px) on `<html>`, so all Tailwind `rem`-base
 - `HelpBot` — global chat/help widget.
 - `QuoteBooklet` — multi-step quote flow used on service pages.
 - `TechMatcher` — multi-step device recommendation quiz modal; collects device type, use cases, budget, and portability preference, then returns a matched recommendation.
+- `MonitorIntro` — monitor/display visual component used on the Knowledge Base page.
 
 **Pages** (all lazy-loaded via `React.lazy`):
 
@@ -69,6 +74,7 @@ Base font size is set to `112.5%` (18px) on `<html>`, so all Tailwind `rem`-base
 | `/contact` | `Contact` |
 | `/knowledge-base` | `KnowledgeBase` |
 | `/service-agreement` | `ServiceAgreement` |
+| `/trade-in` | `TradeIn` |
 
 Legacy routes (`/it-support`, `/on-site-services`, `/device-setup`, `/software-fixes`, `/business-it`, `/book-consultation`, `/buy-ready-computer`, `/build-pc`) all redirect to consolidated pages via `<RedirectTo>` in `App.tsx`. Several legacy page files (`ITSupport.tsx`, `OnSiteServices.tsx`, etc.) still exist in `client/src/pages/` but are no longer imported.
 
