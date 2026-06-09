@@ -1,7 +1,14 @@
 import type { IncomingMessage, ServerResponse } from "http";
-import sgMail from "@sendgrid/mail";
+import nodemailer from "nodemailer";
 
 const BUSINESS_EMAIL = "sonoaac@gmail.com";
+
+function createTransporter() {
+  const user = process.env.GMAIL_USER ?? BUSINESS_EMAIL;
+  const pass = process.env.GMAIL_APP_PASSWORD;
+  if (!pass) return null;
+  return nodemailer.createTransport({ service: "gmail", auth: { user, pass } });
+}
 
 export default async function handler(req: IncomingMessage & { body?: any }, res: ServerResponse) {
   res.setHeader("Content-Type", "application/json");
@@ -26,29 +33,32 @@ export default async function handler(req: IncomingMessage & { body?: any }, res
     }));
   }
 
-  const key = process.env.SENDGRID_API_KEY;
-  if (key) {
+  const transporter = createTransporter();
+  if (transporter) {
     try {
-      sgMail.setApiKey(key);
-      await sgMail.send({
+      const from = process.env.GMAIL_USER ?? BUSINESS_EMAIL;
+      await transporter.sendMail({
+        from,
         to: BUSINESS_EMAIL,
-        from: BUSINESS_EMAIL,
         replyTo: email,
         subject: `New message from ${name} — Sonoaac Contact Form`,
         text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-        html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p><p><strong>Message:</strong></p><p style="white-space:pre-wrap">${message}</p>`,
+        html: `<p><b>Name:</b> ${name}</p><p><b>Email:</b> <a href="mailto:${email}">${email}</a></p><p><b>Message:</b></p><p style="white-space:pre-wrap">${message}</p>`,
       });
+      const smsTo = process.env.ADMIN_PHONE_SMS;
+      if (smsTo) {
+        await transporter.sendMail({
+          from,
+          to: smsTo,
+          subject: "",
+          text: `SNC contact: ${name} (${email}): ${String(message).slice(0, 120)}`,
+        });
+      }
     } catch (err: any) {
-      console.error("SendGrid error:", err?.response?.body ?? err.message);
+      console.error("Nodemailer error:", err?.message ?? err);
     }
   }
 
   res.statusCode = 201;
-  res.end(JSON.stringify({
-    id: 1,
-    name,
-    email,
-    message,
-    createdAt: new Date().toISOString(),
-  }));
+  res.end(JSON.stringify({ id: 1, name, email, message, createdAt: new Date().toISOString() }));
 }

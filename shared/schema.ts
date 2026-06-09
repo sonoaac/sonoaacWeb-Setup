@@ -35,6 +35,23 @@ export const contactSubmissions = pgTable("contact_submissions", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// === Tickets Table ===
+export const tickets = pgTable("tickets", {
+  id: serial("id").primaryKey(),
+  token: text("token").notNull().unique(),
+  tokenExpiresAt: timestamp("token_expires_at").notNull(),
+  customerName: text("customer_name").notNull(),
+  customerEmail: text("customer_email").notNull(),
+  customerPhone: text("customer_phone"),
+  serviceType: text("service_type").notNull(),
+  issueDescription: text("issue_description").notNull(),
+  status: text("status").notNull().default("pending"),
+  adminNotes: text("admin_notes"),
+  internalNotes: text("internal_notes"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 // === Schemas ===
 export const insertPcPartSchema = createInsertSchema(pcParts).omit({ id: true });
 export const insertQuoteSchema = createInsertSchema(quotes).omit({ id: true, createdAt: true });
@@ -49,3 +66,7 @@ export type InsertQuote = z.infer<typeof insertQuoteSchema>;
 
 export type ContactSubmission = typeof contactSubmissions.$inferSelect;
 export type InsertContactSubmission = z.infer<typeof insertContactSchema>;
+
+export const insertTicketSchema = createInsertSchema(tickets).omit({ id: true, createdAt: true, updatedAt: true });
+export type Ticket = typeof tickets.$inferSelect;
+export type InsertTicket = z.infer<typeof insertTicketSchema>;

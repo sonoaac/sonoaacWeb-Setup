@@ -34,13 +34,13 @@ interface CompareCategory {
   products: CompareProduct[];
 }
 
-interface FAQItem {
+export interface FAQItem {
   q: string;
   a: ReactNode;
   keywords?: string;
 }
 
-interface FAQSection {
+export interface FAQSection {
   id: string;
   label: string;
   icon: string;
@@ -524,7 +524,7 @@ const COMPARE_CATEGORIES: CompareCategory[] = [
 
 // ── FAQ Data ──────────────────────────────────────────────────────────────────
 
-const FAQ_SECTIONS: FAQSection[] = [
+export const FAQ_SECTIONS: FAQSection[] = [
   {
     id: "slow-pc",
     label: "Slow & Freezing Computers",
@@ -603,7 +603,7 @@ const FAQ_SECTIONS: FAQSection[] = [
                   "Browser tabs take a long time to reload after switching",
                   "You regularly run 10+ browser tabs plus other apps",
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-2"><span className="text-blue-400 shrink-0">•</span>{item}</li>
+                  <li key={i} className="flex gap-2"><span className="text-green-400 shrink-0">•</span>{item}</li>
                 ))}
               </ul>
             </div>
@@ -636,10 +636,10 @@ const FAQ_SECTIONS: FAQSection[] = [
         a: (
           <div className="space-y-3 text-sm text-gray-600">
             <div className="grid grid-cols-1 gap-3">
-              <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
-                <p className="font-bold text-blue-800 mb-1">Windows</p>
+              <div className="bg-green-950/10 border border-green-900/20 rounded-lg p-3">
+                <p className="font-bold text-green-800 mb-1">Windows</p>
                 <ul className="space-y-0.5 text-xs">
-                  {["Most compatible — runs virtually all software", "Best for gaming, business tools, and specialized apps", "Widest hardware price range ($300 to $3,000+)", "Used on most laptops and desktops worldwide", "Required for many corporate IT environments"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-blue-400">✔</span>{x}</li>)}
+                  {["Most compatible — runs virtually all software", "Best for gaming, business tools, and specialized apps", "Widest hardware price range ($300 to $3,000+)", "Used on most laptops and desktops worldwide", "Required for many corporate IT environments"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-green-400">✔</span>{x}</li>)}
                 </ul>
               </div>
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
@@ -868,7 +868,7 @@ const FAQ_SECTIONS: FAQSection[] = [
                 },
                 {
                   label: "Office Work — Teams, Outlook, Word, Excel",
-                  color: "bg-blue-50 border-blue-100",
+                  color: "bg-green-950/10 border-green-900/20",
                   specs: [
                     ["CPU", "Intel Core i5/i7 (Gen 11+) or AMD Ryzen 5/7", "Needed for Teams video calls and Excel with large datasets"],
                     ["RAM", "16GB — non-negotiable", "Teams + Outlook + Chrome + OneDrive together use 8–14GB RAM"],
@@ -989,10 +989,10 @@ const FAQ_SECTIONS: FAQSection[] = [
                   {["You already use iPhone or Mac", "App quality matters to you (most apps are iPad-first)", "You want 5–7 years of software updates", "You do creative work (drawing, music, video)"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-gray-600">•</span>{x}</li>)}
                 </ul>
               </div>
-              <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
-                <p className="font-bold text-blue-800 text-xs mb-1.5">Choose Android if:</p>
+              <div className="bg-green-950/10 border border-green-900/20 rounded-lg p-3">
+                <p className="font-bold text-green-800 text-xs mb-1.5">Choose Android if:</p>
                 <ul className="space-y-0.5 text-xs">
-                  {["You use Android phone or Google apps", "You want a larger screen at lower cost", "You need microSD expandable storage", "You want more file management control"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-blue-500">•</span>{x}</li>)}
+                  {["You use Android phone or Google apps", "You want a larger screen at lower cost", "You need microSD expandable storage", "You want more file management control"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-green-500">•</span>{x}</li>)}
                 </ul>
               </div>
             </div>
@@ -1096,10 +1096,10 @@ const FAQ_SECTIONS: FAQSection[] = [
                   {["Cheapest option ($20–$60)", "Plugs into wall outlet", "Extends signal into dead zones", "Usually creates a second network name", "Speed drops 30–50% (it's relaying, not routing)"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-gray-400">•</span>{x}</li>)}
                 </ul>
               </div>
-              <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
-                <p className="font-bold text-blue-800 text-xs mb-2">Mesh System (Recommended)</p>
+              <div className="bg-green-950/10 border border-green-900/20 rounded-lg p-3">
+                <p className="font-bold text-green-800 text-xs mb-2">Mesh System (Recommended)</p>
                 <ul className="text-xs space-y-1 text-gray-600">
-                  {["Multiple nodes work as one network", "Seamless roaming — same network name throughout", "No speed penalty between nodes", "Best for homes over 1,500 sq ft", "Examples: Eero, Google Nest, TP-Link Deco ($100–$250)"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-blue-500">✔</span>{x}</li>)}
+                  {["Multiple nodes work as one network", "Seamless roaming — same network name throughout", "No speed penalty between nodes", "Best for homes over 1,500 sq ft", "Examples: Eero, Google Nest, TP-Link Deco ($100–$250)"].map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-green-500">✔</span>{x}</li>)}
                 </ul>
               </div>
               <div className="bg-green-50 border border-green-100 rounded-lg p-3">
@@ -1487,8 +1487,8 @@ const FAQ_SECTIONS: FAQSection[] = [
           <div className="space-y-3 text-gray-600">
             <p>Microsoft 365 (formerly called Office 365) is a subscription that gives you the full Microsoft Office suite plus cloud services — all continuously updated. Here's exactly what you get:</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
-                <p className="font-bold text-blue-800 text-sm mb-2">Apps Included</p>
+              <div className="bg-green-950/10 border border-green-900/20 rounded-lg p-3">
+                <p className="font-bold text-green-800 text-sm mb-2">Apps Included</p>
                 <ul className="space-y-1 text-sm text-gray-700">
                   {[
                     "Word — documents, reports, resumes",
@@ -1499,7 +1499,7 @@ const FAQ_SECTIONS: FAQSection[] = [
                     "OneDrive — 1TB cloud storage",
                     "OneNote — notes and organization",
                     "Publisher / Access (PC only)",
-                  ].map((x, i) => <li key={i} className="flex gap-2"><span className="text-blue-500">✔</span>{x}</li>)}
+                  ].map((x, i) => <li key={i} className="flex gap-2"><span className="text-green-500">✔</span>{x}</li>)}
                 </ul>
               </div>
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
@@ -2175,7 +2175,7 @@ export default function KnowledgeBase() {
                 </button>
               </Link>
               <Link href="/services">
-                <button className="px-5 py-2.5 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors text-sm">
+                <button className="btn-outline px-5 py-2.5 text-sm">
                   Our Services
                 </button>
               </Link>
@@ -2230,7 +2230,7 @@ export default function KnowledgeBase() {
                 onClick={() => handleCategoryChange(cat.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                   activeCategoryId === cat.id
-                    ? "bg-gray-900 text-white shadow"
+                    ? "bg-green-400 text-black shadow"
                     : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300 hover:text-gray-800"
                 }`}
               >
@@ -2351,7 +2351,7 @@ export default function KnowledgeBase() {
                     onClick={() => setActiveFAQId(section.id)}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                       activeFAQId === section.id
-                        ? "bg-gray-900 text-white"
+                        ? "bg-green-400 text-black"
                         : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
                     }`}
                   >
@@ -2376,9 +2376,9 @@ export default function KnowledgeBase() {
           )}
 
           {/* CTA */}
-          <div className="mt-8 bg-gray-900 rounded-2xl p-6 text-white">
+          <div className="mt-8 brand-panel border border-green-900/20 p-6">
             <h3 className="text-lg font-bold mb-2">Still have questions?</h3>
-            <p className="text-gray-400 text-sm mb-4">
+            <p className="text-gray-700 text-sm mb-4">
               Our team can help you choose the right device, fix your current setup, or advise on upgrades — in person or remotely.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -2389,7 +2389,7 @@ export default function KnowledgeBase() {
                 </button>
               </Link>
               <Link href="/contact">
-                <button className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg text-sm transition-colors">
+                <button className="btn-outline px-5 py-2.5 text-sm">
                   Contact Us
                 </button>
               </Link>

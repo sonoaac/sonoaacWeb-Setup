@@ -78,12 +78,12 @@ export function Navbar() {
             {/* Right: contact info + CTA */}
             <div className="flex items-center gap-5">
               <a
-                href="tel:+18627559845"
+                href="tel:+12013496917"
                 className="hidden sm:flex items-center gap-1.5 transition-colors"
                 style={{ fontFamily: "'Times New Roman', Times, serif", fontSize: "0.72rem", color: "#777", letterSpacing: "0.08em" }}
               >
                 <Phone size={11} />
-                (862) 755-9845
+                (201) 349-6917
               </a>
               <a
                 href="mailto:sonoaac@gmail.com"
@@ -97,7 +97,7 @@ export function Navbar() {
                 <motion.button
                   whileTap={{ scale: 0.97 }}
                   style={{
-                    backgroundColor: "#000", color: "#fff",
+                    backgroundColor: "var(--snc-green)", color: "#031007",
                     fontFamily: "'Times New Roman', Times, serif",
                     fontWeight: 900, fontSize: "0.7rem",
                     textTransform: "uppercase", letterSpacing: "0.18em",
@@ -163,8 +163,8 @@ export function Navbar() {
                       style={{
                         position: "absolute", top: "100%", left: 0,
                         width: "260px", backgroundColor: "#fff",
-                        border: "2px solid #000",
-                        boxShadow: "4px 4px 0 #000", zIndex: 50,
+                        border: "2px solid #14532d",
+                        boxShadow: "4px 4px 0 #eadcff", zIndex: 50,
                       }}
                     >
                       {servicesMenu.map((item) => (
@@ -176,7 +176,7 @@ export function Navbar() {
                               borderBottom: "1px solid #e5e5e5", cursor: "pointer",
                               transition: "background 0.15s",
                             }}
-                            onMouseEnter={e => (e.currentTarget.style.background = "#f5f5f5")}
+                            onMouseEnter={e => (e.currentTarget.style.background = "#f4edff")}
                             onMouseLeave={e => (e.currentTarget.style.background = "none")}
                           >
                             <div style={{ fontFamily: "'Times New Roman', Times, serif", fontWeight: 800, fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.12em", color: "#000" }}>
@@ -195,7 +195,7 @@ export function Navbar() {
                             padding: "10px 20px", background: "#f9f9f9",
                             border: "none", cursor: "pointer", transition: "background 0.15s",
                           }}
-                          onMouseEnter={e => (e.currentTarget.style.background = "#eee")}
+                          onMouseEnter={e => (e.currentTarget.style.background = "#eadcff")}
                           onMouseLeave={e => (e.currentTarget.style.background = "#f9f9f9")}
                         >
                           <div style={{ fontFamily: "'Times New Roman', Times, serif", fontWeight: 900, fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.15em", color: "#000" }}>
@@ -240,8 +240,8 @@ export function Navbar() {
                       style={{
                         position: "absolute", top: "100%", left: 0,
                         width: "260px", backgroundColor: "#fff",
-                        border: "2px solid #000",
-                        boxShadow: "4px 4px 0 #000", zIndex: 50,
+                        border: "2px solid #14532d",
+                        boxShadow: "4px 4px 0 #eadcff", zIndex: 50,
                       }}
                     >
                       {myTechMenu.map((item) => (
@@ -253,7 +253,7 @@ export function Navbar() {
                               borderBottom: "1px solid #e5e5e5", cursor: "pointer",
                               transition: "background 0.15s",
                             }}
-                            onMouseEnter={e => (e.currentTarget.style.background = "#f5f5f5")}
+                            onMouseEnter={e => (e.currentTarget.style.background = "#f4edff")}
                             onMouseLeave={e => (e.currentTarget.style.background = "none")}
                           >
                             <div style={{ fontFamily: "'Times New Roman', Times, serif", fontWeight: 800, fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.12em", color: "#000" }}>
@@ -377,8 +377,8 @@ export function Navbar() {
               ))}
 
               <div style={{ paddingTop: "12px", display: "flex", flexDirection: "column", gap: "6px" }}>
-                <a href="tel:+18627559845" style={{ fontFamily: "monospace", fontSize: "0.82rem", color: "#555", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <Phone size={13} /> (862) 755-9845
+                <a href="tel:+12013496917" style={{ fontFamily: "monospace", fontSize: "0.82rem", color: "#555", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <Phone size={13} /> (201) 349-6917
                 </a>
                 <a href="mailto:sonoaac@gmail.com" style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.8rem", color: "#555", display: "flex", alignItems: "center", gap: "8px" }}>
                   <Mail size={13} /> sonoaac@gmail.com

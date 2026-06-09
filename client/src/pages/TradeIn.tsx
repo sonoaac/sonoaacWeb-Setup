@@ -735,7 +735,7 @@ export default function TradeIn() {
                       </button>
                     </Link>
                     <p style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.65rem", color: "#aaa", marginTop: "8px" }}>
-                      Or call us at (862) 755-9845
+                      Or call us at (201) 349-6917
                     </p>
                     <button onClick={reset} style={{ display: "block", margin: "16px auto 0", fontFamily: "'Times New Roman', serif", fontSize: "0.68rem", color: "#888", background: "none", border: "none", cursor: "pointer", textDecoration: "underline" }}>
                       Get another quote
@@ -832,8 +832,8 @@ export default function TradeIn() {
           Call or message us before bringing your device in.
         </p>
         <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="tel:+18627559845" className="btn-outline">
-            (862) 755-9845
+          <a href="tel:+12013496917" className="btn-outline">
+            (201) 349-6917
           </a>
           <Link href="/contact">
             <button className="btn-primary">Contact Us</button>

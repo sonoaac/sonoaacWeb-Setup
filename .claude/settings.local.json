@@ -2,7 +2,21 @@
   "permissions": {
     "allow": [
       "Bash(vercel:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "WebSearch",
+      "WebFetch(domain:www.hp.com)",
+      "WebFetch(domain:www.lenovo.com)",
+      "WebFetch(domain:www.apple.com)",
+      "WebFetch(domain:www.dell.com)",
+      "WebFetch(domain:news.samsung.com)",
+      "WebFetch(domain:www.gsmarena.com)",
+      "WebFetch(domain:nanoreview.net)",
+      "WebFetch(domain:www.brother-usa.com)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npm install:*)",
+      "Bash(npm list:*)"
     ]
   }
 }

@@ -26,7 +26,7 @@ export const ScrollWindow: React.FC<ScrollWindowProps> = ({ sections }) => {
               <p className="text-lg text-gray-700 mb-4">{section.description}</p>
               {section.ctaLabel && section.ctaHref && (
                 <Link href={section.ctaHref}>
-                  <button className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors text-base">
+                  <button className="btn-primary">
                     {section.ctaLabel}
                   </button>
                 </Link>
@@ -37,7 +37,7 @@ export const ScrollWindow: React.FC<ScrollWindowProps> = ({ sections }) => {
         {/* Right: Sticky image frame */}
         <div className="relative flex items-center min-h-[400px]">
           <div className="sticky top-28 w-full">
-            <div className="rounded-2xl border border-gray-200 shadow-lg bg-white outline outline-2 outline-green-100 overflow-hidden flex items-center justify-center min-h-[400px] h-[60vh] max-h-[500px]">
+            <div className="brand-panel border shadow-xl overflow-hidden flex items-center justify-center min-h-[400px] h-[60vh] max-h-[500px]">
               {/* Show the image for the currently visible section */}
               <ScrollWindowImages sections={sections} />
             </div>
@@ -52,13 +52,13 @@ export const ScrollWindow: React.FC<ScrollWindowProps> = ({ sections }) => {
             <img
               src={section.imageSrc}
               alt={section.imageAlt}
-              className="rounded-xl border border-gray-200 shadow-sm w-full object-cover max-h-64"
+              className="border border-green-900/20 shadow-sm w-full object-cover max-h-64"
               loading="lazy"
             />
             <p className="text-base text-gray-700">{section.description}</p>
             {section.ctaLabel && section.ctaHref && (
               <Link href={section.ctaHref}>
-                <button className="px-5 py-2.5 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors text-base">
+                <button className="btn-primary w-full sm:w-auto">
                   {section.ctaLabel}
                 </button>
               </Link>
@@ -107,7 +107,7 @@ const ScrollWindowImages: React.FC<{ sections: ScrollWindowSection[] }> = ({ sec
           <img
             src={section.imageSrc}
             alt={section.imageAlt}
-            className="w-full h-full object-cover rounded-2xl transition-all duration-300"
+            className="w-full h-full object-cover transition-all duration-300"
             loading="lazy"
           />
         </div>

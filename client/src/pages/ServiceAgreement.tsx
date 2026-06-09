@@ -219,7 +219,7 @@ export default function ServiceAgreement() {
               committed to resolving client concerns fairly and promptly.
             </p>
             <p>
-              This agreement is governed by the laws of the State of New York, United States.
+              This agreement is governed by the laws of the State of New Jersey, United States.
               Use of Sonoaac services constitutes acceptance of these terms.
             </p>
           </Section>

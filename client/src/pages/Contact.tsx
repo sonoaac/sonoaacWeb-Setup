@@ -262,12 +262,12 @@ export default function Contact() {
                   },
                   {
                     label: "Phone",
-                    value: "(862) 755-9845",
+                    value: "(201) 349-6917",
                     sub: "By appointment — call or text",
                   },
                   {
                     label: "Location",
-                    value: "New York, NY",
+                    value: "New Jersey",
                     sub: "Remote support available worldwide",
                   },
                   {

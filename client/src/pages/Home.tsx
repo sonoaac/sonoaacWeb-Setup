@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Monitor, MapPin, Cpu, Briefcase, Globe, Wrench } from "lucide-react";
 import { Link } from "wouter";
 import MonitorIntro from "@/components/features/MonitorIntro";
+import HomeFAQ from "@/components/features/HomeFAQ";
 
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
@@ -13,7 +14,7 @@ const fadeUp = {
 
 const categoryTiles = [
   { icon: Monitor,   label: "Remote Support",   sub: "Virus removal, OS fixes, M365",  link: "/services#remote"   },
-  { icon: MapPin,    label: "On Site Visit",     sub: "Home and office, NYC area",      link: "/services#onsite"   },
+  { icon: MapPin,    label: "On Site Visit",     sub: "Home and office, NJ area",       link: "/services#onsite"   },
   { icon: Cpu,       label: "Devices and Builds",sub: "Custom PCs, setup, TechMatcher", link: "/my-tech"           },
   { icon: Briefcase, label: "Business IT",       sub: "Email, networks, small teams",   link: "/services#business" },
   { icon: Globe,     label: "Web Development",   sub: "Custom sites built from scratch",link: "/services#web"      },
@@ -23,7 +24,7 @@ const categoryTiles = [
 const pricingCards = [
   { service: "Remote Virus Removal",       price: "$49",  note: "Per session"                       },
   { service: "Full PC Reset and Reinstall",price: "$79",  note: "Windows or Mac"                    },
-  { service: "On Site Setup Visit",        price: "$99",  note: "First hour, NYC area"              },
+  { service: "On Site Setup Visit",        price: "$99",  note: "First hour, NJ area"               },
   { service: "Custom PC Build Consult",    price: "$59",  note: "Parts and build plan included"     },
   { service: "Business Email (M365)",      price: "$129", note: "Setup and configuration"           },
   { service: "Custom Website",             price: "$499", note: "Mobile responsive, built from scratch" },
@@ -69,7 +70,7 @@ const serviceCards = [
 ];
 
 const howItWorks = [
-  { step: "01", title: "Book a Consultation", body: "Fill out the quick contact form or call or text (862) 755-9845. Same day often available." },
+  { step: "01", title: "Book a Consultation", body: "Fill out the quick contact form or call or text (201) 349-6917. Same day often available." },
   { step: "02", title: "We Diagnose and Fix It", body: "Remote or on site, we identify the problem, give you a clear quote, and get to work." },
   { step: "03", title: "Back Up and Running", body: "Issue resolved, no jargon, no surprises. Follow up support included." },
 ];
@@ -102,7 +103,7 @@ export default function Home() {
                 <em style={{ fontStyle: "italic", fontWeight: 900 }}>On Site. Remote. Anywhere.</em>
               </h1>
               <p style={{ fontSize: "1.1rem", lineHeight: 1.75, color: "#444", maxWidth: "600px", marginBottom: "2.5rem" }}>
-                NYC based tech support for homes, freelancers, and small businesses.
+                NJ based tech support for homes, freelancers, and small businesses.
                 Remote troubleshooting, on site visits, device setup, custom PC builds,
                 and web development all under one name.
               </p>
@@ -121,7 +122,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-x-12 gap-y-4 pt-7 border-t border-green-900/30">
                 {[
                   ["Remote and On Site", "Two ways to help"],
-                  ["NYC Based",          "Tri-state area coverage"],
+                  ["NJ Based",           "NJ and tri-state coverage"],
                   ["Registered US Business", "Licensed and insured"],
                   ["By Appointment",     "Same day often available"],
                 ].map(([label, sub]) => (
@@ -340,6 +341,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── Knowledge Base FAQ ────────────────────────────────────────── */}
+        <HomeFAQ />
+
         {/* ── CTA ───────────────────────────────────────────────────────── */}
         <section className="px-6 sm:px-10 lg:px-16 py-20 md:py-24">
           <div className="max-w-5xl mx-auto">
@@ -350,7 +354,7 @@ export default function Home() {
               </h2>
               <p style={{ fontSize: "1rem", color: "#555", maxWidth: "520px", marginBottom: "2.5rem", lineHeight: 1.75 }}>
                 Call or text{" "}
-                <a href="tel:+18627559845" style={{ color: "#000", fontWeight: 900 }}>(862) 755-9845</a>
+                <a href="tel:+12013496917" style={{ color: "#000", fontWeight: 900 }}>(201) 349-6917</a>
                 , or email{" "}
                 <a href="mailto:sonoaac@gmail.com" style={{ color: "#000", fontWeight: 900 }}>sonoaac@gmail.com</a>
                 . Same day appointments often available.
@@ -364,7 +368,7 @@ export default function Home() {
                 <Link href="/services">
                   <button className="btn-outline">Browse Services</button>
                 </Link>
-                <a href="tel:+18627559845">
+                <a href="tel:+12013496917">
                   <button
                     style={{
                       padding: "16px 28px", border: "2px solid #ccc", background: "none",
@@ -375,7 +379,7 @@ export default function Home() {
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#000"; (e.currentTarget as HTMLElement).style.color = "#000"; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "#ccc"; (e.currentTarget as HTMLElement).style.color = "#555"; }}
                   >
-                    (862) 755-9845
+                    (201) 349-6917
                   </button>
                 </a>
               </div>
