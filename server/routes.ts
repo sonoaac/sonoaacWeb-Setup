@@ -180,6 +180,96 @@ export async function registerRoutes(
     }
   });
 
+  // === Client Discovery Form ===
+  app.post("/api/client-forms", async (req, res) => {
+    try {
+      const d = req.body ?? {};
+      if (!d.businessEmail && !d.phone) {
+        return res.status(400).json({ message: "Email or phone required." });
+      }
+
+      const checked = (arr: unknown) => Array.isArray(arr) && arr.length ? arr.join(", ") : "None";
+      const val = (v: unknown, fallback = "—") => (typeof v === "string" && v.trim()) ? v.trim() : fallback;
+
+      const body = `
+SONOAAC — CLIENT DISCOVERY FORM SUBMISSION
+==========================================
+Submitted by: ${val(d.clientName)} | Signed: ${val(d.clientDate)}
+
+— CLIENT INFORMATION —
+Business Name:      ${val(d.businessName)}
+Contact Person:     ${val(d.contactPerson)} (${val(d.positionTitle)})
+Phone:              ${val(d.phone)} | Alt: ${val(d.altPhone)}
+Email:              ${val(d.businessEmail)}
+Website:            ${val(d.website)}
+Address:            ${val(d.address)}, ${val(d.city)}, ${val(d.state)} ${val(d.zip)}
+Locations:          ${val(d.locations)} | Years in Business: ${val(d.yearsInBusiness)}
+Best Time:          ${checked(d.bestTime)}
+Contact Method:     ${checked(d.contactMethod)}
+
+— BUSINESS TYPE —
+${checked(d.businessTypes)}${d.businessTypeOther ? ` | Other: ${d.businessTypeOther}` : ""}
+
+— CONTACT PERSON —
+Working With:       ${val(d.workingWith)}
+Preferred Contact:  ${val(d.preferredContact)}
+
+— SERVICES REQUESTED —
+Computer & IT:      ${checked(d.computerIt)}
+Security:           ${checked(d.security)}
+Network:            ${checked(d.network)}
+Hardware:           ${checked(d.hardware)}
+Web & Digital:      ${checked(d.webDigital)}
+Other Services:     ${checked(d.otherServices)}
+
+— CURRENT ENVIRONMENT —
+Internet Provider:  ${val(d.internetProvider)} (${val(d.internetType)})
+Network Type:       ${val(d.networkType)}
+Devices:            ${val(d.numDevices)}
+Server:             ${val(d.hasServer)}${d.serverType ? ` — ${d.serverType}` : ""}
+Backup:             ${val(d.hasBackup)}${d.backupType ? ` — ${d.backupType}` : ""}
+Current IT:         ${val(d.currentItProvider)}
+Current Website:    ${val(d.currentWebsite)}
+Ongoing Issues:     ${val(d.ongoingIssues)}
+
+— BUSINESS GOALS —
+${checked(d.goals)}${d.goalsOther ? ` | Other: ${d.goalsOther}` : ""}
+
+— BUDGET & TIMELINE —
+Budget:             ${val(d.budget)}
+Timeline:           ${val(d.timeline)}
+Target Date:        ${val(d.targetDate)}
+
+— ADDITIONAL SERVICES —
+Business Setup:     ${checked(d.bizSetup)}
+Branding:           ${checked(d.branding)}
+How Heard:          ${val(d.howHeard)}
+Additional Notes:   ${val(d.additionalNotes)}
+
+— SITE SURVEY NOTES —
+${val(d.surveyNotes)}
+
+— AGREEMENT —
+Agreed to Terms:    ${d.agreedToTerms ? "YES" : "NO"}
+Signed:             ${val(d.clientName)}
+Date:               ${val(d.clientDate)}
+==========================================
+`.trim();
+
+      const smsBody = `SNC Form: ${val(d.contactPerson)} @ ${val(d.businessName)} | ${val(d.businessEmail)} | ${val(d.phone)} | Budget: ${val(d.budget)}`;
+
+      await sendAdminNotification(
+        `New Client Discovery Form — ${val(d.businessName)} (${val(d.contactPerson)})`,
+        body
+      ).catch(console.error);
+
+      res.status(201).json({ ok: true });
+    } catch (err) {
+      console.error("Client form error:", err);
+      res.status(500).json({ message: "Failed to submit form." });
+    }
+  });
+
   await seedDatabase();
 
   return httpServer;

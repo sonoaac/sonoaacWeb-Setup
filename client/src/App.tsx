@@ -22,6 +22,7 @@ const KnowledgeBase = lazy(() => import("@/pages/KnowledgeBase"));
 const TradeIn = lazy(() => import("@/pages/TradeIn"));
 const TrackTicket = lazy(() => import("@/pages/TrackTicket"));
 const AdminTickets = lazy(() => import("@/pages/AdminTickets"));
+const ClientForms = lazy(() => import("@/pages/ClientForms"));
 
 function RedirectTo({ to }: { to: string }) {
   const [, setLocation] = useLocation();
@@ -43,6 +44,7 @@ function Router() {
         <Route path="/service-agreement" component={ServiceAgreement} />
         <Route path="/track/:token" component={TrackTicket} />
         <Route path="/admin/tickets" component={AdminTickets} />
+        <Route path="/client-forms" component={ClientForms} />
 
         <Route path="/it-support"><RedirectTo to="/services" /></Route>
         <Route path="/on-site-services"><RedirectTo to="/services" /></Route>
