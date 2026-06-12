@@ -383,20 +383,6 @@ export default function ClientForms() {
               <input className={inputClass} value={form.businessTypeOther} onChange={(e) => set("businessTypeOther", e.target.value)} placeholder="Describe your business type" />
             </Field>
           </div>
-          <div className="mt-6 border border-green-900/30 p-5">
-            <p className={labelClass}>You will be working with</p>
-            <div className="flex flex-wrap gap-6 mb-5">
-              {["Mark", "Ishmael"].map((n) => (
-                <RadioBox key={n} label={n} checked={form.workingWith === n} onChange={() => set("workingWith", n)} />
-              ))}
-            </div>
-            <p className={labelClass}>Preferred Contact Person</p>
-            <div className="flex flex-wrap gap-6">
-              {["Mark", "Ishmael", "Either"].map((n) => (
-                <RadioBox key={n} label={n} checked={form.preferredContact === n} onChange={() => set("preferredContact", n)} />
-              ))}
-            </div>
-          </div>
         </motion.div>
 
         {/* ── Section 3: Services ── */}
