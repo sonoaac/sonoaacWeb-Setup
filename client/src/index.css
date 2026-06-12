@@ -39,8 +39,10 @@
 
   html {
     scroll-behavior: smooth;
-    font-size: clamp(17px, 1.1vw + 14px, 20px);
+    font-size: clamp(15px, 1.1vw + 13px, 20px);
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
