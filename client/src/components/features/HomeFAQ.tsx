@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { Link } from "wouter";
 import { FAQ_SECTIONS, type FAQSection } from "@/pages/KnowledgeBase";
 
 function FAQAccordion({ section }: { section: FAQSection }) {
@@ -150,37 +149,6 @@ export default function HomeFAQ() {
         >
           <FAQAccordion section={activeSection} />
         </motion.div>
-
-        {/* Link to full KB */}
-        <div className="mt-10">
-          <Link href="/knowledge-base">
-            <button
-              style={{
-                fontFamily: "'Times New Roman', serif",
-                fontWeight: 800,
-                fontSize: "0.78rem",
-                textTransform: "uppercase",
-                letterSpacing: "0.15em",
-                padding: "14px 24px",
-                background: "none",
-                color: "#000",
-                border: "2px solid #000",
-                cursor: "pointer",
-                transition: "background 0.15s, color 0.15s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "#000";
-                (e.currentTarget as HTMLElement).style.color = "#fff";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = "none";
-                (e.currentTarget as HTMLElement).style.color = "#000";
-              }}
-            >
-              Full Knowledge Base + Product Comparisons →
-            </button>
-          </Link>
-        </div>
       </div>
     </section>
   );

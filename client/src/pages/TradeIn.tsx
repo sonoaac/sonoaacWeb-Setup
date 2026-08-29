@@ -4,7 +4,7 @@ import { Link } from "wouter";
 import { ChevronDown, ChevronRight, Info, CheckCircle, XCircle, Clock, AlertTriangle } from "lucide-react";
 
 // ─── Pricing data ──────────────────────────────────────────────────────────
-// competitorAvg = typical trade-in value across Gazelle / SellCell / BestBuy / Apple
+// competitorAvg = typical trade-in value across major buyback services
 // Sonoaac cash offer = 50% of competitorAvg (competitors offer store credit; we pay cash)
 
 const IPHONE_MODELS: { id: string; name: string; released: number; storage: { gb: string; competitorAvg: number }[] }[] = [
@@ -735,7 +735,7 @@ export default function TradeIn() {
                       </button>
                     </Link>
                     <p style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.65rem", color: "#aaa", marginTop: "8px" }}>
-                      Or call us at (201) 349-6917
+                      Or call us at (862) 423-8875
                     </p>
                     <button onClick={reset} style={{ display: "block", margin: "16px auto 0", fontFamily: "'Times New Roman', serif", fontSize: "0.68rem", color: "#888", background: "none", border: "none", cursor: "pointer", textDecoration: "underline" }}>
                       Get another quote
@@ -832,8 +832,8 @@ export default function TradeIn() {
           Call or message us before bringing your device in.
         </p>
         <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="tel:+12013496917" className="btn-outline">
-            (201) 349-6917
+          <a href="tel:+18624238875" className="btn-outline">
+            (862) 423-8875
           </a>
           <Link href="/contact">
             <button className="btn-primary">Contact Us</button>

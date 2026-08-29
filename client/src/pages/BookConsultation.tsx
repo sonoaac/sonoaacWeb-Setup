@@ -140,7 +140,7 @@ export default function BookConsultation() {
               </div>
               <div className="border-l-2 border-green-800 pl-5">
                 <h3 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-2">Phone</h3>
-                <p className="text-white text-sm">(201) 349-6917</p>
+                <p className="text-white text-sm">(862) 423-8875</p>
               </div>
             </div>
           </motion.div>

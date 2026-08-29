@@ -262,7 +262,7 @@ export default function Contact() {
                   },
                   {
                     label: "Phone",
-                    value: "(201) 349-6917",
+                    value: "(862) 423-8875",
                     sub: "By appointment — call or text",
                   },
                   {

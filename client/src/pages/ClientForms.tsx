@@ -177,7 +177,7 @@ const AGREEMENT_SECTIONS = [
   },
   {
     title: "2. Employee Information Protection",
-    body: `The personal information of Sonoaac technicians and employees — including personal phone numbers, home addresses, personal email accounts, and any other private details — is strictly confidential and will not be disclosed to clients under any circumstances. All communication with Sonoaac staff must occur through official channels: sonoaacservices@gmail.com, 201-349-6917, or www.sonoaac.com. Clients agree not to solicit or contact employees directly outside of authorized business channels.`,
+    body: `The personal information of Sonoaac technicians and employees — including personal phone numbers, home addresses, personal email accounts, and any other private details — is strictly confidential and will not be disclosed to clients under any circumstances. All communication with Sonoaac staff must occur through official channels: sonoaacservices@gmail.com, 862-423-8875, or www.sonoaac.com. Clients agree not to solicit or contact employees directly outside of authorized business channels.`,
   },
   {
     title: "3. Free Reschedule Guarantee",

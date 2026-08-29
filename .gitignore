@@ -63,3 +63,6 @@ vite.config.ts.*
 *.tar.gz
 .vercel
 .env*.local
+
+# Local staging (redundant — copied into client/public/img/rentals)
+TV catalogue img/

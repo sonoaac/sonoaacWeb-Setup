@@ -70,7 +70,7 @@ const serviceCards = [
 ];
 
 const howItWorks = [
-  { step: "01", title: "Book a Consultation", body: "Fill out the quick contact form or call or text (201) 349-6917. Same day often available." },
+  { step: "01", title: "Book a Consultation", body: "Fill out the quick contact form or call or text (862) 423-8875. Same day often available." },
   { step: "02", title: "We Diagnose and Fix It", body: "Remote or on site, we identify the problem, give you a clear quote, and get to work." },
   { step: "03", title: "Back Up and Running", body: "Issue resolved, no jargon, no surprises. Follow up support included." },
 ];
@@ -354,7 +354,7 @@ export default function Home() {
               </h2>
               <p style={{ fontSize: "1rem", color: "#555", maxWidth: "520px", marginBottom: "2.5rem", lineHeight: 1.75 }}>
                 Call or text{" "}
-                <a href="tel:+12013496917" style={{ color: "#000", fontWeight: 900 }}>(201) 349-6917</a>
+                <a href="tel:+18624238875" style={{ color: "#000", fontWeight: 900 }}>(862) 423-8875</a>
                 , or email{" "}
                 <a href="mailto:sonoaac@gmail.com" style={{ color: "#000", fontWeight: 900 }}>sonoaac@gmail.com</a>
                 . Same day appointments often available.
@@ -368,7 +368,7 @@ export default function Home() {
                 <Link href="/services">
                   <button className="btn-outline">Browse Services</button>
                 </Link>
-                <a href="tel:+12013496917">
+                <a href="tel:+18624238875">
                   <button
                     style={{
                       padding: "16px 28px", border: "2px solid #ccc", background: "none",
@@ -379,7 +379,7 @@ export default function Home() {
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#000"; (e.currentTarget as HTMLElement).style.color = "#000"; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "#ccc"; (e.currentTarget as HTMLElement).style.color = "#555"; }}
                   >
-                    (201) 349-6917
+                    (862) 423-8875
                   </button>
                 </a>
               </div>

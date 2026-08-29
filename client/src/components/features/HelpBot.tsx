@@ -1,941 +1,571 @@
 import { useState, useRef, useEffect, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "wouter";
-import { MessageCircle, X, ChevronLeft } from "lucide-react";
+import { MessageCircle, X, Send, RotateCcw } from "lucide-react";
+import { useSubmitContact } from "@/hooks/use-contact";
+import { retrieve, type MemoryEntry } from "@/lib/assistantMemory";
 
-// ── Shared formatting helpers ────────────────────────────────────────────────
+// ── Matching helpers ─────────────────────────────────────────────────────────
 
-function Section({ title, children }: { title?: string; children: ReactNode }) {
+function normalize(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const YES_RE =
+  /^(y|ya|yes|yeah|yep|yup|sure|ok|okay|it did|that did|that helped|helped|worked|fixed|perfect|great|awesome|nice|thanks|thank you|got it|makes sense|all good)\b/;
+const NO_RE =
+  /^(n|no|nope|nah|not really|not quite|didn t|didnt|does not|doesn t|doesnt|negative|still (not|having|broken|slow|down)|nothing)\b/;
+
+function isEscalationIntent(text: string): boolean {
+  const n = normalize(text);
   return (
-    <div className="space-y-1">
-      {title && (
-        <p className="text-green-400 font-bold text-xs uppercase tracking-wider mt-2">
-          {title}
+    /\b(talk|speak|chat) to (a )?(human|person|someone|rep|agent|tech|technician)\b/.test(n) ||
+    /\bcontact support\b/.test(n) ||
+    /\bcustomer (service|support|care)\b/.test(n) ||
+    /\b(real|actual|live) (person|human|agent)\b/.test(n) ||
+    /\b(have |get )?someone (call|contact|reach|email|text|help) me\b/.test(n) ||
+    /\b(call|contact|reach|email|text) me back\b/.test(n) ||
+    /\bget back to me\b/.test(n) ||
+    /\bleave (my|a) (details|message|info)\b/.test(n)
+  );
+}
+
+function smallTalk(text: string): string | null {
+  const n = normalize(text);
+  if (!n) return null;
+  if (
+    /^(hi|hey|hello|yo|sup|hiya|howdy|good (morning|afternoon|evening))\b/.test(n) ||
+    n === "help" ||
+    n === "menu" ||
+    n === "what can you do"
+  ) {
+    return "I can help with things like slow or infected computers, what laptop, tablet, or PC parts to buy (CPU, RAM, SSD, GPU), Wi-Fi and networking, monitors, Microsoft 365, plus pricing, trade-ins, and booking a visit. What's going on?";
+  }
+  if (/\b(thanks|thank you|thx|ty|appreciate|cheers)\b/.test(n)) {
+    return "Anytime. Anything else I can help with?";
+  }
+  if (/\b(bye|goodbye|see ya|see you|thats all|that s all|cya)\b/.test(n)) {
+    return "Take care! If you need us, call or text (862) 423-8875 or use the contact page.";
+  }
+  return null;
+}
+
+// ── Chat model ───────────────────────────────────────────────────────────────
+
+type Mode = "chat" | "awaitingFeedback" | "escalating";
+type Flow = { id: "buy"; tries: number };
+
+let msgSeq = 0;
+const nextId = () => ++msgSeq;
+
+interface Msg {
+  id: number;
+  role: "user" | "bot";
+  text?: string;
+  entry?: MemoryEntry;
+  form?: boolean;
+}
+
+const userMsg = (text: string): Msg => ({ id: nextId(), role: "user", text });
+const botText = (text: string): Msg => ({ id: nextId(), role: "bot", text });
+const botEntry = (entry: MemoryEntry): Msg => ({ id: nextId(), role: "bot", entry });
+const formMsg = (): Msg => ({ id: nextId(), role: "bot", form: true });
+
+const GREETING = "Hi, I'm the Sonoaac assistant. What can I help with?";
+const seedMessages = (): Msg[] => [botText(GREETING)];
+
+const FEEDBACK_Q = "Did that answer it for you?";
+const FALLBACK =
+  'I’m not totally sure I follow. Try rewording that, or if you’d like a real person to follow up, just say “contact support”.';
+
+// ── Guided "which computer" flow ─────────────────────────────────────────────
+
+type UseCase = "school" | "office" | "gaming" | "creative" | "general";
+
+function isBuyIntent(text: string): boolean {
+  const n = normalize(text);
+  if (/\bnew (computer|laptop|pc|desktop|macbook|chromebook)\b/.test(n)) return true;
+  if (/\b(which|what|best)\b[^.!?]*\b(computer|laptop|pc|macbook|chromebook)\b/.test(n)) return true;
+  if (
+    /\b(buy|buying|purchase|purchasing|get|getting|need|want|looking for|shopping for|recommend|choose|pick|suggest)\b[^.!?]*\b(computer|laptop|pc|notebook|desktop|macbook|chromebook|machine)\b/.test(
+      n,
+    )
+  )
+    return true;
+  return false;
+}
+
+function detectUseCase(text: string): UseCase | null {
+  const n = normalize(text);
+  if (/\b(school|student|students|college|university|campus|class|classes|homework|study|studying)\b/.test(n))
+    return "school";
+  if (
+    /\b(video|videos|photo|photos|editing|edit|premiere|photoshop|lightroom|davinci|resolve|final cut|render|rendering|3d|blender|creative|content creation|animation|design)\b/.test(
+      n,
+    )
+  )
+    return "creative";
+  if (/\b(gaming|game|games|gamer|fps|steam|fortnite|valorant|esports|triple a|aaa)\b/.test(n))
+    return "gaming";
+  if (/\b(office|work|working|business|teams|outlook|excel|word|spreadsheet|email|corporate|job)\b/.test(n))
+    return "office";
+  if (/\b(general|home|everyday|basic|browsing|casual|family|simple|light use|web)\b/.test(n))
+    return "general";
+  return null;
+}
+
+const BUY_CLARIFY =
+  "Happy to help you pick. What will you mainly use it for — school, office work, gaming, creative work like video or photo, or general home use?";
+const BUY_RECLARIFY =
+  "No problem — roughly, is it for everyday stuff (browsing, email, docs), heavier work, or gaming and creative work?";
+
+const BUY_ANSWERS: Record<UseCase, { title: string; body: string; cta: { label: string; href: string } }> = {
+  school: {
+    title: "Picking a laptop for school",
+    body: `Prioritize portability, battery, and reliability over raw power:
+- CPU: Intel Core i5 or AMD Ryzen 5 — or an Apple M-series MacBook Air
+- RAM: 16GB is ideal; 8GB only if the budget is tight
+- Storage: 512GB SSD (256GB minimum)
+- Screen & battery: 1080p, 10+ hours real-world
+- A Chromebook is fine if you only need a browser and Google Docs
+
+Sweet spot is about $500–$800.
+
+Ask me about any piece — RAM, storage, or Windows vs Mac vs Chromebook — and I'll go deeper.`,
+    cta: { label: "Explore Devices", href: "/my-tech" },
+  },
+  office: {
+    title: "A laptop for office work",
+    body: `For Teams, Outlook, Word, and Excel:
+- CPU: Intel Core i5/i7 (11th gen or newer) or AMD Ryzen 5/7
+- RAM: 16GB, non-negotiable — Teams + Outlook + Chrome + OneDrive together use 8–14GB
+- Storage: 512GB SSD
+- OS: Windows 11 Pro if you need domain join, BitLocker, or Remote Desktop
+
+Typical range is $700–$1,100.
+
+Is this light use (mostly email and docs) or heavy (big files, lots of apps at once)? I can tighten the spec.`,
+    cta: { label: "Business IT", href: "/services#business" },
+  },
+  gaming: {
+    title: "A machine for gaming",
+    body: `Depends on your target resolution and budget:
+- ~$500: AMD Ryzen 5 7600 + RTX 4060 — 1080p 144Hz
+- ~$800: Intel Core i5-14600K + RTX 4070 — 1440p 144Hz
+- ~$1,200: Ryzen 7 7800X3D + RTX 4070 Ti Super — 1440p to 4K
+- ~$2,400+: Core i9-14900K + RTX 4090 — 4K, max settings
+
+The Ryzen 7 7800X3D is the best gaming CPU per dollar right now.
+
+Want a desktop build or a gaming laptop, and what resolution are you aiming for?`,
+    cta: { label: "Custom PC Build", href: "/my-tech/build-pc" },
+  },
+  creative: {
+    title: "A machine for video and photo work",
+    body: `- RAM: 32GB
+- GPU: a dedicated card — RTX 4070 or better (NVIDIA for Premiere and CUDA), or AMD RX 7900 for DaVinci Resolve
+- CPU: fast multi-core — Intel Core i9 or Ryzen 9
+- Storage: 1TB NVMe SSD
+
+On Final Cut Pro, go Apple Silicon (M3/M4 Pro or Max) — it exports 4K faster than most Windows PCs at the same price.
+
+Which app do you use most — Premiere, DaVinci Resolve, Final Cut, or Photoshop/Lightroom?`,
+    cta: { label: "Custom PC Build", href: "/my-tech/build-pc" },
+  },
+  general: {
+    title: "A laptop for everyday home use",
+    body: `For browsing, email, docs, and video:
+- CPU: any Intel Core i3/i5 or AMD Ryzen 3/5 from 2020 or newer
+- RAM: 16GB (8GB is fine if it's genuinely light use)
+- Storage: 256–512GB SSD — never a spinning HDD
+
+No need to overspend — a $500–$700 laptop handles all of this comfortably.
+
+Want a Windows vs Mac vs Chromebook breakdown for this?`,
+    cta: { label: "Explore Devices", href: "/my-tech" },
+  },
+};
+
+function buyEntry(uc: UseCase): MemoryEntry {
+  const a = BUY_ANSWERS[uc];
+  return {
+    id: `buy-${uc}`,
+    sectionId: "services",
+    section: "Buying advice",
+    q: a.title,
+    a: a.body,
+    kw: "",
+    text: "",
+    cta: a.cta,
+  };
+}
+
+// ── Router ───────────────────────────────────────────────────────────────────
+
+interface Routed {
+  messages: Msg[];
+  mode: Mode;
+  flow: Flow | null;
+}
+
+function escalate(): Routed {
+  return {
+    messages: [
+      botText(
+        "No problem — I'll get a Sonoaac tech to follow up with you. Add your details below and we'll be in touch, usually the same day:",
+      ),
+      formMsg(),
+    ],
+    mode: "escalating",
+    flow: null,
+  };
+}
+
+/** Show one answer at a time; mention the runners-up conversationally. */
+function retrieveResult(text: string): Routed {
+  const hits = retrieve(text, 3);
+  if (hits.length === 0) {
+    return { messages: [botText(FALLBACK)], mode: "chat", flow: null };
+  }
+  const messages: Msg[] = [botEntry(hits[0].entry)];
+  if (hits.length > 1) {
+    const more = hits
+      .slice(1)
+      .map((h) => `“${h.entry.q}”`)
+      .join(" or ");
+    messages.push(botText(`I can also go into ${more} — just ask.`));
+  }
+  messages.push(botText(FEEDBACK_Q));
+  return { messages, mode: "awaitingFeedback", flow: null };
+}
+
+function answerUseCase(uc: UseCase): Routed {
+  return {
+    messages: [botEntry(buyEntry(uc)), botText(FEEDBACK_Q)],
+    mode: "awaitingFeedback",
+    flow: null,
+  };
+}
+
+function advanceBuyFlow(text: string, flow: Flow): Routed {
+  const uc = detectUseCase(text);
+  if (uc) return answerUseCase(uc);
+  if (isEscalationIntent(text)) return escalate();
+
+  // Changed the subject with a clear question? Answer that instead.
+  const hits = retrieve(text, 1);
+  if (hits.length && hits[0].score >= 5) return retrieveResult(text);
+
+  if (flow.tries >= 1) return answerUseCase("general");
+  return { messages: [botText(BUY_RECLARIFY)], mode: "chat", flow: { id: "buy", tries: flow.tries + 1 } };
+}
+
+function route(text: string, flow: Flow | null): Routed {
+  if (flow) return advanceBuyFlow(text, flow);
+  if (isEscalationIntent(text)) return escalate();
+
+  const st = smallTalk(text);
+  if (st) return { messages: [botText(st)], mode: "chat", flow: null };
+
+  if (isBuyIntent(text)) {
+    const uc = detectUseCase(text);
+    if (uc) return answerUseCase(uc);
+    return { messages: [botText(BUY_CLARIFY)], mode: "chat", flow: { id: "buy", tries: 0 } };
+  }
+
+  return retrieveResult(text);
+}
+
+// ── Renderers ────────────────────────────────────────────────────────────────
+
+/** Render a plain-text answer: blank lines = paragraphs, "- " lines = bullets. */
+function PlainAnswer({ text }: { text: string }) {
+  const blocks = text.split(/\n{2,}/);
+  return (
+    <div className="space-y-2">
+      {blocks.map((block, bi) => {
+        const lines = block.split("\n");
+        const bullets = lines.filter((l) => l.trim().startsWith("- "));
+        if (bullets.length && bullets.length === lines.length) {
+          return (
+            <ul key={bi} className="space-y-0.5">
+              {bullets.map((l, li) => (
+                <li key={li} className="flex gap-2">
+                  <span className="text-gray-500 shrink-0">•</span>
+                  <span>{l.replace(/^\s*-\s+/, "")}</span>
+                </li>
+              ))}
+            </ul>
+          );
+        }
+        return (
+          <p key={bi} className="leading-relaxed">
+            {lines.map((l, li) => (
+              <span key={li}>
+                {l.replace(/^\s*-\s+/, "• ")}
+                {li < lines.length - 1 && <br />}
+              </span>
+            ))}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+function EntryBubble({ entry, onNavigate }: { entry: MemoryEntry; onNavigate: () => void }) {
+  return (
+    <>
+      <p className="text-green-400 font-bold text-xs leading-snug">{entry.q}</p>
+      <div className="text-xs text-gray-300 space-y-2">
+        {typeof entry.a === "string" ? (
+          <PlainAnswer text={entry.a} />
+        ) : (
+          /* kb-mono neutralizes the FAQ's light-mode Tailwind colors */
+          <div className="kb-mono">{entry.a as ReactNode}</div>
+        )}
+      </div>
+      {entry.cta && (
+        <p className="text-[0.7rem] pt-1.5 border-t border-gray-800">
+          <Link href={entry.cta.href}>
+            <button
+              onClick={onNavigate}
+              className="text-green-400 underline hover:text-green-300 transition-colors"
+            >
+              {entry.cta.label}
+            </button>
+          </Link>
         </p>
       )}
-      {children}
-    </div>
+    </>
   );
 }
 
-function BulletList({
-  items,
-  type = "dot",
+// ── Escalation form ──────────────────────────────────────────────────────────
+
+function EscalationForm({
+  defaultMessage,
+  onSubmitted,
 }: {
-  items: string[];
-  type?: "check" | "cross" | "dot" | "arrow";
+  defaultMessage: string;
+  onSubmitted: (name: string) => void;
 }) {
-  const icon =
-    type === "check" ? "✔" : type === "cross" ? "✖" : type === "arrow" ? "➡" : "•";
-  const iconColor =
-    type === "check"
-      ? "text-green-400"
-      : type === "cross"
-      ? "text-red-400"
-      : "text-gray-500";
+  const submit = useSubmitContact();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [msg, setMsg] = useState(defaultMessage);
+  const [err, setErr] = useState<string | null>(null);
+  const [done, setDone] = useState(false);
+
+  if (done) {
+    return (
+      <p className="text-gray-300 text-xs leading-relaxed">
+        Sent ✓ — your request is on its way. We'll reply by email, usually the same day.
+      </p>
+    );
+  }
+
+  const emailOk = /^\S+@\S+\.\S+$/.test(email.trim());
+  const valid = name.trim().length > 0 && emailOk && msg.trim().length > 0;
+
+  const field =
+    "w-full bg-black border border-green-900 text-gray-200 text-xs px-2.5 py-1.5 " +
+    "focus:outline-none focus:border-green-600 placeholder:text-gray-600";
+
+  const handle = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErr(null);
+    if (!valid) {
+      setErr("Add your name, a valid email, and a short description.");
+      return;
+    }
+    const body = {
+      name: name.trim(),
+      email: email.trim(),
+      message:
+        "[HelpBot] Customer asked for a follow-up.\n" +
+        (phone.trim() ? `Phone: ${phone.trim()}\n` : "") +
+        `\n${msg.trim()}`,
+    };
+    try {
+      await submit.mutateAsync(body as any);
+      setDone(true);
+      onSubmitted(name.trim());
+    } catch (e: any) {
+      setErr(e?.message ?? "Couldn't send. Try again, or call (862) 423-8875.");
+    }
+  };
+
   return (
-    <ul className="space-y-0.5">
-      {items.map((item, i) => (
-        <li key={i} className="flex gap-2 text-xs">
-          <span className={`${iconColor} shrink-0 mt-0.5`}>{icon}</span>
-          <span className="text-gray-300">{item}</span>
-        </li>
-      ))}
-    </ul>
+    <form onSubmit={handle} className="space-y-2">
+      <input
+        className={field}
+        placeholder="Your name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        autoComplete="name"
+      />
+      <input
+        className={field}
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        autoComplete="email"
+      />
+      <input
+        className={field}
+        placeholder="Phone (optional)"
+        inputMode="tel"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        autoComplete="tel"
+      />
+      <textarea
+        className={field}
+        rows={3}
+        placeholder="What do you need help with?"
+        value={msg}
+        onChange={(e) => setMsg(e.target.value)}
+      />
+      {err && <p className="text-red-400 text-[0.65rem]">{err}</p>}
+      <button
+        type="submit"
+        disabled={submit.isPending}
+        className="w-full px-3 py-2 bg-green-400 text-black text-[0.65rem] uppercase tracking-[0.15em] font-bold hover:bg-green-300 transition-colors disabled:opacity-40"
+      >
+        {submit.isPending ? "Sending…" : "Send to customer service"}
+      </button>
+    </form>
   );
 }
-
-function CompareTable({
-  headers,
-  rows,
-}: {
-  headers: string[];
-  rows: string[][];
-}) {
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-xs border-collapse">
-        <thead>
-          <tr>
-            {headers.map((h, i) => (
-              <th
-                key={i}
-                className="text-left text-green-400 font-bold py-1 pr-3 border-b border-green-900"
-              >
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
-            <tr key={i} className="border-b border-green-900/30">
-              {row.map((cell, j) => (
-                <td key={j} className="py-1 pr-3 text-gray-300">
-                  {cell}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function Note({ children }: { children: ReactNode }) {
-  return (
-    <p className="text-gray-400 text-xs italic leading-relaxed border-l-2 border-green-900 pl-2">
-      {children}
-    </p>
-  );
-}
-
-function Callout({ children }: { children: ReactNode }) {
-  return (
-    <div className="bg-green-900/20 border border-green-900 p-2 rounded text-xs text-gray-300 space-y-1">
-      {children}
-    </div>
-  );
-}
-
-// ── Data ─────────────────────────────────────────────────────────────────────
-
-interface Question {
-  id: string;
-  question: string;
-  answer: ReactNode;
-  ctas?: { label: string; href: string }[];
-}
-
-interface Category {
-  id: string;
-  label: string;
-  questions: Question[];
-}
-
-const CATEGORIES: Category[] = [
-  // ── What We Do ────────────────────────────────────────────────────────────
-  {
-    id: "help",
-    label: "What We Do",
-    questions: [
-      {
-        id: "services",
-        question: "What services does Sonoaac offer?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              We provide a full range of IT services for homes and small businesses.
-              Whether you need a quick software fix or a full business network setup,
-              we handle it.
-            </p>
-            <BulletList
-              type="check"
-              items={[
-                "Remote support sessions via Zoom, AnyDesk, or TeamViewer",
-                "On-site home and office visits — hardware, networks, and setup",
-                "New device configuration and software installation",
-                "Custom PC builds and component recommendations",
-                "Software troubleshooting and OS fixes",
-                "Business IT solutions and ongoing support",
-              ]}
-            />
-          </div>
-        ),
-        ctas: [
-          { label: "View Services", href: "/services" },
-          { label: "Book Consultation", href: "/book-consultation" },
-        ],
-      },
-      {
-        id: "remote",
-        question: "How does remote support work?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              We connect securely to your device over the internet using screen-sharing
-              software. You can watch everything we do in real time and end the session
-              at any moment — you are always in control.
-            </p>
-            <Section title="Tools we use">
-              <BulletList
-                type="dot"
-                items={["Zoom", "AnyDesk", "TeamViewer"]}
-              />
-            </Section>
-            <Section title="What we can fix remotely">
-              <BulletList
-                type="check"
-                items={[
-                  "Microsoft 365 and email setup or issues",
-                  "App crashes, errors, and slow performance",
-                  "OS settings, updates, and driver problems",
-                  "Software installs, activations, and licenses",
-                  "Virus scans and malware removal",
-                  "Printer and peripheral connectivity",
-                ]}
-              />
-            </Section>
-            <Note>
-              Available globally — remote support is not limited by location.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "Get IT Support", href: "/it-support" }],
-      },
-      {
-        id: "booking",
-        question: "How do I book an appointment?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              All services are by appointment. Walk-ins are accepted at an additional
-              charge. Booking takes only a few minutes and we will confirm by email
-              with all the details.
-            </p>
-            <BulletList
-              type="check"
-              items={[
-                "Book online through our consultation form — fastest option",
-                "Contact us directly via the contact page",
-                "Walk-ins accepted at an additional fee",
-              ]}
-            />
-          </div>
-        ),
-        ctas: [
-          { label: "Book Now", href: "/book-consultation" },
-          { label: "Contact Us", href: "/contact" },
-        ],
-      },
-    ],
-  },
-
-  // ── Software Fixes ────────────────────────────────────────────────────────
-  {
-    id: "software",
-    label: "Software Fixes",
-    questions: [
-      {
-        id: "slow-computer",
-        question: "Why is my computer running slow?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              A slow computer is one of the most common tech complaints — and it is
-              almost always fixable without replacing the machine. The root cause is
-              usually one of a few things.
-            </p>
-            <Section title="Most common causes">
-              <BulletList
-                type="dot"
-                items={[
-                  "Too many startup programs loading in the background at boot",
-                  "Low RAM — not enough memory for your current workload",
-                  "Old spinning hard drive (HDD) instead of a fast SSD",
-                  "Malware or adware quietly consuming CPU and memory",
-                  "Outdated Windows updates or outdated drivers",
-                  "Storage drive nearly full — Windows slows down significantly below 10% free space",
-                  "Too many browser tabs or heavy browser extensions",
-                  "Overheating — dust buildup causes the CPU to throttle itself",
-                ]}
-              />
-            </Section>
-            <Section title="Typical fixes">
-              <BulletList
-                type="check"
-                items={[
-                  "Upgrade to an SSD — often the single biggest speed improvement possible",
-                  "Add more RAM — especially if you run 10+ browser tabs or editing software",
-                  "Disable unnecessary startup programs via Task Manager",
-                  "Run a full virus and malware scan",
-                  "Perform a clean Windows update",
-                  "Free up disk space or expand storage",
-                  "Clean dust from vents and fans",
-                ]}
-              />
-            </Section>
-            <Note>
-              A computer that feels slow is often fixed by a RAM or SSD upgrade —
-              not a full replacement. Many machines from 2015 or later perform like
-              new after an SSD swap.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "Get IT Support", href: "/it-support" }],
-      },
-      {
-        id: "os-comparison",
-        question: "What is the difference between Windows, macOS, and ChromeOS?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              These are the three main operating systems for personal computers. Each
-              has a different philosophy — choosing the right one depends on what you
-              do and what devices you already own.
-            </p>
-            <Section title="Windows">
-              <BulletList
-                type="check"
-                items={[
-                  "Most widely compatible — runs virtually all software",
-                  "Best for gaming, business applications, and specialized tools",
-                  "Used on the majority of laptops sold at Best Buy, Micro Center, and Costco",
-                  "Highly customizable with hardware at every price range",
-                  "Required for many corporate and enterprise environments",
-                ]}
-              />
-            </Section>
-            <Section title="macOS (Apple)">
-              <BulletList
-                type="check"
-                items={[
-                  "Hardware and software built together by Apple — very stable and optimized",
-                  "Excellent for photo and video editing, music production, and creative work",
-                  "Strong security and long software update support (5 to 7 years)",
-                  "Integrates seamlessly with iPhone, iPad, and AirPods",
-                  "Apple M-series chips deliver outstanding performance per watt",
-                ]}
-              />
-            </Section>
-            <Section title="ChromeOS (Google)">
-              <BulletList
-                type="check"
-                items={[
-                  "Lightweight — boots in seconds and rarely gets viruses",
-                  "Designed for web and cloud apps (Google Docs, Gmail, YouTube)",
-                  "Best for students, casual browsing, and basic office work",
-                  "Generally the most affordable hardware option",
-                  "Automatic background updates with very little maintenance needed",
-                ]}
-              />
-            </Section>
-            <Note>
-              If you need Microsoft Office, Photoshop, or QuickBooks — choose
-              Windows or macOS. For basic web use or school, ChromeOS works well at
-              a low cost.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "Buy a Computer", href: "/buy-ready-computer" }],
-      },
-    ],
-  },
-
-  // ── On-Site Services ──────────────────────────────────────────────────────
-  {
-    id: "onsite",
-    label: "On-Site Services",
-    questions: [
-      {
-        id: "laptop-upgrades",
-        question: "Can laptops be upgraded like desktops?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              Usually yes — but only partially. Laptops are designed for portability,
-              which limits what can be replaced or added. The key is knowing which
-              components are removable before you buy.
-            </p>
-            <Section title="Commonly upgradeable">
-              <BulletList
-                type="check"
-                items={[
-                  "RAM — if not soldered to the motherboard",
-                  "SSD storage — most laptops allow this swap even on budget models",
-                  "Wi-Fi card — on many business and gaming models",
-                  "Battery — on models with accessible service panels",
-                ]}
-              />
-            </Section>
-            <Section title="Rarely or never upgradeable">
-              <BulletList
-                type="cross"
-                items={[
-                  "CPU (processor) — soldered directly to the board in nearly all laptops",
-                  "GPU (graphics) — integrated into the CPU on most laptops",
-                  "Display size or resolution",
-                  "Ports or IO layout",
-                ]}
-              />
-            </Section>
-            <Note>
-              Modern ultra-thin laptops like MacBook Air and Dell XPS often solder
-              RAM and storage directly to the motherboard to save space — making
-              upgrades impossible. Always check before buying if upgradeability
-              matters to you.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "On-Site Services", href: "/on-site-services" }],
-      },
-      {
-        id: "ram-upgrade",
-        question: "If a laptop has removable RAM, can it be upgraded?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              Yes — if the RAM is not soldered and the motherboard supports a higher
-              capacity, upgrading is usually straightforward and cost-effective.
-            </p>
-            <Section title="Signs RAM is upgradeable">
-              <BulletList
-                type="dot"
-                items={[
-                  "Laptop has physical RAM slots — visible when opening the back panel",
-                  "Manufacturer specs list a maximum supported RAM amount",
-                  "Bottom service panel can be opened with screws",
-                  "BIOS or UEFI shows available slots and current usage",
-                ]}
-              />
-            </Section>
-            <Section title="Example upgrade scenario">
-              <Callout>
-                <p>Laptop ships with 8GB RAM in 1 slot, with 1 empty slot remaining.</p>
-                <p className="text-green-400">
-                  ➡ Can be upgraded to 16GB or 32GB depending on the motherboard's
-                  maximum supported RAM.
-                </p>
-              </Callout>
-            </Section>
-            <Note>
-              Adding more RAM reduces slowdowns when switching between apps, running
-              browsers with many tabs open, or using editing software. It is often
-              the fastest and cheapest upgrade you can make.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "Book On-Site Visit", href: "/on-site-services" }],
-      },
-      {
-        id: "brand-upgradeability",
-        question: "Why do some laptop brands have better upgradeability?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              Design priorities vary by brand. Business and performance laptops
-              prioritize serviceability and long lifecycles. Consumer ultra-thin
-              models prioritize thinness and weight at the expense of repairability.
-            </p>
-            <Section title="Brands known for upgrade options">
-              <BulletList
-                type="check"
-                items={[
-                  "Lenovo ThinkPad series — famous for repairability, RAM slots, and keyboard replacement",
-                  "Dell Latitude and Precision — business focused with full service panel access",
-                  "ASUS ProArt and business models — often have dual RAM slots and accessible drives",
-                  "HP EliteBook — enterprise designed with field repair in mind",
-                ]}
-              />
-            </Section>
-            <Section title="Why these brands are more serviceable">
-              <BulletList
-                type="dot"
-                items={[
-                  "More internal space — chassis designed for airflow and component access",
-                  "Screw-secured service panels rather than glued housings",
-                  "Business-focused designs that need field repairs by IT departments",
-                  "Longer product lifecycles requiring spare parts availability for years",
-                ]}
-              />
-            </Section>
-            <Section title="Brands with limited upgradeability">
-              <BulletList
-                type="cross"
-                items={[
-                  "Apple MacBook — RAM and SSD soldered since 2013, fully sealed on M-series",
-                  "Dell XPS 13 consumer — increasingly soldered components over recent generations",
-                  "Most ultra-thin budget laptops — glued batteries, soldered RAM and storage",
-                ]}
-              />
-            </Section>
-          </div>
-        ),
-        ctas: [{ label: "Get Advice", href: "/book-consultation" }],
-      },
-    ],
-  },
-
-  // ── Devices ───────────────────────────────────────────────────────────────
-  {
-    id: "devices",
-    label: "Devices",
-    questions: [
-      {
-        id: "cpu-cores",
-        question: "What do CPU cores mean?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              The CPU (Central Processing Unit) is the brain of your computer. Cores
-              are individual processing units inside the CPU chip — more cores mean
-              the processor can handle more tasks at the same time without slowing
-              down.
-            </p>
-            <Section title="Core count guide">
-              <CompareTable
-                headers={["Type", "Cores", "Best for"]}
-                rows={[
-                  ["Dual-Core", "2", "Basic browsing, documents"],
-                  ["Quad-Core", "4", "Everyday multitasking"],
-                  ["8-Core", "8", "Gaming, heavy workloads"],
-                  ["12–16 Core", "12–16", "Video editing, 3D rendering"],
-                ]}
-              />
-            </Section>
-            <Section title="Major CPU brands">
-              <BulletList
-                type="dot"
-                items={[
-                  "Intel — Core i3, i5, i7, and i9 series",
-                  "AMD — Ryzen 3, 5, 7, and 9 series",
-                  "Apple — M1, M2, M3, M4 chips (Mac and iPad)",
-                ]}
-              />
-            </Section>
-            <Note>
-              For most home and office use, a 4 to 8 core processor is plenty.
-              Creators and gamers benefit most from 8 to 16 cores.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "Build a PC", href: "/build-pc" }],
-      },
-      {
-        id: "gpu-cores",
-        question: "What are GPU cores?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              The GPU (Graphics Processing Unit) handles everything visual — rendering
-              images, video, games, and increasingly AI tasks. GPU cores (also called
-              shaders or CUDA cores on NVIDIA) process thousands of small calculations
-              simultaneously, which is why they are so fast at graphics work.
-            </p>
-            <Section title="What GPU cores are used for">
-              <BulletList
-                type="check"
-                items={[
-                  "Gaming — rendering 3D environments at high frame rates in real time",
-                  "Video editing — hardware-accelerated export, effects, and color grading",
-                  "AI and machine learning workloads",
-                  "3D modeling and rendering in applications like Blender",
-                  "Photo editing with heavy filters or large RAW files",
-                ]}
-              />
-            </Section>
-            <Section title="Integrated vs dedicated GPU">
-              <BulletList
-                type="dot"
-                items={[
-                  "Integrated GPU — built into the CPU chip, shares system RAM, fine for everyday use and video streaming",
-                  "Dedicated GPU — a separate card with its own video memory (VRAM), dramatically faster for gaming and creative work",
-                ]}
-              />
-            </Section>
-            <Note>
-              NVIDIA and AMD are the two main dedicated GPU brands. For gaming or
-              serious video work, a dedicated GPU makes a massive real-world
-              difference compared to integrated graphics.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "Custom PC Build", href: "/build-pc" }],
-      },
-    ],
-  },
-
-  // ── Device Setup ──────────────────────────────────────────────────────────
-  {
-    id: "setup",
-    label: "Device Setup",
-    questions: [
-      {
-        id: "ipad-vs-samsung",
-        question: "What is the difference between Apple iPads and Samsung tablets?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              Both are excellent tablets but built around different ecosystems. The
-              right choice depends heavily on what apps and other devices you already
-              use.
-            </p>
-            <Section title="Apple iPad (iPadOS)">
-              <BulletList
-                type="check"
-                items={[
-                  "Long software support — 5 to 7 years of iPadOS updates",
-                  "Extremely powerful chips (M-series rivals full laptop CPUs)",
-                  "Best tablet app selection — many productivity apps are iPad-first",
-                  "Works seamlessly with iPhone, Mac, and AirPods",
-                  "Apple Pencil support for precise drawing and note-taking",
-                ]}
-              />
-            </Section>
-            <Section title="Samsung Galaxy Tab (Android)">
-              <BulletList
-                type="check"
-                items={[
-                  "More customization — sideload apps, full file management",
-                  "Expandable storage via microSD on many models",
-                  "DeX desktop mode on select models for laptop-like multitasking",
-                  "Works naturally with Google ecosystem and Android phones",
-                  "Generally more affordable at the entry level",
-                ]}
-              />
-            </Section>
-            <Note>
-              If you already use iPhone and Mac, iPad integrates far better.
-              If you use Android and Google services, Samsung Galaxy Tab fits
-              naturally into that workflow.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "Device Setup", href: "/device-setup" }],
-      },
-      {
-        id: "ipad-gpu-cores",
-        question: "What do GPU cores mean on iPads?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              Apple designs their own chips (A-series and M-series) for iPad. Each
-              chip includes both CPU cores and GPU cores on the same piece of silicon,
-              which is how Apple achieves both thin design and strong performance.
-            </p>
-            <Section title="Example — Apple M2 chip">
-              <Callout>
-                <p>8 CPU cores → handles apps, multitasking, and general performance</p>
-                <p>10 GPU cores → handles graphics, gaming, video playback, and export</p>
-              </Callout>
-            </Section>
-            <Section title="Why GPU cores matter on iPad">
-              <BulletList
-                type="dot"
-                items={[
-                  "Smoother gaming and high-frame-rate video playback",
-                  "Faster photo and video editing in apps like Lightroom and LumaFusion",
-                  "Better performance in AR apps and 3D visualization",
-                  "ProRes video recording on iPad Pro requires significant GPU performance",
-                ]}
-              />
-            </Section>
-            <Note>
-              For casual use like browsing, streaming, and notes, any iPad GPU is
-              more than enough. For creative professionals, the M-series iPad Pro GPU
-              matches or beats many full laptops.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "Device Setup", href: "/device-setup" }],
-      },
-    ],
-  },
-
-  // ── Buy a Computer ────────────────────────────────────────────────────────
-  {
-    id: "buy",
-    label: "Buy a Computer",
-    questions: [
-      {
-        id: "laptop-specs",
-        question: "What specs matter most when buying a laptop?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              Here are the most important components to evaluate, ranked by everyday
-              impact.
-            </p>
-            <Section title="1. Processor (CPU)">
-              <p className="text-gray-300 text-xs leading-relaxed">
-                Determines overall speed and multitasking ability. Look for Intel Core
-                i5 / i7 or AMD Ryzen 5 / 7 for solid everyday performance. Avoid
-                Celeron and Pentium chips for anything beyond very light use.
-              </p>
-            </Section>
-            <Section title="2. RAM (memory)">
-              <BulletList
-                type="dot"
-                items={[
-                  "8GB — absolute minimum for Windows 11 today",
-                  "16GB — recommended for comfortable everyday multitasking",
-                  "32GB+ — heavy users, video editors, and developers",
-                ]}
-              />
-            </Section>
-            <Section title="3. Storage">
-              <p className="text-gray-300 text-xs leading-relaxed">
-                Always choose SSD over HDD. A 256GB SSD feels dramatically faster than
-                a 1TB spinning HDD. 512GB SSD is the sweet spot for most users.
-              </p>
-            </Section>
-            <Section title="4. Display">
-              <BulletList
-                type="dot"
-                items={[
-                  "1080p (Full HD) minimum — anything lower looks blurry on modern screens",
-                  "Brightness matters for outdoor use or bright office environments",
-                  "IPS panels give better color accuracy and viewing angles than TN panels",
-                ]}
-              />
-            </Section>
-            <Section title="5. Battery life">
-              <p className="text-gray-300 text-xs leading-relaxed">
-                Look for 8+ hours of real-world use if you work away from a desk.
-                ARM-based laptops (Apple M-series, Snapdragon X Elite) deliver the
-                best battery life available today.
-              </p>
-            </Section>
-          </div>
-        ),
-        ctas: [
-          { label: "Buy a Computer", href: "/buy-ready-computer" },
-          { label: "Get Advice", href: "/book-consultation" },
-        ],
-      },
-      {
-        id: "ssd-vs-hdd",
-        question: "Is SSD better than a hard drive?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              Yes — SSDs are significantly faster, quieter, and more durable than
-              traditional HDDs. They are now standard in most new computers for good
-              reason.
-            </p>
-            <Section title="SSD vs HDD comparison">
-              <CompareTable
-                headers={["Feature", "HDD", "SSD"]}
-                rows={[
-                  ["Speed", "Slow", "Very fast"],
-                  ["Boot time", "30–60 seconds", "5–15 seconds"],
-                  ["Durability", "Mechanical parts", "No moving parts"],
-                  ["Noise", "Audible spinning", "Silent"],
-                  ["Power use", "Higher", "Lower"],
-                  ["Price per GB", "Cheaper", "More expensive"],
-                ]}
-              />
-            </Section>
-            <Note>
-              Swapping an old HDD for an SSD is often the most cost-effective upgrade
-              you can make. A 5-year-old laptop can feel brand new after the swap —
-              and the upgrade usually costs between $50 and $100.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "Get IT Support", href: "/it-support" }],
-      },
-    ],
-  },
-
-  // ── Printers ──────────────────────────────────────────────────────────────
-  {
-    id: "printers",
-    label: "Printers",
-    questions: [
-      {
-        id: "inkjet-vs-laser",
-        question: "What is the difference between inkjet and laser printers?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              The right printer depends on what and how often you print. Inkjet
-              printers spray liquid ink onto paper. Laser printers use heat and
-              powdered toner — a fundamentally different process that has big
-              practical advantages for documents.
-            </p>
-            <Section title="Inkjet printers">
-              <BulletList
-                type="check"
-                items={[
-                  "Best print quality for photos and color graphics",
-                  "Lower upfront purchase price",
-                  "Compact size — fits easily in tight spaces",
-                  "Can print on glossy photo paper and specialty media",
-                ]}
-              />
-              <div className="mt-1.5">
-                <BulletList
-                  type="cross"
-                  items={[
-                    "Ink cartridges can dry out if not used regularly",
-                    "Slower page-per-minute speed than laser",
-                    "Higher cost per page over time",
-                  ]}
-                />
-              </div>
-            </Section>
-            <Section title="Laser printers">
-              <BulletList
-                type="check"
-                items={[
-                  "Much faster — better for high-volume printing",
-                  "Lower cost per page, especially for text documents",
-                  "Toner does not dry out from infrequent use",
-                  "Sharper, more consistent text quality",
-                ]}
-              />
-              <div className="mt-1.5">
-                <BulletList
-                  type="cross"
-                  items={[
-                    "Higher upfront purchase price",
-                    "Usually larger and heavier",
-                    "Color laser printers are expensive",
-                  ]}
-                />
-              </div>
-            </Section>
-            <Note>
-              For home use with occasional printing, inkjet works fine. For an office
-              or anyone printing 50+ pages per week, a laser printer pays for itself
-              quickly in lower toner costs.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "On-Site Setup", href: "/on-site-services" }],
-      },
-    ],
-  },
-
-  // ── Computer Knowledge ────────────────────────────────────────────────────
-  {
-    id: "knowledge",
-    label: "Computer Knowledge",
-    questions: [
-      {
-        id: "multi-monitor",
-        question: "What determines how many monitors a computer can run?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              The number of monitors you can connect depends on several hardware
-              factors working together. Understanding these helps avoid buying
-              equipment that does not work for your setup.
-            </p>
-            <Section title="Key factors">
-              <BulletList
-                type="dot"
-                items={[
-                  "Graphics card (GPU) — total number of output ports it supports",
-                  "Physical video ports on the computer (HDMI, DisplayPort, USB-C / Thunderbolt)",
-                  "Whether the laptop GPU supports multiple simultaneous external displays",
-                  "Docking station compatibility — quality docks can add 2 to 6 more display ports",
-                  "OS and GPU driver support for the desired configuration",
-                ]}
-              />
-            </Section>
-            <Section title="Common setups">
-              <BulletList
-                type="check"
-                items={[
-                  "Most laptops natively — 1 to 2 external monitors",
-                  "Laptop plus USB-C dock — 2 to 4 monitors depending on the dock",
-                  "Desktop with mid-range GPU — 3 to 4 monitors",
-                  "Desktop with high-end GPU — 4 to 6 monitors",
-                ]}
-              />
-            </Section>
-            <Note>
-              Apple Silicon MacBooks (base M1 and M2) are limited to 1 external
-              monitor without a workaround. The M-series Pro and Max chips officially
-              support 2 to 5 external monitors.
-            </Note>
-          </div>
-        ),
-        ctas: [{ label: "Get IT Support", href: "/it-support" }],
-      },
-      {
-        id: "component-stores",
-        question: "Where can I compare laptops, tablets, and printers in detail?",
-        answer: (
-          <div className="space-y-3">
-            <p className="text-gray-300 text-xs leading-relaxed">
-              Our Knowledge Base has a full interactive comparison tool — pick any two
-              products and see a side-by-side spec breakdown with photos, pros, cons,
-              and real data.
-            </p>
-            <Section title="What you can compare">
-              <BulletList
-                type="check"
-                items={[
-                  "Laptops — MacBook Air M4, HP Omen, Dell XPS, Lenovo Yoga and more",
-                  "Tablets — iPad Pro M4 vs Samsung Galaxy Tab S10 Ultra",
-                  "Printers — Epson EcoTank, Brother laser, Canon PIXMA",
-                ]}
-              />
-            </Section>
-            <Section title="Also includes full FAQ on">
-              <BulletList
-                type="dot"
-                items={[
-                  "Why is my computer slow and how to fix it",
-                  "SSD vs HDD with real speed numbers",
-                  "CPU cores, GPU types, RAM — explained simply",
-                  "Wi-Fi 5 vs 6 vs 6E differences",
-                  "How many monitors your setup can support",
-                ]}
-              />
-            </Section>
-            <Note>
-              Need help choosing? Book a free consultation and we will walk you
-              through the right option for your budget and use case.
-            </Note>
-          </div>
-        ),
-        ctas: [
-          { label: "Knowledge Base", href: "/knowledge-base" },
-          { label: "Custom PC Build", href: "/build-pc" },
-        ],
-      },
-    ],
-  },
-];
 
 // ── Component ────────────────────────────────────────────────────────────────
 
 export default function HelpBot() {
   const [open, setOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedQuestion, setSelectedQuestion] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Msg[]>([]);
+  const [input, setInput] = useState("");
+  const [pending, setPending] = useState(false);
+  const [mode, setMode] = useState<Mode>("chat");
+  const [flow, setFlow] = useState<Flow | null>(null);
+
   const panelRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const timerRef = useRef<number | null>(null);
+  const lastQuestionRef = useRef("");
 
   useEffect(() => {
-    if (open && panelRef.current) panelRef.current.focus();
+    if (!open) return;
+    setMessages((prev) => (prev.length ? prev : seedMessages()));
+    const t = window.setTimeout(() => inputRef.current?.focus(), 60);
+    return () => window.clearTimeout(t);
   }, [open]);
+
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [messages, pending]);
 
   useEffect(() => {
     if (!open) return;
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClose();
+      if (e.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [open]);
 
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedCategory(null);
-    setSelectedQuestion(null);
+  useEffect(
+    () => () => {
+      if (timerRef.current) window.clearTimeout(timerRef.current);
+    },
+    [],
+  );
+
+  const emit = (userText: string, botMsgs: Msg[], nextMode: Mode, nextFlow: Flow | null) => {
+    setMessages((m) => [...m, userMsg(userText)]);
+    setPending(true);
+    if (timerRef.current) window.clearTimeout(timerRef.current);
+    timerRef.current = window.setTimeout(() => {
+      setMessages((m) => [...m, ...botMsgs]);
+      setPending(false);
+      setMode(nextMode);
+      setFlow(nextFlow);
+    }, 340);
   };
 
-  const category = CATEGORIES.find((c) => c.id === selectedCategory);
-  const question = category?.questions.find((q) => q.id === selectedQuestion);
+  const send = (raw: string) => {
+    const text = raw.trim();
+    if (!text || pending) return;
+    setInput("");
 
-  const goBack = () => {
-    if (selectedQuestion) {
-      setSelectedQuestion(null);
-    } else {
-      setSelectedCategory(null);
+    if (mode === "awaitingFeedback" && !flow) {
+      const n = normalize(text);
+      if (YES_RE.test(n)) {
+        emit(text, [botText("Glad that helped. Ask me anything else whenever you need.")], "chat", null);
+        return;
+      }
+      if (NO_RE.test(n)) {
+        emit(
+          text,
+          [
+            botText(
+              "Sorry that didn't sort it. Leave your details and a Sonoaac tech will follow up with you directly — usually the same day:",
+            ),
+            formMsg(),
+          ],
+          "escalating",
+          null,
+        );
+        return;
+      }
+      // Not a yes/no — fall through and treat it as a new question.
     }
+
+    lastQuestionRef.current = text;
+    const r = route(text, flow);
+    emit(text, r.messages, r.mode, r.flow);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    send(input);
+  };
+
+  const onEscalated = (name: string) => {
+    setMessages((m) => [
+      ...m,
+      botText(
+        `Thanks${name ? ", " + name : ""}. Your request is in — a Sonoaac tech will reach out by email, usually the same day. Anything else while you're here?`,
+      ),
+    ]);
+    setMode("chat");
+    setFlow(null);
+  };
+
+  const startOver = () => {
+    if (timerRef.current) window.clearTimeout(timerRef.current);
+    setPending(false);
+    setInput("");
+    setMode("chat");
+    setFlow(null);
+    lastQuestionRef.current = "";
+    setMessages(seedMessages());
+    inputRef.current?.focus();
   };
 
   return (
     <>
       {/* Float button */}
       <button
-        aria-label="Open help chat"
+        aria-label="Open assistant chat"
         onClick={() => setOpen(true)}
         className="fixed bottom-6 right-6 z-[200] w-14 h-14 bg-green-400 text-black flex items-center justify-center hover:bg-green-300 transition-colors shadow-lg shadow-green-900/30 rounded-full"
       >
@@ -954,102 +584,102 @@ export default function HelpBot() {
             tabIndex={-1}
             aria-modal="true"
             role="dialog"
-            className="fixed bottom-24 right-6 z-[200] w-80 max-w-[calc(100vw-3rem)] bg-black border border-green-800 flex flex-col focus:outline-none shadow-xl shadow-black/50"
-            style={{ maxHeight: "72vh" }}
+            aria-label="Sonoaac assistant chat"
+            className="fixed bottom-24 right-6 z-[200] w-[22rem] max-w-[calc(100vw-3rem)] bg-black border border-green-800 flex flex-col focus:outline-none shadow-xl shadow-black/50"
+            style={{ height: "min(72vh, 560px)" }}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-green-900 shrink-0">
-              {selectedCategory || selectedQuestion ? (
+              <span className="text-xs uppercase tracking-[0.3em] text-green-400 font-bold">
+                Sonoaac Assistant
+              </span>
+              <div className="flex items-center gap-2">
+                {messages.length > 1 && (
+                  <button
+                    aria-label="Start over"
+                    onClick={startOver}
+                    className="text-gray-500 hover:text-green-400 transition-colors"
+                  >
+                    <RotateCcw size={14} />
+                  </button>
+                )}
                 <button
-                  aria-label="Go back"
-                  onClick={goBack}
-                  className="flex items-center gap-1 text-green-400 hover:text-green-300 transition-colors text-xs font-bold"
+                  aria-label="Close assistant"
+                  onClick={() => setOpen(false)}
+                  className="text-gray-500 hover:text-green-400 transition-colors"
                 >
-                  <ChevronLeft size={14} />
-                  Back
+                  <X size={16} />
                 </button>
-              ) : (
-                <span className="text-xs uppercase tracking-[0.3em] text-green-400 font-bold">
-                  Sonoaac Help
-                </span>
-              )}
-              <button
-                aria-label="Close help"
-                onClick={handleClose}
-                className="text-gray-500 hover:text-green-400 transition-colors"
-              >
-                <X size={16} />
-              </button>
+              </div>
             </div>
 
-            {/* Breadcrumb */}
-            {(selectedCategory || selectedQuestion) && (
-              <div className="px-4 py-1.5 border-b border-green-900/40 shrink-0">
-                <p className="text-xs text-gray-500 truncate">
-                  {category?.label}
-                  {question && (
-                    <span className="text-gray-600"> › {question.question}</span>
-                  )}
-                </p>
-              </div>
-            )}
-
-            {/* Body — scrollable */}
-            <div className="flex-1 overflow-y-auto p-4 min-h-0">
-              {/* Level 3: Answer */}
-              {question ? (
-                <div className="space-y-3">
-                  <p className="text-green-400 font-bold text-xs leading-snug">
-                    {question.question}
-                  </p>
-                  <div className="text-xs space-y-2">{question.answer}</div>
-                  {question.ctas && question.ctas.length > 0 && (
-                    <div className="flex flex-wrap gap-2 pt-2 border-t border-green-900/40">
-                      {question.ctas.map((cta) => (
-                        <Link key={cta.href} href={cta.href}>
-                          <button
-                            onClick={handleClose}
-                            className="px-4 py-2 bg-green-400 text-black text-xs uppercase tracking-[0.15em] font-bold hover:bg-green-300 transition-colors"
-                          >
-                            {cta.label}
-                          </button>
-                        </Link>
-                      ))}
+            {/* Transcript */}
+            <div
+              ref={bodyRef}
+              role="log"
+              aria-live="polite"
+              className="flex-1 overflow-y-auto p-3 min-h-0 space-y-3"
+            >
+              {messages.map((m) =>
+                m.role === "user" ? (
+                  <div key={m.id} className="flex justify-end">
+                    <div className="max-w-[85%] bg-green-400 text-black text-xs px-3 py-2 rounded leading-relaxed">
+                      {m.text}
                     </div>
-                  )}
-                </div>
-              ) : category ? (
-                /* Level 2: Questions in category */
-                <div className="space-y-2">
-                  <p className="text-xs text-gray-500 mb-3">Select a question:</p>
-                  {category.questions.map((q) => (
-                    <button
-                      key={q.id}
-                      onClick={() => setSelectedQuestion(q.id)}
-                      className="w-full text-left px-3 py-2.5 border border-green-900 text-gray-300 text-xs hover:border-green-600 hover:text-green-400 hover:bg-green-900/10 transition-colors leading-snug"
-                    >
-                      {q.question}
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                /* Level 1: Categories */
-                <div className="space-y-3">
-                  <p className="text-xs text-gray-500">What can we help with?</p>
-                  <div className="flex flex-wrap gap-2">
-                    {CATEGORIES.map((cat) => (
-                      <button
-                        key={cat.id}
-                        onClick={() => setSelectedCategory(cat.id)}
-                        className="px-3 py-1.5 text-xs uppercase tracking-[0.15em] font-bold border border-green-900 text-gray-400 hover:border-green-600 hover:text-green-400 hover:bg-green-900/10 transition-colors"
-                      >
-                        {cat.label}
-                      </button>
-                    ))}
+                  </div>
+                ) : (
+                  <div key={m.id} className="flex justify-start">
+                    <div className="max-w-[92%] border border-gray-800 bg-gray-900/40 px-3 py-2.5 rounded space-y-2">
+                      {m.form ? (
+                        <EscalationForm
+                          defaultMessage={lastQuestionRef.current}
+                          onSubmitted={onEscalated}
+                        />
+                      ) : m.entry ? (
+                        <EntryBubble entry={m.entry} onNavigate={() => setOpen(false)} />
+                      ) : (
+                        <p className="text-gray-300 text-xs leading-relaxed">{m.text}</p>
+                      )}
+                    </div>
+                  </div>
+                ),
+              )}
+
+              {pending && (
+                <div className="flex justify-start">
+                  <div className="border border-gray-800 bg-gray-900/40 px-3 py-2 rounded">
+                    <span className="inline-flex gap-1">
+                      <span className="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.2s]" />
+                      <span className="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce [animation-delay:-0.1s]" />
+                      <span className="w-1.5 h-1.5 bg-gray-500 rounded-full animate-bounce" />
+                    </span>
                   </div>
                 </div>
               )}
             </div>
+
+            {/* Composer */}
+            <form
+              onSubmit={handleSubmit}
+              className="flex items-center gap-2 border-t border-green-900 p-2 shrink-0"
+            >
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your message…"
+                aria-label="Type your message"
+                className="flex-1 bg-black border border-green-900 text-gray-200 text-xs px-3 py-2 focus:outline-none focus:border-green-600 placeholder:text-gray-600"
+              />
+              <button
+                type="submit"
+                aria-label="Send message"
+                disabled={!input.trim() || pending}
+                className="w-9 h-9 shrink-0 bg-green-400 text-black flex items-center justify-center hover:bg-green-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                <Send size={15} />
+              </button>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>

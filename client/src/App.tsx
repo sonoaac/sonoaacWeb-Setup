@@ -18,8 +18,8 @@ const BuildPC = lazy(() => import("@/pages/BuildPC"));
 const Services = lazy(() => import("@/pages/Services"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const ServiceAgreement = lazy(() => import("@/pages/ServiceAgreement"));
-const KnowledgeBase = lazy(() => import("@/pages/KnowledgeBase"));
 const TradeIn = lazy(() => import("@/pages/TradeIn"));
+const Rentals = lazy(() => import("@/pages/Rentals"));
 const TrackTicket = lazy(() => import("@/pages/TrackTicket"));
 const AdminTickets = lazy(() => import("@/pages/AdminTickets"));
 const ClientForms = lazy(() => import("@/pages/ClientForms"));
@@ -39,8 +39,8 @@ function Router() {
         <Route path="/my-tech" component={MyTech} />
         <Route path="/my-tech/build-pc" component={BuildPC} />
         <Route path="/contact" component={Contact} />
-        <Route path="/knowledge-base" component={KnowledgeBase} />
         <Route path="/trade-in" component={TradeIn} />
+        <Route path="/rentals" component={Rentals} />
         <Route path="/service-agreement" component={ServiceAgreement} />
         <Route path="/track/:token" component={TrackTicket} />
         <Route path="/admin/tickets" component={AdminTickets} />
@@ -54,6 +54,7 @@ function Router() {
         <Route path="/book-consultation"><RedirectTo to="/contact" /></Route>
         <Route path="/buy-ready-computer"><RedirectTo to="/my-tech" /></Route>
         <Route path="/build-pc"><RedirectTo to="/my-tech/build-pc" /></Route>
+        <Route path="/knowledge-base"><RedirectTo to="/" /></Route>
 
         <Route component={NotFound} />
       </Switch>

@@ -87,8 +87,8 @@ function getRecommendation(answers: Answers): Recommendation {
         ],
         ctaLabel: "Get Device Matched",
         ctaHref: "/my-tech",
-        secondaryLabel: "Compare Gaming Laptops",
-        secondaryHref: "/knowledge-base",
+        secondaryLabel: "Explore Devices",
+        secondaryHref: "/my-tech",
       };
     }
     return {
@@ -111,8 +111,8 @@ function getRecommendation(answers: Answers): Recommendation {
       ],
       ctaLabel: "Get Device Setup",
       ctaHref: "/contact",
-      secondaryLabel: "Compare Gaming Laptops",
-      secondaryHref: "/knowledge-base",
+      secondaryLabel: "Explore Devices",
+      secondaryHref: "/my-tech",
     };
   }
 
@@ -158,8 +158,8 @@ function getRecommendation(answers: Answers): Recommendation {
       ],
       ctaLabel: "Get Device Setup",
       ctaHref: "/contact",
-      secondaryLabel: "Compare Laptops",
-      secondaryHref: "/knowledge-base",
+      secondaryLabel: "Explore Devices",
+      secondaryHref: "/my-tech",
     };
   }
 
@@ -184,8 +184,8 @@ function getRecommendation(answers: Answers): Recommendation {
       ],
       ctaLabel: "Get iPad Setup",
       ctaHref: "/contact",
-      secondaryLabel: "Compare Tablets",
-      secondaryHref: "/knowledge-base",
+      secondaryLabel: "Explore Devices",
+      secondaryHref: "/my-tech",
     };
   }
 
@@ -461,8 +461,8 @@ function getRecommendation(answers: Answers): Recommendation {
       ],
       ctaLabel: "Get It Set Up",
       ctaHref: "/contact",
-      secondaryLabel: "Compare Devices",
-      secondaryHref: "/knowledge-base",
+      secondaryLabel: "Explore Devices",
+      secondaryHref: "/my-tech",
     };
   }
 
@@ -486,8 +486,8 @@ function getRecommendation(answers: Answers): Recommendation {
     ],
     ctaLabel: "Get It Set Up",
     ctaHref: "/contact",
-    secondaryLabel: "Compare Devices",
-    secondaryHref: "/knowledge-base",
+    secondaryLabel: "Explore Devices",
+    secondaryHref: "/my-tech",
   };
 }
 

@@ -8,6 +8,7 @@ const serviceLinks = [
   { label: "Business IT", path: "/business-it" },
   { label: "Web Development", path: "/services" },
   { label: "My Tech", path: "/my-tech" },
+  { label: "Rent to Own", path: "/rentals" },
 ];
 
 export default function Footer() {

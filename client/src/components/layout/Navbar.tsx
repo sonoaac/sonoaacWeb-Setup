@@ -12,9 +12,10 @@ const servicesMenu = [
 ];
 
 const myTechMenu = [
-  { name: "Build a Custom PC", path: "/my-tech/build-pc", sub: "Configure your dream build" },
-  { name: "Device Matching",   path: "/my-tech",          sub: "Find the right device"      },
-  { name: "Trade In",          path: "/trade-in",         sub: "Get cash for your device"   },
+  { name: "Build a Custom PC", path: "/my-tech/build-pc", sub: "Configure your dream build"    },
+  { name: "Device Matching",   path: "/my-tech",          sub: "Find the right device"         },
+  { name: "Rent to Own",       path: "/rentals",          sub: "Gaming PCs & TVs · 35% down"   },
+  { name: "Trade In",          path: "/trade-in",         sub: "Get cash for your device"      },
 ];
 
 export function Navbar() {
@@ -78,12 +79,12 @@ export function Navbar() {
             {/* Right: contact info + CTA */}
             <div className="flex items-center gap-5">
               <a
-                href="tel:+12013496917"
+                href="tel:+18624238875"
                 className="hidden sm:flex items-center gap-1.5 transition-colors"
                 style={{ fontFamily: "'Times New Roman', Times, serif", fontSize: "0.72rem", color: "#777", letterSpacing: "0.08em" }}
               >
                 <Phone size={11} />
-                (201) 349-6917
+                (862) 423-8875
               </a>
               <a
                 href="mailto:sonoaac@gmail.com"
@@ -272,7 +273,6 @@ export function Navbar() {
 
               {/* Static links */}
               {[
-                { name: "Knowledge Base", path: "/knowledge-base" },
                 { name: "Agreement",      path: "/service-agreement" },
               ].map((link) => (
                 <Link key={link.name} href={link.path}>
@@ -356,7 +356,6 @@ export function Navbar() {
               </div>
 
               {[
-                { name: "Knowledge Base", path: "/knowledge-base" },
                 { name: "Agreement",      path: "/service-agreement" },
               ].map((link) => (
                 <Link key={link.name} href={link.path}>
@@ -377,8 +376,8 @@ export function Navbar() {
               ))}
 
               <div style={{ paddingTop: "12px", display: "flex", flexDirection: "column", gap: "6px" }}>
-                <a href="tel:+12013496917" style={{ fontFamily: "monospace", fontSize: "0.82rem", color: "#555", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <Phone size={13} /> (201) 349-6917
+                <a href="tel:+18624238875" style={{ fontFamily: "monospace", fontSize: "0.82rem", color: "#555", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <Phone size={13} /> (862) 423-8875
                 </a>
                 <a href="mailto:sonoaac@gmail.com" style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.8rem", color: "#555", display: "flex", alignItems: "center", gap: "8px" }}>
                   <Mail size={13} /> sonoaac@gmail.com
