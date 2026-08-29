@@ -270,7 +270,14 @@ Date:               ${val(d.clientDate)}
     }
   });
 
-  await seedDatabase();
+  try {
+    await seedDatabase();
+  } catch (err) {
+    console.error(
+      "Skipping DB seed — database unavailable:",
+      err instanceof Error ? err.message : err,
+    );
+  }
 
   return httpServer;
 }
