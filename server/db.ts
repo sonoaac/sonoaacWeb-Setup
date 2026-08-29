@@ -1,24 +1,11 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
-import * as schema from "@shared/schema";
+// Database is intentionally disabled.
+//
+// The app runs fully DB-less: `server/storage.ts` returns stub data whenever
+// `db` is null, so PC-parts, quotes, and tickets are non-persistent. This keeps
+// deploys independent of any Postgres / storage integration. To re-enable,
+// restore a Pool here from `process.env.DATABASE_URL` and run `npm run db:push`.
 
-const { Pool } = pg;
-
-let pool: pg.Pool | null = null;
-let db: any = null;
-
-if (process.env.DATABASE_URL) {
-  pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  // A dropped/unreachable connection emits 'error' on the pool; if unhandled it
-  // crashes the process. Log and keep serving — DB-backed routes degrade to stubs.
-  pool.on("error", (err) => {
-    console.error("Postgres pool error (continuing without DB):", err.message);
-  });
-  db = drizzle(pool, { schema });
-} else {
-  console.warn("DATABASE_URL not set. Running without a database.");
-  // Mock db — storage layer returns stub data when db is null
-  db = null;
-}
+const pool: any = null;
+const db: any = null;
 
 export { pool, db };

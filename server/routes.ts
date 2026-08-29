@@ -2,6 +2,7 @@ import type { Express } from "express";
 import type { Server } from "http";
 import { randomBytes } from "crypto";
 import { storage } from "./storage";
+import { db } from "./db";
 import { sendContactEmail, sendAdminNotification } from "./email";
 import { api } from "@shared/routes";
 import { z } from "zod";
@@ -283,6 +284,7 @@ Date:               ${val(d.clientDate)}
 }
 
 async function seedDatabase() {
+  if (!db) return; // DB disabled — nothing to seed
   const existingParts = await storage.getPcParts();
   if (existingParts.length === 0) {
     console.log("Seeding PC Parts...");

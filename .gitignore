@@ -66,3 +66,11 @@ vite.config.ts.*
 
 # Local staging (redundant — copied into client/public/img/rentals)
 TV catalogue img/
+
+# Database (disabled — nothing DB-related is committed or deployed)
+DATABASE_URL
+*.sqlite
+*.sqlite3
+*.db
+/drizzle
+drizzle/**/*.sql
