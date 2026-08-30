@@ -19,11 +19,39 @@ const myTechMenu = [
 ];
 
 export function Navbar() {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Smooth-scroll to an in-page section, retrying while a lazy page mounts.
+  const scrollToId = (id: string, tries = 25) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    } else if (tries > 0) {
+      setTimeout(() => scrollToId(id, tries - 1), 60);
+    }
+  };
+
+  // Handle "/path#section" nav items — wouter won't scroll to the hash itself.
+  const handleNavClick = (fullPath: string) => (e: React.MouseEvent) => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+    const hashIndex = fullPath.indexOf("#");
+    if (hashIndex === -1) return; // plain link — let <Link> handle it
+    e.preventDefault();
+    const path = fullPath.slice(0, hashIndex);
+    const id = fullPath.slice(hashIndex + 1);
+    if (location === path) {
+      scrollToId(id);
+    } else {
+      navigate(path);
+      setTimeout(() => scrollToId(id), 80);
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -171,6 +199,7 @@ export function Navbar() {
                       {servicesMenu.map((item) => (
                         <Link key={item.path} href={item.path}>
                           <button
+                            onClick={handleNavClick(item.path)}
                             style={{
                               display: "block", width: "100%", textAlign: "left",
                               padding: "12px 20px", background: "none", border: "none",
@@ -317,6 +346,7 @@ export function Navbar() {
                 {servicesMenu.map((item) => (
                   <Link key={item.path} href={item.path}>
                     <button
+                      onClick={handleNavClick(item.path)}
                       style={{
                         display: "block", width: "100%", textAlign: "left",
                         padding: "9px 0", background: "none", border: "none",

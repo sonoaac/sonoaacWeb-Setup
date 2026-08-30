@@ -30,6 +30,31 @@ function RedirectTo({ to }: { to: string }) {
   return null;
 }
 
+/**
+ * Scrolls to `#section` after a route change. wouter navigation is client-side,
+ * so the browser never processes the URL hash on its own. Retries while the
+ * lazy-loaded page mounts.
+ */
+function ScrollToHash() {
+  const [location] = useLocation();
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    let tries = 0;
+    const go = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 96;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      } else if (tries++ < 25) {
+        window.setTimeout(go, 60);
+      }
+    };
+    window.setTimeout(go, 0);
+  }, [location]);
+  return null;
+}
+
 function Router() {
   return (
     <Suspense fallback={null}>
@@ -72,6 +97,7 @@ function App() {
             <Header />
             {/* Spacer: utility bar (40px) + main nav on md+ (48px) = 88px */}
             <div className="h-10 md:h-[88px]" aria-hidden="true" />
+            <ScrollToHash />
             <main
               id="main-content"
               className="flex-1 min-w-0 focus:outline-none"
