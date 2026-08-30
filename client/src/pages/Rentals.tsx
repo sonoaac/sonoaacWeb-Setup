@@ -481,141 +481,22 @@ export default function Rentals() {
 
   const cat = FILTER_MAP[filter];
   const items = cat ? RENTALS.filter((r) => r.category === cat) : RENTALS;
-  const example = plan(350, 25); // 55" 4K Fire TV
 
   return (
     <div className="min-h-screen bg-black">
-      {/* Hero */}
-      <section className="px-6 py-20 md:py-32 border-b border-green-900/30">
-        <div className="max-w-4xl mx-auto">
+      <section className="px-6 pt-20 md:pt-28 pb-6">
+        <div className="max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-6">Rentals</span>
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Rent to Own.<br />
-              Half Down, the Rest Monthly.
-            </h1>
-            <p className="text-gray-300 text-base leading-relaxed max-w-xl mb-4">
-              TVs on a simple rent-to-own plan — with gaming PCs, laptops, and
-              monitors coming soon. Put 50% down, pay a fixed monthly amount until
-              the balance clears, and it's yours.
-            </p>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xl mb-4">
-              Every rental and purchase is arranged in a quick chat with a Sonoaac
-              agent — we don't ship or sell anything automatically. Browse below,
-              then start a chat or call and we'll take it from there.
-            </p>
-            <p className="text-green-800 text-xs uppercase tracking-[0.2em] mb-8">
-              In-house financing · quick approval · no balloon payment
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="#catalogue"
-                className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors text-center"
-              >
-                Browse the Catalogue
-              </a>
-              <a
-                href="#how"
-                className="px-8 py-4 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors text-center"
-              >
-                How It Works
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section id="how" className="px-6 py-16 md:py-24 border-b border-green-900/30">
-        <div className="max-w-4xl mx-auto">
-          <motion.div {...fadeUp}>
-            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">How It Works</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">Half down, then monthly.</h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-              {[
-                ["1 · 50% down", "Half the outright price up front, once approved. That covers the deposit and gets your order moving."],
-                ["2 · Fixed monthly", "Pay a set amount each month toward the remaining balance. The number of months depends on the price."],
-                ["3 · It's yours", "After the final payment the device is yours outright — no balloon fee, no return."],
-              ].map(([title, body]) => (
-                <div key={title} className="border border-green-900/40 p-4">
-                  <p className="text-green-500 font-bold text-xs uppercase tracking-[0.15em] mb-2">{title}</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">{body}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="border border-green-900/40 p-5">
-              <p className="text-green-800 text-[10px] uppercase tracking-[0.3em] mb-3">
-                Worked example — 55" 4K Fire TV
-              </p>
-              <ul className="space-y-1.5 text-sm">
-                <li className="flex justify-between text-gray-300">
-                  <span>Buy outright</span>
-                  <span className="text-white font-bold">{money(350)}</span>
-                </li>
-                <li className="flex justify-between text-gray-300">
-                  <span>Rent to own — 50% down</span>
-                  <span className="text-white font-bold">{money(example.down)}</span>
-                </li>
-                <li className="flex justify-between text-gray-300">
-                  <span>Then monthly</span>
-                  <span className="text-white font-bold">
-                    {money(25)}/mo × {example.months}
-                  </span>
-                </li>
-                <li className="flex justify-between border-t border-green-900/30 pt-2 mt-1 text-green-500 font-bold text-xs uppercase tracking-[0.15em]">
-                  <span>Rent-to-own total</span>
-                  <span>{money(example.total)}</span>
-                </li>
-              </ul>
-            </div>
-
-            <p className="text-gray-500 text-xs mt-4 leading-relaxed">
-              {PROTECTION_NOTE_TV} Approval required. Ask us about longer terms on
-              higher-value systems.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Delivery */}
-      <section id="delivery" className="px-6 py-16 md:py-24 border-b border-green-900/30">
-        <div className="max-w-4xl mx-auto">
-          <motion.div {...fadeUp}>
-            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">Delivery</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">Ordered, shipped, done.</h2>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-              {[
-                ["1 · Chat or call", "Start a chat or call or text (862) 423-8875. A Sonoaac agent confirms availability, the plan, and approval — usually the same day. Nothing moves until you've spoken with us."],
-                ["2 · We ship it", "Once it's confirmed with the agent, your order ships out. Allow 3–5 business days for it to arrive."],
-                ["3 · You set it up", "It arrives ready to go. TVs include the stand, voice remote, and quick setup guide — plug in and you're watching."],
-              ].map(([title, body]) => (
-                <div key={title} className="border border-green-900/40 p-4">
-                  <p className="text-green-500 font-bold text-xs uppercase tracking-[0.15em] mb-2">{title}</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">{body}</p>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-gray-500 text-xs leading-relaxed">
-              Delivery is included with every rental — no separate shipping fee. We
-              don't install rentals and there's no setup charge; you set it up
-              yourself. If you get stuck, Sonoaac remote support can walk you through
-              it as a normal support session.
-            </p>
+            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-4">Rentals</span>
+            <h1 className="text-3xl md:text-5xl font-bold text-white">Rent to Own.</h1>
           </motion.div>
         </div>
       </section>
 
       {/* Catalogue */}
-      <section id="catalogue" className="px-6 py-16 md:py-24 border-b border-green-900/30">
+      <section id="catalogue" className="px-6 pb-24">
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeUp}>
-            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">Catalogue</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">Pick your system.</h2>
-
             {SHOW_FILTERS && (
               <div className="flex flex-wrap gap-2 mb-10">
                 {FILTERS.map((f) => (
@@ -687,24 +568,6 @@ export default function Rentals() {
                 );
               })}
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Closing CTA */}
-      <section className="px-6 py-16 md:py-24">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div {...fadeUp}>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Don't see it? We'll source it.</h2>
-            <p className="text-gray-400 text-sm mb-8 max-w-lg mx-auto">
-              Tell us the console, PC, or TV you want and we'll quote a rent-to-own
-              plan for it — same 50% down, same terms.
-            </p>
-            <Link href="/contact">
-              <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors">
-                Talk to an Agent
-              </button>
-            </Link>
           </motion.div>
         </div>
       </section>
