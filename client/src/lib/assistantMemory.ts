@@ -186,7 +186,7 @@ const serviceEntries: MemoryEntry[] = [
     "svc-pricing",
     "How much do services cost?",
     "price pricing cost how much rates fee quote charge expensive cheap estimate",
-    "Every job gets a clear quote before work starts. Common starting prices:\n- Remote virus removal: $49 / session\n- Full PC reset & reinstall: $79\n- On-site setup visit: $99 (first hour)\n- Custom PC build consult: $59\n- Business email (M365): $129\n- Custom website: $499",
+    "Every job gets a clear quote before work starts. Common starting prices:\n- Remote virus removal: $49 / session\n- Full PC reset & reinstall: $79\n- On-site setup visit: $99 (first hour)\n- Custom PC build consult: $59\n- Business email (M365): $129\n- Custom website (5 static pages, you fully control it): $500, add-ons priced separately",
     { label: "View Services", href: "/services" },
   ),
   svc(

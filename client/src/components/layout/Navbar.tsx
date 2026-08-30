@@ -8,13 +8,13 @@ const servicesMenu = [
   { name: "On Site Services",   path: "/services#onsite",   sub: "Starting at $99"  },
   { name: "Software Fixes",     path: "/services#software", sub: "Starting at $49"  },
   { name: "Business IT",        path: "/services#business", sub: "Starting at $129" },
-  { name: "Web Development",    path: "/services#web",      sub: "Starting at $499" },
+  { name: "Web Development",    path: "/services#web",      sub: "Starting at $500" },
 ];
 
 const myTechMenu = [
   { name: "Build a Custom PC", path: "/my-tech/build-pc", sub: "Configure your dream build"    },
   { name: "Device Matching",   path: "/my-tech",          sub: "Find the right device"         },
-  { name: "Rent to Own",       path: "/rentals",          sub: "Gaming PCs & TVs · 35% down"   },
+  { name: "Rent to Own",       path: "/rentals",          sub: "4K Fire TVs · 50% down"        },
   { name: "Trade In",          path: "/trade-in",         sub: "Get cash for your device"      },
 ];
 

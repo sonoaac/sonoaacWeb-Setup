@@ -28,7 +28,7 @@ development, device trade-ins, and rent-to-own electronics.
 - On-site setup visit — from $99 (first hour), NJ area
 - Custom PC build consult — from $59 (parts list and build plan included)
 - Business email / Microsoft 365 setup — from $129
-- Custom website — from $499 (mobile responsive, built from scratch)
+- Custom website — from $500 (see Web development below)
 - Every job gets a clear quote before any work starts. No surprise charges.
 
 ## Remote support
@@ -38,6 +38,19 @@ TeamViewer). The customer watches in real time and can end the session anytime.
 Good for Microsoft 365 and email, app crashes and errors, slow performance, driver
 and update problems, software installs and activations, virus scans, and printer
 setup. No location limit.
+
+## Web development
+
+Simple, fast static websites, custom built (no templates). The customer gets FULL
+autonomous control — their own admin login to edit pages, text, and images
+whenever they want, with no developer needed and no monthly fees to Sonoaac. The
+finished site belongs to the customer.
+
+Pricing: starts at $500 for 5 simple static pages, mobile responsive, with an
+admin panel so the owner runs it themselves. Includes on-page SEO, fast load
+times, and clean structured markup. Extra pages, contact forms, online booking,
+e-commerce, and other add-ons are priced separately — quote on request (add-on
+prices are still being finalized, so don't quote figures for them).
 
 ## Trade-in (sell a device for cash)
 

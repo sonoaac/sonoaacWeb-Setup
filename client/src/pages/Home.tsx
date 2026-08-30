@@ -27,7 +27,7 @@ const pricingCards = [
   { service: "On Site Setup Visit",        price: "$99",  note: "First hour, NJ area"               },
   { service: "Custom PC Build Consult",    price: "$59",  note: "Parts and build plan included"     },
   { service: "Business Email (M365)",      price: "$129", note: "Setup and configuration"           },
-  { service: "Custom Website",             price: "$499", note: "Mobile responsive, built from scratch" },
+  { service: "Custom Website",             price: "$500", note: "5 static pages, you fully control it" },
 ];
 
 const serviceCards = [
@@ -63,8 +63,8 @@ const serviceCards = [
   },
   {
     title: "Web Development",
-    startingAt: "$499",
-    detail: "Custom websites for small businesses. Mobile responsive, SEO optimized, with admin dashboards. No templates, built from scratch.",
+    startingAt: "$500",
+    detail: "Simple static websites you fully own and run yourself. $500 covers 5 pages, mobile responsive, with an admin panel. Add-ons priced separately.",
     link: "/services#web",
   },
 ];

@@ -394,29 +394,44 @@ export default function Services() {
               Web Development
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Websites for Small Businesses
+              Websites You Fully Own and Run Yourself
             </h2>
-            <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-10">
-              Clean, professional web presence built around your business needs.
-              No templates — every site is custom-designed and built for performance.
+            <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-8">
+              Simple, fast static websites — custom built, no templates. You get full
+              autonomous control: your own admin login to edit pages, text, and
+              images whenever you want, without calling a developer and with no
+              monthly fees to us.
             </p>
+
+            <div className="border border-green-900/40 p-5 max-w-xl mb-12">
+              <p className="text-green-800 text-[10px] uppercase tracking-[0.3em] mb-2">Pricing</p>
+              <p className="text-white text-2xl font-bold mb-1">
+                Starts at $500 <span className="text-gray-500 text-sm font-normal">/ 5 pages</span>
+              </p>
+              <p className="text-gray-400 text-xs leading-relaxed">
+                Five simple static pages, mobile responsive, with an admin panel so
+                you run it yourself. Extra pages, forms, booking, e-commerce, and
+                other add-ons are priced separately — ask for a quote.
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-green-900/20 mb-14">
               {[
                 {
-                  title: "Custom Website Design",
-                  description: "Tailored design built to reflect your brand. Clean, professional layouts for any industry.",
+                  title: "Full Ownership & Control",
+                  description: "The site is yours. You get the admin login and full autonomous control to update pages, copy, and images yourself — no developer needed, no monthly fees to us.",
                 },
                 {
-                  title: "Mobile-Responsive Builds",
-                  description: "Every site is built mobile-first and tested across all screen sizes.",
+                  title: "Simple Static Pages",
+                  description: "Fast, lightweight static builds. The $500 base covers 5 pages — home, about, services, gallery, contact, or whatever fits your business.",
                 },
                 {
-                  title: "SEO Optimization",
-                  description: "On-page SEO, fast load times, and structured markup to help clients find you.",
+                  title: "Mobile-Responsive",
+                  description: "Built mobile-first and tested across phones, tablets, and desktops.",
                 },
                 {
-                  title: "Admin & CMS Integration",
-                  description: "Easy-to-manage dashboards so you can update content without developer help.",
+                  title: "SEO & Performance",
+                  description: "On-page SEO, fast load times, and clean structured markup so clients can find you.",
                 },
               ].map((item, i) => (
                 <motion.div
