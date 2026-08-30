@@ -3,6 +3,7 @@ import type { Server } from "http";
 import { randomBytes } from "crypto";
 import { storage } from "./storage";
 import { db } from "./db";
+import { streamAssistantReply, sanitizeMessages, assistantAvailable } from "@shared/assistant-core";
 import { sendContactEmail, sendAdminNotification } from "./email";
 import { api } from "@shared/routes";
 import { z } from "zod";
@@ -269,6 +270,32 @@ Date:               ${val(d.clientDate)}
       console.error("Client form error:", err);
       res.status(500).json({ message: "Failed to submit form." });
     }
+  });
+
+  // AI assistant — streams a reply from Claude. Mirrors api/assistant.ts (Vercel).
+  app.post("/api/assistant", async (req, res) => {
+    if (!assistantAvailable()) return res.status(503).json({ fallback: true });
+    const messages = sanitizeMessages(req.body?.messages);
+    if (messages.length === 0) return res.status(400).json({ message: "No messages" });
+
+    const iterator = streamAssistantReply(messages);
+    let first;
+    try {
+      first = await iterator.next();
+    } catch (err) {
+      console.error("Assistant error:", err instanceof Error ? err.message : err);
+      return res.status(502).json({ fallback: true });
+    }
+
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.setHeader("Cache-Control", "no-store");
+    if (!first.done && first.value) res.write(first.value);
+    try {
+      for await (const chunk of iterator) res.write(chunk);
+    } catch (err) {
+      console.error("Assistant stream error:", err instanceof Error ? err.message : err);
+    }
+    res.end();
   });
 
   try {

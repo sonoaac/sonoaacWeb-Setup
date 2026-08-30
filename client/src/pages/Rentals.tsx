@@ -395,6 +395,11 @@ function DetailModal({ item, onClose }: { item: RentalItem; onClose: () => void 
               </p>
             </div>
           </div>
+          <p className="text-green-500 text-xs leading-relaxed border border-green-900/40 p-3">
+            Both options are set up with a Sonoaac agent. Start a chat or call and we'll
+            confirm availability, the plan, and delivery with you first — nothing is
+            charged or shipped automatically.
+          </p>
           <p className="text-gray-500 text-xs leading-relaxed">{protectionNote}</p>
 
           {/* Highlights */}
@@ -459,7 +464,7 @@ function DetailModal({ item, onClose }: { item: RentalItem; onClose: () => void 
               onClick={onClose}
               className="w-full px-4 py-3 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors"
             >
-              Apply to Rent
+              Talk to a Sonoaac Agent
             </button>
           </Link>
         </div>
@@ -493,6 +498,11 @@ export default function Rentals() {
               TVs on a simple rent-to-own plan — with gaming PCs, laptops, and
               monitors coming soon. Put 50% down, pay a fixed monthly amount until
               the balance clears, and it's yours.
+            </p>
+            <p className="text-gray-400 text-sm leading-relaxed max-w-xl mb-4">
+              Every rental and purchase is arranged in a quick chat with a Sonoaac
+              agent — we don't ship or sell anything automatically. Browse below,
+              then start a chat or call and we'll take it from there.
             </p>
             <p className="text-green-800 text-xs uppercase tracking-[0.2em] mb-8">
               In-house financing · quick approval · no balloon payment
@@ -578,8 +588,8 @@ export default function Rentals() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
               {[
-                ["1 · Apply or call", "Apply online or call or text (862) 423-8875. We confirm the plan and approve you, usually the same day."],
-                ["2 · We ship it", "Once approved, your order ships out. Allow 3–5 business days for it to arrive."],
+                ["1 · Chat or call", "Start a chat or call or text (862) 423-8875. A Sonoaac agent confirms availability, the plan, and approval — usually the same day. Nothing moves until you've spoken with us."],
+                ["2 · We ship it", "Once it's confirmed with the agent, your order ships out. Allow 3–5 business days for it to arrive."],
                 ["3 · You set it up", "It arrives ready to go. TVs include the stand, voice remote, and quick setup guide — plug in and you're watching."],
               ].map(([title, body]) => (
                 <div key={title} className="border border-green-900/40 p-4">
@@ -668,7 +678,7 @@ export default function Rentals() {
                         </button>
                         <Link href="/contact" className="flex-1">
                           <button className="w-full px-3 py-2.5 bg-green-400 text-black font-bold text-[10px] uppercase tracking-[0.15em] hover:bg-green-300 transition-colors">
-                            Apply
+                            Talk to an Agent
                           </button>
                         </Link>
                       </div>
@@ -692,7 +702,7 @@ export default function Rentals() {
             </p>
             <Link href="/contact">
               <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors">
-                Request a Rental
+                Talk to an Agent
               </button>
             </Link>
           </motion.div>

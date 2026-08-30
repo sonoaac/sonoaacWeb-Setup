@@ -460,6 +460,10 @@ export default function HelpBot() {
   const inputRef = useRef<HTMLInputElement>(null);
   const timerRef = useRef<number | null>(null);
   const lastQuestionRef = useRef("");
+  // Plain-text mirror of the chat, sent to /api/assistant as history.
+  const convoRef = useRef<{ role: "user" | "assistant"; content: string }[]>([]);
+  // Flips true once the AI endpoint is unreachable — then it's keyword-only.
+  const llmDownRef = useRef(false);
 
   useEffect(() => {
     if (!open) return;
@@ -501,11 +505,93 @@ export default function HelpBot() {
     }, 340);
   };
 
+  /** Keyword-engine reply rendered immediately (the user message is already shown). */
+  const keywordReplyInline = (text: string) => {
+    lastQuestionRef.current = text;
+    const r = route(text, null);
+    setMessages((m) => [...m, ...r.messages]);
+    setMode(r.mode);
+    setFlow(r.flow);
+    setPending(false);
+  };
+
+  /** Stream a reply from the AI assistant; fall back to the keyword engine on failure. */
+  const streamFromLLM = async (text: string) => {
+    setMessages((m) => [...m, userMsg(text)]);
+    convoRef.current = [...convoRef.current, { role: "user" as const, content: text }].slice(-16);
+    setPending(true);
+    setMode("chat");
+    setFlow(null);
+
+    const botId = nextId();
+    let acc = "";
+    let streaming = false;
+
+    try {
+      const resp = await fetch("/api/assistant", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: convoRef.current }),
+      });
+
+      if (!resp.ok || !resp.body) {
+        llmDownRef.current = true;
+        keywordReplyInline(text);
+        return;
+      }
+
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      for (;;) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        acc += decoder.decode(value, { stream: true });
+        if (!streaming) {
+          setMessages((m) => [...m, { id: botId, role: "bot", text: acc }]);
+          streaming = true;
+          setPending(false);
+        } else {
+          setMessages((m) => m.map((x) => (x.id === botId ? { ...x, text: acc } : x)));
+        }
+      }
+
+      acc = acc.trim();
+      if (!streaming || !acc) {
+        llmDownRef.current = true;
+        setMessages((m) => m.filter((x) => x.id !== botId));
+        keywordReplyInline(text);
+        return;
+      }
+      setMessages((m) => m.map((x) => (x.id === botId ? { ...x, text: acc } : x)));
+      convoRef.current = [...convoRef.current, { role: "assistant" as const, content: acc }].slice(-16);
+    } catch {
+      if (streaming && acc.trim()) {
+        // Connection dropped mid-reply — keep what streamed.
+      } else {
+        llmDownRef.current = true;
+        setMessages((m) => m.filter((x) => x.id !== botId));
+        keywordReplyInline(text);
+        return;
+      }
+    } finally {
+      setPending(false);
+    }
+  };
+
   const send = (raw: string) => {
     const text = raw.trim();
     if (!text || pending) return;
     setInput("");
 
+    // Explicit human hand-off always opens the form, in either mode.
+    if (isEscalationIntent(text)) {
+      convoRef.current = [...convoRef.current, { role: "user" as const, content: text }].slice(-16);
+      const r = route(text, null);
+      emit(text, r.messages, r.mode, r.flow);
+      return;
+    }
+
+    // Yes/no only applies right after a keyword-engine answer.
     if (mode === "awaitingFeedback" && !flow) {
       const n = normalize(text);
       if (YES_RE.test(n)) {
@@ -526,7 +612,12 @@ export default function HelpBot() {
         );
         return;
       }
-      // Not a yes/no — fall through and treat it as a new question.
+    }
+
+    // Primary path: AI assistant. Falls back to the keyword engine on any failure.
+    if (!llmDownRef.current) {
+      void streamFromLLM(text);
+      return;
     }
 
     lastQuestionRef.current = text;
@@ -557,6 +648,8 @@ export default function HelpBot() {
     setMode("chat");
     setFlow(null);
     lastQuestionRef.current = "";
+    convoRef.current = [];
+    llmDownRef.current = false;
     setMessages(seedMessages());
     inputRef.current?.focus();
   };
