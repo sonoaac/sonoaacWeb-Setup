@@ -71,6 +71,25 @@ Form submissions are handled by `api/contact.ts` (production / Vercel) and
   form / financing backend yet.
 - Assistant knows about it via the `svc-rentals` record in `assistantMemory.ts`.
 
+### AI assistant / HelpBot (2026-08-29)
+
+- The chat widget now streams from Claude (**Haiku 4.5**) via `/api/assistant`
+  (`api/assistant.ts` on Vercel, mirrored as an Express route in
+  `server/routes.ts` for local dev). Falls back to the built-in keyword engine on
+  any failure — including **no `ANTHROPIC_API_KEY`** (returns `{fallback:true}`).
+- **TO ENABLE:** create a key at console.anthropic.com → API Keys, set a monthly
+  spend limit, add `ANTHROPIC_API_KEY` to Vercel env vars (and local `.env`), redeploy.
+  Until then the widget behaves exactly as the keyword version.
+- Knowledge the bot uses lives in `shared/assistant-knowledge.ts` (plain text —
+  edit this to change what it knows). System prompt + guardrails in
+  `shared/assistant-core.ts`: it must never confirm orders/prices/shipments and
+  always hands off to a human agent; scope limited to IT/devices/Sonoaac services.
+- Guardrails: history trimmed to last ~16 turns / ~14k chars, `max_tokens` 1024,
+  prompt-cached system prompt. Consider adding per-IP rate limiting on the
+  function if abuse shows up.
+- Rentals page: all buy/rent CTAs route through a human agent now ("Talk to an
+  Agent"); nothing ships or sells self-serve.
+
 ### Notes
 
 - SendGrid is NOT used anywhere in code. `@sendgrid/mail` is a leftover dependency
