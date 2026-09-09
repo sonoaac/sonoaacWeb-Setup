@@ -22,8 +22,12 @@ export function Navbar() {
   const [location, navigate] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  // A menu that was opened by CLICK stays open until you click it again or click
+  // away — it ignores mouse-leave. Hover still opens menus as a preview.
+  const [pinned, setPinned] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
   // Smooth-scroll to an in-page section, retrying while a lazy page mounts.
   const scrollToId = (id: string, tries = 25) => {
@@ -40,6 +44,7 @@ export function Navbar() {
   const handleNavClick = (fullPath: string) => (e: React.MouseEvent) => {
     setMobileOpen(false);
     setOpenDropdown(null);
+    setPinned(null);
     const hashIndex = fullPath.indexOf("#");
     if (hashIndex === -1) return; // plain link — let <Link> handle it
     e.preventDefault();
@@ -62,17 +67,44 @@ export function Navbar() {
   useEffect(() => {
     setMobileOpen(false);
     setOpenDropdown(null);
+    setPinned(null);
   }, [location]);
+
+  // Close a click-pinned dropdown when clicking anywhere outside the navbar.
+  useEffect(() => {
+    if (!pinned) return;
+    const onDown = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setPinned(null);
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [pinned]);
 
   const openMenu = (name: string) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setOpenDropdown(name);
   };
   const scheduleClose = () => {
-    closeTimer.current = setTimeout(() => setOpenDropdown(null), 150);
+    closeTimer.current = setTimeout(() => {
+      setOpenDropdown((cur) => (pinned ? cur : null));
+    }, 150);
   };
   const cancelClose = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
+  };
+  // Click the trigger: pin it open, or unpin/close if it's already the pinned one.
+  const toggleDropdown = (name: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    if (pinned === name) {
+      setPinned(null);
+      setOpenDropdown(null);
+    } else {
+      setPinned(name);
+      setOpenDropdown(name);
+    }
   };
 
   const isActive = (path: string) =>
@@ -80,6 +112,7 @@ export function Navbar() {
 
   return (
     <div
+      ref={navRef}
       className="w-full bg-white"
       style={{ boxShadow: scrolled ? "0 1px 0 0 #000" : "none", transition: "box-shadow 0.2s" }}
     >
@@ -167,6 +200,8 @@ export function Navbar() {
                 onMouseLeave={scheduleClose}
               >
                 <button
+                  onClick={() => toggleDropdown("services")}
+                  aria-expanded={openDropdown === "services"}
                   style={{
                     fontFamily: "'Times New Roman', Times, serif",
                     fontWeight: isActive("/services") ? 900 : 700,
@@ -220,6 +255,7 @@ export function Navbar() {
                       ))}
                       <Link href="/services">
                         <button
+                          onClick={handleNavClick("/services")}
                           style={{
                             display: "block", width: "100%", textAlign: "left",
                             padding: "10px 20px", background: "#f9f9f9",
@@ -245,6 +281,8 @@ export function Navbar() {
                 onMouseLeave={scheduleClose}
               >
                 <button
+                  onClick={() => toggleDropdown("mytech")}
+                  aria-expanded={openDropdown === "mytech"}
                   style={{
                     fontFamily: "'Times New Roman', Times, serif",
                     fontWeight: isActive("/my-tech") ? 900 : 700,
@@ -277,6 +315,7 @@ export function Navbar() {
                       {myTechMenu.map((item) => (
                         <Link key={item.path} href={item.path}>
                           <button
+                            onClick={handleNavClick(item.path)}
                             style={{
                               display: "block", width: "100%", textAlign: "left",
                               padding: "12px 20px", background: "none", border: "none",
