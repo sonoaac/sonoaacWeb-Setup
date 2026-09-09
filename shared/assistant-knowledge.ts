@@ -8,9 +8,10 @@ export const ASSISTANT_KNOWLEDGE = `
 ## Company
 
 Sonoaac (SNC) is an NJ-based IT services company for homes, freelancers, and small
-businesses. Services: remote support, on-site home/office visits, new device setup,
-software troubleshooting, custom PC builds, business IT and Microsoft 365, web
-development, device trade-ins, and rent-to-own electronics.
+businesses. Services: computer & printer setup, remote and on-site IT support,
+basic business websites, local SEO / Google Business Profile, business email and
+Microsoft 365, monthly support & maintenance plans, device trade-ins, and
+rent-to-own TVs. Services can be bought individually or as a bundle.
 
 ## Contact
 
@@ -21,36 +22,59 @@ development, device trade-ins, and rent-to-own electronics.
 - Everything is by appointment. Walk-ins are accepted for an extra fee. Same-day is
   often available.
 
-## Services and starting prices
+## Services
 
-- Remote virus / malware removal — from $49 per session
-- Full PC reset & reinstall (Windows or Mac) — from $79
-- On-site setup visit — from $99 (first hour), NJ area
-- Custom PC build consult — from $59 (parts list and build plan included)
-- Business email / Microsoft 365 setup — from $129
-- Custom website — from $500 (see Web development below)
-- Every job gets a clear quote before any work starts. No surprise charges.
+Pricing note: do NOT quote prices for any service or bundle below — pricing is
+being finalized. Every job is quoted individually; send the customer to the
+contact page or (862) 423-8875 for a quote.
+
+Individual services:
+- Computer & printer setup — install and configure computers and printers,
+  Wi-Fi printing, drivers, and scanning.
+- Basic business website — a 3-5 page site: contact info, services, hours,
+  mobile-friendly. The customer fully owns it and gets an admin login to update
+  it themselves (see Web development below).
+- Local SEO / Google Maps — Google Business Profile setup and optimization,
+  business info, local keywords, and basic on-page SEO.
+- Remote IT support — screen-share help (Zoom, AnyDesk, TeamViewer).
+- On-site visits — home and office, NJ and the tri-state area.
+- Google setup — "set up Google everything": Gmail / Google Workspace (Drive,
+  Docs, Sheets, Calendar), Google Business Profile, and business email on Google.
+- Monthly support & maintenance — website updates, Google Business Profile
+  updates, basic SEO maintenance, and one small tech-support request per month.
+
+Note: Sonoaac does not offer virus/malware removal or custom PC builds as
+standalone services. For an infected or broken machine, the fix is a clean
+reinstall / setup handled under computer setup or remote support.
+
+Bundles (Sonoaac packages the services above):
+- Starter — computer/printer setup, basic configuration, Google email & account
+  setup.
+- Business — computer/printer setup, a 3-5 page website, Google Business Profile
+  optimization, basic local SEO.
+- Business+ — everything in Business, plus an extra computer/printer, more SEO
+  optimization, website maintenance, and 30 days of support.
 
 ## Remote support
 
 We connect securely over the internet with screen-sharing (Zoom, AnyDesk, or
 TeamViewer). The customer watches in real time and can end the session anytime.
-Good for Microsoft 365 and email, app crashes and errors, slow performance, driver
-and update problems, software installs and activations, virus scans, and printer
+Good for email and account setup, app crashes and errors, slow performance,
+driver and update problems, software installs and activations, and printer
 setup. No location limit.
 
 ## Web development
 
-Simple, fast static websites, custom built (no templates). The customer gets FULL
-autonomous control — their own admin login to edit pages, text, and images
-whenever they want, with no developer needed and no monthly fees to Sonoaac. The
-finished site belongs to the customer.
+Simple, fast static business websites, custom built (no templates). The base is a
+3-5 page site — contact info, services, hours — mobile responsive. The customer
+gets FULL autonomous control: their own admin login to edit pages, text, and
+images whenever they want, with no developer needed and no monthly fees to
+Sonoaac. The finished site belongs to the customer. Includes on-page SEO, fast
+load times, and clean structured markup.
 
-Pricing: starts at $500 for 5 simple static pages, mobile responsive, with an
-admin panel so the owner runs it themselves. Includes on-page SEO, fast load
-times, and clean structured markup. Extra pages, contact forms, online booking,
-e-commerce, and other add-ons are priced separately — quote on request (add-on
-prices are still being finalized, so don't quote figures for them).
+Extra pages, contact forms, online booking, e-commerce, and other add-ons are
+available. Do NOT quote prices — pricing is being finalized; send the customer to
+contact us for a quote.
 
 ## Trade-in (sell a device for cash)
 

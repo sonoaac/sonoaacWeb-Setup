@@ -14,8 +14,8 @@ import { ThemeProvider } from "@/context/ThemeContext";
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Home = lazy(() => import("@/pages/Home"));
 const MyTech = lazy(() => import("@/pages/MyTech"));
-const BuildPC = lazy(() => import("@/pages/BuildPC"));
 const Services = lazy(() => import("@/pages/Services"));
+const Demos = lazy(() => import("@/pages/Demos"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const ServiceAgreement = lazy(() => import("@/pages/ServiceAgreement"));
 const TradeIn = lazy(() => import("@/pages/TradeIn"));
@@ -61,8 +61,9 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
+        <Route path="/demos" component={Demos} />
         <Route path="/my-tech" component={MyTech} />
-        <Route path="/my-tech/build-pc" component={BuildPC} />
+        <Route path="/my-tech/build-pc"><RedirectTo to="/my-tech" /></Route>
         <Route path="/contact" component={Contact} />
         <Route path="/trade-in" component={TradeIn} />
         <Route path="/rentals" component={Rentals} />
@@ -78,7 +79,7 @@ function Router() {
         <Route path="/business-it"><RedirectTo to="/services" /></Route>
         <Route path="/book-consultation"><RedirectTo to="/contact" /></Route>
         <Route path="/buy-ready-computer"><RedirectTo to="/my-tech" /></Route>
-        <Route path="/build-pc"><RedirectTo to="/my-tech/build-pc" /></Route>
+        <Route path="/build-pc"><RedirectTo to="/my-tech" /></Route>
         <Route path="/knowledge-base"><RedirectTo to="/" /></Route>
 
         <Route component={NotFound} />

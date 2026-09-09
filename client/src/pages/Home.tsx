@@ -13,58 +13,58 @@ const fadeUp = {
 };
 
 const categoryTiles = [
-  { icon: Monitor,   label: "Remote Support",   sub: "Virus removal, OS fixes, M365",  link: "/services#remote"   },
-  { icon: MapPin,    label: "On Site Visit",     sub: "Home and office, NJ area",       link: "/services#onsite"   },
-  { icon: Cpu,       label: "Devices and Builds",sub: "Custom PCs, setup, TechMatcher", link: "/my-tech"           },
-  { icon: Briefcase, label: "Business IT",       sub: "Email, networks, small teams",   link: "/services#business" },
-  { icon: Globe,     label: "Web Development",   sub: "Custom sites built from scratch",link: "/services#web"      },
-  { icon: Wrench,    label: "Software Fixes",    sub: "Resets, malware, performance",   link: "/services#software" },
+  { icon: Monitor,   label: "Remote Support",         sub: "Secure screen-share help",          link: "/services#remote"   },
+  { icon: MapPin,    label: "On Site Visit",           sub: "Home and office, NJ area",          link: "/services#onsite"   },
+  { icon: Wrench,    label: "Computer & Printer Setup",sub: "Devices, printers, Wi-Fi, drivers", link: "/services#software" },
+  { icon: Briefcase, label: "Google Workspace Setup",  sub: "Gmail, Drive, Calendar, Profile",   link: "/services#business" },
+  { icon: Globe,     label: "Web Development",          sub: "Sites you fully own and run",       link: "/services#web"      },
+  { icon: Cpu,       label: "Device Matching",         sub: "Find the right device, trade-ins",  link: "/my-tech"           },
 ];
 
 const pricingCards = [
-  { service: "Remote Virus Removal",       price: "$49",  note: "Per session"                       },
-  { service: "Full PC Reset and Reinstall",price: "$79",  note: "Windows or Mac"                    },
-  { service: "On Site Setup Visit",        price: "$99",  note: "First hour, NJ area"               },
-  { service: "Custom PC Build Consult",    price: "$59",  note: "Parts and build plan included"     },
-  { service: "Business Email (M365)",      price: "$129", note: "Setup and configuration"           },
-  { service: "Custom Website",             price: "$500", note: "5 static pages, you fully control it" },
+  { service: "Remote IT Support",        price: "By quote", note: "Secure screen-share, per session" },
+  { service: "On Site Visit",            price: "By quote", note: "Home or office, NJ area" },
+  { service: "Computer & Printer Setup", price: "By quote", note: "Devices, printers, Wi-Fi, drivers" },
+  { service: "Google Workspace Setup",   price: "By quote", note: "Gmail, Drive, Calendar, Business Profile" },
+  { service: "Local SEO / Google Maps",  price: "By quote", note: "Business Profile + basic on-page SEO" },
+  { service: "Business Website",         price: "By quote", note: "3–5 pages, you fully control it" },
 ];
 
 const serviceCards = [
   {
     title: "Remote IT Support",
-    startingAt: "$49",
-    detail: "Virus removal, Microsoft 365, OS errors, app crashes, email config, driver issues, and security audits via Zoom, AnyDesk, or TeamViewer.",
+    startingAt: "By quote",
+    detail: "Screen-share help over Zoom, AnyDesk, or TeamViewer — app errors, slow performance, email and account setup, driver issues, and software installs.",
     link: "/services#remote",
   },
   {
     title: "On Site Services",
-    startingAt: "$99",
+    startingAt: "By quote",
     detail: "Home and office visits for workstation setup, network configuration, hardware installs, and hands-on troubleshooting. We come to you.",
     link: "/services#onsite",
   },
   {
-    title: "Business IT Solutions",
-    startingAt: "$129",
-    detail: "Startup IT planning, business email and Microsoft 365, workstation rollouts, security fundamentals, network setup, and ongoing support.",
-    link: "/services#business",
-  },
-  {
-    title: "Devices and Custom Builds",
-    startingAt: "$59",
-    detail: "Device recommendations, new device setup, PC and laptop resets, custom PC builds, data transfers, and our TechMatcher tool.",
-    link: "/my-tech",
-  },
-  {
-    title: "Software and App Fixes",
-    startingAt: "$49",
-    detail: "Full PC and laptop resets, performance issues, malware removal, login problems, driver errors, and Microsoft 365 troubleshooting.",
+    title: "Computer & Printer Setup",
+    startingAt: "By quote",
+    detail: "Install and configure computers and printers — drivers, Wi-Fi printing, scanning, and clean setup for a new or refreshed machine.",
     link: "/services#software",
   },
   {
+    title: "Google Workspace Setup",
+    startingAt: "By quote",
+    detail: "Set up Google everything — Gmail, Google Workspace (Drive, Docs, Calendar), business email on Google, and your Google Business Profile.",
+    link: "/services#business",
+  },
+  {
+    title: "Local SEO & Google Maps",
+    startingAt: "By quote",
+    detail: "Google Business Profile setup and optimization, accurate business info, local keywords, and basic on-page SEO so customers find you.",
+    link: "/services#business",
+  },
+  {
     title: "Web Development",
-    startingAt: "$500",
-    detail: "Simple static websites you fully own and run yourself. $500 covers 5 pages, mobile responsive, with an admin panel. Add-ons priced separately.",
+    startingAt: "By quote",
+    detail: "Simple static websites you fully own and run yourself — 3–5 pages, mobile responsive, with an admin panel. Add-ons available.",
     link: "/services#web",
   },
 ];
@@ -104,8 +104,8 @@ export default function Home() {
               </h1>
               <p style={{ fontSize: "1.1rem", lineHeight: 1.75, color: "#444", maxWidth: "600px", marginBottom: "2.5rem" }}>
                 NJ based tech support for homes, freelancers, and small businesses.
-                Remote troubleshooting, on site visits, device setup, custom PC builds,
-                and web development all under one name.
+                Remote and on-site help, computer and printer setup, Google Workspace,
+                local SEO, and web development all under one name.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-16">
                 <Link href="/contact">

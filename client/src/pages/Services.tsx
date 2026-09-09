@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { BraidingDemo } from "@/components/demos/BraidingDemo";
-import { MechanicDemo } from "@/components/demos/MechanicDemo";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -29,16 +27,16 @@ export default function Services() {
               IT Support &amp;<br />Digital Solutions
             </h1>
             <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-xl mb-8">
-              Remote troubleshooting, on-site visits, software fixes, device setup, business IT,
-              and custom web development — everything your home or business needs.
+              Remote and on-site help, computer and printer setup, Google Workspace, local
+              SEO, and web development — everything your home or business needs.
             </p>
             <div className="flex flex-wrap gap-3 text-xs text-green-800 uppercase tracking-[0.2em]">
               {[
                 ["Remote Support", "#remote"],
                 ["On-Site", "#onsite"],
-                ["Software Fixes", "#software"],
+                ["Computer & Printer Setup", "#software"],
                 ["Device Setup", "#device-setup"],
-                ["Business IT", "#business"],
+                ["Google Workspace", "#business"],
                 ["Web Dev", "#web"],
               ].map(([label, href]) => (
                 <a key={label} href={href} className="hover:text-green-400 transition-colors">
@@ -67,12 +65,8 @@ export default function Services() {
             <div className="space-y-0">
               {[
                 {
-                  title: "Virus & Malware Removal",
-                  detail: "Full scan, removal, and prevention setup. Protect your device and data.",
-                },
-                {
-                  title: "Microsoft 365 Setup & Troubleshooting",
-                  detail: "Outlook, Teams, Word, Excel, OneDrive — setup, login issues, and configuration.",
+                  title: "Google Workspace & Email",
+                  detail: "Gmail, Google Workspace apps, Calendar, Drive, and business email on Google — setup, login issues, and configuration.",
                 },
                 {
                   title: "OS Errors & System Issues",
@@ -91,12 +85,12 @@ export default function Services() {
                   detail: "Missing or outdated drivers, device recognition errors, peripheral setup.",
                 },
                 {
-                  title: "Security Audits",
-                  detail: "Review your security posture, update settings, and recommend improvements.",
+                  title: "Printer Setup",
+                  detail: "Install and configure printers and scanners, Wi-Fi printing, and driver issues.",
                 },
                 {
                   title: "PC / Laptop Full Reset",
-                  detail: "Clean Windows reinstall to remove malware, resolve persistent errors, and restore speed.",
+                  detail: "Clean reinstall to clear out clutter, resolve persistent errors, and restore speed.",
                 },
               ].map((item, i) => (
                 <motion.div
@@ -182,53 +176,53 @@ export default function Services() {
         </div>
       </section>
 
-      {/* 03 — Software & App Fixes */}
+      {/* 03 — Computer & Printer Setup */}
       <section id="software" className="px-6 py-16 md:py-24 border-b border-green-900/30 scroll-mt-20">
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              Software &amp; App Fixes
+              Computer &amp; Printer Setup
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Common Issues We Resolve
+              Set Up Right, First Time
             </h2>
             <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-10">
-              Available remotely or on-site for Windows and Mac. If your device is misbehaving,
-              we can diagnose and fix it.
+              Available remotely or on-site for Windows and Mac. We get a new or refreshed
+              machine, printer, and accounts working the way they should.
             </p>
             <div className="space-y-0 mb-10">
               {[
                 {
-                  title: "Virus & Malware",
-                  detail: "Detection, removal, and ongoing protection setup to keep your system clean.",
+                  title: "New Computer Setup",
+                  detail: "Out-of-box setup, updates, essential apps, accounts, and preferences configured and ready to use.",
                 },
                 {
-                  title: "Microsoft 365",
-                  detail: "Login errors, licensing issues, sync problems, and full suite configuration.",
+                  title: "Printer & Scanner Setup",
+                  detail: "Install and configure printers and scanners, Wi-Fi printing, and driver troubleshooting.",
                 },
                 {
-                  title: "OS Errors",
-                  detail: "Blue screens, update failures, boot loops, corrupted system files.",
+                  title: "Wi-Fi & Network",
+                  detail: "Connect devices, fix drop-outs, position the router, and set up guest Wi-Fi.",
                 },
                 {
-                  title: "App Crashes",
-                  detail: "Repeated crashes, freezing, and software conflicts diagnosed and resolved.",
+                  title: "Drivers & Peripherals",
+                  detail: "Missing, outdated, or conflicting drivers reinstalled; webcams, docks, and peripherals connected.",
                 },
                 {
-                  title: "Login Issues",
-                  detail: "Account lockouts, password resets, Windows Hello, and two-factor authentication setup.",
+                  title: "Accounts & Email",
+                  detail: "Gmail, Outlook, Google Workspace, iCloud, and business email set up and synced across devices.",
                 },
                 {
-                  title: "Driver & Hardware Errors",
-                  detail: "Missing, outdated, or conflicting drivers reinstalled and configured.",
+                  title: "Data Transfer",
+                  detail: "Move files, photos, bookmarks, and settings from an old device to a new one.",
                 },
                 {
-                  title: "Performance Issues",
-                  detail: "Slow startup, high CPU/RAM usage, background bloatware removed.",
+                  title: "Performance Cleanup",
+                  detail: "Slow startup, high CPU/RAM usage, and background bloatware cleared out.",
                 },
                 {
                   title: "PC / Laptop Full Reset",
-                  detail: "Complete Windows reinstall — wipes the slate clean. Data backup included.",
+                  detail: "Complete clean reinstall — wipes the slate clean. Data backup included.",
                 },
               ].map((item, i) => (
                 <motion.div
@@ -279,7 +273,7 @@ export default function Services() {
                 },
                 {
                   title: "PC & Laptop Reset",
-                  detail: "Full reinstall from scratch — removes clutter, malware, and slow-down. Brings device back to peak performance.",
+                  detail: "Full reinstall from scratch — clears out clutter and slow-down and brings the device back to peak performance.",
                 },
                 {
                   title: "Software Installation",
@@ -295,7 +289,7 @@ export default function Services() {
                 },
                 {
                   title: "Account Configuration",
-                  detail: "Email, Microsoft 365, Google Workspace, iCloud, and all other accounts set up and synced.",
+                  detail: "Gmail, Google Workspace, business email, iCloud, and all other accounts set up and synced.",
                 },
               ].map((item, i) => (
                 <motion.div
@@ -320,45 +314,45 @@ export default function Services() {
         </div>
       </section>
 
-      {/* 05 — Business IT */}
+      {/* 05 — Google Workspace Setup */}
       <section id="business" className="px-6 py-16 md:py-24 border-b border-green-900/30 scroll-mt-20">
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeUp}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              Business IT Solutions
+              Google Workspace Setup
             </span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              IT Built for Small Business
+              Set Up Google Everything
             </h2>
             <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-10">
-              From day-one startup setup to ongoing IT management — Sonoaac keeps your
-              business tech running so you can focus on what you do best.
+              Get your whole business running on Google — email, calendar, files, and
+              your Google Business Profile — set up cleanly and synced across every device.
             </p>
             <div className="space-y-0 mb-10">
               {[
                 {
-                  title: "Startup IT Setup",
-                  detail: "Get your first office or home office fully operational — computers, network, software, and accounts.",
+                  title: "Business Email on Google",
+                  detail: "Professional email at your own domain (you@yourbusiness.com) with Gmail — set up, verified, and migrated from your old inbox.",
                 },
                 {
-                  title: "Business Email & Tools",
-                  detail: "Microsoft 365 or Google Workspace for your whole team — email, calendar, shared drives, and video calls.",
+                  title: "Google Workspace Apps",
+                  detail: "Drive, Docs, Sheets, Slides, Calendar, and Meet configured for your team, with shared drives and sharing rules.",
                 },
                 {
-                  title: "Workstation Rollout",
-                  detail: "Deploy multiple workstations for new hires or office expansions. Consistent setup across all machines.",
+                  title: "Google Business Profile",
+                  detail: "Create or claim your listing, fill in hours, services, photos, and service area so you show up on Google and Maps.",
                 },
                 {
-                  title: "Security Fundamentals",
-                  detail: "Antivirus, password policies, two-factor authentication, and employee security best practices.",
+                  title: "Accounts & Devices",
+                  detail: "Sign every phone, tablet, and computer into the right Google account and confirm email, calendar, and files all sync.",
                 },
                 {
-                  title: "Network Configuration",
-                  detail: "Business Wi-Fi, router setup, wired LAN, guest network isolation, and remote access VPN.",
+                  title: "Team Onboarding",
+                  detail: "Add staff accounts, set permissions, and hand over a simple guide so everyone knows how to use it.",
                 },
                 {
-                  title: "Ongoing IT Support",
-                  detail: "Recurring support for day-to-day IT issues, updates, and equipment as your team grows.",
+                  title: "Local SEO Basics",
+                  detail: "Consistent business info across the web, local keywords, and basic on-page SEO to help customers find you.",
                 },
               ].map((item, i) => (
                 <motion.div
@@ -448,28 +442,20 @@ export default function Services() {
               ))}
             </div>
 
-            {/* Live Demos */}
+            {/* Live Demos → own page */}
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
               Live Demos
             </span>
             <h3 className="text-xl md:text-2xl font-bold text-white mb-4">See It In Action</h3>
-            <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-10">
-              Fully functional UI components built for real clients. This is what Sonoaac builds.
+            <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-6">
+              Fully functional UI components built for real client industries. This is what
+              Sonoaac builds.
             </p>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-              <div>
-                <h4 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-6">
-                  Beauty &amp; Salon Booking
-                </h4>
-                <BraidingDemo />
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-green-400 uppercase tracking-[0.2em] mb-6">
-                  Automotive Service Menu
-                </h4>
-                <MechanicDemo />
-              </div>
-            </div>
+            <Link href="/demos">
+              <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors">
+                View Live Demos
+              </button>
+            </Link>
           </motion.div>
         </div>
       </section>

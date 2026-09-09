@@ -74,3 +74,6 @@ DATABASE_URL
 *.db
 /drizzle
 drizzle/**/*.sql
+
+# Retired pages kept out of the build
+/_ignore/

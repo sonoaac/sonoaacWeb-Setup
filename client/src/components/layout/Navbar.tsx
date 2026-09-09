@@ -4,18 +4,18 @@ import { useState, useEffect, useRef } from "react";
 import { ChevronDown, Phone, Mail, Menu, X } from "lucide-react";
 
 const servicesMenu = [
-  { name: "Remote IT Support",  path: "/services#remote",   sub: "Starting at $49"  },
-  { name: "On Site Services",   path: "/services#onsite",   sub: "Starting at $99"  },
-  { name: "Software Fixes",     path: "/services#software", sub: "Starting at $49"  },
-  { name: "Business IT",        path: "/services#business", sub: "Starting at $129" },
-  { name: "Web Development",    path: "/services#web",      sub: "Starting at $500" },
+  { name: "Remote IT Support",       path: "/services#remote",   sub: "Secure screen-share help"            },
+  { name: "On Site Services",        path: "/services#onsite",   sub: "Home & office, NJ area"              },
+  { name: "Computer & Printer Setup",path: "/services#software", sub: "Devices, printers, Wi-Fi, drivers"   },
+  { name: "Google Workspace Setup",  path: "/services#business", sub: "Gmail, Drive, Calendar, Business Profile" },
+  { name: "Web Development",          path: "/services#web",      sub: "Sites you fully own & run"           },
+  { name: "Live Demos",              path: "/demos",             sub: "See what we build"                   },
 ];
 
 const myTechMenu = [
-  { name: "Build a Custom PC", path: "/my-tech/build-pc", sub: "Configure your dream build"    },
-  { name: "Device Matching",   path: "/my-tech",          sub: "Find the right device"         },
-  { name: "Rent to Own",       path: "/rentals",          sub: "4K Fire TVs · 50% down"        },
-  { name: "Trade In",          path: "/trade-in",         sub: "Get cash for your device"      },
+  { name: "Device Matching", path: "/my-tech",  sub: "Find the right device"    },
+  { name: "Rent to Own",     path: "/rentals",  sub: "4K Fire TVs · 50% down"   },
+  { name: "Trade In",        path: "/trade-in", sub: "Get cash for your device" },
 ];
 
 export function Navbar() {

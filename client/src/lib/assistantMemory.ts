@@ -133,7 +133,7 @@ const SECTION_CTA: Record<string, { label: string; href: string }> = {
   networking: { label: "On-Site Services", href: "/services#onsite" },
   displays: { label: "Get IT Support", href: "/services#software" },
   microsoft365: { label: "Business IT", href: "/services#business" },
-  "cpu-gpu": { label: "Custom PC Build", href: "/my-tech/build-pc" },
+  "cpu-gpu": { label: "Explore Devices", href: "/my-tech" },
 };
 
 const faqEntries: MemoryEntry[] = FAQ_SECTIONS.flatMap((s) =>
@@ -178,16 +178,16 @@ const serviceEntries: MemoryEntry[] = [
   svc(
     "svc-overview",
     "What does Sonoaac do?",
-    "services offer help what do you do list of services everything remote onsite on site setup repair fix",
-    "Sonoaac is an NJ-based IT service for homes and small businesses:\n- Remote support (Zoom, AnyDesk, TeamViewer)\n- On-site home and office visits\n- New device setup and software installs\n- Custom PC builds and part recommendations\n- Business IT, email, and Microsoft 365\n- Web development\n- Device trade-ins for cash",
+    "services offer help what do you do list of services everything remote onsite on site setup repair fix printer website seo bundle package starter business",
+    "Sonoaac is an NJ-based IT service for homes and small businesses:\n- Computer & printer setup (drivers, Wi-Fi printing, scanning)\n- Remote & on-site IT support\n- Basic business websites (3–5 pages, mobile-friendly, you fully control it)\n- Local SEO & Google Business Profile\n- Google Workspace setup (Gmail, Drive, Calendar, business email — everything Google)\n- Monthly support & maintenance plans\n- Device trade-ins for cash\n- Rent-to-own TVs\n\nThese can be bought on their own or bundled into Starter, Business, and Business+ packages.",
     { label: "View Services", href: "/services" },
   ),
   svc(
     "svc-pricing",
     "How much do services cost?",
-    "price pricing cost how much rates fee quote charge expensive cheap estimate",
-    "Every job gets a clear quote before work starts. Common starting prices:\n- Remote virus removal: $49 / session\n- Full PC reset & reinstall: $79\n- On-site setup visit: $99 (first hour)\n- Custom PC build consult: $59\n- Business email (M365): $129\n- Custom website (5 static pages, you fully control it): $500, add-ons priced separately",
-    { label: "View Services", href: "/services" },
+    "price pricing cost how much rates fee quote charge expensive cheap estimate bundle package",
+    "Pricing is being finalized, so I can't give figures yet. Every job is quoted individually — tell us what you need through the contact page or call/text (862) 423-8875 and we'll send a quote. Services can be bought on their own or as a Starter / Business / Business+ bundle.",
+    { label: "Contact Us", href: "/contact" },
   ),
   svc(
     "svc-booking",

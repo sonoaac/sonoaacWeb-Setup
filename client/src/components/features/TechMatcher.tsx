@@ -210,10 +210,10 @@ function getRecommendation(answers: Answers): Recommendation {
           { label: "RAM", value: "32GB DDR5 for gaming; 64GB for creative workstations", note: "Desktop RAM is affordable — don't underbuy. 32GB future-proofs well." },
           { label: "Storage", value: "1TB NVMe SSD for OS and apps + 2TB HDD or 2nd SSD for storage" },
         ],
-        ctaLabel: "Get a Custom Build Quote",
-        ctaHref: "/my-tech/build-pc",
-        secondaryLabel: "Contact for Specs",
-        secondaryHref: "/contact",
+        ctaLabel: "Get a Quote",
+        ctaHref: "/contact",
+        secondaryLabel: "Browse Devices",
+        secondaryHref: "/my-tech",
       };
     }
     return {
@@ -390,8 +390,8 @@ function getRecommendation(answers: Answers): Recommendation {
         ],
         ctaLabel: "Get Dev Setup Help",
         ctaHref: "/contact",
-        secondaryLabel: "Custom PC Build",
-        secondaryHref: "/my-tech/build-pc",
+        secondaryLabel: "Browse Devices",
+        secondaryHref: "/my-tech",
       };
     }
 
@@ -415,8 +415,8 @@ function getRecommendation(answers: Answers): Recommendation {
       ],
       ctaLabel: "Get Full Setup",
       ctaHref: "/contact",
-      secondaryLabel: "Custom PC Build",
-      secondaryHref: "/my-tech/build-pc",
+      secondaryLabel: "Browse Devices",
+      secondaryHref: "/my-tech",
     };
   }
 

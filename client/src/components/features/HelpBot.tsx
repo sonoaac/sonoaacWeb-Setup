@@ -75,7 +75,17 @@ const botText = (text: string): Msg => ({ id: nextId(), role: "bot", text });
 const botEntry = (entry: MemoryEntry): Msg => ({ id: nextId(), role: "bot", entry });
 const formMsg = (): Msg => ({ id: nextId(), role: "bot", form: true });
 
-const GREETING = "Hi, I'm the Sonoaac assistant. What can I help with?";
+const GREETING =
+  "Hi, I'm the Sonoaac assistant. We help with:\n" +
+  "- Computer & printer setup (drivers, Wi-Fi printing, scanning)\n" +
+  "- Remote & on-site IT support\n" +
+  "- Basic business websites (3–5 pages, mobile-friendly)\n" +
+  "- Local SEO & Google Business Profile\n" +
+  "- Google Workspace setup (Gmail, Drive, Calendar, business email)\n" +
+  "- Monthly support & maintenance plans\n" +
+  "- Device trade-ins for cash\n" +
+  "- Rent-to-own TVs\n\n" +
+  "We also bundle setup + website + SEO into Starter, Business, and Business+ packages. What can I help with?";
 const seedMessages = (): Msg[] => [botText(GREETING)];
 
 const FEEDBACK_Q = "Did that answer it for you?";
@@ -162,7 +172,7 @@ Is this light use (mostly email and docs) or heavy (big files, lots of apps at o
 The Ryzen 7 7800X3D is the best gaming CPU per dollar right now.
 
 Want a desktop build or a gaming laptop, and what resolution are you aiming for?`,
-    cta: { label: "Custom PC Build", href: "/my-tech/build-pc" },
+    cta: { label: "Explore Devices", href: "/my-tech" },
   },
   creative: {
     title: "A machine for video and photo work",
@@ -174,7 +184,7 @@ Want a desktop build or a gaming laptop, and what resolution are you aiming for?
 On Final Cut Pro, go Apple Silicon (M3/M4 Pro or Max) — it exports 4K faster than most Windows PCs at the same price.
 
 Which app do you use most — Premiere, DaVinci Resolve, Final Cut, or Photoshop/Lightroom?`,
-    cta: { label: "Custom PC Build", href: "/my-tech/build-pc" },
+    cta: { label: "Explore Devices", href: "/my-tech" },
   },
   general: {
     title: "A laptop for everyday home use",
@@ -716,7 +726,7 @@ export default function HelpBot() {
               {messages.map((m) =>
                 m.role === "user" ? (
                   <div key={m.id} className="flex justify-end">
-                    <div className="max-w-[85%] bg-green-400 text-black text-xs px-3 py-2 rounded leading-relaxed">
+                    <div className="max-w-[85%] bg-green-400 text-black text-xs px-3 py-2 rounded leading-relaxed whitespace-pre-wrap">
                       {m.text}
                     </div>
                   </div>
@@ -731,7 +741,7 @@ export default function HelpBot() {
                       ) : m.entry ? (
                         <EntryBubble entry={m.entry} onNavigate={() => setOpen(false)} />
                       ) : (
-                        <p className="text-gray-300 text-xs leading-relaxed">{m.text}</p>
+                        <p className="text-gray-300 text-xs leading-relaxed whitespace-pre-line">{m.text}</p>
                       )}
                     </div>
                   </div>

@@ -121,7 +121,7 @@ export default function MyTech() {
             </h1>
             <p className="text-gray-300 text-base leading-relaxed max-w-xl mb-4">
               Not sure what to buy? Tell us your needs and we'll recommend the right
-              laptop, desktop, iPad, or custom PC — then configure it completely for you.
+              laptop, desktop, or iPad — then configure it completely for you.
             </p>
             <p className="text-green-800 text-xs uppercase tracking-[0.2em] mb-8">
               Sonoaac recommends — we do not sell hardware directly.
@@ -344,7 +344,6 @@ export default function MyTech() {
                 "Laptops — Windows and Mac, for work, school, and business",
                 "Desktops — high-performance systems for invoicing, editing, or multitasking",
                 "iPads — ideal for front-desk, POS, scheduling, and customer-facing use",
-                "Custom PC builds — spec'd to your exact needs and budget",
                 "Budget picks — solid, reliable devices that won't break the bank",
               ].map((item) => (
                 <li key={item} className="text-gray-300 text-sm">
@@ -416,7 +415,7 @@ export default function MyTech() {
                 },
                 {
                   title: "Mobile Laptop Setup",
-                  detail: "Lightweight laptop for travel, school, and everyday use. Fully configured on-site with all software, virus protection, and accounts.",
+                  detail: "Lightweight laptop for travel, school, and everyday use. Fully configured on-site with all software, security settings, and accounts.",
                 },
               ].map((item) => (
                 <div
@@ -430,30 +429,6 @@ export default function MyTech() {
                 </div>
               ))}
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Build a Custom PC */}
-      <section className="px-6 py-16 md:py-24 border-b border-green-900/30">
-        <div className="max-w-4xl mx-auto">
-          <motion.div {...fadeUp}>
-            <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-2">
-              Custom PC Builds
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Build Your Own PC
-            </h2>
-            <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-8">
-              Want something spec'd exactly to your needs? Use our PC builder to select
-              your components — processor, GPU, RAM, storage, case, and power supply —
-              then request a quote for assembly.
-            </p>
-            <Link href="/my-tech/build-pc">
-              <button className="px-8 py-4 bg-green-400 text-black font-bold text-xs uppercase tracking-[0.2em] hover:bg-green-300 transition-colors">
-                Open PC Builder
-              </button>
-            </Link>
           </motion.div>
         </div>
       </section>
@@ -520,7 +495,6 @@ export default function MyTech() {
                     <option value="laptop">Laptop</option>
                     <option value="desktop">Desktop</option>
                     <option value="ipad">iPad</option>
-                    <option value="custom-pc">Custom PC Build</option>
                     <option value="other">Other / Not sure</option>
                   </select>
                 </div>
