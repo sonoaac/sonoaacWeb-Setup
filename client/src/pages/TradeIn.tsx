@@ -5,7 +5,7 @@ import { ChevronDown, ChevronRight, Info, CheckCircle, XCircle, Clock, AlertTria
 
 // ─── Pricing data ──────────────────────────────────────────────────────────
 // competitorAvg = typical trade-in value across major buyback services
-// Sonoaac cash offer = 50% of competitorAvg (competitors offer store credit; we pay cash)
+// Sonoaac cash offer = 35% of competitorAvg (competitors offer store credit; we pay cash)
 
 const IPHONE_MODELS: { id: string; name: string; released: number; storage: { gb: string; competitorAvg: number }[] }[] = [
   {
@@ -311,7 +311,7 @@ const CONDITION_MULTIPLIER: Record<Condition, number> = {
   ineligible: 0,
 };
 
-const SONOAAC_MULTIPLIER = 0.5; // cash offer — 50% of typical market rate
+const SONOAAC_MULTIPLIER = 0.35; // cash offer — 35% of typical market rate (was 0.5; cut 30%)
 
 function calcOffer(competitorAvg: number, condition: Condition): number {
   return Math.round(competitorAvg * SONOAAC_MULTIPLIER * CONDITION_MULTIPLIER[condition]);
