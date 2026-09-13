@@ -128,8 +128,8 @@ export function ScrollCarousel({ items }: { items: CarouselItem[] }) {
                   </p>
                   {item.cta && (
                     <span
-                      className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 transition-colors duration-200"
-                      style={{ color: "#fff", border: "1px solid rgba(255,255,255,0.65)" }}
+                      className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-200"
+                      style={{ color: "#fff" }}
                     >
                       {item.cta} &rarr;
                     </span>
