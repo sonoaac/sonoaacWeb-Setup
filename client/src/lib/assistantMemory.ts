@@ -127,13 +127,13 @@ const STOP = new Set(
 const SECTION_CTA: Record<string, { label: string; href: string }> = {
   "slow-pc": { label: "Get IT Support", href: "/services#software" },
   os: { label: "Get IT Support", href: "/services#software" },
-  hardware: { label: "Explore Devices", href: "/my-tech" },
-  buying: { label: "Explore Devices", href: "/my-tech" },
+  hardware: { label: "Get Advice", href: "/contact" },
+  buying: { label: "Get Advice", href: "/contact" },
   tablets: { label: "Device Setup", href: "/services" },
   networking: { label: "On-Site Services", href: "/services#onsite" },
   displays: { label: "Get IT Support", href: "/services#software" },
   microsoft365: { label: "Business IT", href: "/services#business" },
-  "cpu-gpu": { label: "Explore Devices", href: "/my-tech" },
+  "cpu-gpu": { label: "Get Advice", href: "/contact" },
 };
 
 const faqEntries: MemoryEntry[] = FAQ_SECTIONS.flatMap((s) =>

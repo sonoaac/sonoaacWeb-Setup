@@ -13,9 +13,8 @@ const servicesMenu = [
 ];
 
 const myTechMenu = [
-  { name: "Device Matching", path: "/my-tech",  sub: "Find the right device"    },
-  { name: "Rent to Own",     path: "/rentals",  sub: "4K Fire TVs · 50% down"   },
-  { name: "Trade In",        path: "/trade-in", sub: "Get cash for your device" },
+  { name: "Rent to Own", path: "/rentals",  sub: "4K Fire TVs · 50% down"   },
+  { name: "Trade In",    path: "/trade-in", sub: "Get cash for your device" },
 ];
 
 export function Navbar() {
@@ -274,7 +273,7 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
-              {/* My Tech dropdown */}
+              {/* Devices dropdown (rent-to-own + trade-in) */}
               <div
                 className="relative"
                 onMouseEnter={() => openMenu("mytech")}
@@ -285,15 +284,15 @@ export function Navbar() {
                   aria-expanded={openDropdown === "mytech"}
                   style={{
                     fontFamily: "'Times New Roman', Times, serif",
-                    fontWeight: isActive("/my-tech") ? 900 : 700,
+                    fontWeight: isActive("/rentals") || isActive("/trade-in") ? 900 : 700,
                     fontSize: "0.78rem", textTransform: "uppercase",
-                    letterSpacing: "0.18em", color: isActive("/my-tech") ? "#000" : "#555",
+                    letterSpacing: "0.18em", color: isActive("/rentals") || isActive("/trade-in") ? "#000" : "#555",
                     display: "flex", alignItems: "center", gap: "4px",
                     padding: "0 16px", height: "48px", background: "none", border: "none",
                     cursor: "pointer", transition: "color 0.15s",
                   }}
                 >
-                  My Tech
+                  Devices
                   <ChevronDown size={12} className={`transition-transform duration-200 ${openDropdown === "mytech" ? "rotate-180" : ""}`} />
                 </button>
                 <AnimatePresence>
@@ -405,7 +404,7 @@ export function Navbar() {
 
               <div style={{ borderBottom: "1px solid #e5e5e5", paddingBottom: "12px", marginBottom: "12px" }}>
                 <p style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.3em", color: "#aaa", marginBottom: "8px" }}>
-                  My Tech
+                  Devices
                 </p>
                 {myTechMenu.map((item) => (
                   <Link key={item.path} href={item.path}>

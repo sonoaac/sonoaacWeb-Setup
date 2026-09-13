@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Monitor, MapPin, Cpu, Briefcase, Globe, Wrench } from "lucide-react";
+import { ArrowRight, Monitor, MapPin, Repeat, Briefcase, Globe, Wrench } from "lucide-react";
 import { Link } from "wouter";
 import MonitorIntro from "@/components/features/MonitorIntro";
 import HomeFAQ from "@/components/features/HomeFAQ";
@@ -18,7 +18,7 @@ const categoryTiles = [
   { icon: Wrench,    label: "Computer & Printer Setup",sub: "Devices, printers, Wi-Fi, drivers", link: "/services#software" },
   { icon: Briefcase, label: "Google Workspace Setup",  sub: "Gmail, Drive, Calendar, Profile",   link: "/services#business" },
   { icon: Globe,     label: "Web Development",          sub: "Sites you fully own and run",       link: "/services#web"      },
-  { icon: Cpu,       label: "Device Matching",         sub: "Find the right device, trade-ins",  link: "/my-tech"           },
+  { icon: Repeat,    label: "Trade In",                sub: "Cash for your old device",          link: "/trade-in"          },
 ];
 
 const pricingCards = [

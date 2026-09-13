@@ -305,9 +305,9 @@ export default function Services() {
                 </motion.div>
               ))}
             </div>
-            <Link href="/my-tech">
+            <Link href="/contact">
               <button className="text-xs text-green-800 uppercase tracking-[0.2em] hover:text-green-400 transition-colors">
-                Need a device recommendation? → My Tech
+                Need a device recommendation? → Contact Us
               </button>
             </Link>
           </motion.div>
@@ -476,9 +476,9 @@ export default function Services() {
                   Book Consultation
                 </button>
               </Link>
-              <Link href="/my-tech">
+              <Link href="/trade-in">
                 <button className="px-8 py-4 border border-green-800 text-green-400 font-bold text-xs uppercase tracking-[0.2em] hover:border-green-400 transition-colors w-full sm:w-auto">
-                  Device Matching
+                  Trade In Your Device
                 </button>
               </Link>
             </div>

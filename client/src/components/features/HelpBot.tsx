@@ -146,7 +146,7 @@ const BUY_ANSWERS: Record<UseCase, { title: string; body: string; cta: { label: 
 Sweet spot is about $500–$800.
 
 Ask me about any piece — RAM, storage, or Windows vs Mac vs Chromebook — and I'll go deeper.`,
-    cta: { label: "Explore Devices", href: "/my-tech" },
+    cta: { label: "Get Advice", href: "/contact" },
   },
   office: {
     title: "A laptop for office work",
@@ -172,7 +172,7 @@ Is this light use (mostly email and docs) or heavy (big files, lots of apps at o
 The Ryzen 7 7800X3D is the best gaming CPU per dollar right now.
 
 Want a desktop build or a gaming laptop, and what resolution are you aiming for?`,
-    cta: { label: "Explore Devices", href: "/my-tech" },
+    cta: { label: "Get Advice", href: "/contact" },
   },
   creative: {
     title: "A machine for video and photo work",
@@ -184,7 +184,7 @@ Want a desktop build or a gaming laptop, and what resolution are you aiming for?
 On Final Cut Pro, go Apple Silicon (M3/M4 Pro or Max) — it exports 4K faster than most Windows PCs at the same price.
 
 Which app do you use most — Premiere, DaVinci Resolve, Final Cut, or Photoshop/Lightroom?`,
-    cta: { label: "Explore Devices", href: "/my-tech" },
+    cta: { label: "Get Advice", href: "/contact" },
   },
   general: {
     title: "A laptop for everyday home use",
@@ -196,7 +196,7 @@ Which app do you use most — Premiere, DaVinci Resolve, Final Cut, or Photoshop
 No need to overspend — a $500–$700 laptop handles all of this comfortably.
 
 Want a Windows vs Mac vs Chromebook breakdown for this?`,
-    cta: { label: "Explore Devices", href: "/my-tech" },
+    cta: { label: "Get Advice", href: "/contact" },
   },
 };
 

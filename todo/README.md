@@ -21,6 +21,8 @@ Working notes for the Sonoaac site. One file per area — see the list at the bo
 ### Nice to have
 - [ ] Verify the Tello email-to-SMS gateway actually delivers (`8624238875@tmomail.net`).
 - [ ] Add real product photos to `client/public/img/rentals/` as more items are listed.
+- [ ] Replace the Rentals TV photos — they still show Insignia/Best Buy branding
+      on-screen even though the text was scrubbed. See `2026-09-13-morning-fixes/`.
 - [ ] Delete the redundant repo-root `TV catalogue img/` folder (contents already
       copied into `client/public/img/rentals/`).
 - [ ] Rental application form + financing backend (CTAs currently go to `/contact`).
@@ -36,4 +38,5 @@ Working notes for the Sonoaac site. One file per area — see the list at the bo
 | [ai-assistant.md](ai-assistant.md) | Claude-powered HelpBot (Haiku 4.5) + keyword fallback |
 | [rentals.md](rentals.md) | `/rentals` rent-to-own page, catalogue data, images |
 | [knowledge-base.md](knowledge-base.md) | Knowledge Base removal, FAQ data source |
+| [my-tech-retired.md](my-tech-retired.md) | Why `/my-tech` was pulled, where the files went, how to restore it |
 | [notes.md](notes.md) | Misc facts worth remembering |
