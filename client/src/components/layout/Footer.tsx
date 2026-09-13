@@ -7,6 +7,7 @@ const serviceLinks = [
   { label: "Google Workspace Setup", path: "/services#business" },
   { label: "Web Development", path: "/services#web" },
   { label: "Live Demos", path: "/demos" },
+  { label: "Shop", path: "/shop" },
   { label: "Trade In", path: "/trade-in" },
   { label: "Rent to Own", path: "/rentals" },
 ];

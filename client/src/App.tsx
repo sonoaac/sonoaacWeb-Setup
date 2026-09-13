@@ -14,6 +14,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Home = lazy(() => import("@/pages/Home"));
 const Services = lazy(() => import("@/pages/Services"));
+const Shop = lazy(() => import("@/pages/Shop"));
 const Demos = lazy(() => import("@/pages/Demos"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const ServiceAgreement = lazy(() => import("@/pages/ServiceAgreement"));
@@ -60,6 +61,7 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
+        <Route path="/shop" component={Shop} />
         <Route path="/demos" component={Demos} />
         <Route path="/my-tech"><RedirectTo to="/services" /></Route>
         <Route path="/my-tech/build-pc"><RedirectTo to="/services" /></Route>

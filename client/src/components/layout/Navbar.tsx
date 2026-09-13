@@ -13,6 +13,7 @@ const servicesMenu = [
 ];
 
 const myTechMenu = [
+  { name: "Shop",        path: "/shop",     sub: "Browse the lineup"       },
   { name: "Rent to Own", path: "/rentals",  sub: "4K Fire TVs · 50% down"   },
   { name: "Trade In",    path: "/trade-in", sub: "Get cash for your device" },
 ];

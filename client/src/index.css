@@ -298,4 +298,8 @@ input:focus, textarea:focus, select:focus {
 
 /* Left-border accent strips */
 .kb-mono [class*="border-l-2"] { border-left-color: #bbb !important; }
+
+/* Hide scrollbar on horizontal scroll-snap carousels (ScrollCarousel component) */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 .kb-mono [class*="border-l-4"] { border-left-color: #bbb !important; }
