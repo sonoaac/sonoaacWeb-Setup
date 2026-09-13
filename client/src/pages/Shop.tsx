@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Laptop, Gamepad2, Building2, Tablet, PiggyBank, Tv } from "lucide-react";
 import { ScrollCarousel, type CarouselItem } from "@/components/features/ScrollCarousel";
+import { ScrambleText } from "@/components/features/ScrambleText";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -99,7 +100,9 @@ export default function Shop() {
             transition={{ duration: 0.5, delay: 0.05 }}
             className="text-center py-10 md:py-14 border-b border-black"
           >
-            <h1
+            <ScrambleText
+              as="h1"
+              text="The Sonoaac Shop"
               className="text-white"
               style={{
                 fontFamily: "'Times New Roman', Times, serif",
@@ -109,9 +112,7 @@ export default function Shop() {
                 fontSize: "clamp(2.75rem, 9vw, 6rem)",
                 lineHeight: 0.95,
               }}
-            >
-              The Sonoaac Shop
-            </h1>
+            />
             <p className="text-gray-400 text-xs md:text-sm mt-4 max-w-md mx-auto leading-relaxed">
               Sonoaac recommends devices and sets them up for you — browse the
               lineup, then talk to us about your specific needs.
