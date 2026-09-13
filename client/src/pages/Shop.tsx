@@ -78,10 +78,22 @@ export default function Shop() {
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <span className="text-xs uppercase tracking-[0.4em] text-green-800 block mb-4">Shop</span>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">Browse the Lineup.</h1>
-            <p className="text-gray-300 text-sm leading-relaxed max-w-xl">
+            <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-6">
               Sonoaac recommends devices and sets them up for you — swipe through
               what's popular, then talk to us about your specific needs.
             </p>
+            <div className="flex flex-wrap gap-4 text-xs uppercase tracking-[0.15em]">
+              <Link href="/rentals">
+                <button className="text-green-400 hover:text-green-300 transition-colors underline underline-offset-4">
+                  Rent to Own TVs
+                </button>
+              </Link>
+              <Link href="/trade-in">
+                <button className="text-green-400 hover:text-green-300 transition-colors underline underline-offset-4">
+                  Trade In Your Device
+                </button>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

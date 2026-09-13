@@ -12,12 +12,6 @@ const servicesMenu = [
   { name: "Live Demos",              path: "/demos",             sub: "See what we build"                   },
 ];
 
-const myTechMenu = [
-  { name: "Shop",        path: "/shop",     sub: "Browse the lineup"       },
-  { name: "Rent to Own", path: "/rentals",  sub: "4K Fire TVs · 50% down"   },
-  { name: "Trade In",    path: "/trade-in", sub: "Get cash for your device" },
-];
-
 export function Navbar() {
   const [location, navigate] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -274,73 +268,9 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
-              {/* Devices dropdown (rent-to-own + trade-in) */}
-              <div
-                className="relative"
-                onMouseEnter={() => openMenu("mytech")}
-                onMouseLeave={scheduleClose}
-              >
-                <button
-                  onClick={() => toggleDropdown("mytech")}
-                  aria-expanded={openDropdown === "mytech"}
-                  style={{
-                    fontFamily: "'Times New Roman', Times, serif",
-                    fontWeight: isActive("/rentals") || isActive("/trade-in") ? 900 : 700,
-                    fontSize: "0.78rem", textTransform: "uppercase",
-                    letterSpacing: "0.18em", color: isActive("/rentals") || isActive("/trade-in") ? "#000" : "#555",
-                    display: "flex", alignItems: "center", gap: "4px",
-                    padding: "0 16px", height: "48px", background: "none", border: "none",
-                    cursor: "pointer", transition: "color 0.15s",
-                  }}
-                >
-                  Devices
-                  <ChevronDown size={12} className={`transition-transform duration-200 ${openDropdown === "mytech" ? "rotate-180" : ""}`} />
-                </button>
-                <AnimatePresence>
-                  {openDropdown === "mytech" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -4 }}
-                      transition={{ duration: 0.15 }}
-                      onMouseEnter={cancelClose}
-                      onMouseLeave={scheduleClose}
-                      style={{
-                        position: "absolute", top: "100%", left: 0,
-                        width: "260px", backgroundColor: "#fff",
-                        border: "2px solid #14532d",
-                        boxShadow: "4px 4px 0 #eadcff", zIndex: 50,
-                      }}
-                    >
-                      {myTechMenu.map((item) => (
-                        <Link key={item.path} href={item.path}>
-                          <button
-                            onClick={handleNavClick(item.path)}
-                            style={{
-                              display: "block", width: "100%", textAlign: "left",
-                              padding: "12px 20px", background: "none", border: "none",
-                              borderBottom: "1px solid #e5e5e5", cursor: "pointer",
-                              transition: "background 0.15s",
-                            }}
-                            onMouseEnter={e => (e.currentTarget.style.background = "#f4edff")}
-                            onMouseLeave={e => (e.currentTarget.style.background = "none")}
-                          >
-                            <div style={{ fontFamily: "'Times New Roman', Times, serif", fontWeight: 800, fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.12em", color: "#000" }}>
-                              {item.name}
-                            </div>
-                            <div style={{ fontFamily: "'Times New Roman', Times, serif", fontSize: "0.65rem", color: "#888", marginTop: "2px" }}>
-                              {item.sub}
-                            </div>
-                          </button>
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
               {/* Static links */}
               {[
+                { name: "Shop",           path: "/shop" },
                 { name: "Agreement",      path: "/service-agreement" },
               ].map((link) => (
                 <Link key={link.name} href={link.path}>
@@ -403,28 +333,8 @@ export function Navbar() {
                 ))}
               </div>
 
-              <div style={{ borderBottom: "1px solid #e5e5e5", paddingBottom: "12px", marginBottom: "12px" }}>
-                <p style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.3em", color: "#aaa", marginBottom: "8px" }}>
-                  Devices
-                </p>
-                {myTechMenu.map((item) => (
-                  <Link key={item.path} href={item.path}>
-                    <button
-                      style={{
-                        display: "block", width: "100%", textAlign: "left",
-                        padding: "9px 0", background: "none", border: "none",
-                        fontFamily: "'Times New Roman', serif", fontWeight: 800,
-                        fontSize: "0.82rem", textTransform: "uppercase",
-                        letterSpacing: "0.14em", color: "#222", cursor: "pointer",
-                      }}
-                    >
-                      {item.name}
-                    </button>
-                  </Link>
-                ))}
-              </div>
-
               {[
+                { name: "Shop",           path: "/shop" },
                 { name: "Agreement",      path: "/service-agreement" },
               ].map((link) => (
                 <Link key={link.name} href={link.path}>
