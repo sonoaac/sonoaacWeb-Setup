@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 
-const serviceLinks = [
+const footerLinks = [
   { label: "Remote IT Support", path: "/services#remote" },
   { label: "On-Site Services", path: "/services#onsite" },
   { label: "Computer & Printer Setup", path: "/services#software" },
@@ -10,88 +10,54 @@ const serviceLinks = [
   { label: "Shop", path: "/shop" },
   { label: "Trade In", path: "/trade-in" },
   { label: "Rent to Own", path: "/rentals" },
+  { label: "Service Agreement", path: "/service-agreement" },
+  { label: "Contact Us", path: "/contact" },
+  { label: "Book Consultation", path: "/contact" },
 ];
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="border-t border-green-900/30 bg-black">
-      <div className="max-w-5xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mb-10">
-          {/* About */}
-          <div>
-            <span className="text-xs uppercase tracking-[0.35em] text-green-800 block mb-4">
-              Sonoaac
-            </span>
-            <p className="text-green-700 text-xs leading-relaxed mb-3">
-              IT Support and Digital Solutions Specialist.
-              Registered US business.
-            </p>
-            <p className="text-green-800 text-xs leading-relaxed">
-              Services by appointment only.<br />
-              Walk ins available at additional charge.
-            </p>
-          </div>
+      <div className="max-w-5xl mx-auto px-6 py-8 space-y-3">
+        {/* 1. Brand + one-line blurb */}
+        <p className="text-xs leading-relaxed">
+          <span className="uppercase tracking-[0.3em] text-green-800 font-bold">Sonoaac</span>
+          <span className="text-green-700">
+            {" "}&mdash; IT Support and Digital Solutions Specialist. Registered US business.
+            By appointment; walk-ins at additional charge.
+          </span>
+        </p>
 
-          {/* Services */}
-          <div>
-            <span className="text-xs uppercase tracking-[0.35em] text-green-800 block mb-4">
-              Services
+        {/* 2. Every page link, one flowing row */}
+        <p className="text-xs leading-relaxed">
+          {footerLinks.map((item, i) => (
+            <span key={item.label + item.path}>
+              {i > 0 && <span className="text-green-900"> &middot; </span>}
+              <Link href={item.path}>
+                <button className="text-green-700 hover:text-green-400 transition-colors uppercase tracking-[0.1em]">
+                  {item.label}
+                </button>
+              </Link>
             </span>
-            <ul className="space-y-2">
-              {serviceLinks.map((item) => (
-                <li key={item.label}>
-                  <Link href={item.path}>
-                    <button className="text-green-700 text-xs hover:text-green-400 transition-colors uppercase tracking-[0.15em]">
-                      {item.label}
-                    </button>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          ))}
+        </p>
 
-          {/* Legal & Info */}
-          <div>
-            <span className="text-xs uppercase tracking-[0.35em] text-green-800 block mb-4">
-              Legal &amp; Info
-            </span>
-            <ul className="space-y-2 mb-6">
-              <li>
-                <Link href="/service-agreement">
-                  <button className="text-green-700 text-xs hover:text-green-400 transition-colors uppercase tracking-[0.15em]">
-                    Service Agreement
-                  </button>
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact">
-                  <button className="text-green-700 text-xs hover:text-green-400 transition-colors uppercase tracking-[0.15em]">
-                    Contact Us
-                  </button>
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact">
-                  <button className="text-green-700 text-xs hover:text-green-400 transition-colors uppercase tracking-[0.15em]">
-                    Book Consultation
-                  </button>
-                </Link>
-              </li>
-            </ul>
-            <span className="text-xs uppercase tracking-[0.35em] text-green-800 block mb-2">
-              Contact
-            </span>
-            <p className="text-green-700 text-xs">contact@sonoaac.com</p>
-          </div>
-        </div>
+        {/* 3. Contact */}
+        <p className="text-xs text-green-700">
+          <a href="tel:+18624238875" className="hover:text-green-400 transition-colors">
+            (862) 423-8875
+          </a>
+          <span className="text-green-900"> &middot; </span>
+          <a href="mailto:contact@sonoaac.com" className="hover:text-green-400 transition-colors">
+            contact@sonoaac.com
+          </a>
+        </p>
 
-        {/* Bottom bar */}
-        <div className="border-t border-green-900/20 pt-6 flex flex-col sm:flex-row justify-between items-start gap-3">
-          <p className="text-green-900 text-xs">
-            &copy; {year} Sonoaac. All rights reserved.
-          </p>
-          <p className="text-green-900 text-xs text-right">
+        {/* 4-5. Copyright + disclaimer */}
+        <div className="border-t border-green-900/20 pt-3 flex flex-col sm:flex-row justify-between gap-1 text-[11px] text-green-900">
+          <p>&copy; {year} Sonoaac. All rights reserved.</p>
+          <p className="sm:text-right">
             Software purchases are nonrefundable. Sonoaac recommends and does not sell software directly.
           </p>
         </div>
