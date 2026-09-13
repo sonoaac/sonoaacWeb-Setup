@@ -164,16 +164,16 @@ export function ScrollCarousel({ items }: { items: CarouselItem[] }) {
       <button
         aria-label="Previous"
         onClick={() => scrollByCard(-1)}
-        className="hidden sm:flex absolute left-2 top-[176px] w-9 h-9 items-center justify-center border border-black bg-white text-black hover:bg-black hover:text-white transition-colors"
+        className="hidden sm:flex absolute left-2 top-[176px] w-9 h-9 items-center justify-center text-black hover:text-gray-500 transition-colors"
       >
-        <ChevronLeft size={16} />
+        <ChevronLeft size={20} />
       </button>
       <button
         aria-label="Next"
         onClick={() => scrollByCard(1)}
-        className="hidden sm:flex absolute right-2 top-[176px] w-9 h-9 items-center justify-center border border-black bg-white text-black hover:bg-black hover:text-white transition-colors"
+        className="hidden sm:flex absolute right-2 top-[176px] w-9 h-9 items-center justify-center text-black hover:text-gray-500 transition-colors"
       >
-        <ChevronRight size={16} />
+        <ChevronRight size={20} />
       </button>
     </div>
   );

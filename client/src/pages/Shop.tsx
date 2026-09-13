@@ -138,7 +138,7 @@ export default function Shop() {
       {/* My Tech carousel */}
       <section id="my-tech" className="py-10 md:py-16 border-t border-green-900/30 scroll-mt-20">
         <div className="max-w-5xl mx-auto px-6 mb-6">
-          <motion.div {...fadeUp} className="inline-block border border-black px-4 py-1.5">
+          <motion.div {...fadeUp} className="inline-block">
             <span className="text-xs font-bold uppercase tracking-[0.3em] text-green-400">My Tech</span>
           </motion.div>
         </div>
