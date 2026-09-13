@@ -183,12 +183,12 @@ export default function Home() {
         <section id="pricing" className="px-6 sm:px-10 lg:px-16 py-20 md:py-28 border-b border-green-900/30" style={{ backgroundColor: "#f9f9f9" }}>
           <div className="max-w-5xl mx-auto">
             <motion.div {...fadeUp} className="mb-10">
-              <p className="section-label">Transparent Pricing</p>
+              <p className="section-label">How Pricing Works</p>
               <h2 style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "clamp(1.7rem, 3vw, 2.5rem)", color: "#000", marginBottom: "0.6rem" }}>
-                Starting-At Rates
+                One Clear Quote, No Surprises
               </h2>
               <p style={{ fontSize: "0.95rem", color: "#666", maxWidth: "500px" }}>
-                Every job gets a clear quote before work begins. These are floor prices — final cost depends on complexity.
+                Every job is quoted before any work begins — no guessing, no surprise charges. Tell us what you need and we'll send a price.
               </p>
             </motion.div>
 
@@ -203,14 +203,11 @@ export default function Home() {
                   className="bg-black"
                   style={{ padding: "32px 28px" }}
                 >
-                  <div style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "2.4rem", color: "#000", lineHeight: 1 }}>
-                    {item.price}
-                  </div>
-                  <div style={{ fontFamily: "'Times New Roman', serif", fontWeight: 500, fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.2em", color: "#999", marginBottom: "14px" }}>
-                    starting at
-                  </div>
-                  <div style={{ fontFamily: "'Times New Roman', serif", fontWeight: 800, fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "0.12em", color: "#000", marginBottom: "4px" }}>
+                  <div style={{ fontFamily: "'Times New Roman', serif", fontWeight: 800, fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "0.12em", color: "#000", marginBottom: "10px" }}>
                     {item.service}
+                  </div>
+                  <div style={{ fontFamily: "'Times New Roman', serif", fontWeight: 900, fontSize: "1.15rem", color: "#000", marginBottom: "8px" }}>
+                    {item.price}
                   </div>
                   <div style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.72rem", color: "#888" }}>
                     {item.note}
@@ -261,9 +258,8 @@ export default function Home() {
                     {item.detail}
                   </p>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <span style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.72rem", color: "#888" }}>
-                      Starting at{" "}
-                      <strong style={{ color: "#000", fontWeight: 900 }}>{item.startingAt}</strong>
+                    <span style={{ fontFamily: "'Times New Roman', serif", fontSize: "0.72rem", color: "#000", fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                      {item.startingAt}
                     </span>
                     <Link href={item.link}>
                       <button style={{ fontFamily: "'Times New Roman', serif", fontWeight: 800, fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: "0.15em", color: "#000", background: "none", border: "none", cursor: "pointer" }}>
@@ -288,7 +284,7 @@ export default function Home() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
                   { point: "Registered US Business",  sub: "Operating officially since day one. Fully licensed." },
-                  { point: "Upfront Pricing",         sub: "Starting rates shown. Full quote before any work begins." },
+                  { point: "Upfront Pricing",         sub: "No guessing — you get a full quote before any work begins." },
                   { point: "Secure Remote Access",    sub: "Consent based sessions only. Your data stays yours." },
                   { point: "One on One Support",      sub: "You talk directly to the person doing the work." },
                 ].map((item) => (

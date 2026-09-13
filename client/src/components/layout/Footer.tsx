@@ -1,13 +1,14 @@
 import { Link } from "wouter";
 
 const serviceLinks = [
-  { label: "IT Support", path: "/it-support" },
-  { label: "On-Site Services", path: "/on-site-services" },
-  { label: "Software Fixes", path: "/software-fixes" },
-  { label: "Device Setup", path: "/device-setup" },
-  { label: "Business IT", path: "/business-it" },
-  { label: "Web Development", path: "/services" },
+  { label: "Remote IT Support", path: "/services#remote" },
+  { label: "On-Site Services", path: "/services#onsite" },
+  { label: "Computer & Printer Setup", path: "/services#software" },
+  { label: "Google Workspace Setup", path: "/services#business" },
+  { label: "Web Development", path: "/services#web" },
+  { label: "Live Demos", path: "/demos" },
   { label: "My Tech", path: "/my-tech" },
+  { label: "Trade In", path: "/trade-in" },
   { label: "Rent to Own", path: "/rentals" },
 ];
 
@@ -71,7 +72,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/book-consultation">
+                <Link href="/contact">
                   <button className="text-green-700 text-xs hover:text-green-400 transition-colors uppercase tracking-[0.15em]">
                     Book Consultation
                   </button>
