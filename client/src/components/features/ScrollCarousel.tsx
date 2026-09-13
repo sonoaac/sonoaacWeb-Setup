@@ -3,17 +3,25 @@ import { Link } from "wouter";
 import { ChevronLeft, ChevronRight, type LucideIcon } from "lucide-react";
 
 /**
- * Mobile-first horizontal scroll-snap carousel.
+ * Mobile-first horizontal scroll-snap carousel, styled like a newspaper photo
+ * spread — square-cornered tiles, a thin hairline frame, a small uppercase
+ * "kicker" over a serif headline, a rule before the dek, a bordered link.
  *
  * Cards sit flat ("simple display") until you scroll — the card nearest
- * center gets a subtle scale/brightness lift so it reads as a carousel in
- * motion, tracked via IntersectionObserver (works everywhere, unlike the
- * Chromium-only `animation-timeline: view()` CSS approach). A thin progress
- * bar and a "swipe" hint reinforce that it scrolls horizontally.
+ * center gets a subtle scale/brightness lift, tracked via IntersectionObserver
+ * (works everywhere, unlike the Chromium-only `animation-timeline: view()`
+ * CSS approach). A thin progress bar and a "swipe" hint reinforce that it
+ * scrolls horizontally.
+ *
+ * Text inside a card uses inline `style` colors, never `text-white` /
+ * `text-green-*` classNames — those are globally remapped to dark ink for the
+ * site's black-on-white theme (see index.css), which would make text
+ * invisible against these intentionally dark card photos.
  */
 
 export interface CarouselItem {
   id: string;
+  kicker: string;
   title: string;
   subtitle: string;
   gradient: string; // CSS background (gradient) — no external images needed
@@ -81,33 +89,50 @@ export function ScrollCarousel({ items }: { items: CarouselItem[] }) {
               <div
                 ref={(el) => (cardRefs.current[i] = el)}
                 data-index={i}
-                className="group shrink-0 snap-center w-[78vw] sm:w-[320px] h-[380px] rounded-2xl relative overflow-hidden cursor-pointer transition-transform duration-300 ease-out"
+                className="group shrink-0 snap-center w-[78vw] sm:w-[320px] h-[400px] relative overflow-hidden cursor-pointer transition-transform duration-300 ease-out"
                 style={{
                   background: item.gradient,
+                  border: "1px solid rgba(255,255,255,0.3)",
                   transform: isActive ? "scale(1)" : "scale(0.92)",
                   opacity: isActive ? 1 : 0.55,
                 }}
               >
                 <div
                   className="absolute inset-0 transition-opacity duration-300"
-                  style={{
-                    background: "linear-gradient(to bottom, rgba(0,0,0,0) 35%, rgba(0,0,0,0.85) 100%)",
-                  }}
+                  style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0) 28%, rgba(0,0,0,0.92) 100%)" }}
                 />
                 {Icon && (
                   <Icon
-                    size={40}
-                    strokeWidth={1.25}
-                    className="absolute top-6 right-6 text-white/70 transition-transform duration-300 group-hover:scale-110"
+                    size={34}
+                    strokeWidth={1}
+                    style={{ color: "rgba(255,255,255,0.55)" }}
+                    className="absolute top-5 right-5 transition-transform duration-300 group-hover:scale-110"
                   />
                 )}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="text-white font-bold text-xl leading-snug mb-1">{item.title}</p>
-                  <p className="text-white/70 text-sm leading-relaxed">{item.subtitle}</p>
+                  <p
+                    className="text-[10px] uppercase tracking-[0.3em] mb-2"
+                    style={{ color: "rgba(255,255,255,0.55)" }}
+                  >
+                    {item.kicker}
+                  </p>
+                  <p
+                    className="font-bold text-xl leading-[1.15] uppercase mb-2"
+                    style={{ color: "#f5f5f5", fontFamily: "'Times New Roman', Times, serif", letterSpacing: "-0.01em" }}
+                  >
+                    {item.title}
+                  </p>
+                  <div className="h-px w-8 mb-2" style={{ backgroundColor: "rgba(255,255,255,0.4)" }} />
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.72)" }}>
+                    {item.subtitle}
+                  </p>
                   {item.cta && (
-                    <p className="text-green-400 text-xs font-bold uppercase tracking-[0.2em] mt-3">
+                    <span
+                      className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 transition-colors duration-200"
+                      style={{ color: "#fff", border: "1px solid rgba(255,255,255,0.65)" }}
+                    >
                       {item.cta} &rarr;
-                    </p>
+                    </span>
                   )}
                 </div>
               </div>
@@ -117,16 +142,16 @@ export function ScrollCarousel({ items }: { items: CarouselItem[] }) {
       </div>
 
       {/* Progress bar */}
-      <div className="mx-6 sm:mx-[calc(50%-160px+0px)] h-[2px] bg-green-900/30 mt-4 max-w-[calc(100%-3rem)] sm:max-w-none">
+      <div className="mx-6 sm:mx-[calc(50%-160px)] h-px bg-black/15 mt-4 max-w-[calc(100%-3rem)] sm:max-w-none">
         <div
-          className="h-full bg-green-400 transition-[width] duration-150 ease-out"
+          className="h-full bg-black transition-[width] duration-150 ease-out"
           style={{ width: `${Math.max(6, progress)}%` }}
         />
       </div>
 
       {/* Swipe hint — fades once the user has scrolled */}
       <div
-        className={`flex items-center justify-center gap-2 mt-3 text-green-800 text-[10px] uppercase tracking-[0.25em] transition-opacity duration-500 ${
+        className={`flex items-center justify-center gap-2 mt-3 text-[10px] uppercase tracking-[0.25em] transition-opacity duration-500 text-gray-500 ${
           hasScrolled ? "opacity-0" : "opacity-100"
         }`}
       >
@@ -139,14 +164,14 @@ export function ScrollCarousel({ items }: { items: CarouselItem[] }) {
       <button
         aria-label="Previous"
         onClick={() => scrollByCard(-1)}
-        className="hidden sm:flex absolute left-2 top-[152px] w-9 h-9 items-center justify-center rounded-full bg-black/60 border border-green-800 text-green-400 hover:bg-black transition-colors"
+        className="hidden sm:flex absolute left-2 top-[176px] w-9 h-9 items-center justify-center border border-black bg-white text-black hover:bg-black hover:text-white transition-colors"
       >
         <ChevronLeft size={16} />
       </button>
       <button
         aria-label="Next"
         onClick={() => scrollByCard(1)}
-        className="hidden sm:flex absolute right-2 top-[152px] w-9 h-9 items-center justify-center rounded-full bg-black/60 border border-green-800 text-green-400 hover:bg-black transition-colors"
+        className="hidden sm:flex absolute right-2 top-[176px] w-9 h-9 items-center justify-center border border-black bg-white text-black hover:bg-black hover:text-white transition-colors"
       >
         <ChevronRight size={16} />
       </button>
