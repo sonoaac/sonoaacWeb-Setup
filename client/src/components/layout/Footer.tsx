@@ -9,7 +9,6 @@ const footerLinks = [
   { label: "Live Demos", path: "/demos" },
   { label: "Shop", path: "/shop" },
   { label: "Trade In", path: "/trade-in" },
-  { label: "Rent to Own", path: "/rentals" },
   { label: "Service Agreement", path: "/service-agreement" },
   { label: "Contact Us", path: "/contact" },
   { label: "Book Consultation", path: "/contact" },

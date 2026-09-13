@@ -83,8 +83,7 @@ const GREETING =
   "- Local SEO & Google Business Profile\n" +
   "- Google Workspace setup (Gmail, Drive, Calendar, business email)\n" +
   "- Monthly support & maintenance plans\n" +
-  "- Device trade-ins for cash\n" +
-  "- Rent-to-own TVs\n\n" +
+  "- Device trade-ins for cash\n\n" +
   "We also bundle setup + website + SEO into Starter, Business, and Business+ packages. What can I help with?";
 const seedMessages = (): Msg[] => [botText(GREETING)];
 

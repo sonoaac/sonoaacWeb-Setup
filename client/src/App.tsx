@@ -19,7 +19,6 @@ const Demos = lazy(() => import("@/pages/Demos"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const ServiceAgreement = lazy(() => import("@/pages/ServiceAgreement"));
 const TradeIn = lazy(() => import("@/pages/TradeIn"));
-const Rentals = lazy(() => import("@/pages/Rentals"));
 const TrackTicket = lazy(() => import("@/pages/TrackTicket"));
 const AdminTickets = lazy(() => import("@/pages/AdminTickets"));
 const ClientForms = lazy(() => import("@/pages/ClientForms"));
@@ -67,7 +66,7 @@ function Router() {
         <Route path="/my-tech/build-pc"><RedirectTo to="/services" /></Route>
         <Route path="/contact" component={Contact} />
         <Route path="/trade-in" component={TradeIn} />
-        <Route path="/rentals" component={Rentals} />
+        <Route path="/rentals"><RedirectTo to="/shop" /></Route>
         <Route path="/service-agreement" component={ServiceAgreement} />
         <Route path="/track/:token" component={TrackTicket} />
         <Route path="/admin/tickets" component={AdminTickets} />

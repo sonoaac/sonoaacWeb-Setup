@@ -9,9 +9,11 @@ export const ASSISTANT_KNOWLEDGE = `
 
 Sonoaac (SNC) is an NJ-based IT services company for homes, freelancers, and small
 businesses. Services: computer & printer setup, remote and on-site IT support,
-basic business websites, local SEO / Google Business Profile, business email and
-Microsoft 365, monthly support & maintenance plans, device trade-ins, and
-rent-to-own TVs. Services can be bought individually or as a bundle.
+basic business websites, local SEO / Google Business Profile, Google Workspace
+setup, monthly support & maintenance plans, and device trade-ins. Services can be
+bought individually or as a bundle. Sonoaac also has a Shop page (/shop) where it
+recommends laptops, TVs, desktops, phones, and tablets and helps set them up —
+it does not sell hardware directly.
 
 ## Contact
 
@@ -83,54 +85,15 @@ store credit, no mail-in wait. Get an instant estimate by picking the device and
 condition, we verify it in person, then pay on the spot. Be honest about condition;
 misrepresented devices get the quote rejected.
 
-## Rentals (rent-to-own electronics) — the /rentals page
+## Shop (device recommendations) — the /shop page
 
-The /rentals page is a browse / shopping page ONLY. There is NO cart, NO checkout,
-and NO online payment. Nothing ships or sells automatically. Every rental AND every
-outright purchase is arranged in a quick chat or call with a human Sonoaac agent
-first — the agent confirms availability, the plan, and approval (usually the same
-day), and nothing moves until the customer has spoken with us. When someone wants
-to rent or buy, point them to the contact page and (862) 423-8875 and offer to
-pass along their name, email, and phone.
-
-Tagline on the page: "In-house financing · quick approval · no balloon payment."
-
-### How rent-to-own works (3 steps)
-1. 50% down — half the outright price up front, once approved. That covers the
-   deposit and gets the order moving.
-2. Fixed monthly — a set amount each month toward the remaining balance. The
-   number of months depends on the price.
-3. It's yours — after the final payment the device is owned outright. No balloon
-   fee, no return.
-
-Worked example — 55" 4K Fire TV: buy outright $350, or rent-to-own $175 down (50%)
-then $25/mo x 7 months = $350 total (rent-to-own costs the same as buying, just
-spread out).
-
-Optional protection plan (added at signup) covers mechanical and electrical
-failure. TV protection plans do NOT cover screen damage or accidental damage.
-Approval required. Longer terms may be available on higher-value systems — ask.
-
-### TVs available now
-- 55" LED 4K UHD Smart Fire TV — $350 outright, or $175 down + $25/mo for 7 months.
-- 50" LED 4K UHD Smart Fire TV — $300 outright, or $150 down + $25/mo for 6 months.
-Both: 4K UHD, HDR10, 60Hz, Fire TV built in with an Alexa voice remote, 3x HDMI
-(eARC on HDMI 1), Wi-Fi 5, Bluetooth 5.0, DTS Virtual:X sound. Box includes the
-stand, remote, batteries, power cord, screws, and a quick setup guide.
-Gaming PCs, gaming laptops, and monitors are "coming soon" — not orderable yet.
-
-### Delivery (3 steps)
-1. Chat or call — start a chat or call/text (862) 423-8875. A Sonoaac agent
-   confirms availability, the plan, and approval, usually the same day. Nothing
-   moves until the customer has spoken with us.
-2. We ship it — once confirmed with the agent, the order ships. Allow 3-5 business
-   days to arrive.
-3. Set it up — it arrives ready to go; TVs include the stand, remote, and quick
-   setup guide. Plug in and go.
-
-Delivery is included with every rental — no separate shipping fee. We do NOT
-install rentals and there is no setup charge; the customer sets it up. If they get
-stuck, Sonoaac remote support can walk them through it as a normal support session.
+The /shop page is a browse page ONLY — there is NO cart, NO checkout, and NO
+online payment, and nothing is rented or financed. It lists five categories
+Sonoaac helps customers with: Laptops, TV, Desktops, Phones, and Tablets. Sonoaac
+does not sell hardware directly; every card links to the contact page so a
+Sonoaac agent can recommend a specific device and, if the customer buys one
+elsewhere or already owns one, set it up. Sonoaac does NOT offer rent-to-own or
+any financing plan.
 
 ## Tech FAQ (use these facts; keep answers short)
 

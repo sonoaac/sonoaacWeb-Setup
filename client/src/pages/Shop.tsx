@@ -1,7 +1,7 @@
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Laptop, Gamepad2, Building2, Tablet, PiggyBank, Tv } from "lucide-react";
-import { ScrollCarousel, type CarouselItem } from "@/components/features/ScrollCarousel";
+import { Laptop, Tv, Monitor, Smartphone, Tablet, type LucideIcon } from "lucide-react";
 import { ScrambleText } from "@/components/features/ScrambleText";
 
 const fadeUp = {
@@ -11,72 +11,64 @@ const fadeUp = {
   transition: { duration: 0.5 },
 };
 
+interface ShopItem {
+  id: string;
+  category: string;
+  title: string;
+  subtitle: string;
+  icon: LucideIcon;
+}
+
 // Sonoaac recommends devices and helps set them up — it doesn't sell hardware
-// directly (see /trade-in and /rentals for the two things it does sell/rent).
-const MY_TECH_ITEMS: CarouselItem[] = [
+// directly (see /trade-in for the one thing it does buy).
+const CATEGORIES = ["Laptops", "TV", "Desktops", "Phones", "Tablets"];
+
+const SHOP_ITEMS: ShopItem[] = [
   {
     id: "laptops",
-    kicker: "Laptops",
-    title: "Everyday Laptops",
+    category: "Laptops",
+    title: "Laptops",
     subtitle: "Windows & Mac, picked for work, school, and browsing.",
-    gradient: "linear-gradient(155deg, #0f2e1c 0%, #04120a 70%)",
     icon: Laptop,
-    href: "/contact",
-    cta: "Get Advice",
   },
   {
-    id: "gaming",
-    kicker: "Gaming",
-    title: "Gaming Rigs",
-    subtitle: "High refresh, dedicated GPU, built to your budget.",
-    gradient: "linear-gradient(155deg, #1a2e0f 0%, #0a1206 70%)",
-    icon: Gamepad2,
-    href: "/contact",
-    cta: "Get Advice",
+    id: "tv",
+    category: "TV",
+    title: "TVs",
+    subtitle: "Smart TVs sized and set up for your space.",
+    icon: Tv,
   },
   {
-    id: "business",
-    kicker: "Business",
-    title: "Business Desktops",
-    subtitle: "Reliable multitasking, built for the office.",
-    gradient: "linear-gradient(155deg, #0f2020 0%, #051010 70%)",
-    icon: Building2,
-    href: "/contact",
-    cta: "Get Advice",
+    id: "desktops",
+    category: "Desktops",
+    title: "Desktops",
+    subtitle: "Reliable towers and all-in-ones for home or office.",
+    icon: Monitor,
+  },
+  {
+    id: "phones",
+    category: "Phones",
+    title: "Phones",
+    subtitle: "Everyday and business smartphones, set up and ready to go.",
+    icon: Smartphone,
   },
   {
     id: "tablets",
-    kicker: "Tablets",
-    title: "Tablets & iPads",
-    subtitle: "Front-desk, POS, scheduling, and on-the-go use.",
-    gradient: "linear-gradient(155deg, #12241c 0%, #05120c 70%)",
+    category: "Tablets",
+    title: "Tablets",
+    subtitle: "iPads and Android tablets for work, school, or the front desk.",
     icon: Tablet,
-    href: "/contact",
-    cta: "Get Advice",
-  },
-  {
-    id: "budget",
-    kicker: "Value",
-    title: "Budget Picks",
-    subtitle: "Solid and reliable — devices that won't break the bank.",
-    gradient: "linear-gradient(155deg, #1c2412 0%, #0c1006 70%)",
-    icon: PiggyBank,
-    href: "/contact",
-    cta: "Get Advice",
-  },
-  {
-    id: "rentals",
-    kicker: "Rent to Own",
-    title: "Rent-to-Own TVs",
-    subtitle: "50% down, fixed monthly, own it outright.",
-    gradient: "linear-gradient(155deg, #0f2e1c 0%, #030a06 70%)",
-    icon: Tv,
-    href: "/rentals",
-    cta: "Browse Rentals",
   },
 ];
 
 export default function Shop() {
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const filteredItems = useMemo(
+    () => (activeCategory === "All" ? SHOP_ITEMS : SHOP_ITEMS.filter((item) => item.category === activeCategory)),
+    [activeCategory],
+  );
+
   return (
     <div className="min-h-screen bg-black">
       {/* Masthead */}
@@ -90,7 +82,7 @@ export default function Shop() {
             className="flex items-center justify-between py-3 border-b border-green-900/30 text-[10px] uppercase tracking-[0.25em] text-green-800"
           >
             <span>Sonoaac Edition</span>
-            <span className="hidden sm:inline">Devices &middot; Rentals &middot; Trade-Ins</span>
+            <span className="hidden sm:inline">Devices &middot; Trade-Ins</span>
           </motion.div>
 
           {/* Nameplate */}
@@ -122,9 +114,6 @@ export default function Shop() {
           {/* Section index */}
           <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 py-3 text-[11px] uppercase tracking-[0.2em] text-gray-400">
             <a href="#my-tech" className="hover:text-green-400 transition-colors">My Tech</a>
-            <Link href="/rentals">
-              <button className="hover:text-green-400 transition-colors">Rent to Own</button>
-            </Link>
             <Link href="/trade-in">
               <button className="hover:text-green-400 transition-colors">Trade In</button>
             </Link>
@@ -135,14 +124,60 @@ export default function Shop() {
         </div>
       </section>
 
-      {/* My Tech carousel */}
+      {/* My Tech: filter + grid */}
       <section id="my-tech" className="py-10 md:py-16 border-t border-green-900/30 scroll-mt-20">
-        <div className="max-w-5xl mx-auto px-6 mb-6">
-          <motion.div {...fadeUp} className="inline-block">
+        <div className="max-w-5xl mx-auto px-6">
+          <motion.div {...fadeUp} className="mb-8">
             <span className="text-xs font-bold uppercase tracking-[0.3em] text-green-400">My Tech</span>
           </motion.div>
+
+          <div className="flex flex-col md:flex-row gap-6 md:gap-12">
+            {/* Filter sidebar */}
+            <aside className="md:w-36 shrink-0">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-3">Filter</p>
+              <div className="flex flex-wrap md:flex-col gap-x-5 gap-y-2 md:gap-y-3 md:sticky md:top-24">
+                {["All", ...CATEGORIES].map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`text-xs uppercase tracking-[0.15em] text-left transition-colors ${
+                      activeCategory === cat
+                        ? "text-white font-bold underline underline-offset-4"
+                        : "text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </aside>
+
+            {/* Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 flex-1">
+              {filteredItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link key={item.id} href="/contact">
+                    <div className="group border border-black p-6 h-full flex flex-col cursor-pointer hover:bg-black/[0.03] transition-colors">
+                      <Icon size={26} strokeWidth={1} className="text-white mb-5" />
+                      <h3
+                        className="font-bold text-base uppercase mb-2 text-white"
+                        style={{ fontFamily: "'Times New Roman', Times, serif", letterSpacing: "-0.01em" }}
+                      >
+                        {item.title}
+                      </h3>
+                      <div className="h-px w-8 bg-black mb-2" />
+                      <p className="text-xs text-gray-400 leading-relaxed mb-5 flex-1">{item.subtitle}</p>
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">
+                        Get Advice &rarr;
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
         </div>
-        <ScrollCarousel items={MY_TECH_ITEMS} />
       </section>
 
       {/* Closing CTA */}

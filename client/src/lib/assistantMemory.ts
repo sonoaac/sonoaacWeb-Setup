@@ -179,7 +179,7 @@ const serviceEntries: MemoryEntry[] = [
     "svc-overview",
     "What does Sonoaac do?",
     "services offer help what do you do list of services everything remote onsite on site setup repair fix printer website seo bundle package starter business",
-    "Sonoaac is an NJ-based IT service for homes and small businesses:\n- Computer & printer setup (drivers, Wi-Fi printing, scanning)\n- Remote & on-site IT support\n- Basic business websites (3–5 pages, mobile-friendly, you fully control it)\n- Local SEO & Google Business Profile\n- Google Workspace setup (Gmail, Drive, Calendar, business email — everything Google)\n- Monthly support & maintenance plans\n- Device trade-ins for cash\n- Rent-to-own TVs\n\nThese can be bought on their own or bundled into Starter, Business, and Business+ packages.",
+    "Sonoaac is an NJ-based IT service for homes and small businesses:\n- Computer & printer setup (drivers, Wi-Fi printing, scanning)\n- Remote & on-site IT support\n- Basic business websites (3–5 pages, mobile-friendly, you fully control it)\n- Local SEO & Google Business Profile\n- Google Workspace setup (Gmail, Drive, Calendar, business email — everything Google)\n- Monthly support & maintenance plans\n- Device trade-ins for cash\n\nThese can be bought on their own or bundled into Starter, Business, and Business+ packages.",
     { label: "View Services", href: "/services" },
   ),
   svc(
@@ -202,13 +202,6 @@ const serviceEntries: MemoryEntry[] = [
     "remote support online screen share anydesk teamviewer zoom remotely connect fix online",
     "We connect securely to your device over the internet with screen sharing. You watch everything in real time and can end the session anytime. Good for M365/email, app errors, slow performance, driver issues, malware scans, and printer setup. No location limit.",
     { label: "Get Remote Support", href: "/services#remote" },
-  ),
-  svc(
-    "svc-rentals",
-    "Can I rent electronics instead of buying?",
-    "rent rental rentals rent to own renting lease finance financing payment plan installments monthly gaming pc laptop tv monitor console down payment no credit cant afford spread the cost fire tv delivery shipping how long ship install installation setup",
-    "Yes — Sonoaac rents TVs on a rent-to-own plan (gaming PCs, laptops, and monitors coming soon):\n- 50% down\n- Then a fixed monthly payment until the balance clears (term depends on the price)\n- After the final payment the device is yours — no balloon fee\n- Optional protection plan at signup (TV plans don't cover screen or accidental damage)\n\nTVs available now:\n- 55\" 4K Fire TV — $350 outright, or $175 down + $25/mo for 7 months\n- 50\" 4K Fire TV — $300 outright, or $150 down + $25/mo for 6 months\n\nEvery rental and purchase is arranged with a Sonoaac agent first — nothing ships or sells automatically. Start a chat or call/text (862) 423-8875; the agent confirms availability, the plan, and delivery. Once confirmed it ships — allow 3–5 business days. Delivery is included (no separate shipping fee) and there's no installation or setup charge; you set it up yourself.",
-    { label: "Browse Rentals", href: "/rentals" },
   ),
   svc(
     "svc-trade-in",
